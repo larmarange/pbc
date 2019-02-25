@@ -1,0 +1,17 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the depenses_init() hook (in hooks/depenses.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="depenses-convention-<%%VALUE(id)%%>" class="depenses-convention"><%%SELECT%%><%%VALUE(convention)%%><%%ENDSELECT%%></td>
+		<td id="depenses-ligne_budgetaire-<%%VALUE(id)%%>" class="depenses-ligne_budgetaire"><%%SELECT%%><%%VALUE(ligne_budgetaire)%%><%%ENDSELECT%%></td>
+		<td id="depenses-ligne_credit-<%%VALUE(id)%%>" class="depenses-ligne_credit"><%%SELECT%%><%%VALUE(ligne_credit)%%><%%ENDSELECT%%></td>
+		<td id="depenses-date-<%%VALUE(id)%%>" class="depenses-date"><%%SELECT%%><%%VALUE(date)%%><%%ENDSELECT%%></td>
+		<td id="depenses-intitule-<%%VALUE(id)%%>" class="depenses-intitule"><%%SELECT%%><%%VALUE(intitule)%%><%%ENDSELECT%%></td>
+		<td id="depenses-beneficiaire-<%%VALUE(id)%%>" class="depenses-beneficiaire"><%%SELECT%%><%%VALUE(beneficiaire)%%><%%ENDSELECT%%></td>
+		<td id="depenses-montant-<%%VALUE(id)%%>" class="depenses-montant text-right"><%%SELECT%%><%%VALUE(montant)%%><%%ENDSELECT%%></td>
+		<td id="depenses-statut-<%%VALUE(id)%%>" class="depenses-statut"><%%SELECT%%><%%VALUE(statut)%%><%%ENDSELECT%%></td>
+		<td id="depenses-ventilation-<%%VALUE(id)%%>" class="depenses-ventilation"><%%SELECT%%><%%VALUE(ventilation)%%><%%ENDSELECT%%></td>
+		<td id="depenses-notes-<%%VALUE(id)%%>" class="depenses-notes"><%%SELECT%%><%%VALUE(notes)%%><%%ENDSELECT%%></td>

@@ -1,0 +1,197 @@
+<!-- Edit this file to change the layout of the detail view print preview page -->
+
+
+<div class="panel-heading"><h3 class="panel-title">
+	<strong><%%DETAIL_VIEW_TITLE%%></strong>
+	<div class="hidden-print pull-right">
+		<div class="btn-group">
+			<button type="button" id="print" onclick="window.print();" title="<%%TRANSLATION(Print)%%>" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> <%%TRANSLATION(Print)%%></button>
+			<button type="submit" id="back" title="<%%TRANSLATION(Cancel Printing)%%>" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> <%%TRANSLATION(Cancel Printing)%%></button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</h3></div>
+
+<div class="panel-body">
+	<fieldset class="form-horizontal">
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Nom</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(nom)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Statut</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(statut)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Bailleur(s)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(bailleur)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Porteur</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><span id="porteur<%%RND1%%>"><%%COMBOTEXT(porteur)%%></span></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">D&#233;but</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(date_debut)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Fin</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(date_fin)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Dur&#233;e (mois)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(duree)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Notes</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(notes)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Accord&#233; hors FG</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(accorde_hfg)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Frais de Gestion</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(frais_gestion)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Total Accord&#233;</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(accorde)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Vers&#233;</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(verse)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Reste &#224; Verser</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(reste_verser)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Ouvert</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(ouvert)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Reste &#224; Ouvrir</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(reste_ouvrir)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">R&#233;serv&#233;</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(reserve)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Liquid&#233;</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(liquide)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Utilis&#233; (R+L)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(utilise)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Disponible (O-U)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(disponible)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Reste &#224; Engager</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(reste_engager)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">U/O (%)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(prop_uo)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">U/V (%)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(prop_uv)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">U/A (%, hors FG)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(prop_ua)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Budget non ventil&#233;</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(budget_nv)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">D&#233;penses non ventil&#233;es</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(depenses_nv)%%></div>
+			</div>
+		</div>
+	</fieldset>
+</div>
+<!-- child records -->
+<div class="panel-body">
+	<div id="conventions-children"></div>
+</div>
+
+<script>
+	$j(function(){
+		/* prevent loading child records in multiple DVP */
+		if($j('[id=conventions-children]').length > 1) return;
+
+		post(
+			'parent-children.php', {
+				ParentTable: 'conventions',
+				SelectedID: '<%%VALUE(id)%%>',
+				Operation: 'show-children-printable'
+			},
+			'conventions-children',
+			'disable-element',
+			'loading-element',
+			apply_persisting_children
+		);
+
+		$j('form').on('click', '#children-tabs button[data-target]', function(){
+			$j(this).toggleClass('active');
+			persist_expanded_child($j(this).attr('id'));
+		});
+	})
+</script>
+

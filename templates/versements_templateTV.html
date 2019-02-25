@@ -1,0 +1,13 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the versements_init() hook (in hooks/versements.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="versements-convention-<%%VALUE(id)%%>" class="versements-convention"><%%SELECT%%><%%VALUE(convention)%%><%%ENDSELECT%%></td>
+		<td id="versements-ligne_budgetaire-<%%VALUE(id)%%>" class="versements-ligne_budgetaire"><%%SELECT%%><%%VALUE(ligne_budgetaire)%%><%%ENDSELECT%%></td>
+		<td id="versements-date-<%%VALUE(id)%%>" class="versements-date"><%%SELECT%%><%%VALUE(date)%%><%%ENDSELECT%%></td>
+		<td id="versements-intitule-<%%VALUE(id)%%>" class="versements-intitule"><%%SELECT%%><%%VALUE(intitule)%%><%%ENDSELECT%%></td>
+		<td id="versements-montant-<%%VALUE(id)%%>" class="versements-montant text-right"><%%SELECT%%><%%VALUE(montant)%%><%%ENDSELECT%%></td>
+		<td id="versements-notes-<%%VALUE(id)%%>" class="versements-notes"><%%SELECT%%><%%VALUE(notes)%%><%%ENDSELECT%%></td>

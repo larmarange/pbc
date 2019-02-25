@@ -1,0 +1,442 @@
+<!-- Edit this file to change the layout of the detail view form -->
+
+<a name="detail-view"></a>
+<div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
+
+<div class="panel-body" id="conventions_dv_container">
+	<!-- child links -->
+	<div class="row vspacer-md">
+		<div class="col-xs-12">
+			<input type="hidden" id="budgets_hclink" value="budgets_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="versements_hclink" value="versements_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="lignes_credits_hclink" value="lignes_credits_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="ventilation_hclink" value="ventilation_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="fichiers_hclink" value="fichiers_view.php?filterer_convention=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<hr class="hidden-xs hidden-sm">
+
+	<div class="row">
+		<!-- form inputs -->
+		<div class="col-md-8 col-lg-10" id="conventions_dv_form">
+			<fieldset class="form-horizontal">
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="nom" class="control-label col-lg-3">Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<div class="col-lg-9">
+						<input maxlength="40" type="text" class="form-control" name="nom" id="nom" value="<%%VALUE(nom)%%>" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="statut" class="control-label col-lg-3">Statut<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<div class="col-lg-9">
+						<%%COMBO(statut)%%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="bailleur" class="control-label col-lg-3">Bailleur(s)</label>
+					<div class="col-lg-9">
+						<input maxlength="40" type="text" class="form-control" name="bailleur" id="bailleur" value="<%%VALUE(bailleur)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="porteur" class="control-label col-lg-3" data-parent_link="view_parent_modal">Porteur</label>
+					<div class="col-lg-9">
+						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(porteur)%%><%%PLINK(porteur)%%><%%ADDNEW(personnes)%%></div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
+					<div class="col-lg-9">
+						<%%COMBO(date_debut)%%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="date_fin" class="control-label col-lg-3">Fin</label>
+					<div class="col-lg-9">
+						<%%COMBO(date_fin)%%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="duree" class="control-label col-lg-3">Dur&#233;e (mois)</label>
+					<div class="col-lg-9">
+						<input maxlength="" type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="notes" class="control-label col-lg-3">Notes</label>
+					<div class="col-lg-9">
+						<%%HTMLAREA(notes)%%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="accorde_hfg" class="control-label col-lg-3">Accord&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde_hfg-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="accorde_hfg-description"><div class="alert alert-info">Montants accord&#233;s hors frais de gestion (somme des Lignes Budg&#233;taires)</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="accorde_hfg" id="accorde_hfg" value="<%%VALUE(accorde_hfg)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="frais_gestion" class="control-label col-lg-3">Frais de Gestion <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="frais_gestion-description"><div class="alert alert-info">Calcul&#233; &#224; partir des lignes budg&#233;taires de type 'Frais de gestion'</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="frais_gestion" id="frais_gestion" value="<%%VALUE(frais_gestion)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="accorde" class="control-label col-lg-3">Total Accord&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="accorde-description"><div class="alert alert-info">Montant total accord&#233; par le bailleur (frais de gestion inclus)</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="verse" class="control-label col-lg-3">Vers&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="verse-description"><div class="alert alert-info">Total des fonds vers&#233;s par le bailleur &#224; l'organisme de gestion</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="verse" id="verse" value="<%%VALUE(verse)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reste_verser" class="control-label col-lg-3">Reste &#224; Verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_verser-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reste_verser-description"><div class="alert alert-info">Budget accord&#233; non vers&#233;</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reste_verser" id="reste_verser" value="<%%VALUE(reste_verser)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="ouvert" class="control-label col-lg-3">Ouvert <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#ouvert-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="ouvert-description"><div class="alert alert-info">Total des cr&#233;dits ouverts (par l'organisme de gestion)</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="ouvert" id="ouvert" value="<%%VALUE(ouvert)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reste_ouvrir" class="control-label col-lg-3">Reste &#224; Ouvrir <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_ouvrir-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reste_ouvrir-description"><div class="alert alert-info">Budget vers&#233; (frais de gestion exclus) - Cr&#233;dits Ouverts</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reste_ouvrir" id="reste_ouvrir" value="<%%VALUE(reste_ouvrir)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reserve" class="control-label col-lg-3">R&#233;serv&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reserve-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reserve-description"><div class="alert alert-info">Sommes des d&#233;penses r&#233;serv&#233;es (mouvements de type 'd&#233;pense' et de statut 'r&#233;serv&#233;e')</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reserve" id="reserve" value="<%%VALUE(reserve)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="liquide" class="control-label col-lg-3">Liquid&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquide-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="liquide-description"><div class="alert alert-info">Sommes des d&#233;penses liquid&#233;es (mouvements de type 'd&#233;pense' et de statut 'liquid&#233;e')</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="liquide" id="liquide" value="<%%VALUE(liquide)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="utilise" class="control-label col-lg-3">Utilis&#233; (R+L) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#utilise-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="utilise-description"><div class="alert alert-info">Total des d&#233;penses (r&#233;serv&#233;es et liquid&#233;es)</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="utilise" id="utilise" value="<%%VALUE(utilise)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="disponible" class="control-label col-lg-3">Disponible (O-U) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#disponible-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="disponible-description"><div class="alert alert-info">Ouvert - Utilis&#233;</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="disponible" id="disponible" value="<%%VALUE(disponible)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reste_engager" class="control-label col-lg-3">Reste &#224; Engager <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_engager-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reste_engager-description"><div class="alert alert-info">Accord&#233; (hors frais de gestion) - Utilis&#233;</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reste_engager" id="reste_engager" value="<%%VALUE(reste_engager)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="prop_uo" class="control-label col-lg-3">U/O (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uo-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="prop_uo-description"><div class="alert alert-info">Utilis&#233; / Ouvert</div></span>
+
+						<input maxlength="12" type="text" class="form-control" name="prop_uo" id="prop_uo" value="<%%VALUE(prop_uo)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="prop_uv" class="control-label col-lg-3">U/V (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uv-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="prop_uv-description"><div class="alert alert-info">Utilis&#233; / Vers&#233;</div></span>
+
+						<input maxlength="12" type="text" class="form-control" name="prop_uv" id="prop_uv" value="<%%VALUE(prop_uv)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="prop_ua" class="control-label col-lg-3">U/A (%, hors FG) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="prop_ua-description"><div class="alert alert-info">Utilis&#233; / Accord&#233; hors frais de gestion</div></span>
+
+						<input maxlength="12" type="text" class="form-control" name="prop_ua" id="prop_ua" value="<%%VALUE(prop_ua)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="budget_nv" class="control-label col-lg-3">Budget non ventil&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#budget_nv-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="budget_nv-description"><div class="alert alert-info">Budget accord&#233; hors frais de gestion qui n'est pas ventil&#233; (cf. section 'Ventilation')</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="budget_nv" id="budget_nv" value="<%%VALUE(budget_nv)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="depenses_nv" class="control-label col-lg-3">D&#233;penses non ventil&#233;es <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depenses_nv-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="depenses_nv-description"><div class="alert alert-info">D&#233;penses qui ne sont pas ventil&#233;es</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="depenses_nv" id="depenses_nv" value="<%%VALUE(depenses_nv)%%>">
+					</div>
+				</div>
+
+			</fieldset>
+		</div>
+
+		<!-- DV action buttons -->
+		<hr class="hidden-md hidden-lg">
+		<div class="col-md-4 col-lg-2" id="conventions_dv_action_buttons">
+			<div class="btn-toolbar">
+				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
+					<%%UPDATE_BUTTON%%>
+				</div><p></p>
+				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
+					<%%DESELECT_BUTTON%%>
+					<%%DVPRINT_BUTTON%%>
+					<%%DELETE_BUTTON%%>
+				</div><p></p>
+				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
+					<%%INSERT_BUTTON%%>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- child records -->
+	<hr>
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div id="conventions-children" class="children-tabs"></div>
+		</div>
+	</div>
+
+</div><!-- /div class="panel-body" -->
+	<script src="nicEdit.js"></script>
+	<script>
+		$j(function() {
+			var add_new_mode = (!$j('input[name=SelectedID]').val());
+			var embedded_mode = ($j('input[name=Embedded]').val() == 1);
+
+			/* auto-close embedded page? */
+			var autoclose_mode = ($j('input[name=AutoClose]').val() == 1);
+			var record_added_ok = (location.search.split('record-added-ok=').length == 2);
+			var record_updated_ok = (location.search.split('record-updated-ok=').length == 2);
+			if((record_added_ok || record_updated_ok) && embedded_mode && autoclose_mode){
+				setTimeout(AppGini.closeParentModal, 2000);
+			}
+
+			bkLib.onDomLoaded(function(){
+				if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
+
+				$j('.nicEdit-panelContain').parent().width('100%');
+				$j('.nicEdit-panelContain').parent().next().width('98%');
+				$j('.nicEdit-main').width('99%');
+			});
+			/* enable DV action buttons to float on scrolling down the form */
+			enable_dvab_floating();
+
+			if(!(embedded_mode && AppGini.mobileDevice())){
+				$j('select, input[type=text], textarea').not(':disabled').eq(0).focus();
+			}
+
+			$j('form').eq(0).change(function(){
+				if($j(this).data('already_changed')) return;
+				if($j('#deselect').length) $j('#deselect').removeClass('btn-default').addClass('btn-warning').get(0).lastChild.data = " <%%TRANSLATION(Cancel)%%>";
+				$j(this).data('already_changed', true);
+			});
+
+			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function(){ /* */ return false; });
+
+			if(embedded_mode){
+				/* hide links to children tables in embedded mode */
+				$j('.detail_view a[id$=_link]').remove();
+
+				/* append embedded mode to all links */
+				var append_embedded = function(){
+					$j('a[href]:not([href^="#"]):not([href^="javascript"]):not([href$="Embedded=1"]):not([href*="link.php?t="]):not([href^="mailto:"])').each(
+						function(){
+							$j(this).attr('href', $j(this).attr('href') + '&Embedded=1');
+						}
+					);
+				}
+				setTimeout(append_embedded, 500);
+				setTimeout(append_embedded, 1500);
+				setTimeout(append_embedded, 2500);
+				setTimeout(append_embedded, 3500);
+			}
+
+			/* when no record is selected ('add new' mode) */
+			if(add_new_mode){
+				/* hide links to children tables */
+				$j('.detail_view a[id$=_link]').remove();
+			}else{
+				post(
+					'parent-children.php', {
+						ParentTable: 'conventions',
+						SelectedID: '<%%VALUE(id)%%>',
+						Operation: 'show-children'
+					},
+					'conventions-children'
+				);
+			}
+
+			if(!embedded_mode){
+				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
+				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
+
+				$j('.add_new_parent').click(function(){
+					var pt = $j(this).attr('id').replace(/_add_new$/, '');
+					modal_window({
+						url: pt + '_view.php?addNew_x=1&Embedded=1',
+						close: function(){
+							var field_id = $j('#' + pt + '_add_new').prevAll('input:hidden').eq(0).attr('id');
+							$j('#' + field_id + '-container').select2('focus').select2('focus');
+						},
+						size: 'full',
+						title: $j(this).attr('title')
+					});
+				});
+			}
+
+			AppGini.hideViewParentLinks();
+
+			$j('form').on('click', '.view_parent', function(){
+				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
+				if($j(this).prevAll('input:hidden').length){
+					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
+				}else{
+					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
+				}
+
+				/* handle radio lookups */
+				if($j(this).prevAll('[type=radio]').length){
+					parent_id = $j(this).prevAll('[type=radio]').eq(0).val();
+				}
+
+				if(parent_id != '{empty_value}' && parent_id != undefined && parent_id != ''){
+					var parent_link = $j(this).parents('.form-group').children('label').data('parent_link');
+					switch(parent_link){
+						case 'view_parent_hidden':
+							break;
+						case 'view_parent_modal':
+							modal_window({
+								url: pt + '_view.php?Embedded=1&SelectedID=' + encodeURIComponent(parent_id),
+								close: function(){
+									var field_id = $j('#' + pt + '_view_parent').prevAll('input:hidden').eq(0).attr('id');
+									$j('#' + field_id + '-container').select2('focus').select2('focus');
+								},
+								size: 'full',
+								title: $j(this).attr('title')
+							});
+							break;
+						case 'view_parent_same_window':
+							window.location = pt + '_view.php?Embedded=' + (embedded_mode ? '1' : '') + '&SelectedID=' + encodeURIComponent(parent_id);
+							break;
+						case 'view_parent_new_window':
+							window.open(pt + '_view.php?SelectedID=' + encodeURIComponent(parent_id));
+							break;
+					}
+
+				}
+			});
+
+
+			/* load admin tools for admin user */
+			if(!add_new_mode){
+				$j('body').append('<div id="admin-tools-appendix"></div>');
+				$j('#admin-tools-appendix').load(
+					'ajax_admin_tools.php?table=conventions&id=<%%URLVALUE(id)%%>',
+					function(resp){
+						if(!resp.length) return;
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=conventions&id=<%%URLVALUE(id)%%>');
+					}
+				);
+			}
+
+			/* warn user if 'add new' clicked while unsaved changes exist */
+			$j('#addNew').click(function(){
+				if($j('#deselect.btn-warning').length){
+					return confirm('<%%TRANSLATION(discard changes confirm)%%>');
+				}
+			});
+
+		});
+	</script>
