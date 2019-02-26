@@ -28,7 +28,7 @@
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
 		"CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
-		"`versements`.`notes`" => "notes"
+		"if(CHAR_LENGTH(`versements`.`notes`)>80, concat(left(`versements`.`notes`,80),' ...'), `versements`.`notes`)" => "notes"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
@@ -70,7 +70,7 @@
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
 		"CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
-		"`versements`.`notes`" => "notes"
+		"`versements`.`notes`" => "Notes"
 	);
 
 	// Lookup fields that can be used as filterers

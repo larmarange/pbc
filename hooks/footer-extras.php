@@ -1,9 +1,8 @@
 <style>
 .navbar-header a {text-transform: uppercase !important;}
 
-
-// masquer champs inutiles dans les sous-tables
-// https://bigprof.com/blog/appgini/how-to-hide-a-field-in-child-table-view/
+/* masquer champs inutiles dans les sous-tables
+   https://bigprof.com/blog/appgini/how-to-hide-a-field-in-child-table-view/ */
 
 #panel_budgets-convention .budgets-convention {display: none;}
 #panel_ventilation-convention .ventilation-convention {display: none;}
@@ -21,4 +20,9 @@
 
 #panel_depenses-ventilation .depenses-ventilation {display: none;}
 #panel_depenses-ventilation .depenses-convention {display: none;}
+
+/* afficher champs sur une seule ligne dans les vues tables */
+.table_view td, .tab-content td {white-space: nowrap;}
+
+
 </style>

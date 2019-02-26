@@ -26,7 +26,7 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"`lignes_credits`.`intitule`" => "intitule",
-		"`lignes_credits`.`notes`" => "notes",
+		"if(CHAR_LENGTH(`lignes_credits`.`notes`)>80, concat(left(`lignes_credits`.`notes`,80),' ...'), `lignes_credits`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '</span>')" => "ouvert",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '</span>')" => "liquide",
@@ -84,7 +84,7 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"`lignes_credits`.`intitule`" => "intitule",
-		"`lignes_credits`.`notes`" => "notes",
+		"`lignes_credits`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '</span>')" => "ouvert",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '</span>')" => "liquide",
@@ -114,7 +114,7 @@
 	$x->AllowNavigation = 1;
 	$x->AllowPrinting = 1;
 	$x->AllowCSV = 1;
-	$x->RecordsPerPage = 10;
+	$x->RecordsPerPage = 50;
 	$x->QuickSearch = 1;
 	$x->QuickSearchText = $Translation["quick search"];
 	$x->ScriptFileName = "lignes_credits_view.php";

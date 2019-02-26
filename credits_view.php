@@ -29,7 +29,7 @@
 		"if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`credits`.`intitule`" => "intitule",
 		"CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
-		"`credits`.`notes`" => "notes"
+		"if(CHAR_LENGTH(`credits`.`notes`)>80, concat(left(`credits`.`notes`,80),' ...'), `credits`.`notes`)" => "notes"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
@@ -75,7 +75,7 @@
 		"if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`credits`.`intitule`" => "intitule",
 		"CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
-		"`credits`.`notes`" => "notes"
+		"`credits`.`notes`" => "Notes"
 	);
 
 	// Lookup fields that can be used as filterers

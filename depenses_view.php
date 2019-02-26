@@ -32,7 +32,7 @@
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
 		"`depenses`.`statut`" => "statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
-		"`depenses`.`notes`" => "notes"
+		"if(CHAR_LENGTH(`depenses`.`notes`)>80, concat(left(`depenses`.`notes`,80),' ...'), `depenses`.`notes`)" => "notes"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
@@ -90,7 +90,7 @@
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
 		"`depenses`.`statut`" => "statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
-		"`depenses`.`notes`" => "notes"
+		"`depenses`.`notes`" => "Notes"
 	);
 
 	// Lookup fields that can be used as filterers

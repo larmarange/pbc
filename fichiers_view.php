@@ -26,7 +26,7 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`fichiers`.`titre`" => "titre",
 		"`fichiers`.`fichier`" => "fichier",
-		"`fichiers`.`notes`" => "notes"
+		"if(CHAR_LENGTH(`fichiers`.`notes`)>80, concat(left(`fichiers`.`notes`,80),' ...'), `fichiers`.`notes`)" => "notes"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
@@ -60,7 +60,7 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`fichiers`.`titre`" => "titre",
 		"`fichiers`.`fichier`" => "fichier",
-		"`fichiers`.`notes`" => "notes"
+		"`fichiers`.`notes`" => "Notes"
 	);
 
 	// Lookup fields that can be used as filterers
