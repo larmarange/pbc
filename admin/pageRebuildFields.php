@@ -16,6 +16,8 @@
 			'statut' => array('appgini' => 'VARCHAR(40) not null default \'active\' '),
 			'bailleur' => array('appgini' => 'VARCHAR(40) null '),
 			'porteur' => array('appgini' => 'INT unsigned null '),
+			'date_reponse' => array('appgini' => 'DATE null '),
+			'demande' => array('appgini' => 'DECIMAL(10,2) null '),
 			'date_debut' => array('appgini' => 'DATE null '),
 			'date_fin' => array('appgini' => 'DATE null '),
 			'duree' => array('appgini' => 'MEDIUMINT unsigned null '),
@@ -25,6 +27,7 @@
 			'accorde' => array('appgini' => 'DECIMAL(10,2) null '),
 			'verse' => array('appgini' => 'DECIMAL(10,2) null '),
 			'reste_verser' => array('appgini' => 'DECIMAL(10,2) null '),
+			'verse_hfg' => array('appgini' => 'DECIMAL(10,2) null '),
 			'ouvert' => array('appgini' => 'DECIMAL(10,2) null '),
 			'reste_ouvrir' => array('appgini' => 'DECIMAL(10,2) null '),
 			'reserve' => array('appgini' => 'DECIMAL(10,2) null '),
@@ -126,10 +129,10 @@
 			'email' => array('appgini' => 'VARCHAR(80) null ')
 		),
 		'types_ligne' => array(   
+			'frais_gestion' => array('appgini' => 'VARCHAR(40) null '),
 			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
 			'gestionnaire' => array('appgini' => 'VARCHAR(40) not null '),
-			'type' => array('appgini' => 'VARCHAR(40) not null '),
-			'frais_gestion' => array('appgini' => 'VARCHAR(40) null ')
+			'type' => array('appgini' => 'VARCHAR(40) not null ')
 		)
 	);
 

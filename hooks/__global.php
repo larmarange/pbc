@@ -62,7 +62,7 @@
 		if (is_null($liquide)) $liquide = 0;
 		$utilise = $reserve + $liquide;
 		$disponible = $ouvert - $utilise;
-		$reste_verser = $accorde_hfg - $verse;
+		$reste_verser = $accorde - $verse;
 		$reste_ouvrir = $verse_hfg - $ouvert;
 		$reste_engager = $accorde_hfg - $utilise;
 		$prop_uo = ($ouvert > 0) ? 100 * $utilise / $ouvert : 0;
@@ -78,6 +78,7 @@
 			frais_gestion='{$frais_gestion}', 
 			accorde='{$accorde}',
 			verse='{$verse}',
+			verse_hfg='{$verse_hfg}',
 			ouvert='{$ouvert}',
 			reserve='{$reserve}',
 			liquide='{$liquide}',

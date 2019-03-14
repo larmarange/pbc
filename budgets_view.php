@@ -88,7 +88,7 @@
 		"`budgets`.`reste_verser`" => "Reste &#224; Verser",
 		"`budgets`.`ouvert`" => "Ouvert",
 		"`budgets`.`reste_ouvrir`" => "Reste &#224; Ouvrir",
-		"`budgets`.`reserve`" => "Reserv&#233;",
+		"`budgets`.`reserve`" => "R&#233;serv&#233;",
 		"`budgets`.`liquide`" => "Liquid&#233;",
 		"`budgets`.`utilise`" => "Utilis&#233;",
 		"`budgets`.`disponible`" => "Disponible",
@@ -151,7 +151,7 @@
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Type", "Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "Reserv&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "U/O (%)", "U/V (%)", "U/A (%)");
+	$x->ColCaption = array("Convention", "Type", "Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "U/O (%)", "U/V (%)", "U/A (%)");
 	$x->ColFieldName = array('convention', 'type', 'accorde', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'prop_uo', 'prop_uv', 'prop_ua');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 

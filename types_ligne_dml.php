@@ -14,12 +14,12 @@ function types_ligne_insert(){
 		return false;
 	}
 
+	$data['frais_gestion'] = makeSafe($_REQUEST['frais_gestion']);
+		if($data['frais_gestion'] == empty_lookup_value){ $data['frais_gestion'] = ''; }
 	$data['gestionnaire'] = makeSafe($_REQUEST['gestionnaire']);
 		if($data['gestionnaire'] == empty_lookup_value){ $data['gestionnaire'] = ''; }
 	$data['type'] = makeSafe($_REQUEST['type']);
 		if($data['type'] == empty_lookup_value){ $data['type'] = ''; }
-	$data['frais_gestion'] = makeSafe($_REQUEST['frais_gestion']);
-		if($data['frais_gestion'] == empty_lookup_value){ $data['frais_gestion'] = ''; }
 	if($data['gestionnaire']== ''){
 		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Organisme gestionnaire': " . $Translation['field not null'] . '<br><br>';
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
@@ -38,7 +38,7 @@ function types_ligne_insert(){
 	}
 
 	$o = array('silentErrors' => true);
-	sql('insert into `types_ligne` set       `gestionnaire`=' . (($data['gestionnaire'] !== '' && $data['gestionnaire'] !== NULL) ? "'{$data['gestionnaire']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL'), $o);
+	sql('insert into `types_ligne` set       `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `gestionnaire`=' . (($data['gestionnaire'] !== '' && $data['gestionnaire'] !== NULL) ? "'{$data['gestionnaire']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL'), $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo "<a href=\"types_ligne_view.php?addNew_x=1\">{$Translation['< back']}</a>";
@@ -130,6 +130,8 @@ function types_ligne_update($selected_id){
 		return false;
 	}
 
+	$data['frais_gestion'] = makeSafe($_REQUEST['frais_gestion']);
+		if($data['frais_gestion'] == empty_lookup_value){ $data['frais_gestion'] = ''; }
 	$data['gestionnaire'] = makeSafe($_REQUEST['gestionnaire']);
 		if($data['gestionnaire'] == empty_lookup_value){ $data['gestionnaire'] = ''; }
 	if($data['gestionnaire']==''){
@@ -144,8 +146,6 @@ function types_ligne_update($selected_id){
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
-	$data['frais_gestion'] = makeSafe($_REQUEST['frais_gestion']);
-		if($data['frais_gestion'] == empty_lookup_value){ $data['frais_gestion'] = ''; }
 	$data['selectedID']=makeSafe($selected_id);
 
 	// hook: types_ligne_before_update
@@ -155,7 +155,7 @@ function types_ligne_update($selected_id){
 	}
 
 	$o=array('silentErrors' => true);
-	sql('update `types_ligne` set       `gestionnaire`=' . (($data['gestionnaire'] !== '' && $data['gestionnaire'] !== NULL) ? "'{$data['gestionnaire']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `types_ligne` set       `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `gestionnaire`=' . (($data['gestionnaire'] !== '' && $data['gestionnaire'] !== NULL) ? "'{$data['gestionnaire']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo '<a href="types_ligne_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -303,9 +303,9 @@ function types_ligne_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 
 	// set records to read only if user can't insert new records and can't edit current record
 	if(($selected_id && !$AllowUpdate) || (!$selected_id && !$AllowInsert)){
+		$jsReadOnly .= "\tjQuery('#frais_gestion').prop('disabled', true);\n";
 		$jsReadOnly .= "\tjQuery('#gestionnaire').replaceWith('<div class=\"form-control-static\" id=\"gestionnaire\">' + (jQuery('#gestionnaire').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#type').replaceWith('<div class=\"form-control-static\" id=\"type\">' + (jQuery('#type').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('#frais_gestion').prop('disabled', true);\n";
 		$jsReadOnly .= "\tjQuery('.select2-container').hide();\n";
 
 		$noUploads = true;
@@ -333,13 +333,14 @@ function types_ligne_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	}
 
 	// process images
+	$templateCode = str_replace('<%%UPLOADFILE(frais_gestion)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(id)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(gestionnaire)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(type)%%>', '', $templateCode);
-	$templateCode = str_replace('<%%UPLOADFILE(frais_gestion)%%>', '', $templateCode);
 
 	// process values
 	if($selected_id){
+		$templateCode = str_replace('<%%CHECKED(frais_gestion)%%>', ($row['frais_gestion'] ? "checked" : ""), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(id)%%>', safe_html($urow['id']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(id)%%>', html_attr($row['id']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode($urow['id']), $templateCode);
@@ -349,15 +350,14 @@ function types_ligne_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(type)%%>', safe_html($urow['type']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(type)%%>', html_attr($row['type']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(type)%%>', urlencode($urow['type']), $templateCode);
-		$templateCode = str_replace('<%%CHECKED(frais_gestion)%%>', ($row['frais_gestion'] ? "checked" : ""), $templateCode);
 	}else{
+		$templateCode = str_replace('<%%CHECKED(frais_gestion)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%VALUE(id)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(gestionnaire)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(gestionnaire)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(type)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(type)%%>', urlencode(''), $templateCode);
-		$templateCode = str_replace('<%%CHECKED(frais_gestion)%%>', '', $templateCode);
 	}
 
 	// process translations

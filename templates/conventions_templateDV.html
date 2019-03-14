@@ -57,6 +57,26 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
+					<label for="date_reponse" class="control-label col-lg-3">Date r&#233;ponse <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#date_reponse-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="date_reponse-description"><div class="alert alert-info">Si la convention a &#233;t&#233; soumise pour financement &#224; un appel d'offres, indiquez la date (approximative) o&#249; une r&#233;ponse est attendue</div></span>
+
+						<%%COMBO(date_reponse)%%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="demande" class="control-label col-lg-3">Demand&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#demande-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="demande-description"><div class="alert alert-info">Budget demand&#233;</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="demande" id="demande" value="<%%VALUE(demande)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
 					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
 					<div class="col-lg-9">
 						<%%COMBO(date_debut)%%>
@@ -121,7 +141,7 @@
 					<hr class="hidden-md hidden-lg">
 					<label for="verse" class="control-label col-lg-3">Vers&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="verse-description"><div class="alert alert-info">Total des fonds vers&#233;s par le bailleur &#224; l'organisme de gestion</div></span>
+						<span class="help-block collapse" id="verse-description"><div class="alert alert-info">Total des fonds vers&#233;s par le bailleur &#224; l'organisme de gestion (cf. Versements)</div></span>
 
 						<input maxlength="13" type="text" class="form-control" name="verse" id="verse" value="<%%VALUE(verse)%%>">
 					</div>
@@ -134,6 +154,16 @@
 						<span class="help-block collapse" id="reste_verser-description"><div class="alert alert-info">Budget accord&#233; non vers&#233;</div></span>
 
 						<input maxlength="13" type="text" class="form-control" name="reste_verser" id="reste_verser" value="<%%VALUE(reste_verser)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="verse_hfg" class="control-label col-lg-3">Vers&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse_hfg-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="verse_hfg-description"><div class="alert alert-info">Montants vers&#233;s hors frais de gestion (somme des Versements)</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="verse_hfg" id="verse_hfg" value="<%%VALUE(verse_hfg)%%>">
 					</div>
 				</div>
 

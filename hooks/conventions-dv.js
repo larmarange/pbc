@@ -30,6 +30,7 @@ $j(function () {
 	$j('#accorde_hfg').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#accorde_hfg').val()) + '</div>'));
 	$j('#accorde').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#accorde').val()) + '</div>'));
 	$j('#verse').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#verse').val()) + '</div>'));
+	$j('#verse_hfg').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#verse_hfg').val()) + '</div>'));
 	$j('#ouvert').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#ouvert').val()) + '</div>'));
 	$j('#reserve').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reserve').val()) + '</div>'));
 	$j('#liquide').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#liquide').val()) + '</div>'));

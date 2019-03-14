@@ -44,9 +44,9 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde" class="control-label col-lg-3">Accord&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
+					<label for="accorde" class="control-label col-lg-3">Pr&#233;visionnel <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="accorde-description"><div class="alert alert-info">Optionnel : vous pouvez sp&#233;cifier le montant accord&#233; associ&#233; &#224; cette ventilation</div></span>
+						<span class="help-block collapse" id="accorde-description"><div class="alert alert-info">Optionnel : vous pouvez sp&#233;cifier le montant pr&#233;visionnel associ&#233; &#224; cette ventilation</div></span>
 
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>">
 					</div>
@@ -54,7 +54,7 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="reserve" class="control-label col-lg-3">Reserv&#233;</label>
+					<label for="reserve" class="control-label col-lg-3">R&#233;serv&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reserve" id="reserve" value="<%%VALUE(reserve)%%>">
 					</div>
@@ -86,8 +86,10 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_ua" class="control-label col-lg-3">U/A (%)</label>
+					<label for="prop_ua" class="control-label col-lg-3">U/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
 					<div class="col-lg-9">
+						<span class="help-block collapse" id="prop_ua-description"><div class="alert alert-info">Utilis&#233; sur Pr&#233;visionnel</div></span>
+
 						<input maxlength="12" type="text" class="form-control" name="prop_ua" id="prop_ua" value="<%%VALUE(prop_ua)%%>">
 					</div>
 				</div>

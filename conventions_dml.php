@@ -22,6 +22,10 @@ function conventions_insert(){
 		if($data['bailleur'] == empty_lookup_value){ $data['bailleur'] = ''; }
 	$data['porteur'] = makeSafe($_REQUEST['porteur']);
 		if($data['porteur'] == empty_lookup_value){ $data['porteur'] = ''; }
+	$data['date_reponse'] = intval($_REQUEST['date_reponseYear']) . '-' . intval($_REQUEST['date_reponseMonth']) . '-' . intval($_REQUEST['date_reponseDay']);
+	$data['date_reponse'] = parseMySQLDate($data['date_reponse'], '');
+	$data['demande'] = makeSafe($_REQUEST['demande']);
+		if($data['demande'] == empty_lookup_value){ $data['demande'] = ''; }
 	$data['date_debut'] = intval($_REQUEST['date_debutYear']) . '-' . intval($_REQUEST['date_debutMonth']) . '-' . intval($_REQUEST['date_debutDay']);
 	$data['date_debut'] = parseMySQLDate($data['date_debut'], '');
 	$data['date_fin'] = intval($_REQUEST['date_finYear']) . '-' . intval($_REQUEST['date_finMonth']) . '-' . intval($_REQUEST['date_finDay']);
@@ -40,6 +44,8 @@ function conventions_insert(){
 		if($data['verse'] == empty_lookup_value){ $data['verse'] = ''; }
 	$data['reste_verser'] = makeSafe($_REQUEST['reste_verser']);
 		if($data['reste_verser'] == empty_lookup_value){ $data['reste_verser'] = ''; }
+	$data['verse_hfg'] = makeSafe($_REQUEST['verse_hfg']);
+		if($data['verse_hfg'] == empty_lookup_value){ $data['verse_hfg'] = ''; }
 	$data['ouvert'] = makeSafe($_REQUEST['ouvert']);
 		if($data['ouvert'] == empty_lookup_value){ $data['ouvert'] = ''; }
 	$data['reste_ouvrir'] = makeSafe($_REQUEST['reste_ouvrir']);
@@ -83,7 +89,7 @@ function conventions_insert(){
 	}
 
 	$o = array('silentErrors' => true);
-	sql('insert into `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL'), $o);
+	sql('insert into `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `date_reponse`=' . (($data['date_reponse'] !== '' && $data['date_reponse'] !== NULL) ? "'{$data['date_reponse']}'" : 'NULL') . ', `demande`=' . (($data['demande'] !== '' && $data['demande'] !== NULL) ? "'{$data['demande']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `verse_hfg`=' . (($data['verse_hfg'] !== '' && $data['verse_hfg'] !== NULL) ? "'{$data['verse_hfg']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL'), $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo "<a href=\"conventions_view.php?addNew_x=1\">{$Translation['< back']}</a>";
@@ -307,6 +313,10 @@ function conventions_update($selected_id){
 		if($data['bailleur'] == empty_lookup_value){ $data['bailleur'] = ''; }
 	$data['porteur'] = makeSafe($_REQUEST['porteur']);
 		if($data['porteur'] == empty_lookup_value){ $data['porteur'] = ''; }
+	$data['date_reponse'] = intval($_REQUEST['date_reponseYear']) . '-' . intval($_REQUEST['date_reponseMonth']) . '-' . intval($_REQUEST['date_reponseDay']);
+	$data['date_reponse'] = parseMySQLDate($data['date_reponse'], '');
+	$data['demande'] = makeSafe($_REQUEST['demande']);
+		if($data['demande'] == empty_lookup_value){ $data['demande'] = ''; }
 	$data['date_debut'] = intval($_REQUEST['date_debutYear']) . '-' . intval($_REQUEST['date_debutMonth']) . '-' . intval($_REQUEST['date_debutDay']);
 	$data['date_debut'] = parseMySQLDate($data['date_debut'], '');
 	$data['date_fin'] = intval($_REQUEST['date_finYear']) . '-' . intval($_REQUEST['date_finMonth']) . '-' . intval($_REQUEST['date_finDay']);
@@ -325,6 +335,8 @@ function conventions_update($selected_id){
 		if($data['verse'] == empty_lookup_value){ $data['verse'] = ''; }
 	$data['reste_verser'] = makeSafe($_REQUEST['reste_verser']);
 		if($data['reste_verser'] == empty_lookup_value){ $data['reste_verser'] = ''; }
+	$data['verse_hfg'] = makeSafe($_REQUEST['verse_hfg']);
+		if($data['verse_hfg'] == empty_lookup_value){ $data['verse_hfg'] = ''; }
 	$data['ouvert'] = makeSafe($_REQUEST['ouvert']);
 		if($data['ouvert'] == empty_lookup_value){ $data['ouvert'] = ''; }
 	$data['reste_ouvrir'] = makeSafe($_REQUEST['reste_ouvrir']);
@@ -358,7 +370,7 @@ function conventions_update($selected_id){
 	}
 
 	$o=array('silentErrors' => true);
-	sql('update `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `date_reponse`=' . (($data['date_reponse'] !== '' && $data['date_reponse'] !== NULL) ? "'{$data['date_reponse']}'" : 'NULL') . ', `demande`=' . (($data['demande'] !== '' && $data['demande'] !== NULL) ? "'{$data['demande']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `verse_hfg`=' . (($data['verse_hfg'] !== '' && $data['verse_hfg'] !== NULL) ? "'{$data['verse_hfg']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo '<a href="conventions_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -417,13 +429,21 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$combo_statut->ListItem = explode('||', entitiesToUTF8(convertLegacyOptions($statut_data)));
 		$combo_statut->ListData = $combo_statut->ListItem;
 	}else{
-		$combo_statut->ListItem = explode('||', entitiesToUTF8(convertLegacyOptions("en projet;;active;;cl&#244;tur&#233;e;;refus&#233;e")));
+		$combo_statut->ListItem = explode('||', entitiesToUTF8(convertLegacyOptions("en projet;;soumise pour financement;;active;;cl&#244;tur&#233;e;;refus&#233;e")));
 		$combo_statut->ListData = $combo_statut->ListItem;
 	}
 	$combo_statut->SelectName = 'statut';
 	$combo_statut->AllowNull = false;
 	// combobox: porteur
 	$combo_porteur = new DataCombo;
+	// combobox: date_reponse
+	$combo_date_reponse = new DateCombo;
+	$combo_date_reponse->DateFormat = "dmy";
+	$combo_date_reponse->MinYear = 1900;
+	$combo_date_reponse->MaxYear = 2100;
+	$combo_date_reponse->DefaultDate = parseMySQLDate('', '');
+	$combo_date_reponse->MonthNames = $Translation['month names'];
+	$combo_date_reponse->NamePrefix = 'date_reponse';
 	// combobox: date_debut
 	$combo_date_debut = new DateCombo;
 	$combo_date_debut->DateFormat = "dmy";
@@ -472,6 +492,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$row = $hc->xss_clean($row); /* sanitize data */
 		$combo_statut->SelectedData = $row['statut'];
 		$combo_porteur->SelectedData = $row['porteur'];
+		$combo_date_reponse->DefaultDate = $row['date_reponse'];
 		$combo_date_debut->DefaultDate = $row['date_debut'];
 		$combo_date_fin->DefaultDate = $row['date_fin'];
 	}else{
@@ -634,6 +655,9 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$jsReadOnly .= "\tjQuery('#bailleur').replaceWith('<div class=\"form-control-static\" id=\"bailleur\">' + (jQuery('#bailleur').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#porteur').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#porteur_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
+		$jsReadOnly .= "\tjQuery('#date_reponse').prop('readonly', true);\n";
+		$jsReadOnly .= "\tjQuery('#date_reponseDay, #date_reponseMonth, #date_reponseYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
+		$jsReadOnly .= "\tjQuery('#demande').replaceWith('<div class=\"form-control-static\" id=\"demande\">' + (jQuery('#demande').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#date_debut').prop('readonly', true);\n";
 		$jsReadOnly .= "\tjQuery('#date_debutDay, #date_debutMonth, #date_debutYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#date_fin').prop('readonly', true);\n";
@@ -644,6 +668,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$jsReadOnly .= "\tjQuery('#accorde').replaceWith('<div class=\"form-control-static\" id=\"accorde\">' + (jQuery('#accorde').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#verse').replaceWith('<div class=\"form-control-static\" id=\"verse\">' + (jQuery('#verse').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reste_verser').replaceWith('<div class=\"form-control-static\" id=\"reste_verser\">' + (jQuery('#reste_verser').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#verse_hfg').replaceWith('<div class=\"form-control-static\" id=\"verse_hfg\">' + (jQuery('#verse_hfg').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#ouvert').replaceWith('<div class=\"form-control-static\" id=\"ouvert\">' + (jQuery('#ouvert').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reste_ouvrir').replaceWith('<div class=\"form-control-static\" id=\"reste_ouvrir\">' + (jQuery('#reste_ouvrir').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reserve').replaceWith('<div class=\"form-control-static\" id=\"reserve\">' + (jQuery('#reserve').val() || '') + '</div>');\n";
@@ -670,6 +695,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%COMBO(porteur)%%>', $combo_porteur->HTML, $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(porteur)%%>', $combo_porteur->MatchText, $templateCode);
 	$templateCode = str_replace('<%%URLCOMBOTEXT(porteur)%%>', urlencode($combo_porteur->MatchText), $templateCode);
+	$templateCode = str_replace('<%%COMBO(date_reponse)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_reponse->GetHTML(true) . '</div>' : $combo_date_reponse->GetHTML()), $templateCode);
+	$templateCode = str_replace('<%%COMBOTEXT(date_reponse)%%>', $combo_date_reponse->GetHTML(true), $templateCode);
 	$templateCode = str_replace('<%%COMBO(date_debut)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_debut->GetHTML(true) . '</div>' : $combo_date_debut->GetHTML()), $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(date_debut)%%>', $combo_date_debut->GetHTML(true), $templateCode);
 	$templateCode = str_replace('<%%COMBO(date_fin)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_fin->GetHTML(true) . '</div>' : $combo_date_fin->GetHTML()), $templateCode);
@@ -697,6 +724,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%UPLOADFILE(statut)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(bailleur)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(porteur)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(date_reponse)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(demande)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date_debut)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date_fin)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(duree)%%>', '', $templateCode);
@@ -706,6 +735,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%UPLOADFILE(accorde)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(verse)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reste_verser)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(verse_hfg)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(ouvert)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reste_ouvrir)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reserve)%%>', '', $templateCode);
@@ -736,6 +766,11 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(porteur)%%>', safe_html($urow['porteur']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(porteur)%%>', html_attr($row['porteur']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(porteur)%%>', urlencode($urow['porteur']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(date_reponse)%%>', @date('d/m/Y', @strtotime(html_attr($row['date_reponse']))), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(date_reponse)%%>', urlencode(@date('d/m/Y', @strtotime(html_attr($urow['date_reponse'])))), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(demande)%%>', safe_html($urow['demande']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(demande)%%>', html_attr($row['demande']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(demande)%%>', urlencode($urow['demande']), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_debut)%%>', @date('d/m/Y', @strtotime(html_attr($row['date_debut']))), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(date_debut)%%>', urlencode(@date('d/m/Y', @strtotime(html_attr($urow['date_debut'])))), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_fin)%%>', @date('d/m/Y', @strtotime(html_attr($row['date_fin']))), $templateCode);
@@ -765,6 +800,9 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(reste_verser)%%>', safe_html($urow['reste_verser']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reste_verser)%%>', html_attr($row['reste_verser']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(reste_verser)%%>', urlencode($urow['reste_verser']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(verse_hfg)%%>', safe_html($urow['verse_hfg']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(verse_hfg)%%>', html_attr($row['verse_hfg']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(verse_hfg)%%>', urlencode($urow['verse_hfg']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(ouvert)%%>', safe_html($urow['ouvert']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(ouvert)%%>', html_attr($row['ouvert']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ouvert)%%>', urlencode($urow['ouvert']), $templateCode);
@@ -812,6 +850,10 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$templateCode = str_replace('<%%URLVALUE(bailleur)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(porteur)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(porteur)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(date_reponse)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(date_reponse)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(demande)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(demande)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_debut)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(date_debut)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_fin)%%>', '', $templateCode);
@@ -829,6 +871,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$templateCode = str_replace('<%%URLVALUE(verse)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(reste_verser)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(reste_verser)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(verse_hfg)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(verse_hfg)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(ouvert)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ouvert)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(reste_ouvrir)%%>', '', $templateCode);

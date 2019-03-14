@@ -66,12 +66,12 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "Convention",
 		"`ventilation`.`intitule`" => "Intitul&#233;",
 		"`ventilation`.`notes`" => "Notes",
-		"`ventilation`.`accorde`" => "Accord&#233;",
-		"`ventilation`.`reserve`" => "Reserv&#233;",
+		"`ventilation`.`accorde`" => "Pr&#233;visionnel",
+		"`ventilation`.`reserve`" => "R&#233;serv&#233;",
 		"`ventilation`.`liquide`" => "Liquid&#233;",
 		"`ventilation`.`utilise`" => "Utilis&#233;",
 		"`ventilation`.`reste_engager`" => "Reste &#224; Engager",
-		"`ventilation`.`prop_ua`" => "U/A (%)"
+		"`ventilation`.`prop_ua`" => "U/P (%)"
 	);
 
 	// Fields that can be quick searched
@@ -121,7 +121,7 @@
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Accord&#233;", "Reserv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "U/A (%)");
+	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "U/P (%)");
 	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'prop_ua');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10);
 

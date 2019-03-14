@@ -27,6 +27,8 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
 		"if(`conventions`.`date_fin`,date_format(`conventions`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`conventions`.`duree`" => "duree",
@@ -36,6 +38,7 @@
 		"CONCAT('<span style=''color: ', IF(`conventions`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`verse` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse`, 2, 'ru_RU'), '</span>')" => "verse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_verser` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_verser`, 2, 'ru_RU'), '</span>')" => "reste_verser",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`verse_hfg` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse_hfg`, 2, 'ru_RU'), '</span>')" => "verse_hfg",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`ouvert`, 2, 'ru_RU'), '</span>')" => "ouvert",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_ouvrir` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_ouvrir`, 2, 'ru_RU'), '</span>')" => "reste_ouvrir",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
@@ -56,27 +59,30 @@
 		3 => 3,
 		4 => 4,
 		5 => '`personnes1`.`nom`',
-		6 => '`conventions`.`date_debut`',
-		7 => '`conventions`.`date_fin`',
-		8 => '`conventions`.`duree`',
-		9 => 9,
-		10 => '`conventions`.`accorde_hfg`',
-		11 => '`conventions`.`frais_gestion`',
-		12 => '`conventions`.`accorde`',
-		13 => '`conventions`.`verse`',
-		14 => '`conventions`.`reste_verser`',
-		15 => '`conventions`.`ouvert`',
-		16 => '`conventions`.`reste_ouvrir`',
-		17 => '`conventions`.`reserve`',
-		18 => '`conventions`.`liquide`',
-		19 => '`conventions`.`utilise`',
-		20 => '`conventions`.`disponible`',
-		21 => '`conventions`.`reste_engager`',
-		22 => '`conventions`.`prop_uo`',
-		23 => '`conventions`.`prop_uv`',
-		24 => '`conventions`.`prop_ua`',
-		25 => '`conventions`.`budget_nv`',
-		26 => '`conventions`.`depenses_nv`'
+		6 => '`conventions`.`date_reponse`',
+		7 => '`conventions`.`demande`',
+		8 => '`conventions`.`date_debut`',
+		9 => '`conventions`.`date_fin`',
+		10 => '`conventions`.`duree`',
+		11 => 11,
+		12 => '`conventions`.`accorde_hfg`',
+		13 => '`conventions`.`frais_gestion`',
+		14 => '`conventions`.`accorde`',
+		15 => '`conventions`.`verse`',
+		16 => '`conventions`.`reste_verser`',
+		17 => '`conventions`.`verse_hfg`',
+		18 => '`conventions`.`ouvert`',
+		19 => '`conventions`.`reste_ouvrir`',
+		20 => '`conventions`.`reserve`',
+		21 => '`conventions`.`liquide`',
+		22 => '`conventions`.`utilise`',
+		23 => '`conventions`.`disponible`',
+		24 => '`conventions`.`reste_engager`',
+		25 => '`conventions`.`prop_uo`',
+		26 => '`conventions`.`prop_uv`',
+		27 => '`conventions`.`prop_ua`',
+		28 => '`conventions`.`budget_nv`',
+		29 => '`conventions`.`depenses_nv`'
 	);
 
 	// Fields that can be displayed in the csv file
@@ -86,6 +92,8 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
 		"if(`conventions`.`date_fin`,date_format(`conventions`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`conventions`.`duree`" => "duree",
@@ -95,6 +103,7 @@
 		"CONCAT('<span style=''color: ', IF(`conventions`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`verse` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse`, 2, 'ru_RU'), '</span>')" => "verse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_verser` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_verser`, 2, 'ru_RU'), '</span>')" => "reste_verser",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`verse_hfg` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse_hfg`, 2, 'ru_RU'), '</span>')" => "verse_hfg",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`ouvert`, 2, 'ru_RU'), '</span>')" => "ouvert",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_ouvrir` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_ouvrir`, 2, 'ru_RU'), '</span>')" => "reste_ouvrir",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
@@ -115,6 +124,8 @@
 		"`conventions`.`statut`" => "Statut",
 		"`conventions`.`bailleur`" => "Bailleur(s)",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "Porteur",
+		"`conventions`.`date_reponse`" => "Date r&#233;ponse",
+		"`conventions`.`demande`" => "Demand&#233;",
 		"`conventions`.`date_debut`" => "D&#233;but",
 		"`conventions`.`date_fin`" => "Fin",
 		"`conventions`.`duree`" => "Dur&#233;e (mois)",
@@ -124,6 +135,7 @@
 		"`conventions`.`accorde`" => "Total Accord&#233;",
 		"`conventions`.`verse`" => "Vers&#233;",
 		"`conventions`.`reste_verser`" => "Reste &#224; Verser",
+		"`conventions`.`verse_hfg`" => "Vers&#233; hors FG",
 		"`conventions`.`ouvert`" => "Ouvert",
 		"`conventions`.`reste_ouvrir`" => "Reste &#224; Ouvrir",
 		"`conventions`.`reserve`" => "R&#233;serv&#233;",
@@ -145,6 +157,8 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
 		"if(`conventions`.`date_fin`,date_format(`conventions`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`conventions`.`duree`" => "duree",
@@ -154,6 +168,7 @@
 		"CONCAT('<span style=''color: ', IF(`conventions`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`verse` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse`, 2, 'ru_RU'), '</span>')" => "verse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_verser` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_verser`, 2, 'ru_RU'), '</span>')" => "reste_verser",
+		"CONCAT('<span style=''color: ', IF(`conventions`.`verse_hfg` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse_hfg`, 2, 'ru_RU'), '</span>')" => "verse_hfg",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`ouvert`, 2, 'ru_RU'), '</span>')" => "ouvert",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reste_ouvrir` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_ouvrir`, 2, 'ru_RU'), '</span>')" => "reste_ouvrir",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
@@ -200,10 +215,10 @@
 	$x->DefaultSortField = '`conventions`.`date_fin`';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Nom", "Statut", "Bailleur(s)", "Porteur", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Accord&#233; hors FG", "Frais de Gestion", "Total Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233; (R+L)", "Disponible (O-U)", "Reste &#224; Engager", "U/O (%)", "U/V (%)", "U/A (%, hors FG)", "Budget non ventil&#233;", "D&#233;penses non ventil&#233;es");
-	$x->ColFieldName = array('nom', 'statut', 'bailleur', 'porteur', 'date_debut', 'date_fin', 'duree', 'accorde_hfg', 'frais_gestion', 'accorde', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'prop_uo', 'prop_uv', 'prop_ua', 'budget_nv', 'depenses_nv');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Nom", "Statut", "Bailleur(s)", "Porteur", "Date r&#233;ponse", "Demand&#233;", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Accord&#233; hors FG", "Frais de Gestion", "Total Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Vers&#233; hors FG", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233; (R+L)", "Disponible (O-U)", "Reste &#224; Engager", "U/O (%)", "U/V (%)", "U/A (%, hors FG)", "Budget non ventil&#233;", "D&#233;penses non ventil&#233;es");
+	$x->ColFieldName = array('nom', 'statut', 'bailleur', 'porteur', 'date_reponse', 'demande', 'date_debut', 'date_fin', 'duree', 'accorde_hfg', 'frais_gestion', 'accorde', 'verse', 'reste_verser', 'verse_hfg', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'prop_uo', 'prop_uv', 'prop_ua', 'budget_nv', 'depenses_nv');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/conventions_templateTV.html';
@@ -259,7 +274,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`conventions`.`accorde_hfg`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`accorde_hfg`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`frais_gestion`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`frais_gestion`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`accorde`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`verse`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`verse`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_verser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_verser`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`ouvert`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_ouvrir`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_ouvrir`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reserve`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`liquide`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`utilise`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`disponible`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_engager`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`budget_nv`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`budget_nv`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`depenses_nv`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`depenses_nv`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`conventions`.`demande`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`demande`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`accorde_hfg`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`accorde_hfg`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`frais_gestion`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`frais_gestion`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`accorde`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`verse`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`verse`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_verser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_verser`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`verse_hfg`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`verse_hfg`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`ouvert`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_ouvrir`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_ouvrir`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reserve`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`liquide`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`utilise`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`disponible`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`reste_engager`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`budget_nv`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`budget_nv`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`conventions`.`depenses_nv`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`conventions`.`depenses_nv`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)){
 			$sumRow = '<tr class="success">';
@@ -268,26 +283,29 @@
 			$sumRow .= '<td class="conventions-statut"></td>';
 			$sumRow .= '<td class="conventions-bailleur"></td>';
 			$sumRow .= '<td class="conventions-porteur"></td>';
+			$sumRow .= '<td class="conventions-date_reponse"></td>';
+			$sumRow .= "<td class=\"conventions-demande text-right\">{$row[0]}</td>";
 			$sumRow .= '<td class="conventions-date_debut"></td>';
 			$sumRow .= '<td class="conventions-date_fin"></td>';
 			$sumRow .= '<td class="conventions-duree"></td>';
-			$sumRow .= "<td class=\"conventions-accorde_hfg text-right\">{$row[0]}</td>";
-			$sumRow .= "<td class=\"conventions-frais_gestion text-right\">{$row[1]}</td>";
-			$sumRow .= "<td class=\"conventions-accorde text-right\">{$row[2]}</td>";
-			$sumRow .= "<td class=\"conventions-verse text-right\">{$row[3]}</td>";
-			$sumRow .= "<td class=\"conventions-reste_verser text-right\">{$row[4]}</td>";
-			$sumRow .= "<td class=\"conventions-ouvert text-right\">{$row[5]}</td>";
-			$sumRow .= "<td class=\"conventions-reste_ouvrir text-right\">{$row[6]}</td>";
-			$sumRow .= "<td class=\"conventions-reserve text-right\">{$row[7]}</td>";
-			$sumRow .= "<td class=\"conventions-liquide text-right\">{$row[8]}</td>";
-			$sumRow .= "<td class=\"conventions-utilise text-right\">{$row[9]}</td>";
-			$sumRow .= "<td class=\"conventions-disponible text-right\">{$row[10]}</td>";
-			$sumRow .= "<td class=\"conventions-reste_engager text-right\">{$row[11]}</td>";
+			$sumRow .= "<td class=\"conventions-accorde_hfg text-right\">{$row[1]}</td>";
+			$sumRow .= "<td class=\"conventions-frais_gestion text-right\">{$row[2]}</td>";
+			$sumRow .= "<td class=\"conventions-accorde text-right\">{$row[3]}</td>";
+			$sumRow .= "<td class=\"conventions-verse text-right\">{$row[4]}</td>";
+			$sumRow .= "<td class=\"conventions-reste_verser text-right\">{$row[5]}</td>";
+			$sumRow .= "<td class=\"conventions-verse_hfg text-right\">{$row[6]}</td>";
+			$sumRow .= "<td class=\"conventions-ouvert text-right\">{$row[7]}</td>";
+			$sumRow .= "<td class=\"conventions-reste_ouvrir text-right\">{$row[8]}</td>";
+			$sumRow .= "<td class=\"conventions-reserve text-right\">{$row[9]}</td>";
+			$sumRow .= "<td class=\"conventions-liquide text-right\">{$row[10]}</td>";
+			$sumRow .= "<td class=\"conventions-utilise text-right\">{$row[11]}</td>";
+			$sumRow .= "<td class=\"conventions-disponible text-right\">{$row[12]}</td>";
+			$sumRow .= "<td class=\"conventions-reste_engager text-right\">{$row[13]}</td>";
 			$sumRow .= '<td class="conventions-prop_uo"></td>';
 			$sumRow .= '<td class="conventions-prop_uv"></td>';
 			$sumRow .= '<td class="conventions-prop_ua"></td>';
-			$sumRow .= "<td class=\"conventions-budget_nv text-right\">{$row[12]}</td>";
-			$sumRow .= "<td class=\"conventions-depenses_nv text-right\">{$row[13]}</td>";
+			$sumRow .= "<td class=\"conventions-budget_nv text-right\">{$row[14]}</td>";
+			$sumRow .= "<td class=\"conventions-depenses_nv text-right\">{$row[15]}</td>";
 			$sumRow .= '</tr>';
 
 			$x->HTML = str_replace('<!-- tv data below -->', '', $x->HTML);

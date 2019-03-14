@@ -22,40 +22,40 @@
 
 	// Fields that can be displayed in the table view
 	$x->QueryFieldsTV = array(   
+		"concat('<i class=\"glyphicon glyphicon-', if(`types_ligne`.`frais_gestion`, 'check', 'unchecked'), '\"></i>')" => "frais_gestion",
 		"`types_ligne`.`id`" => "id",
 		"`types_ligne`.`gestionnaire`" => "gestionnaire",
-		"`types_ligne`.`type`" => "type",
-		"concat('<i class=\"glyphicon glyphicon-', if(`types_ligne`.`frais_gestion`, 'check', 'unchecked'), '\"></i>')" => "frais_gestion"
+		"`types_ligne`.`type`" => "type"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
-		1 => '`types_ligne`.`id`',
-		2 => 2,
+		1 => 1,
+		2 => '`types_ligne`.`id`',
 		3 => 3,
 		4 => 4
 	);
 
 	// Fields that can be displayed in the csv file
 	$x->QueryFieldsCSV = array(   
+		"`types_ligne`.`frais_gestion`" => "frais_gestion",
 		"`types_ligne`.`id`" => "id",
 		"`types_ligne`.`gestionnaire`" => "gestionnaire",
-		"`types_ligne`.`type`" => "type",
-		"`types_ligne`.`frais_gestion`" => "frais_gestion"
+		"`types_ligne`.`type`" => "type"
 	);
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = array(   
+		"`types_ligne`.`frais_gestion`" => "Frais de Gestion ?",
 		"`types_ligne`.`id`" => "ID",
 		"`types_ligne`.`gestionnaire`" => "Organisme gestionnaire",
-		"`types_ligne`.`type`" => "Type",
-		"`types_ligne`.`frais_gestion`" => "Frais de Gestion ?"
+		"`types_ligne`.`type`" => "Type"
 	);
 
 	// Fields that can be quick searched
 	$x->QueryFieldsQS = array(   
+		"concat('<i class=\"glyphicon glyphicon-', if(`types_ligne`.`frais_gestion`, 'check', 'unchecked'), '\"></i>')" => "frais_gestion",
 		"`types_ligne`.`id`" => "id",
 		"`types_ligne`.`gestionnaire`" => "gestionnaire",
-		"`types_ligne`.`type`" => "type",
-		"concat('<i class=\"glyphicon glyphicon-', if(`types_ligne`.`frais_gestion`, 'check', 'unchecked'), '\"></i>')" => "frais_gestion"
+		"`types_ligne`.`type`" => "type"
 	);
 
 	// Lookup fields that can be used as filterers
@@ -87,13 +87,13 @@
 	$x->TableTitle = "Type de lignes budg&#233;taires";
 	$x->TableIcon = "resources/table_icons/034-mechanism.png";
 	$x->PrimaryKey = "`types_ligne`.`id`";
-	$x->DefaultSortField = '2';
+	$x->DefaultSortField = '3';
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150);
-	$x->ColCaption = array("Organisme gestionnaire", "Type", "Frais de Gestion ?");
-	$x->ColFieldName = array('gestionnaire', 'type', 'frais_gestion');
-	$x->ColNumber  = array(2, 3, 4);
+	$x->ColCaption = array("Frais de Gestion ?", "Organisme gestionnaire", "Type");
+	$x->ColFieldName = array('frais_gestion', 'gestionnaire', 'type');
+	$x->ColNumber  = array(1, 3, 4);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/types_ligne_templateTV.html';

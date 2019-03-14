@@ -20,6 +20,16 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
+					<div class="col-lg-offset-3 col-lg-9">
+						<div class="checkbox"><label for="frais_gestion"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%>> Frais de Gestion ?</label>
+							<i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i>
+							<span class="help-block collapse" id="frais_gestion-description"><div class="alert alert-info">Indiquez si cette ligne budg&#233;taire est du type 'Frais de gestion'. Elle sera alors exclue du calcul des montants &#224; ouvrir.</div></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
 					<label for="gestionnaire" class="control-label col-lg-3">Organisme gestionnaire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="gestionnaire" id="gestionnaire" value="<%%VALUE(gestionnaire)%%>" required>
@@ -31,16 +41,6 @@
 					<label for="type" class="control-label col-lg-3">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="type" id="type" value="<%%VALUE(type)%%>" required>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<div class="col-lg-offset-3 col-lg-9">
-						<div class="checkbox"><label for="frais_gestion"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%>> Frais de Gestion ?</label>
-							<i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i>
-							<span class="help-block collapse" id="frais_gestion-description"><div class="alert alert-info">Indiquez si cette ligne budg&#233;taire est du type 'Frais de gestion'. Elle sera alors exclue du calcul des montants &#224; ouvrir.</div></span>
-						</div>
 					</div>
 				</div>
 

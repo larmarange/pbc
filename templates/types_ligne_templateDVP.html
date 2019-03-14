@@ -15,6 +15,12 @@
 <div class="panel-body">
 	<fieldset class="form-horizontal">
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Frais de Gestion ?</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%> readonly></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Organisme gestionnaire</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(gestionnaire)%%></div>
@@ -24,12 +30,6 @@
 			<label class="col-xs-3 control-label">Type</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(type)%%></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Frais de Gestion ?</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%> readonly></div>
 			</div>
 		</div>
 	</fieldset>
