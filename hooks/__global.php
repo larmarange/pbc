@@ -124,10 +124,12 @@
 		if ($maj_droit) {
 			$groupe = sqlValue("SELECT groupID FROM `membership_userrecords` WHERE tableName='conventions' AND pkValue={$id_convention}");
 			sql("UPDATE `membership_userrecords` INNER JOIN `budgets` ON membership_userrecords.pkValue=budgets.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='budgets' AND budgets.convention={$id_convention}", $eo);
-			sql("UPDATE `membership_userrecords` INNER JOIN `ventilation` ON membership_userrecords.pkValue=ventilation.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='ventilation' AND ventilation.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `versements` ON membership_userrecords.pkValue=versements.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='versements' AND versements.convention={$id_convention}", $eo);
+			sql("UPDATE `membership_userrecords` INNER JOIN `lignes_credits` ON membership_userrecords.pkValue=lignes_credits.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='lignes_credits' AND lignes_credits.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `credits` ON membership_userrecords.pkValue=credits.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='credits' AND credits.convention={$id_convention}", $eo);
+			sql("UPDATE `membership_userrecords` INNER JOIN `ventilation` ON membership_userrecords.pkValue=ventilation.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='ventilation' AND ventilation.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `depenses` ON membership_userrecords.pkValue=depenses.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='depenses' AND depenses.convention={$id_convention}", $eo);
+			sql("UPDATE `membership_userrecords` INNER JOIN `fichiers` ON membership_userrecords.pkValue=fichiers.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='fichiers' AND fichiers.convention={$id_convention}", $eo);
 		}
 	}
 	
