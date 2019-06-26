@@ -1,2 +1,5 @@
 config.php
 config.bak.php
+images/*
+!images/blank/gif
+!images/index.html
