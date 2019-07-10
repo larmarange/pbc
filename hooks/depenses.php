@@ -2,6 +2,10 @@
 	// For help on using hooks, please refer to https://bigprof.com/appgini/help/working-with-generated-web-database-application/hooks
 
 	function depenses_init(&$options, $memberInfo, &$args){
+		/* Inserted by Search Page Maker for AppGini on 2019-07-10 12:45:52 */
+		$options->FilterPage = 'hooks/depenses_filter.php';
+		/* End of Search Page Maker for AppGini code */
+
 
 		return TRUE;
 	}
