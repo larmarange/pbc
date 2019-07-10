@@ -8,6 +8,12 @@ En cours de développement
 
 ## Historique des versions
 
+### v0.2-dev
+
+- ajout du champs 'Exercice comptable' aux lignes de crédits. Dans le cadre d'une
+  convention multi-année, il est donc nécessaire de prévoir des lignes de crédits
+  différentes pour chaque année.
+
 ### v0.1
 
 - première version de test
