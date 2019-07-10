@@ -8,10 +8,19 @@ $j(function () {
 			$j('#ligne_budgetaire').parentsUntil('.form-group').find('.form-control-static').first().hide();
 		}
 	});
-	
+
 	ligne_credit = $j('#ligne_credit').val();
-	
-	setInterval(function() {
+	contrat = $j('#contrat').val();
+
+	if (contrat > 0) {
+		$j('#beneficiaire').parentsUntil('.form-group').parent().hide();
+		$j('#ventilation').parentsUntil('.form-group').parent().hide();
+	} else {
+		$j('#beneficiaire').parentsUntil('.form-group').parent().show();
+		$j('#ventilation').parentsUntil('.form-group').parent().show();
+	}
+
+setInterval(function() {
 		if ($j('#ligne_credit').val() != ligne_credit) {
 			ligne_credit = $j('#ligne_credit').val();
 			if (ligne_credit) {
@@ -24,6 +33,17 @@ $j(function () {
 				});
 			}
 		}
-		
+
+		if ($j('#contrat').val() != contrat) {
+			contrat = $j('#contrat').val();
+			if (contrat > 0) {
+				$j('#beneficiaire').parentsUntil('.form-group').parent().hide();
+				$j('#ventilation').parentsUntil('.form-group').parent().hide();
+			} else {
+				$j('#beneficiaire').parentsUntil('.form-group').parent().show();
+				$j('#ventilation').parentsUntil('.form-group').parent().show();
+			}
+		}
+
 	}, 1000);
 });

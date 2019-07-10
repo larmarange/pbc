@@ -119,6 +119,24 @@ ventilation_delete1Tip=["",spacer+"This option allows each member of the group t
 ventilation_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Ventilation Budg&#233;taire' table."];
 ventilation_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Ventilation Budg&#233;taire' table."];
 
+// recrutements table
+recrutements_addTip=["",spacer+"This option allows all members of the group to add records to the 'Recrutements' table. A member who adds a record to the table becomes the 'owner' of that record."];
+
+recrutements_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Recrutements' table."];
+recrutements_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Recrutements' table."];
+recrutements_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Recrutements' table."];
+recrutements_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Recrutements' table."];
+
+recrutements_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Recrutements' table."];
+recrutements_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Recrutements' table."];
+recrutements_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Recrutements' table."];
+recrutements_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Recrutements' table, regardless of their owner."];
+
+recrutements_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Recrutements' table."];
+recrutements_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Recrutements' table."];
+recrutements_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Recrutements' table."];
+recrutements_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Recrutements' table."];
+
 // depenses table
 depenses_addTip=["",spacer+"This option allows all members of the group to add records to the 'D&#233;penses' table. A member who adds a record to the table becomes the 'owner' of that record."];
 

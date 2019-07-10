@@ -1,16 +1,16 @@
 <?php
 	// For help on using hooks, please refer to https://bigprof.com/appgini/help/working-with-generated-web-database-application/hooks
 
-	function conventions_init(&$options, $memberInfo, &$args){
-		/* Inserted by Search Page Maker for AppGini on 2019-07-10 12:50:28 */
-		$options->FilterPage = 'hooks/conventions_filter.php';
+	function recrutements_init(&$options, $memberInfo, &$args){
+		/* Inserted by Search Page Maker for AppGini on 2019-07-10 07:05:38 */
+		$options->FilterPage = 'hooks/recrutements_filter.php';
 		/* End of Search Page Maker for AppGini code */
 
 
 		return TRUE;
 	}
 
-	function conventions_header($contentType, $memberInfo, &$args){
+	function recrutements_header($contentType, $memberInfo, &$args){
 		$header='';
 
 		switch($contentType){
@@ -42,7 +42,7 @@
 		return $header;
 	}
 
-	function conventions_footer($contentType, $memberInfo, &$args){
+	function recrutements_footer($contentType, $memberInfo, &$args){
 		$footer='';
 
 		switch($contentType){
@@ -74,19 +74,19 @@
 		return $footer;
 	}
 
-	function conventions_before_insert(&$data, $memberInfo, &$args){
+	function recrutements_before_insert(&$data, $memberInfo, &$args){
 
 		return TRUE;
 	}
 
-	function conventions_after_insert($data, $memberInfo, &$args){
-		maj_convention($data['id'], false);
+	function recrutements_after_insert($data, $memberInfo, &$args){
+		if ($data['convention']) maj_convention($data['convention']);
 
 		return TRUE;
 	}
 
-	function conventions_before_update(&$data, $memberInfo, &$args){
-		// Calcul de la durée de la convention
+	function recrutements_before_update(&$data, $memberInfo, &$args){
+		// Calcul de la durée du contrat
 		if (is_null($data['date_debut']) OR $data['date_debut'] == "" OR is_null($data['date_fin']) OR $data['date_fin'] == "")
 			$data['duree'] = "";
 		else
@@ -95,30 +95,32 @@
 		return TRUE;
 	}
 
-	function conventions_after_update($data, $memberInfo, &$args){
-		maj_convention($data['id']);
+	function recrutements_after_update($data, $memberInfo, &$args){
+		if ($data['convention']) maj_convention($data['convention']);
 
 		return TRUE;
 	}
 
-	function conventions_before_delete($selectedID, &$skipChecks, $memberInfo, &$args){
+	function recrutements_before_delete($selectedID, &$skipChecks, $memberInfo, &$args){
+		$selectedID = makeSafe($selectedID);
+		$GLOBALS['maj_convention'] = sqlValue("select convention from depenses where id='{$selectedID}'", $eo);
 
 		return TRUE;
 	}
 
-	function conventions_after_delete($selectedID, $memberInfo, &$args){
+	function recrutements_after_delete($selectedID, $memberInfo, &$args){
+		if ($GLOBALS['maj_convention']) maj_convention($GLOBALS['maj_convention']);
+	}
+
+	function recrutements_dv($selectedID, $memberInfo, &$html, &$args){
 
 	}
 
-	function conventions_dv($selectedID, $memberInfo, &$html, &$args){
-
-	}
-
-	function conventions_csv($query, $memberInfo, &$args){
+	function recrutements_csv($query, $memberInfo, &$args){
 
 		return $query;
 	}
-	function conventions_batch_actions(&$args){
+	function recrutements_batch_actions(&$args){
 
 		return array();
 	}

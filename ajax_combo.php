@@ -166,6 +166,41 @@
 				'not_null' => true
 			)
 		),
+		'recrutements' => array(   
+			'convention' => array(
+				'parent_table' => 'conventions',
+				'parent_pk_field' => 'id',
+				'parent_caption' => '`conventions`.`nom`',
+				'parent_from' => '`conventions` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`conventions`.`porteur` ',
+				'filterers' => array(),
+				'custom_query' => '',
+				'inherit_permissions' => true,
+				'list_type' => 0,
+				'not_null' => true
+			),
+			'beneficiaire' => array(
+				'parent_table' => 'personnes',
+				'parent_pk_field' => 'id',
+				'parent_caption' => '`personnes`.`nom`',
+				'parent_from' => '`personnes` ',
+				'filterers' => array(),
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false
+			),
+			'ventilation' => array(
+				'parent_table' => 'ventilation',
+				'parent_pk_field' => 'id',
+				'parent_caption' => '`ventilation`.`intitule`',
+				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` ',
+				'filterers' => array(),
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false
+			)
+		),
 		'depenses' => array(   
 			'convention' => array(
 				'parent_table' => 'conventions',
@@ -199,6 +234,17 @@
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => true
+			),
+			'contrat' => array(
+				'parent_table' => 'recrutements',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`recrutements`.`intitule`) || CHAR_LENGTH(`recrutements`.`beneficiaire`), CONCAT_WS(\'\', `recrutements`.`intitule`, \' - \', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS(\'\',   `personnes1`.`nom`), \'\')), \'\')',
+				'parent_from' => '`recrutements` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`recrutements`.`convention` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`recrutements`.`beneficiaire` LEFT JOIN `ventilation` as ventilation1 ON `ventilation1`.`id`=`recrutements`.`ventilation` ',
+				'filterers' => array('convention' => 'convention'),
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false
 			),
 			'beneficiaire' => array(
 				'parent_table' => 'personnes',

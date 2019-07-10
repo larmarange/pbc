@@ -28,7 +28,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`credits`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`credits`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
 		"if(CHAR_LENGTH(`credits`.`notes`)>80, concat(left(`credits`.`notes`,80),' ...'), `credits`.`notes`)" => "notes"
 	);
 	// mapping incoming sort by requests to actual query fields
@@ -51,7 +51,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`credits`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`credits`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
 		"`credits`.`notes`" => "notes"
 	);
 	// Fields that can be filtered
@@ -74,7 +74,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`credits`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`credits`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '</span>')" => "montant",
 		"`credits`.`notes`" => "Notes"
 	);
 
@@ -170,7 +170,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('$', FORMAT(sum(`credits`.`montant`), 2)) from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`credits`.`montant`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`credits`.`montant`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)){
 			$sumRow = '<tr class="success">';

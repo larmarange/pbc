@@ -3,10 +3,13 @@
 <a name="detail-view"></a>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="depenses_dv_container">
+<div class="panel-body" id="recrutements_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12">
+			<a class="hidden-xs btn btn-default btn-lg pull-right hidden hspacer-sm" href="depenses_view.php?filterer_contrat=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="depenses_link"><i class="glyphicon glyphicon-list-alt"></i> D&#233;penses</a>
+			<a class="visible-xs btn btn-default btn-lg btn-block hidden vspacer-sm" href="depenses_view.php?filterer_contrat=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="xs_depenses_link"><i class="glyphicon glyphicon-list-alt"></i> D&#233;penses</a>
+			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_contrat=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -14,8 +17,16 @@
 
 	<div class="row">
 		<!-- form inputs -->
-		<div class="col-md-8 col-lg-10" id="depenses_dv_form">
+		<div class="col-md-8 col-lg-10" id="recrutements_dv_form">
 			<fieldset class="form-horizontal">
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="id" class="control-label col-lg-3">ID</label>
+					<div class="col-lg-9">
+						<div class="form-control-static" id="id"><%%VALUE(id)%%></div>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
@@ -27,43 +38,9 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne Budg&#233;taire</label>
-					<div class="col-lg-9">
-						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_budgetaire)%%><%%PLINK(ligne_budgetaire)%%><%%ADDNEW(budgets)%%></div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<label for="ligne_credit" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne de cr&#233;dit (CFI) - Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
-					<div class="col-lg-9">
-						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_credit)%%><%%PLINK(ligne_credit)%%><%%ADDNEW(lignes_credits)%%></div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<label for="date" class="control-label col-lg-3">Date<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
-					<div class="col-lg-9">
-						<%%COMBO(date)%%>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label for="intitule" class="control-label col-lg-3">Intitul&#233; du poste<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="100" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<label for="contrat" class="control-label col-lg-3" data-parent_link="view_parent_modal">Contrat (si salaire) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#contrat-description"></i></label>
-					<div class="col-lg-9">
-						<span class="help-block collapse" id="contrat-description"><div class="alert alert-info">Pour les d&#233;penses de personnel, voir la liste des recrutements</div></span>
-
-						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(contrat)%%><%%PLINK(contrat)%%><%%ADDNEW(recrutements)%%></div>
 					</div>
 				</div>
 
@@ -77,19 +54,25 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="montant" class="control-label col-lg-3">Montant<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
 					<div class="col-lg-9">
-						<input maxlength="13" type="text" class="form-control" name="montant" id="montant" value="<%%VALUE(montant)%%>" required>
+						<%%COMBO(date_debut)%%>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="statut" class="control-label col-lg-3">Statut<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#statut-description"></i></label>
+					<label for="date_fin" class="control-label col-lg-3">Fin</label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="statut-description"><div class="alert alert-info">Une d&#233;pense est consid&#233;r&#233;e comme liquid&#233;e une fois r&#233;gl&#233;e par l'organisme gestionnaire. Si la d&#233;pense est engag&#233;e (le montant a &#233;t&#233; r&#233;serv&#233; par l'organisme gestionnaire) ou si elle est plannifi&#233;e par l'&#233;quipe de recherche, s&#233;lectionnez 'r&#233;serv&#233;e'.</div></span>
+						<%%COMBO(date_fin)%%>
+					</div>
+				</div>
 
-						<%%COMBO(statut)%%>
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="duree" class="control-label col-lg-3">Dur&#233;e (mois)</label>
+					<div class="col-lg-9">
+						<input maxlength="" type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
 					</div>
 				</div>
 
@@ -109,12 +92,50 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="previsionnel" class="control-label col-lg-3">Co&#251;t total pr&#233;vionnel</label>
+					<div class="col-lg-9">
+						<input maxlength="13" type="text" class="form-control" name="previsionnel" id="previsionnel" value="<%%VALUE(previsionnel)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="depense" class="control-label col-lg-3">D&#233;pens&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depense-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="depense-description"><div class="alert alert-info">D&#233;penses (tous status) associ&#233;es &#224; ce contrat</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="depense" id="depense" value="<%%VALUE(depense)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Pr&#233;vionnel - D&#233;pens&#233;</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="prop_dp" class="control-label col-lg-3">D/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_dp-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="prop_dp-description"><div class="alert alert-info">D&#233;pens&#233; sur Pr&#233;visionnel</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="prop_dp" id="prop_dp" value="<%%VALUE(prop_dp)%%>">
+					</div>
+				</div>
+
 			</fieldset>
 		</div>
 
 		<!-- DV action buttons -->
 		<hr class="hidden-md hidden-lg">
-		<div class="col-md-4 col-lg-2" id="depenses_dv_action_buttons">
+		<div class="col-md-4 col-lg-2" id="recrutements_dv_action_buttons">
 			<div class="btn-toolbar">
 				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
 					<%%UPDATE_BUTTON%%>
@@ -131,6 +152,14 @@
 		</div>
 	</div>
 
+
+	<!-- child records -->
+	<hr>
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<div id="recrutements-children" class="children-tabs"></div>
+		</div>
+	</div>
 
 </div><!-- /div class="panel-body" -->
 	<script src="nicEdit.js"></script>
@@ -169,6 +198,38 @@
 
 			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function(){ /* */ return false; });
 
+			if(embedded_mode){
+				/* hide links to children tables in embedded mode */
+				$j('.detail_view a[id$=_link]').remove();
+
+				/* append embedded mode to all links */
+				var append_embedded = function(){
+					$j('a[href]:not([href^="#"]):not([href^="javascript"]):not([href$="Embedded=1"]):not([href*="link.php?t="]):not([href^="mailto:"])').each(
+						function(){
+							$j(this).attr('href', $j(this).attr('href') + '&Embedded=1');
+						}
+					);
+				}
+				setTimeout(append_embedded, 500);
+				setTimeout(append_embedded, 1500);
+				setTimeout(append_embedded, 2500);
+				setTimeout(append_embedded, 3500);
+			}
+
+			/* when no record is selected ('add new' mode) */
+			if(add_new_mode){
+				/* hide links to children tables */
+				$j('.detail_view a[id$=_link]').remove();
+			}else{
+				post(
+					'parent-children.php', {
+						ParentTable: 'recrutements',
+						SelectedID: '<%%VALUE(id)%%>',
+						Operation: 'show-children'
+					},
+					'recrutements-children'
+				);
+			}
 
 			if(!embedded_mode){
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
@@ -189,7 +250,7 @@
 							localStorage.clear(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
-								table: 'depenses',
+								table: 'recrutements',
 								field: field_id,
 								callback: function(data) {
 									$j('#' + field_id + '-container').select2('data', data, true);
@@ -249,10 +310,10 @@
 			if(!add_new_mode){
 				$j('body').append('<div id="admin-tools-appendix"></div>');
 				$j('#admin-tools-appendix').load(
-					'ajax_admin_tools.php?table=depenses&id=<%%URLVALUE(id)%%>',
+					'ajax_admin_tools.php?table=recrutements&id=<%%URLVALUE(id)%%>',
 					function(resp){
 						if(!resp.length) return;
-						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=depenses&id=<%%URLVALUE(id)%%>');
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=recrutements&id=<%%URLVALUE(id)%%>');
 					}
 				);
 			}

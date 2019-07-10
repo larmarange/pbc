@@ -132,12 +132,19 @@
 					'group' => $tg[0],
 					'homepageShowCount' => 0
 				),
+				'recrutements' => array(
+					'Caption' => 'Recrutements',
+					'Description' => '',
+					'tableIcon' => 'resources/table_icons/067-human-resources-1.png',
+					'group' => $tg[0],
+					'homepageShowCount' => 0
+				),
 				'depenses' => array(
 					'Caption' => 'D&#233;penses',
 					'Description' => '',
 					'tableIcon' => 'resources/table_icons/005-expenses.png',
 					'group' => $tg[0],
-					'homepageShowCount' => 1
+					'homepageShowCount' => 0
 				),
 				'fichiers' => array(
 					'Caption' => 'Fichiers',
@@ -181,6 +188,7 @@
 				'lignes_credits' => 'Lignes de Cr&#233;dits',
 				'credits' => 'Cr&#233;dits (ouverture)',
 				'ventilation' => 'Ventilation Budg&#233;taire',
+				'recrutements' => 'Recrutements',
 				'depenses' => 'D&#233;penses',
 				'fichiers' => 'Fichiers',
 				'personnes' => 'Individus',

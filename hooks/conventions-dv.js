@@ -23,9 +23,9 @@ function percent(x) {
 
 $j(function () {
 	$j("#conventions_dv_container").prepend("<div class='alert alert-info'>Sauvez les changements pour forcer la mise à jour des champs calculés.</div>");
-	
+
 	$j('#duree').hide().after($j('<div class="form-control-static">' + $j('#duree').val() + '</div>'));
-	
+
 	$j('#frais_gestion').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#frais_gestion').val()) + '</div>'));
 	$j('#accorde_hfg').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#accorde_hfg').val()) + '</div>'));
 	$j('#accorde').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#accorde').val()) + '</div>'));
@@ -38,11 +38,13 @@ $j(function () {
 	$j('#disponible').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#disponible').val()) + '</div>'));
 	$j('#reste_verser').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reste_verser').val()) + '</div>'));
 	$j('#reste_ouvrir').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reste_ouvrir').val()) + '</div>'));
-	$j('#reste_engager').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reste_engager').val()) + '</div>'));	
-	$j('#budget_nv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#budget_nv').val()) + '</div>'));	
-	$j('#depenses_nv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#depenses_nv').val()) + '</div>'));	
-	
-	$j('#prop_uo').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_uo').val()) + '</div>'));	
-	$j('#prop_uv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_uv').val()) + '</div>'));	
-	$j('#prop_ua').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_ua').val()) + '</div>'));		
+	$j('#reste_engager').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reste_engager').val()) + '</div>'));
+  $j('#reservation_salaire').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reservation_salaire').val()) + '</div>'));
+  $j('#reste_depenser').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#reste_depenser').val()) + '</div>'));
+	$j('#budget_nv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#budget_nv').val()) + '</div>'));
+	$j('#depenses_nv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + currency($j('#depenses_nv').val()) + '</div>'));
+
+	$j('#prop_uo').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_uo').val()) + '</div>'));
+	$j('#prop_uv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_uv').val()) + '</div>'));
+	$j('#prop_ua').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_ua').val()) + '</div>'));
 });

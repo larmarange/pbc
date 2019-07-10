@@ -10,6 +10,7 @@ En cours de développement
 
 ### v0.2-dev
 
+- gestion des recrutements prévus sur les conventions
 - ajout du champs 'Exercice comptable' aux lignes de crédits. Dans le cadre d'une
   convention multi-année, il est donc nécessaire de prévoir des lignes de crédits
   différentes pour chaque année.

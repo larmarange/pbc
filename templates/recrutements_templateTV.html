@@ -1,0 +1,19 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the recrutements_init() hook (in hooks/recrutements.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="recrutements-convention-<%%VALUE(id)%%>" class="recrutements-convention"><%%SELECT%%><%%VALUE(convention)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-intitule-<%%VALUE(id)%%>" class="recrutements-intitule"><%%SELECT%%><%%VALUE(intitule)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-beneficiaire-<%%VALUE(id)%%>" class="recrutements-beneficiaire"><%%SELECT%%><%%VALUE(beneficiaire)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-date_debut-<%%VALUE(id)%%>" class="recrutements-date_debut"><%%SELECT%%><%%VALUE(date_debut)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-date_fin-<%%VALUE(id)%%>" class="recrutements-date_fin"><%%SELECT%%><%%VALUE(date_fin)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-duree-<%%VALUE(id)%%>" class="recrutements-duree text-right"><%%SELECT%%><%%VALUE(duree)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-ventilation-<%%VALUE(id)%%>" class="recrutements-ventilation"><%%SELECT%%><%%VALUE(ventilation)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-notes-<%%VALUE(id)%%>" class="recrutements-notes"><%%SELECT%%><%%VALUE(notes)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-previsionnel-<%%VALUE(id)%%>" class="recrutements-previsionnel text-right"><%%SELECT%%><%%VALUE(previsionnel)%%><%%ENDSELECT%%></td>
+		<td id="recrutements-depense-<%%VALUE(id)%%>" class="recrutements-depense text-right"><%%VALUE(depense)%%></td>
+		<td id="recrutements-reservation_salaire-<%%VALUE(id)%%>" class="recrutements-reservation_salaire text-right"><%%VALUE(reservation_salaire)%%></td>
+		<td id="recrutements-prop_dp-<%%VALUE(id)%%>" class="recrutements-prop_dp text-right"><%%VALUE(prop_dp)%%></td>

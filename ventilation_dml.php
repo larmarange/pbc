@@ -30,6 +30,10 @@ function ventilation_insert(){
 		if($data['utilise'] == empty_lookup_value){ $data['utilise'] = ''; }
 	$data['reste_engager'] = makeSafe($_REQUEST['reste_engager']);
 		if($data['reste_engager'] == empty_lookup_value){ $data['reste_engager'] = ''; }
+	$data['reservation_salaire'] = makeSafe($_REQUEST['reservation_salaire']);
+		if($data['reservation_salaire'] == empty_lookup_value){ $data['reservation_salaire'] = ''; }
+	$data['reste_depenser'] = makeSafe($_REQUEST['reste_depenser']);
+		if($data['reste_depenser'] == empty_lookup_value){ $data['reste_depenser'] = ''; }
 	$data['prop_ua'] = makeSafe($_REQUEST['prop_ua']);
 		if($data['prop_ua'] == empty_lookup_value){ $data['prop_ua'] = ''; }
 	if($data['convention']== ''){
@@ -50,7 +54,7 @@ function ventilation_insert(){
 	}
 
 	$o = array('silentErrors' => true);
-	sql('insert into `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL'), $o);
+	sql('insert into `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL'), $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo "<a href=\"ventilation_view.php?addNew_x=1\">{$Translation['< back']}</a>";
@@ -96,6 +100,25 @@ function ventilation_delete($selected_id, $AllowDeleteOfParents=false, $skipChec
 		$args=array();
 		if(!ventilation_before_delete($selected_id, $skipChecks, getMemberInfo(), $args))
 			return $Translation['Couldn\'t delete this record'];
+	}
+
+	// child table: recrutements
+	$res = sql("select `id` from `ventilation` where `id`='$selected_id'", $eo);
+	$id = db_fetch_row($res);
+	$rires = sql("select count(1) from `recrutements` where `ventilation`='".addslashes($id[0])."'", $eo);
+	$rirow = db_fetch_row($rires);
+	if($rirow[0] && !$AllowDeleteOfParents && !$skipChecks){
+		$RetMsg = $Translation["couldn't delete"];
+		$RetMsg = str_replace("<RelatedRecords>", $rirow[0], $RetMsg);
+		$RetMsg = str_replace("<TableName>", "recrutements", $RetMsg);
+		return $RetMsg;
+	}elseif($rirow[0] && $AllowDeleteOfParents && !$skipChecks){
+		$RetMsg = $Translation["confirm delete"];
+		$RetMsg = str_replace("<RelatedRecords>", $rirow[0], $RetMsg);
+		$RetMsg = str_replace("<TableName>", "recrutements", $RetMsg);
+		$RetMsg = str_replace("<Delete>", "<input type=\"button\" class=\"button\" value=\"".$Translation['yes']."\" onClick=\"window.location='ventilation_view.php?SelectedID=".urlencode($selected_id)."&delete_x=1&confirmed=1';\">", $RetMsg);
+		$RetMsg = str_replace("<Cancel>", "<input type=\"button\" class=\"button\" value=\"".$Translation['no']."\" onClick=\"window.location='ventilation_view.php?SelectedID=".urlencode($selected_id)."';\">", $RetMsg);
+		return $RetMsg;
 	}
 
 	// child table: depenses
@@ -168,6 +191,10 @@ function ventilation_update($selected_id){
 		if($data['utilise'] == empty_lookup_value){ $data['utilise'] = ''; }
 	$data['reste_engager'] = makeSafe($_REQUEST['reste_engager']);
 		if($data['reste_engager'] == empty_lookup_value){ $data['reste_engager'] = ''; }
+	$data['reservation_salaire'] = makeSafe($_REQUEST['reservation_salaire']);
+		if($data['reservation_salaire'] == empty_lookup_value){ $data['reservation_salaire'] = ''; }
+	$data['reste_depenser'] = makeSafe($_REQUEST['reste_depenser']);
+		if($data['reste_depenser'] == empty_lookup_value){ $data['reste_depenser'] = ''; }
 	$data['prop_ua'] = makeSafe($_REQUEST['prop_ua']);
 		if($data['prop_ua'] == empty_lookup_value){ $data['prop_ua'] = ''; }
 	$data['selectedID']=makeSafe($selected_id);
@@ -179,7 +206,7 @@ function ventilation_update($selected_id){
 	}
 
 	$o=array('silentErrors' => true);
-	sql('update `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo '<a href="ventilation_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -421,6 +448,8 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$jsReadOnly .= "\tjQuery('#liquide').replaceWith('<div class=\"form-control-static\" id=\"liquide\">' + (jQuery('#liquide').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#utilise').replaceWith('<div class=\"form-control-static\" id=\"utilise\">' + (jQuery('#utilise').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reste_engager').replaceWith('<div class=\"form-control-static\" id=\"reste_engager\">' + (jQuery('#reste_engager').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#reservation_salaire').replaceWith('<div class=\"form-control-static\" id=\"reservation_salaire\">' + (jQuery('#reservation_salaire').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#reste_depenser').replaceWith('<div class=\"form-control-static\" id=\"reste_depenser\">' + (jQuery('#reste_depenser').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#prop_ua').replaceWith('<div class=\"form-control-static\" id=\"prop_ua\">' + (jQuery('#prop_ua').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('.select2-container').hide();\n";
 
@@ -461,6 +490,8 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%UPLOADFILE(liquide)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(utilise)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reste_engager)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(reservation_salaire)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(reste_depenser)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(prop_ua)%%>', '', $templateCode);
 
 	// process values
@@ -496,6 +527,12 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(reste_engager)%%>', safe_html($urow['reste_engager']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reste_engager)%%>', html_attr($row['reste_engager']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(reste_engager)%%>', urlencode($urow['reste_engager']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(reservation_salaire)%%>', safe_html($urow['reservation_salaire']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reservation_salaire)%%>', html_attr($row['reservation_salaire']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reservation_salaire)%%>', urlencode($urow['reservation_salaire']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(reste_depenser)%%>', safe_html($urow['reste_depenser']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reste_depenser)%%>', html_attr($row['reste_depenser']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reste_depenser)%%>', urlencode($urow['reste_depenser']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(prop_ua)%%>', safe_html($urow['prop_ua']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(prop_ua)%%>', html_attr($row['prop_ua']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(prop_ua)%%>', urlencode($urow['prop_ua']), $templateCode);
@@ -517,6 +554,10 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$templateCode = str_replace('<%%URLVALUE(utilise)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(reste_engager)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(reste_engager)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(reservation_salaire)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reservation_salaire)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(reste_depenser)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reste_depenser)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(prop_ua)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(prop_ua)%%>', urlencode(''), $templateCode);
 	}

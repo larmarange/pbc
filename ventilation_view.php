@@ -26,12 +26,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`ventilation`.`intitule`" => "intitule",
 		"if(CHAR_LENGTH(`ventilation`.`notes`)>80, concat(left(`ventilation`.`notes`,80),' ...'), `ventilation`.`notes`)" => "notes",
-		"CONCAT('$', FORMAT(`ventilation`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`ventilation`.`reserve`, 2))" => "reserve",
-		"CONCAT('$', FORMAT(`ventilation`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`ventilation`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`ventilation`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('&euro;', FORMAT(`ventilation`.`prop_ua`, 2))" => "prop_ua"
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`ventilation`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(   
@@ -44,7 +46,9 @@
 		7 => '`ventilation`.`liquide`',
 		8 => '`ventilation`.`utilise`',
 		9 => '`ventilation`.`reste_engager`',
-		10 => '`ventilation`.`prop_ua`'
+		10 => '`ventilation`.`reservation_salaire`',
+		11 => '`ventilation`.`reste_depenser`',
+		12 => '`ventilation`.`prop_ua`'
 	);
 
 	// Fields that can be displayed in the csv file
@@ -53,12 +57,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "notes",
-		"CONCAT('$', FORMAT(`ventilation`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`ventilation`.`reserve`, 2))" => "reserve",
-		"CONCAT('$', FORMAT(`ventilation`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`ventilation`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`ventilation`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('&euro;', FORMAT(`ventilation`.`prop_ua`, 2))" => "prop_ua"
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`ventilation`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
 	);
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = array(   
@@ -71,6 +77,8 @@
 		"`ventilation`.`liquide`" => "Liquid&#233;",
 		"`ventilation`.`utilise`" => "Utilis&#233;",
 		"`ventilation`.`reste_engager`" => "Reste &#224; Engager",
+		"`ventilation`.`reservation_salaire`" => "Salaires restant &#224; verser",
+		"`ventilation`.`reste_depenser`" => "Reste &#224; D&#233;penser",
 		"`ventilation`.`prop_ua`" => "U/P (%)"
 	);
 
@@ -80,12 +88,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "Notes",
-		"CONCAT('$', FORMAT(`ventilation`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`ventilation`.`reserve`, 2))" => "reserve",
-		"CONCAT('$', FORMAT(`ventilation`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`ventilation`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`ventilation`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('&euro;', FORMAT(`ventilation`.`prop_ua`, 2))" => "prop_ua"
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`ventilation`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
 	);
 
 	// Lookup fields that can be used as filterers
@@ -121,10 +131,10 @@
 	$x->DefaultSortField = '2';
 	$x->DefaultSortDirection = 'asc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "U/P (%)");
-	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'prop_ua');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
+	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/ventilation_templateTV.html';
@@ -180,7 +190,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('$', FORMAT(sum(`ventilation`.`accorde`), 2)), CONCAT('$', FORMAT(sum(`ventilation`.`reserve`), 2)), CONCAT('$', FORMAT(sum(`ventilation`.`liquide`), 2)), CONCAT('$', FORMAT(sum(`ventilation`.`utilise`), 2)), CONCAT('$', FORMAT(sum(`ventilation`.`reste_engager`), 2)) from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`ventilation`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`accorde`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reserve`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`liquide`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`utilise`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_engager`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reservation_salaire`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_depenser`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)){
 			$sumRow = '<tr class="success">';
@@ -193,6 +203,8 @@
 			$sumRow .= "<td class=\"ventilation-liquide text-right\">{$row[2]}</td>";
 			$sumRow .= "<td class=\"ventilation-utilise text-right\">{$row[3]}</td>";
 			$sumRow .= "<td class=\"ventilation-reste_engager text-right\">{$row[4]}</td>";
+			$sumRow .= "<td class=\"ventilation-reservation_salaire text-right\">{$row[5]}</td>";
+			$sumRow .= "<td class=\"ventilation-reste_depenser text-right\">{$row[6]}</td>";
 			$sumRow .= '<td class="ventilation-prop_ua"></td>';
 			$sumRow .= '</tr>';
 

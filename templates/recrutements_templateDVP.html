@@ -15,15 +15,51 @@
 <div class="panel-body">
 	<fieldset class="form-horizontal">
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">ID</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(id)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Convention</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="convention<%%RND1%%>"><%%COMBOTEXT(convention)%%></span></div>
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Intitul&#233;</label>
+			<label class="col-xs-3 control-label">Intitul&#233; du poste</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(intitule)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">B&#233;n&#233;ficiaire</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><span id="beneficiaire<%%RND1%%>"><%%COMBOTEXT(beneficiaire)%%></span></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">D&#233;but</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(date_debut)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Fin</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(date_fin)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Dur&#233;e (mois)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(duree)%%></div>
+			</div>
+		</div>
+		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Ventilation Budg&#233;taire</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><span id="ventilation<%%RND1%%>"><%%COMBOTEXT(ventilation)%%></span></div>
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
@@ -33,33 +69,15 @@
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Pr&#233;visionnel</label>
+			<label class="col-xs-3 control-label">Co&#251;t total pr&#233;vionnel</label>
 			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(accorde)%%></div>
+				<div class="form-control-static"><%%VALUE(previsionnel)%%></div>
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">R&#233;serv&#233;</label>
+			<label class="col-xs-3 control-label">D&#233;pens&#233;</label>
 			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(reserve)%%></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Liquid&#233;</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(liquide)%%></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Utilis&#233;</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(utilise)%%></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Reste &#224; Engager</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(reste_engager)%%></div>
+				<div class="form-control-static"><%%VALUE(depense)%%></div>
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
@@ -69,36 +87,30 @@
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Reste &#224; D&#233;penser</label>
+			<label class="col-xs-3 control-label">D/P (%)</label>
 			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(reste_depenser)%%></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">U/P (%)</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><%%VALUE(prop_ua)%%></div>
+				<div class="form-control-static"><%%VALUE(prop_dp)%%></div>
 			</div>
 		</div>
 	</fieldset>
 </div>
 <!-- child records -->
 <div class="panel-body">
-	<div id="ventilation-children"></div>
+	<div id="recrutements-children"></div>
 </div>
 
 <script>
 	$j(function(){
 		/* prevent loading child records in multiple DVP */
-		if($j('[id=ventilation-children]').length > 1) return;
+		if($j('[id=recrutements-children]').length > 1) return;
 
 		post(
 			'parent-children.php', {
-				ParentTable: 'ventilation',
+				ParentTable: 'recrutements',
 				SelectedID: '<%%VALUE(id)%%>',
 				Operation: 'show-children-printable'
 			},
-			'ventilation-children',
+			'recrutements-children',
 			'disable-element',
 			'loading-element',
 			apply_persisting_children
