@@ -75,7 +75,12 @@
 	}
 
 	function recrutements_before_insert(&$data, $memberInfo, &$args){
-
+		// Calcul de la durée du contrat
+		if (is_null($data['date_debut']) OR $data['date_debut'] == "" OR is_null($data['date_fin']) OR $data['date_fin'] == "")
+			$data['duree'] = "";
+		else
+			$data['duree'] = dateDifference($data['date_debut'], $data['date_fin']);
+			
 		return TRUE;
 	}
 

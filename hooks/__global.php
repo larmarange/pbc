@@ -270,6 +270,7 @@ function maj_recrutements($id_contrat){
 
 	$previsionnel = sqlValue("SELECT previsionnel FROM `recrutements` WHERE id={$id_contrat}");
 	$depense = sqlValue("SELECT sum(montant) FROM `depenses` WHERE contrat={$id_contrat}");
+	if (is_null($depense)) $depense = 0;
 
 	if (!is_null($previsionnel) & $previsionnel > 0) {
 		$reservation_salaire = $previsionnel - $depense;
