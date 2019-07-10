@@ -194,7 +194,7 @@
 				'parent_pk_field' => 'id',
 				'parent_caption' => '`ventilation`.`intitule`',
 				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` ',
-				'filterers' => array(),
+				'filterers' => array('convention' => 'convention'),
 				'custom_query' => '',
 				'inherit_permissions' => false,
 				'list_type' => 0,

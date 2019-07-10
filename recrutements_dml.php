@@ -238,6 +238,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$filterer_ventilation = thisOr(undo_magic_quotes($_REQUEST['filterer_ventilation']), '');
 
 	// populate filterers, starting from children to grand-parents
+	if($filterer_ventilation && !$filterer_convention) $filterer_convention = sqlValue("select convention from ventilation where id='" . makeSafe($filterer_ventilation) . "'");
 
 	// unique random identifier
 	$rnd1 = ($dvprint ? rand(1000000, 9999999) : '');
@@ -261,7 +262,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$combo_date_fin->DefaultDate = parseMySQLDate('', '');
 	$combo_date_fin->MonthNames = $Translation['month names'];
 	$combo_date_fin->NamePrefix = 'date_fin';
-	// combobox: ventilation
+	// combobox: ventilation, filterable by: convention
 	$combo_ventilation = new DataCombo;
 
 	if($selected_id){
@@ -323,7 +324,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 			setTimeout(function(){
 				if(typeof(convention_reload__RAND__) == 'function') convention_reload__RAND__();
 				if(typeof(beneficiaire_reload__RAND__) == 'function') beneficiaire_reload__RAND__();
-				if(typeof(ventilation_reload__RAND__) == 'function') ventilation_reload__RAND__();
+				<?php echo (!$AllowUpdate || $dvprint ? 'if(typeof(ventilation_reload__RAND__) == \'function\') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);' : ''); ?>
 			}, 10); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
 		});
 		function convention_reload__RAND__(){
@@ -345,6 +346,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 							$j('[id=convention-container-readonly__RAND__]').html('<span id="convention-match-text">' + resp.results[0].text + '</span>');
 							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=conventions_view_parent]').hide(); }else{ $j('.btn[id=conventions_view_parent]').show(); }
 
+						if(typeof(ventilation_reload__RAND__) == 'function') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);
 
 							if(typeof(convention_update_autofills__RAND__) == 'function') convention_update_autofills__RAND__();
 						}
@@ -368,6 +370,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 				$j('[name="convention"]').val(e.added.id);
 				if(e.added.id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=conventions_view_parent]').hide(); }else{ $j('.btn[id=conventions_view_parent]').show(); }
 
+						if(typeof(ventilation_reload__RAND__) == 'function') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);
 
 				if(typeof(convention_update_autofills__RAND__) == 'function') convention_update_autofills__RAND__();
 			});
@@ -480,7 +483,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		<?php } ?>
 
 		}
-		function ventilation_reload__RAND__(){
+		function ventilation_reload__RAND__(filterer_convention){
 		<?php if(($AllowUpdate || $AllowInsert) && !$dvprint){ ?>
 
 			$j("#ventilation-container__RAND__").select2({
@@ -489,7 +492,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 					$j.ajax({
 						url: 'ajax_combo.php',
 						dataType: 'json',
-						data: { id: AppGini.current_ventilation__RAND__.value, t: 'recrutements', f: 'ventilation' },
+						data: { filterer_convention: filterer_convention, id: AppGini.current_ventilation__RAND__.value, t: 'recrutements', f: 'ventilation' },
 						success: function(resp){
 							c({
 								id: resp.results[0].id,
@@ -512,7 +515,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 					url: 'ajax_combo.php',
 					dataType: 'json',
 					cache: true,
-					data: function(term, page){ /* */ return { s: term, p: page, t: 'recrutements', f: 'ventilation' }; },
+					data: function(term, page){ /* */ return { filterer_convention: filterer_convention, s: term, p: page, t: 'recrutements', f: 'ventilation' }; },
 					results: function(resp, page){ /* */ return resp; }
 				},
 				escapeMarkup: function(str){ /* */ return str; }

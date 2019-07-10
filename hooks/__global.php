@@ -266,6 +266,8 @@ function maj_recrutements($id_contrat){
 
 	$beneficiaire = sqlValue("SELECT beneficiaire FROM `recrutements` WHERE id={$id_contrat}");
 	$ventilation = sqlValue("SELECT ventilation FROM `recrutements` WHERE id={$id_contrat}");
+  if (is_null($beneficiaire)) $beneficiaire = "NULL";
+	if (is_null($ventilation)) $ventilation = "NULL";
 	sql("UPDATE `depenses` SET depenses.beneficiaire={$beneficiaire}, depenses.ventilation={$ventilation} WHERE depenses.contrat={$id_contrat}", $eo);
 
 	$previsionnel = sqlValue("SELECT previsionnel FROM `recrutements` WHERE id={$id_contrat}");

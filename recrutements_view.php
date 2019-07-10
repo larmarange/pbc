@@ -80,7 +80,7 @@
 		"`recrutements`.`duree`" => "Dur&#233;e (mois)",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "Ventilation Budg&#233;taire",
 		"`recrutements`.`notes`" => "Notes",
-		"`recrutements`.`previsionnel`" => "Co&#251;t total pr&#233;vionnel",
+		"`recrutements`.`previsionnel`" => "Co&#251;t total pr&#233;visionnel",
 		"`recrutements`.`depense`" => "D&#233;pens&#233;",
 		"`recrutements`.`reservation_salaire`" => "Salaires restant &#224; verser",
 		"`recrutements`.`prop_dp`" => "D/P (%)"
@@ -135,7 +135,7 @@
 	$x->PrimaryKey = "`recrutements`.`id`";
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233; du poste", "B&#233;n&#233;ficiaire", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Ventilation Budg&#233;taire", "Notes", "Co&#251;t total pr&#233;vionnel", "D&#233;pens&#233;", "Salaires restant &#224; verser", "D/P (%)");
+	$x->ColCaption = array("Convention", "Intitul&#233; du poste", "B&#233;n&#233;ficiaire", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Ventilation Budg&#233;taire", "Notes", "Co&#251;t total pr&#233;visionnel", "D&#233;pens&#233;", "Salaires restant &#224; verser", "D/P (%)");
 	$x->ColFieldName = array('convention', 'intitule', 'beneficiaire', 'date_debut', 'date_fin', 'duree', 'ventilation', 'notes', 'previsionnel', 'depense', 'reservation_salaire', 'prop_dp');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
