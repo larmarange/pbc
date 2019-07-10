@@ -43,6 +43,7 @@ class DataList{
 		$AllowSorting,
 		$AllowNavigation,
 		$AllowPrinting,
+		$AllowPrintingDV,
 		$HideTableView,
 		$AllowCSV,
 		$CSVSeparator,
@@ -84,6 +85,7 @@ class DataList{
 		$this->AllowFilters = 1;
 		$this->AllowNavigation = 1;
 		$this->AllowPrinting = 1;
+		$this->AllowPrintingDV = 1;
 		$this->HideTableView = 0;
 		$this->QuickSearch = 0;
 		$this->AllowCSV = 0;
@@ -165,42 +167,23 @@ class DataList{
 			$SortDirection = '';
 		}
 
-		if(!$this->AllowDelete){
-			$delete_x = '';
-		}
-		if(!$this->AllowDeleteOfParents){
-			$SkipChecks = '';
-		}
-		if(!$this->AllowInsert){
-			$insert_x = '';
-			$addNew_x = '';
-		}
-		if(!$this->AllowUpdate){
-			$update_x = '';
-		}
-		if(!$this->AllowFilters){
-			$Filter_x = '';
-		}
-		if(!$this->AllowPrinting){
-			$Print_x = '';
-			$PrintTV = '';
-		}
-		if(!$this->QuickSearch){
-			$SearchString = '';
-		}
-		if(!$this->AllowCSV){
-			$CSV_x = '';
-		}
+		if(!$this->AllowDelete) $delete_x = '';
+		if(!$this->AllowDeleteOfParents) $SkipChecks = '';
+		if(!$this->AllowInsert) $insert_x = $addNew_x = '';
+		if(!$this->AllowUpdate) $update_x = '';
+		if(!$this->AllowFilters) $Filter_x = '';
+		if(!$this->AllowPrinting) $Print_x = $PrintTV = '';
+		if(!$this->AllowPrintingDV) $PrintDV = '';
+		if(!$this->QuickSearch) $SearchString = '';
+		if(!$this->AllowCSV) $CSV_x = '';
 
 	// enforce record selection if user has edit/delete permissions on the current table
-		$AllowPrintDV=1;
 		$this->Permissions=getTablePermissions($this->TableName);
 		if($this->Permissions[3] || $this->Permissions[4]){ // current user can edit or delete?
 			$this->AllowSelection = 1;
 		}elseif(!$this->AllowSelection){
-			$SelectedID='';
-			$AllowPrintDV=0;
-			$PrintDV='';
+			$SelectedID = '';
+			$PrintDV = '';
 		}
 
 		if(!$this->AllowSelection || !$SelectedID){ $dvprint_x=''; }
@@ -704,7 +687,7 @@ class DataList{
 			/* if user can print DV, add action to 'More' menu */
 			$selected_records_more = array();
 
-			if($AllowPrintDV){
+			if($this->AllowPrintingDV){
 				$selected_records_more[] = array(
 					'function' => ($this->SeparateDV ? 'print_multiple_dv_sdv' : 'print_multiple_dv_tvdv'),
 					'title' => $Translation['Print Preview Detail View'],
@@ -1205,6 +1188,20 @@ class DataList{
 					$this->ContentType = 'detailview';
 					$dvShown = true;
 				}
+
+				// if we're in embedded mode and a new record has just been inserted,
+				// save its ID to localStorage in order to be used in child DV to
+				// auto-select the new parent
+				if(isset($_REQUEST['record-added-ok']) && $Embedded && $SelectedID) {
+					ob_start();
+					?><script>
+						localStorage.setItem(
+							'<?php echo $this->TableName; ?>_last_added_id', 
+							<?php echo json_encode($SelectedID); ?>
+						);
+					</script><?php
+					$this->HTML .= ob_get_clean();
+				}
 			}
 		}
 
@@ -1248,10 +1245,10 @@ class DataList{
 
 		// $this->HTML .= '<font face="garamond">'.html_attr($tvQuery).'</font>';  // uncomment this line for debugging the table view query
 
-		if($dvShown && $tvShown) $this->ContentType='tableview+detailview';
-		if($dvprint_x!='') $this->ContentType='print-detailview';
-		if($Print_x!='') $this->ContentType='print-tableview';
-		if($PrintDV!='') $this->ContentType='print-detailview';
+		if($dvShown && $tvShown) $this->ContentType = 'tableview+detailview';
+		if($dvprint_x != '') $this->ContentType = 'print-detailview';
+		if($Print_x != '') $this->ContentType = 'print-tableview';
+		if($PrintDV != '') $this->ContentType = 'print-detailview';
 
 		// call detail view javascript hook file if found
 		$dvJSHooksFile=dirname(__FILE__).'/hooks/'.$this->TableName.'-dv.js';

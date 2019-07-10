@@ -14,6 +14,7 @@
 			exit;
 		}
 
+		if($redirect_to_setup) update_config_app_uri();
 		return $config_exists;
 	}
 
@@ -33,6 +34,8 @@
 			'dbDatabase' => $dbDatabase,
 			'adminConfig' => $adminConfig
 		);
+
+		if(isset($appURI)) $config_array['appURI'] = $appURI;
 
 		if(save_config($config_array)){
 			@rename($curr_dir . '/admin/incConfig.php', $curr_dir . '/admin/incConfig.bak.php');
@@ -58,6 +61,8 @@
 			"\t\$dbUsername = '" . addslashes($config_array['dbUsername']) . "';\n" .
 			"\t\$dbPassword = '" . addslashes($config_array['dbPassword']) . "';\n" .
 			"\t\$dbDatabase = '" . addslashes($config_array['dbDatabase']) . "';\n" .
+
+			(isset($config_array['appURI']) ? "\t\$appURI = '" . addslashes($config_array['appURI']) . "';\n" : '') .
 
 			"\n\t\$adminConfig = array(\n" . 
 				$new_admin_config .
@@ -87,6 +92,7 @@
 			'dbUsername' => '',
 			'dbPassword' => '',
 			'dbDatabase' => '',
+			'appURI' => '',
 
 			'adminConfig' => array(
 				'adminUsername' => '',
@@ -127,6 +133,7 @@
 			$config['dbDatabase'] = $dbDatabase;
 			$config['dbPassword'] = $dbPassword;
 			$config['dbUsername'] = $dbUsername;
+			$config['appURI'] = $appURI;
 			$config['adminConfig'] = $adminConfig;
 		}
 
@@ -186,5 +193,28 @@
 		$new_hash = password_hash($pass, PASSWORD_DEFAULT);
 		$suser = makeSafe($user, false);
 		sql("update `membership_users` set `passMD5`='{$new_hash}' where `memberID`='{$suser}'", $eo);
+	}
+
+	function update_config_app_uri() {
+		// update only if we're on homepage
+		if(!defined('HOMEPAGE')) return;
+		if(!preg_match('/index\.php$/', $_SERVER['SCRIPT_NAME'])) return;
+
+		// config exists?
+		@include(dirname(__FILE__) . '/config.php');
+		if(!isset($dbServer)) return;
+
+		// check if appURI defined
+		if(isset($appURI)) return;
+
+		// now set appURI, knowing that we're on homepage
+		save_config(array(
+			'dbServer' => $dbServer,
+			'dbUsername' => $dbUsername,
+			'dbPassword' => $dbPassword,
+			'dbDatabase' => $dbDatabase,
+			'appURI' => trim(dirname($_SERVER['SCRIPT_NAME']), '/'),
+			'adminConfig' => $adminConfig
+		));
 	}
 

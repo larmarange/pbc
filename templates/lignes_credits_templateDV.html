@@ -37,11 +37,21 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233; / CFI <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#intitule-description"></i></label>
+					<label for="intitule" class="control-label col-lg-3">Intitul&#233; / CFI<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#intitule-description"></i></label>
 					<div class="col-lg-9">
 						<span class="help-block collapse" id="intitule-description"><div class="alert alert-info">Typiquement, le centre financier (CFI) correspondant aupr&#232;s de l'organisme gestionnaire</div></span>
 
-						<input maxlength="40" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>">
+						<input maxlength="40" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="exercice" class="control-label col-lg-3">Exercice <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="exercice-description"><div class="alert alert-info">Exercice comptable</div></span>
+
+						<input maxlength="10" type="text" class="form-control" name="exercice" id="exercice" value="<%%VALUE(exercice)%%>">
 					</div>
 				</div>
 
@@ -63,7 +73,7 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="reserve" class="control-label col-lg-3">Reserv&#233;</label>
+					<label for="reserve" class="control-label col-lg-3">R&#233;serv&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reserve" id="reserve" value="<%%VALUE(reserve)%%>">
 					</div>
@@ -213,6 +223,20 @@
 						close: function(){
 							var field_id = $j('#' + pt + '_add_new').prevAll('input:hidden').eq(0).attr('id');
 							$j('#' + field_id + '-container').select2('focus').select2('focus');
+
+							/* if a new parent was added, select it */
+							var new_id = localStorage.getItem(pt + '_last_added_id');
+							if(new_id === null) return;
+
+							localStorage.clear(pt + '_last_added_id');
+							AppGini.lookupText({
+								id: new_id,
+								table: 'lignes_credits',
+								field: field_id,
+								callback: function(data) {
+									$j('#' + field_id + '-container').select2('data', data, true);
+								}
+							});
 						},
 						size: 'full',
 						title: $j(this).attr('title')

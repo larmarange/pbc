@@ -35,7 +35,7 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_credit" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne de cr&#233;dit / CFI<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label for="ligne_credit" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne de cr&#233;dit (CFI) - Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_credit)%%><%%PLINK(ligne_credit)%%><%%ADDNEW(lignes_credits)%%></div>
 					</div>
@@ -145,6 +145,20 @@
 						close: function(){
 							var field_id = $j('#' + pt + '_add_new').prevAll('input:hidden').eq(0).attr('id');
 							$j('#' + field_id + '-container').select2('focus').select2('focus');
+
+							/* if a new parent was added, select it */
+							var new_id = localStorage.getItem(pt + '_last_added_id');
+							if(new_id === null) return;
+
+							localStorage.clear(pt + '_last_added_id');
+							AppGini.lookupText({
+								id: new_id,
+								table: 'credits',
+								field: field_id,
+								callback: function(data) {
+									$j('#' + field_id + '-container').select2('data', data, true);
+								}
+							});
 						},
 						size: 'full',
 						title: $j(this).attr('title')

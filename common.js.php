@@ -305,6 +305,8 @@ function lignes_credits_validateData(){
 	if($j('#convention').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Convention", close: function(){ /* */ $j('[name=convention]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Field ligne_budgetaire can't be empty */
 	if($j('#ligne_budgetaire').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne Budg&#233;taire", close: function(){ /* */ $j('[name=ligne_budgetaire]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
+	/* Field intitule can't be empty */
+	if($j('#intitule').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Intitul&#233; / CFI", close: function(){ /* */ $j('[name=intitule]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	return true;
 }
 function credits_validateData(){
@@ -312,7 +314,7 @@ function credits_validateData(){
 	/* Field convention can't be empty */
 	if($j('#convention').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Convention", close: function(){ /* */ $j('[name=convention]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Field ligne_credit can't be empty */
-	if($j('#ligne_credit').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne de cr&#233;dit / CFI", close: function(){ /* */ $j('[name=ligne_credit]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
+	if($j('#ligne_credit').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne de cr&#233;dit (CFI) - Exercice", close: function(){ /* */ $j('[name=ligne_credit]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Date field date can't be empty */
 	if($j('#date-dd').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function(){ /* */ $j('#date-dd').focus().parents('.form-group').addClass('has-error'); } }); return false; };
 	if($j('#date-mm').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function(){ /* */ $j('#date-mm').focus().parents('.form-group').addClass('has-error'); } }); return false; };
@@ -334,7 +336,7 @@ function depenses_validateData(){
 	/* Field convention can't be empty */
 	if($j('#convention').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Convention", close: function(){ /* */ $j('[name=convention]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Field ligne_credit can't be empty */
-	if($j('#ligne_credit').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne de cr&#233;dit / CFI", close: function(){ /* */ $j('[name=ligne_credit]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
+	if($j('#ligne_credit').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne de cr&#233;dit (CFI) - Exercice", close: function(){ /* */ $j('[name=ligne_credit]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Date field date can't be empty */
 	if($j('#date-dd').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function(){ /* */ $j('#date-dd').focus().parents('.form-group').addClass('has-error'); } }); return false; };
 	if($j('#date-mm').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function(){ /* */ $j('#date-mm').focus().parents('.form-group').addClass('has-error'); } }); return false; };
@@ -1372,4 +1374,31 @@ AppGini.filterURIComponents = function(filterIndex, andOr, fieldIndex, operator,
 		encodeURIComponent('FilterOperator[' + filterIndex + ']') + '=' + operator + '&' +
 		encodeURIComponent('FilterValue[' + filterIndex + ']') + '=' + encodeURIComponent(value);
 }
+
+/*
+	retrieve the lookup text for given id by querying ajax_combo.php
+	options: { id, table, field, callback }
+	callback is called on success, passing { id, text }
+*/
+AppGini.lookupText = function(options) {
+	if(undefined == options) return 'options?';
+	if(undefined == options.id) return 'options.id?';
+	if(undefined == options.table) return 'options.table?';
+	if(undefined == options.field) return 'options.field?';
+	if(undefined == options.callback) return 'options.callback?';
+	if(typeof(options.callback) != 'function') return 'options.callback!';
+
+	$j.ajax({
+		url: 'ajax_combo.php',
+		dataType: 'json',
+		cache: true,
+		data: { id: options.id, t: options.table, f: options.field },
+		success: function(resp) {
+			options.callback(resp.results[0]);
+		}
+	});
+
+	return true;
+}
+
 

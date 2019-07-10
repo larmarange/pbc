@@ -307,3 +307,6 @@
 	/* Added in AppGini 5.73 */
 	$Translation['datetimepicker locale'] = 'en'; // If needed, set a locale for use in datetime picker. For supported locales, type moment.locales() in your browser console.
 	$Translation['account token theft warning'] = 'Someone might have been trying to access your account by stealing your cookie-based access token. As a precaution, you have been logged out and are required to re-enter your login credentials to sign in.';
+
+	/* Added in AppGini 5.75 */
+	$Translation['rebuild fields'] = 'You could try fixing this issue from the Admin Area : Utilities menu : Rebuild Fields.';

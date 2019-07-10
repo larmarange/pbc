@@ -68,6 +68,7 @@
 			'dbUsername' => config('dbUsername'),
 			'dbPassword' => config('dbPassword'),
 			'dbDatabase' => config('dbDatabase'),
+			'appURI' => trim(preg_replace('/admin$/', '', dirname($_SERVER['SCRIPT_NAME'])), '/'),
 
 			'adminConfig' => array(
 				'adminUsername' => strtolower($post['adminUsername']),

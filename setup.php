@@ -145,6 +145,7 @@
 			'dbUsername' => undo_magic_quotes($db_username),
 			'dbPassword' => undo_magic_quotes($db_password),
 			'dbDatabase' => undo_magic_quotes($db_name),
+			'appURI' => trim(dirname($_SERVER['SCRIPT_NAME']), '/'),
 
 			'adminConfig' => array(
 				'adminUsername' => $username,

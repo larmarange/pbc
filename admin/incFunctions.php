@@ -418,7 +418,7 @@
 					$errorNum = db_errno($db_link);
 					$errorMsg = htmlspecialchars(db_error($db_link));
 
-					if(getLoggedAdmin()) $errorMsg .= "<pre class=\"ltr\">{$Translation['query:']}\n" . htmlspecialchars($statment) . "</pre><i class=\"text-right\">{$Translation['admin-only info']}</i>";
+					if(getLoggedAdmin()) $errorMsg .= "<pre class=\"ltr\">{$Translation['query:']}\n" . htmlspecialchars($statment) . "</pre><p><i class=\"text-right\">{$Translation['admin-only info']}</i></p><p>{$Translation['rebuild fields']}</p>";
 
 					if($o['silentErrors']){ $o['error'] = $errorMsg; return false; }
 
@@ -441,14 +441,11 @@
 	}
 
 	########################################################################
-	function sqlValue($statment){
+	function sqlValue($statment, &$error = NULL){
 		// executes a statment that retreives a single data value and returns the value retrieved
-		if(!$res=sql($statment, $eo)){
-			return FALSE;
-		}
-		if(!$row=db_fetch_row($res)){
-			return FALSE;
-		}
+		$eo = array('silentErrors' => true);
+		if(!$res = sql($statment, $eo)) { $error = $eo['error']; return false; }
+		if(!$row = db_fetch_row($res)) return false;
 		return $row[0];
 	}
 	########################################################################
@@ -466,7 +463,7 @@
 			return $_SESSION['adminUsername'];
 		}
 
-		unset($_SESSTION['adminUsername']);
+		unset($_SESSION['adminUsername']);
 		return false;
 	}
 	########################################################################
@@ -856,7 +853,7 @@
 				`dateUpdated` BIGINT UNSIGNED, 
 				`groupID` INT UNSIGNED, 
 				PRIMARY KEY (`recID`),
-				UNIQUE INDEX `tableName_pkValue` (`tableName`, `pkValue`),
+				UNIQUE INDEX `tableName_pkValue` (`tableName`, `pkValue`(150)),
 				INDEX `pkValue` (`pkValue`),
 				INDEX `tableName` (`tableName`),
 				INDEX `memberID` (`memberID`),
@@ -864,7 +861,7 @@
 			) CHARSET " . mysql_charset,
 		$eo);
 
-		sql("ALTER TABLE `{$tn}` ADD UNIQUE INDEX `tableName_pkValue` (`tableName`, `pkValue`)", $eo);
+		sql("ALTER TABLE `{$tn}` ADD UNIQUE INDEX `tableName_pkValue` (`tableName`, `pkValue`(150))", $eo);
 		sql("ALTER TABLE `{$tn}` ADD INDEX `pkValue` (`pkValue`)", $eo);
 		sql("ALTER TABLE `{$tn}` ADD INDEX `tableName` (`tableName`)", $eo);
 		sql("ALTER TABLE `{$tn}` ADD INDEX `memberID` (`memberID`)", $eo);
@@ -1055,21 +1052,19 @@
 	########################################################################
 	function application_url($page = '', $s = false) {
 		if($s === false) $s = $_SERVER;
-		$ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+		$ssl = (!empty($s['HTTPS']) && strtolower($s['HTTPS']) != 'off');
 		$http = ($ssl ? 'https:' : 'http:');
 		$port = $s['SERVER_PORT'];
-		$port = ((!$ssl && $port == '80') || ($ssl && $port == '443') || !$port) ? '' : ':' . $port;
+		$port = ($port == '80' || $port == '443' || !$port) ? '' : ':' . $port;
+		// HTTP_HOST already includes server port if not standard, but SERVER_NAME doesn't
 		$host = (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : $s['SERVER_NAME'] . $port);
 
-		$fp = normalize_path(dirname(__FILE__));
-		$dr = normalize_path(realpath($s['DOCUMENT_ROOT']));
+		$uri = config('appURI');
+		if(!$uri) $uri = '/';
 
-		$uri = str_replace($dr, '', $fp);
-		// remove '/admin' postfix
-		$uri = preg_replace('/\/admin$/', '', $uri);
 		// uri must begin and end with /, but not be '//'
 		if($uri != '/' && $uri[0] != '/') $uri = "/{$uri}";
-		if($uri != '/' && $uri[strlen($uri)] != '/') $uri = "{$uri}/";
+		if($uri != '/' && $uri[strlen($uri) - 1] != '/') $uri = "{$uri}/";
 
 		return "{$http}//{$host}{$uri}{$page}";
 	}

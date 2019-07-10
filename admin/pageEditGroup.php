@@ -160,9 +160,9 @@ if($groupID != ''){
 	<input type="hidden" name="groupID" value="<?php echo $groupID; ?>">
 
 	<div class="form-group ">
-		<label for="group name" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"><?php echo $Translation["group name"]; ?></label>
+		<label for="group-name" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"><?php echo $Translation["group name"]; ?></label>
 		<div class="col-sm-8 col-md-9 col-lg-6 ">
-			<input class="form-control" type="text" name="name" <?php echo ($anonGroupID == $groupID ? "readonly" : ""); ?> value="<?php echo html_attr($name); ?>">
+			<input class="form-control" type="text" id="group-name" name="name" <?php echo ($anonGroupID == $groupID ? "readonly" : ""); ?> value="<?php echo html_attr($name); ?>" autofocus>
 			<span class="help-block">
 				<?php
 					if($anonGroupID == $groupID){
@@ -231,18 +231,18 @@ if($groupID != ''){
 			<tbody>
 				<?php foreach($table_list as $tn => $tc){ ?>
 					<!-- <?php echo $tn; ?> table -->
-					<tr>
+					<tr id="<?php echo $tn; ?>-table-permissions">
 						<th><?php echo $tc; ?></th>
-						<td>
+						<td class="insert-permission">
 							<input onMouseOver="stm(<?php echo $tn; ?>_addTip, toolTipStyle);" onMouseOut="htm();" type="checkbox" name="<?php echo $tn; ?>_insert" value="1" <?php echo ($perm["{$tn}_insert"] ? "checked class=\"text-primary\"" : ""); ?>>
 						</td>
-						<td>
+						<td class="view-permission">
 							<?php echo htmlRadioGroup("{$tn}_view", $arrPermVal, $arrPermText, $perm["{$tn}_view"], 'text-primary'); ?>
 						</td>
-						<td>
+						<td class="edit-permission">
 							<?php echo htmlRadioGroup("{$tn}_edit", $arrPermVal, $arrPermText, $perm["{$tn}_edit"], 'text-primary'); ?>
 						</td>
-						<td>
+						<td class="delete-permission">
 							<?php echo htmlRadioGroup("{$tn}_delete", $arrPermVal, $arrPermText, $perm["{$tn}_delete"], 'text-primary'); ?>
 						</td>
 					</tr>

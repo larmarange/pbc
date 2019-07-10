@@ -72,7 +72,8 @@
 			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
 			'convention' => array('appgini' => 'INT unsigned not null '),
 			'ligne_budgetaire' => array('appgini' => 'INT unsigned not null '),
-			'intitule' => array('appgini' => 'VARCHAR(40) null '),
+			'intitule' => array('appgini' => 'VARCHAR(40) not null '),
+			'exercice' => array('appgini' => 'VARCHAR(10) null '),
 			'notes' => array('appgini' => 'TEXT null '),
 			'ouvert' => array('appgini' => 'DECIMAL(10,2) null '),
 			'reserve' => array('appgini' => 'DECIMAL(10,2) null '),
@@ -197,8 +198,30 @@
 			return 1;
 		}
 
+		// missing field is defined as PK and table has another PK field?
+		$current_pk = getPKFieldName($fix_table);
+		if(stripos($def['appgini'], 'primary key') !== false && $current_pk !== false) {
+			// if current PK is not another AppGini-defined field, then rename it.
+			if(!isset($schema[$fix_table][$current_pk])) {
+				// no need to include 'primary key' in definition since it's already a PK field
+				$redef = str_ireplace(' primary key', '', $def['appgini']);
+				$qry = "alter table `{$fix_table}` change `{$current_pk}` `{$fix_field}` {$redef}";
+				sql($qry, $eo);
+				return 1;
+			}
+
+			// current PK field is another AppGini-defined field
+			// this happens if table had a PK field in AppGini then it was unset as PK
+			// and another field was created and set as PK
+			// in that case, drop PK index from current PK
+			// and also remove auto_increment from it if defined
+			// then proceed to creating the missing PK field
+			$pk_def = str_ireplace(' auto_increment', '', $schema[$fix_table][$current_pk]);
+			sql("alter table `{$fix_table}` modify `{$current_pk}` {$pk_def}", $eo);
+		}
+
 		// create field
-		$qry = "alter table `{$fix_table}` add column `{$fix_field}` {$schema[$fix_table][$fix_field]['appgini']}";
+		$qry = "alter table `{$fix_table}` add column `{$fix_field}` {$def['appgini']}";
 		sql($qry, $eo);
 		return 2;
 	}

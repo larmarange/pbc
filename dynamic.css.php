@@ -53,7 +53,7 @@ div.datePicker{ font-size: 1.3em; }
 .select2-container .select2-choice{ height: 2.4em; line-height: 2.2em; }
 .select2-container .select2-choice .select2-arrow b{ background-position: 0 -0.1em; }
 
-.navbar ul.dropdown-menu{ max-height: 400px; overflow-y: auto; }
+.navbar ul.dropdown-menu{ max-height: 90vh; overflow-y: auto; }
 
 .date_combo { padding-right: 0.5em; }
 /* .date_combo select { width: 100% !important; padding-left: 0; padding-right: 0; } */
@@ -203,3 +203,9 @@ img[src="blank.gif"] { max-height: 10px !important; }
 .theme-rtl #Previous .glyphicon, .theme-rtl #Next .glyphicon {
 	transform: rotate(180deg);
 }
+
+/* theme-specific compact adjustments */
+.theme-sandstone .theme-compact .btn {
+	padding: 2.5px 10px;
+}
+
