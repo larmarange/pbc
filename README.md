@@ -8,7 +8,7 @@ En cours de développement
 
 ## Historique des versions
 
-### v0.2-dev
+### v0.2
 
 - gestion des recrutements prévus sur les conventions
 - ajout du champs 'Exercice comptable' aux lignes de crédits. Dans le cadre d'une
