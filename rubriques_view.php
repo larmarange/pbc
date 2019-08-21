@@ -128,7 +128,7 @@
 	$x->TableTitle = "Rubriques de Ventilation";
 	$x->TableIcon = "resources/table_icons/032-archives.png";
 	$x->PrimaryKey = "`rubriques`.`id`";
-	$x->DefaultSortField = '2';
+	$x->DefaultSortField = '3';
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);

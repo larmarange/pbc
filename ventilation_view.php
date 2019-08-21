@@ -133,7 +133,7 @@
 	$x->TableTitle = "Ventilation Budg&#233;taire";
 	$x->TableIcon = "resources/table_icons/024-tasks.png";
 	$x->PrimaryKey = "`ventilation`.`id`";
-	$x->DefaultSortField = '2';
+	$x->DefaultSortField = '3';
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
