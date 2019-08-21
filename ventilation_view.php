@@ -24,6 +24,7 @@
 	$x->QueryFieldsTV = array(   
 		"`ventilation`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
+		"IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') /* Rubrique de Ventilation */" => "rubrique",
 		"`ventilation`.`intitule`" => "intitule",
 		"if(CHAR_LENGTH(`ventilation`.`notes`)>80, concat(left(`ventilation`.`notes`,80),' ...'), `ventilation`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
@@ -39,22 +40,24 @@
 	$x->SortFields = array(   
 		1 => '`ventilation`.`id`',
 		2 => '`conventions1`.`nom`',
-		3 => 3,
+		3 => '`rubriques1`.`intitule`',
 		4 => 4,
-		5 => '`ventilation`.`accorde`',
-		6 => '`ventilation`.`reserve`',
-		7 => '`ventilation`.`liquide`',
-		8 => '`ventilation`.`utilise`',
-		9 => '`ventilation`.`reste_engager`',
-		10 => '`ventilation`.`reservation_salaire`',
-		11 => '`ventilation`.`reste_depenser`',
-		12 => '`ventilation`.`prop_ua`'
+		5 => 5,
+		6 => '`ventilation`.`accorde`',
+		7 => '`ventilation`.`reserve`',
+		8 => '`ventilation`.`liquide`',
+		9 => '`ventilation`.`utilise`',
+		10 => '`ventilation`.`reste_engager`',
+		11 => '`ventilation`.`reservation_salaire`',
+		12 => '`ventilation`.`reste_depenser`',
+		13 => '`ventilation`.`prop_ua`'
 	);
 
 	// Fields that can be displayed in the csv file
 	$x->QueryFieldsCSV = array(   
 		"`ventilation`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
+		"IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') /* Rubrique de Ventilation */" => "rubrique",
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
@@ -70,6 +73,7 @@
 	$x->QueryFieldsFilters = array(   
 		"`ventilation`.`id`" => "ID",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "Convention",
+		"IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') /* Rubrique de Ventilation */" => "Rubrique de Ventilation",
 		"`ventilation`.`intitule`" => "Intitul&#233;",
 		"`ventilation`.`notes`" => "Notes",
 		"`ventilation`.`accorde`" => "Pr&#233;visionnel",
@@ -86,6 +90,7 @@
 	$x->QueryFieldsQS = array(   
 		"`ventilation`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
+		"IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') /* Rubrique de Ventilation */" => "rubrique",
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '</span>')" => "accorde",
@@ -99,9 +104,9 @@
 	);
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = array(  'convention' => 'Convention');
+	$x->filterers = array(  'convention' => 'Convention', 'rubrique' => 'Rubrique de Ventilation');
 
-	$x->QueryFrom = "`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` ";
+	$x->QueryFrom = "`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` LEFT JOIN `rubriques` as rubriques1 ON `rubriques1`.`id`=`ventilation`.`rubrique` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 
@@ -131,10 +136,10 @@
 	$x->DefaultSortField = '2';
 	$x->DefaultSortDirection = 'asc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
-	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Rubrique de Ventilation", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
+	$x->ColFieldName = array('convention', 'rubrique', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/ventilation_templateTV.html';
@@ -196,6 +201,7 @@
 			$sumRow = '<tr class="success">';
 			if(!isset($_REQUEST['Print_x'])) $sumRow .= '<td class="text-center"><strong>&sum;</strong></td>';
 			$sumRow .= '<td class="ventilation-convention"></td>';
+			$sumRow .= '<td class="ventilation-rubrique"></td>';
 			$sumRow .= '<td class="ventilation-intitule"></td>';
 			$sumRow .= '<td class="ventilation-notes"></td>';
 			$sumRow .= "<td class=\"ventilation-accorde text-right\">{$row[0]}</td>";

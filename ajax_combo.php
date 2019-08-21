@@ -153,6 +153,19 @@
 				'not_null' => true
 			)
 		),
+		'rubriques' => array(   
+			'convention' => array(
+				'parent_table' => 'conventions',
+				'parent_pk_field' => 'id',
+				'parent_caption' => '`conventions`.`nom`',
+				'parent_from' => '`conventions` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`conventions`.`porteur` ',
+				'filterers' => array(),
+				'custom_query' => '',
+				'inherit_permissions' => true,
+				'list_type' => 0,
+				'not_null' => true
+			)
+		),
 		'ventilation' => array(   
 			'convention' => array(
 				'parent_table' => 'conventions',
@@ -164,6 +177,17 @@
 				'inherit_permissions' => true,
 				'list_type' => 0,
 				'not_null' => true
+			),
+			'rubrique' => array(
+				'parent_table' => 'rubriques',
+				'parent_pk_field' => 'id',
+				'parent_caption' => '`rubriques`.`intitule`',
+				'parent_from' => '`rubriques` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`rubriques`.`convention` ',
+				'filterers' => array('convention' => 'convention'),
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false
 			)
 		),
 		'recrutements' => array(   
@@ -193,7 +217,7 @@
 				'parent_table' => 'ventilation',
 				'parent_pk_field' => 'id',
 				'parent_caption' => '`ventilation`.`intitule`',
-				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` ',
+				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` LEFT JOIN `rubriques` as rubriques1 ON `rubriques1`.`id`=`ventilation`.`rubrique` ',
 				'filterers' => array('convention' => 'convention'),
 				'custom_query' => '',
 				'inherit_permissions' => false,
@@ -261,7 +285,7 @@
 				'parent_table' => 'ventilation',
 				'parent_pk_field' => 'id',
 				'parent_caption' => '`ventilation`.`intitule`',
-				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` ',
+				'parent_from' => '`ventilation` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`ventilation`.`convention` LEFT JOIN `rubriques` as rubriques1 ON `rubriques1`.`id`=`ventilation`.`rubrique` ',
 				'filterers' => array('convention' => 'convention'),
 				'custom_query' => '',
 				'inherit_permissions' => false,

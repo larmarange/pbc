@@ -101,6 +101,24 @@ credits_delete1Tip=["",spacer+"This option allows each member of the group to de
 credits_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Cr&#233;dits (ouverture)' table."];
 credits_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Cr&#233;dits (ouverture)' table."];
 
+// rubriques table
+rubriques_addTip=["",spacer+"This option allows all members of the group to add records to the 'Rubriques de Ventilation' table. A member who adds a record to the table becomes the 'owner' of that record."];
+
+rubriques_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Rubriques de Ventilation' table."];
+rubriques_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Rubriques de Ventilation' table."];
+rubriques_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Rubriques de Ventilation' table."];
+rubriques_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Rubriques de Ventilation' table."];
+
+rubriques_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Rubriques de Ventilation' table."];
+rubriques_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Rubriques de Ventilation' table."];
+rubriques_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Rubriques de Ventilation' table."];
+rubriques_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Rubriques de Ventilation' table, regardless of their owner."];
+
+rubriques_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Rubriques de Ventilation' table."];
+rubriques_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Rubriques de Ventilation' table."];
+rubriques_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Rubriques de Ventilation' table."];
+rubriques_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Rubriques de Ventilation' table."];
+
 // ventilation table
 ventilation_addTip=["",spacer+"This option allows all members of the group to add records to the 'Ventilation Budg&#233;taire' table. A member who adds a record to the table becomes the 'owner' of that record."];
 

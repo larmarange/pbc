@@ -71,6 +71,14 @@
 				}
 			}
 
+			// rubriques de ventilation
+			$l = sql("SELECT id FROM rubriques WHERE convention={$id_convention}", $eo);
+			if ($l->num_rows > 0) {
+				while($row = $l->fetch_assoc()) {
+					maj_rubrique($row['id']);
+				}
+			}
+
 			// lignes de crédits
 			$l = sql("SELECT id FROM lignes_credits WHERE convention={$id_convention}", $eo);
 			if ($l->num_rows > 0) {
@@ -87,6 +95,7 @@
 			sql("UPDATE `membership_userrecords` INNER JOIN `lignes_credits` ON membership_userrecords.pkValue=lignes_credits.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='lignes_credits' AND lignes_credits.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `credits` ON membership_userrecords.pkValue=credits.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='credits' AND credits.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `ventilation` ON membership_userrecords.pkValue=ventilation.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='ventilation' AND ventilation.convention={$id_convention}", $eo);
+			sql("UPDATE `membership_userrecords` INNER JOIN `rubriques` ON membership_userrecords.pkValue=rubriques.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='rubriques' AND rubriques.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `depenses` ON membership_userrecords.pkValue=depenses.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='depenses' AND depenses.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `fichiers` ON membership_userrecords.pkValue=fichiers.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='fichiers' AND fichiers.convention={$id_convention}", $eo);
 			sql("UPDATE `membership_userrecords` INNER JOIN `recrutements` ON membership_userrecords.pkValue=recrutements.id SET membership_userrecords.groupID={$groupe} WHERE membership_userrecords.tableName='recrutements' AND recrutements.convention={$id_convention}", $eo);
@@ -235,6 +244,43 @@
 			reste_depenser={$reste_depenser},
 			prop_ua={$prop_ua}
 			WHERE id={$id_ventilation}", $eo);
+	}
+
+	function maj_rubrique($id_rubrique){
+		$id_rubrique = makeSafe($id_rubrique);
+		#$accorde = sqlValue("SELECT sum(accorde) FROM `ventilation` WHERE rubrique={$id_rubrique}");
+		# ne faire la somme d'accorde que si tous les lignes de ventilation ont un prévésionnel
+		$accorde = sqlValue("SELECT CASE WHEN COUNT(accorde)<COUNT(*) THEN NULL ELSE SUM(accorde) END FROM `ventilation` WHERE rubrique={$id_rubrique}");
+
+		$reserve = sqlValue("SELECT sum(reserve) FROM `ventilation` WHERE rubrique={$id_rubrique}");
+		if (is_null($reserve)) $reserve = 0;
+		$liquide = sqlValue("SELECT sum(liquide) FROM `ventilation` WHERE rubrique={$id_rubrique}");
+		if (is_null($liquide)) $liquide = 0;
+		$utilise = $reserve + $liquide;
+		$reservation_salaire = sqlValue("SELECT sum(reservation_salaire) FROM `ventilation` WHERE rubrique={$id_rubrique}");
+		if (is_null($reservation_salaire)) $reservation_salaire = 0;
+
+		if (is_null($accorde)) {
+			$accorde = "NULL";
+			$reste_engager = "NULL";
+			$reste_depenser = "NULL";
+			$prop_ua = "NULL";
+		} else {
+			$reste_engager = $accorde - $utilise;
+			$reste_depenser = $reste_engager - $reservation_salaire;
+			$prop_ua = ($accorde > 0) ? 100 * $utilise / $accorde : 0;
+		}
+
+		sql("UPDATE rubriques SET
+			accorde={$accorde},
+			reserve={$reserve},
+			liquide={$liquide},
+			utilise={$utilise},
+			reste_engager={$reste_engager},
+			reservation_salaire='{$reservation_salaire}',
+			reste_depenser={$reste_depenser},
+			prop_ua={$prop_ua}
+			WHERE id={$id_rubrique}", $eo);
 	}
 
 	function maj_ligne_credit($id_ligne){

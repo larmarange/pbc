@@ -1,16 +1,16 @@
 <?php
 	// For help on using hooks, please refer to https://bigprof.com/appgini/help/working-with-generated-web-database-application/hooks
 
-	function ventilation_init(&$options, $memberInfo, &$args){
-		/* Inserted by Search Page Maker for AppGini on 2019-07-10 12:50:28 */
-		$options->FilterPage = 'hooks/ventilation_filter.php';
+	function rubriques_init(&$options, $memberInfo, &$args){
+		/* Inserted by Search Page Maker for AppGini on 2019-08-21 03:13:46 */
+		$options->FilterPage = 'hooks/rubriques_filter.php';
 		/* End of Search Page Maker for AppGini code */
 
 
 		return TRUE;
 	}
 
-	function ventilation_header($contentType, $memberInfo, &$args){
+	function rubriques_header($contentType, $memberInfo, &$args){
 		$header='';
 
 		switch($contentType){
@@ -42,7 +42,7 @@
 		return $header;
 	}
 
-	function ventilation_footer($contentType, $memberInfo, &$args){
+	function rubriques_footer($contentType, $memberInfo, &$args){
 		$footer='';
 
 		switch($contentType){
@@ -74,49 +74,49 @@
 		return $footer;
 	}
 
-	function ventilation_before_insert(&$data, $memberInfo, &$args){
+	function rubriques_before_insert(&$data, $memberInfo, &$args){
 
 		return TRUE;
 	}
 
-	function ventilation_after_insert($data, $memberInfo, &$args){
+	function rubriques_after_insert($data, $memberInfo, &$args){
 		if ($data['convention']) maj_convention($data['convention']);
 
 		return TRUE;
 	}
 
-	function ventilation_before_update(&$data, $memberInfo, &$args){
+	function rubriques_before_update(&$data, $memberInfo, &$args){
 
 		return TRUE;
 	}
 
-	function ventilation_after_update($data, $memberInfo, &$args){
+	function rubriques_after_update($data, $memberInfo, &$args){
 		if ($data['convention']) maj_convention($data['convention']);
 
 		return TRUE;
 	}
 
-	function ventilation_before_delete($selectedID, &$skipChecks, $memberInfo, &$args){
+	function rubriques_before_delete($selectedID, &$skipChecks, $memberInfo, &$args){
 		$selectedID = makeSafe($selectedID);
-		$GLOBALS['maj_convention'] = sqlValue("select convention from ventilation where id='{$selectedID}'", $eo);
+		$GLOBALS['maj_convention'] = sqlValue("select convention from rubriques where id='{$selectedID}'", $eo);
 
 		return TRUE;
 	}
 
-	function ventilation_after_delete($selectedID, $memberInfo, &$args){
+	function rubriques_after_delete($selectedID, $memberInfo, &$args){
 		if ($GLOBALS['maj_convention']) maj_convention($GLOBALS['maj_convention']);
 
 	}
 
-	function ventilation_dv($selectedID, $memberInfo, &$html, &$args){
+	function rubriques_dv($selectedID, $memberInfo, &$html, &$args){
 
 	}
 
-	function ventilation_csv($query, $memberInfo, &$args){
+	function rubriques_csv($query, $memberInfo, &$args){
 
 		return $query;
 	}
-	function ventilation_batch_actions(&$args){
+	function rubriques_batch_actions(&$args){
 
 		return array();
 	}

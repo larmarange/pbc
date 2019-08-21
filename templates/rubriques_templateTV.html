@@ -1,0 +1,18 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the rubriques_init() hook (in hooks/rubriques.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="rubriques-convention-<%%VALUE(id)%%>" class="rubriques-convention"><%%SELECT%%><%%VALUE(convention)%%><%%ENDSELECT%%></td>
+		<td id="rubriques-intitule-<%%VALUE(id)%%>" class="rubriques-intitule"><%%SELECT%%><%%VALUE(intitule)%%><%%ENDSELECT%%></td>
+		<td id="rubriques-notes-<%%VALUE(id)%%>" class="rubriques-notes"><%%SELECT%%><%%VALUE(notes)%%><%%ENDSELECT%%></td>
+		<td id="rubriques-accorde-<%%VALUE(id)%%>" class="rubriques-accorde text-right"><%%SELECT%%><%%VALUE(accorde)%%><%%ENDSELECT%%></td>
+		<td id="rubriques-reserve-<%%VALUE(id)%%>" class="rubriques-reserve text-right"><%%VALUE(reserve)%%></td>
+		<td id="rubriques-liquide-<%%VALUE(id)%%>" class="rubriques-liquide text-right"><%%VALUE(liquide)%%></td>
+		<td id="rubriques-utilise-<%%VALUE(id)%%>" class="rubriques-utilise text-right"><%%VALUE(utilise)%%></td>
+		<td id="rubriques-reste_engager-<%%VALUE(id)%%>" class="rubriques-reste_engager text-right"><%%VALUE(reste_engager)%%></td>
+		<td id="rubriques-reservation_salaire-<%%VALUE(id)%%>" class="rubriques-reservation_salaire text-right"><%%VALUE(reservation_salaire)%%></td>
+		<td id="rubriques-reste_depenser-<%%VALUE(id)%%>" class="rubriques-reste_depenser text-right"><%%VALUE(reste_depenser)%%></td>
+		<td id="rubriques-prop_ua-<%%VALUE(id)%%>" class="rubriques-prop_ua text-right"><%%VALUE(prop_ua)%%></td>

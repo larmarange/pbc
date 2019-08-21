@@ -94,9 +94,24 @@
 			'montant' => array('appgini' => 'DECIMAL(10,2) not null '),
 			'notes' => array('appgini' => 'TEXT null ')
 		),
+		'rubriques' => array(   
+			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
+			'convention' => array('appgini' => 'INT unsigned not null '),
+			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
+			'notes' => array('appgini' => 'TEXT null '),
+			'accorde' => array('appgini' => 'DOUBLE(10,2) unsigned null '),
+			'reserve' => array('appgini' => 'DECIMAL(10,2) null '),
+			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
+			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
+			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
+			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
+			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
+			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null ')
+		),
 		'ventilation' => array(   
 			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
 			'convention' => array('appgini' => 'INT unsigned not null '),
+			'rubrique' => array('appgini' => 'INT unsigned null '),
 			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
 			'notes' => array('appgini' => 'TEXT null '),
 			'accorde' => array('appgini' => 'DOUBLE(10,2) unsigned null '),

@@ -21,12 +21,6 @@
 			</div>
 		</div>
 		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
-			<label class="col-xs-3 control-label">Rubrique de Ventilation</label>
-			<div class="col-xs-9">
-				<div class="form-control-static"><span id="rubrique<%%RND1%%>"><%%COMBOTEXT(rubrique)%%></span></div>
-			</div>
-		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Intitul&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(intitule)%%></div>
@@ -90,21 +84,21 @@
 </div>
 <!-- child records -->
 <div class="panel-body">
-	<div id="ventilation-children"></div>
+	<div id="rubriques-children"></div>
 </div>
 
 <script>
 	$j(function(){
 		/* prevent loading child records in multiple DVP */
-		if($j('[id=ventilation-children]').length > 1) return;
+		if($j('[id=rubriques-children]').length > 1) return;
 
 		post(
 			'parent-children.php', {
-				ParentTable: 'ventilation',
+				ParentTable: 'rubriques',
 				SelectedID: '<%%VALUE(id)%%>',
 				Operation: 'show-children-printable'
 			},
-			'ventilation-children',
+			'rubriques-children',
 			'disable-element',
 			'loading-element',
 			apply_persisting_children

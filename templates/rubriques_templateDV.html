@@ -3,12 +3,13 @@
 <a name="detail-view"></a>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="ventilation_dv_container">
+<div class="panel-body" id="rubriques_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12">
-			<input type="hidden" id="recrutements_hclink" value="recrutements_view.php?filterer_ventilation=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
-			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_ventilation=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<a class="hidden-xs btn btn-default btn-lg pull-right hidden hspacer-sm" href="ventilation_view.php?filterer_rubrique=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="ventilation_link"><i class="glyphicon glyphicon-list-alt"></i> Ventilation Budg&#233;taire</a>
+			<a class="visible-xs btn btn-default btn-lg btn-block hidden vspacer-sm" href="ventilation_view.php?filterer_rubrique=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="xs_ventilation_link"><i class="glyphicon glyphicon-list-alt"></i> Ventilation Budg&#233;taire</a>
+			<input type="hidden" id="ventilation_hclink" value="ventilation_view.php?filterer_rubrique=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -16,7 +17,7 @@
 
 	<div class="row">
 		<!-- form inputs -->
-		<div class="col-md-8 col-lg-10" id="ventilation_dv_form">
+		<div class="col-md-8 col-lg-10" id="rubriques_dv_form">
 			<fieldset class="form-horizontal">
 
 				<div class="form-group">
@@ -24,16 +25,6 @@
 					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<hr class="hidden-md hidden-lg">
-					<label for="rubrique" class="control-label col-lg-3" data-parent_link="view_parent_modal">Rubrique de Ventilation <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#rubrique-description"></i></label>
-					<div class="col-lg-9">
-						<span class="help-block collapse" id="rubrique-description"><div class="alert alert-info">(optionnel)</div></span>
-
-						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(rubrique)%%><%%PLINK(rubrique)%%><%%ADDNEW(rubriques)%%></div>
 					</div>
 				</div>
 
@@ -55,10 +46,8 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde" class="control-label col-lg-3">Pr&#233;visionnel <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
+					<label for="accorde" class="control-label col-lg-3">Pr&#233;visionnel</label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="accorde-description"><div class="alert alert-info">Optionnel : vous pouvez sp&#233;cifier le montant pr&#233;visionnel associ&#233; &#224; cette ventilation</div></span>
-
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>">
 					</div>
 				</div>
@@ -130,7 +119,7 @@
 
 		<!-- DV action buttons -->
 		<hr class="hidden-md hidden-lg">
-		<div class="col-md-4 col-lg-2" id="ventilation_dv_action_buttons">
+		<div class="col-md-4 col-lg-2" id="rubriques_dv_action_buttons">
 			<div class="btn-toolbar">
 				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
 					<%%UPDATE_BUTTON%%>
@@ -152,7 +141,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
-			<div id="ventilation-children" class="children-tabs"></div>
+			<div id="rubriques-children" class="children-tabs"></div>
 		</div>
 	</div>
 
@@ -218,11 +207,11 @@
 			}else{
 				post(
 					'parent-children.php', {
-						ParentTable: 'ventilation',
+						ParentTable: 'rubriques',
 						SelectedID: '<%%VALUE(id)%%>',
 						Operation: 'show-children'
 					},
-					'ventilation-children'
+					'rubriques-children'
 				);
 			}
 
@@ -245,7 +234,7 @@
 							localStorage.clear(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
-								table: 'ventilation',
+								table: 'rubriques',
 								field: field_id,
 								callback: function(data) {
 									$j('#' + field_id + '-container').select2('data', data, true);
@@ -305,10 +294,10 @@
 			if(!add_new_mode){
 				$j('body').append('<div id="admin-tools-appendix"></div>');
 				$j('#admin-tools-appendix').load(
-					'ajax_admin_tools.php?table=ventilation&id=<%%URLVALUE(id)%%>',
+					'ajax_admin_tools.php?table=rubriques&id=<%%URLVALUE(id)%%>',
 					function(resp){
 						if(!resp.length) return;
-						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=ventilation&id=<%%URLVALUE(id)%%>');
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=rubriques&id=<%%URLVALUE(id)%%>');
 					}
 				);
 			}

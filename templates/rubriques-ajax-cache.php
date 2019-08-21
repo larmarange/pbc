@@ -4,12 +4,11 @@
 ?>
 <script>
 	$j(function(){
-		var tn = 'ventilation';
+		var tn = 'rubriques';
 
 		/* data for selected record, or defaults if none is selected */
 		var data = {
-			convention: <?php echo json_encode(array('id' => $rdata['convention'], 'value' => $rdata['convention'], 'text' => $jdata['convention'])); ?>,
-			rubrique: <?php echo json_encode(array('id' => $rdata['rubrique'], 'value' => $rdata['rubrique'], 'text' => $jdata['rubrique'])); ?>
+			convention: <?php echo json_encode(array('id' => $rdata['convention'], 'value' => $rdata['convention'], 'text' => $jdata['convention'])); ?>
 		};
 
 		/* initialize or continue using AppGini.cache for the current table */
@@ -22,14 +21,6 @@
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'convention' && d.id == data.convention.id)
 				return { results: [ data.convention ], more: false, elapsed: 0.01 };
-			return false;
-		});
-
-		/* saved value for rubrique */
-		cache.addCheck(function(u, d){
-			if(u != 'ajax_combo.php') return false;
-			if(d.t == tn && d.f == 'rubrique' && d.id == data.rubrique.id)
-				return { results: [ data.rubrique ], more: false, elapsed: 0.01 };
 			return false;
 		});
 

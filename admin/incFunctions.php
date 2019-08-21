@@ -125,6 +125,13 @@
 					'group' => $tg[0],
 					'homepageShowCount' => 0
 				),
+				'rubriques' => array(
+					'Caption' => 'Rubriques de Ventilation',
+					'Description' => '',
+					'tableIcon' => 'resources/table_icons/032-archives.png',
+					'group' => $tg[0],
+					'homepageShowCount' => 0
+				),
 				'ventilation' => array(
 					'Caption' => 'Ventilation Budg&#233;taire',
 					'Description' => '',
@@ -187,6 +194,7 @@
 				'versements' => 'Versements (bailleur)',
 				'lignes_credits' => 'Lignes de Cr&#233;dits',
 				'credits' => 'Cr&#233;dits (ouverture)',
+				'rubriques' => 'Rubriques de Ventilation',
 				'ventilation' => 'Ventilation Budg&#233;taire',
 				'recrutements' => 'Recrutements',
 				'depenses' => 'D&#233;penses',

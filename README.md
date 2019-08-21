@@ -8,6 +8,10 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 ## Historique des versions
 
+### v0.3-dev
+
+- ajout des rubriques de ventilation
+
 ### v0.2
 
 - gestion des recrutements prévus sur les conventions
