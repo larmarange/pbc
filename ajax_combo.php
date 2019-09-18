@@ -213,6 +213,17 @@
 				'list_type' => 0,
 				'not_null' => false
 			),
+			'ligne_budgetaire' => array(
+				'parent_table' => 'budgets',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
+				'filterers' => array('convention' => 'convention'),
+				'custom_query' => 'SELECT `budgets`.`id`, IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => true
+			),
 			'ventilation' => array(
 				'parent_table' => 'ventilation',
 				'parent_pk_field' => 'id',
@@ -263,7 +274,7 @@
 				'parent_table' => 'recrutements',
 				'parent_pk_field' => 'id',
 				'parent_caption' => 'IF(CHAR_LENGTH(`recrutements`.`intitule`) || CHAR_LENGTH(`recrutements`.`beneficiaire`), CONCAT_WS(\'\', `recrutements`.`intitule`, \' - \', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS(\'\',   `personnes1`.`nom`), \'\')), \'\')',
-				'parent_from' => '`recrutements` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`recrutements`.`convention` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`recrutements`.`beneficiaire` LEFT JOIN `ventilation` as ventilation1 ON `ventilation1`.`id`=`recrutements`.`ventilation` ',
+				'parent_from' => '`recrutements` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`recrutements`.`convention` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`recrutements`.`beneficiaire` LEFT JOIN `budgets` as budgets1 ON `budgets1`.`id`=`recrutements`.`ligne_budgetaire` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets1`.`type` LEFT JOIN `ventilation` as ventilation1 ON `ventilation1`.`id`=`recrutements`.`ventilation` ',
 				'filterers' => array('convention' => 'convention'),
 				'custom_query' => '',
 				'inherit_permissions' => false,

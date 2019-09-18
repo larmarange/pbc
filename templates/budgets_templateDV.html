@@ -9,6 +9,7 @@
 		<div class="col-xs-12">
 			<input type="hidden" id="versements_hclink" value="versements_view.php?filterer_ligne_budgetaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<input type="hidden" id="lignes_credits_hclink" value="lignes_credits_view.php?filterer_ligne_budgetaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
+			<input type="hidden" id="recrutements_hclink" value="recrutements_view.php?filterer_ligne_budgetaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_ligne_budgetaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
@@ -113,6 +114,26 @@
 					<label for="reste_engager" class="control-label col-lg-3">Reste &#224; Engager</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reste_engager" id="reste_engager" value="<%%VALUE(reste_engager)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="reste_depenser" class="control-label col-lg-3">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="reste_depenser-description"><div class="alert alert-info">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
+
+						<input maxlength="13" type="text" class="form-control" name="reste_depenser" id="reste_depenser" value="<%%VALUE(reste_depenser)%%>">
 					</div>
 				</div>
 

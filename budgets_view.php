@@ -35,6 +35,8 @@
 		"CONCAT('<span style=''color: ', IF(`budgets`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`disponible`, 2, 'ru_RU'), '</span>')" => "disponible",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uo`, 0, 'ru_RU'), '%</span>')" => "prop_uo",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uv` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uv`, 0, 'ru_RU'), '%</span>')" => "prop_uv",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
@@ -54,9 +56,11 @@
 		11 => '`budgets`.`utilise`',
 		12 => '`budgets`.`disponible`',
 		13 => '`budgets`.`reste_engager`',
-		14 => '`budgets`.`prop_uo`',
-		15 => '`budgets`.`prop_uv`',
-		16 => '`budgets`.`prop_ua`'
+		14 => '`budgets`.`reservation_salaire`',
+		15 => '`budgets`.`reste_depenser`',
+		16 => '`budgets`.`prop_uo`',
+		17 => '`budgets`.`prop_uv`',
+		18 => '`budgets`.`prop_ua`'
 	);
 
 	// Fields that can be displayed in the csv file
@@ -74,6 +78,8 @@
 		"CONCAT('<span style=''color: ', IF(`budgets`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`disponible`, 2, 'ru_RU'), '</span>')" => "disponible",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uo`, 0, 'ru_RU'), '%</span>')" => "prop_uo",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uv` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uv`, 0, 'ru_RU'), '%</span>')" => "prop_uv",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
@@ -93,6 +99,8 @@
 		"`budgets`.`utilise`" => "Utilis&#233;",
 		"`budgets`.`disponible`" => "Disponible",
 		"`budgets`.`reste_engager`" => "Reste &#224; Engager",
+		"`budgets`.`reservation_salaire`" => "Salaires restant &#224; verser",
+		"`budgets`.`reste_depenser`" => "Reste &#224; D&#233;penser",
 		"`budgets`.`prop_uo`" => "U/O (%)",
 		"`budgets`.`prop_uv`" => "U/V (%)",
 		"`budgets`.`prop_ua`" => "U/A (%)"
@@ -113,6 +121,8 @@
 		"CONCAT('<span style=''color: ', IF(`budgets`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`utilise`, 2, 'ru_RU'), '</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`disponible`, 2, 'ru_RU'), '</span>')" => "disponible",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_engager`, 2, 'ru_RU'), '</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reservation_salaire`, 2, 'ru_RU'), '</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`budgets`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_depenser`, 2, 'ru_RU'), '</span>')" => "reste_depenser",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uo`, 0, 'ru_RU'), '%</span>')" => "prop_uo",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_uv` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uv`, 0, 'ru_RU'), '%</span>')" => "prop_uv",
 		"CONCAT('<span style=''color: ', IF(`budgets`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua"
@@ -151,10 +161,10 @@
 	$x->DefaultSortField = '3';
 	$x->DefaultSortDirection = 'asc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Type", "Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "U/O (%)", "U/V (%)", "U/A (%)");
-	$x->ColFieldName = array('convention', 'type', 'accorde', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'prop_uo', 'prop_uv', 'prop_ua');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Type", "Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/O (%)", "U/V (%)", "U/A (%)");
+	$x->ColFieldName = array('convention', 'type', 'accorde', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_uo', 'prop_uv', 'prop_ua');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/budgets_templateTV.html';
@@ -210,7 +220,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`budgets`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`accorde`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`verse`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`verse`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_verser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_verser`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`ouvert`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_ouvrir`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_ouvrir`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reserve`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`liquide`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`utilise`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`disponible`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_engager`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`budgets`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`accorde`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`verse`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`verse`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_verser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_verser`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`ouvert`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_ouvrir`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_ouvrir`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reserve`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`liquide`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`utilise`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`disponible`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_engager`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reservation_salaire`), 2, 'ru_RU'), '</span>'), CONCAT('<span style=''color: ', IF(sum(`budgets`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`budgets`.`reste_depenser`), 2, 'ru_RU'), '</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)){
 			$sumRow = '<tr class="success">';
@@ -227,6 +237,8 @@
 			$sumRow .= "<td class=\"budgets-utilise text-right\">{$row[7]}</td>";
 			$sumRow .= "<td class=\"budgets-disponible text-right\">{$row[8]}</td>";
 			$sumRow .= "<td class=\"budgets-reste_engager text-right\">{$row[9]}</td>";
+			$sumRow .= "<td class=\"budgets-reservation_salaire text-right\">{$row[10]}</td>";
+			$sumRow .= "<td class=\"budgets-reste_depenser text-right\">{$row[11]}</td>";
 			$sumRow .= '<td class="budgets-prop_uo"></td>';
 			$sumRow .= '<td class="budgets-prop_uv"></td>';
 			$sumRow .= '<td class="budgets-prop_ua"></td>';

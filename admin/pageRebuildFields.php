@@ -57,6 +57,8 @@
 			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
 			'disponible' => array('appgini' => 'FLOAT(10,2) null '),
 			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
+			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
+			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
 			'prop_uo' => array('appgini' => 'DECIMAL(10,1) null '),
 			'prop_uv' => array('appgini' => 'DECIMAL(10,1) null '),
 			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null ')
@@ -131,6 +133,7 @@
 			'date_debut' => array('appgini' => 'DATE null '),
 			'date_fin' => array('appgini' => 'DATE null '),
 			'duree' => array('appgini' => 'MEDIUMINT unsigned null '),
+			'ligne_budgetaire' => array('appgini' => 'INT unsigned not null '),
 			'ventilation' => array('appgini' => 'INT unsigned null '),
 			'notes' => array('appgini' => 'TEXT null '),
 			'previsionnel' => array('appgini' => 'DOUBLE(10,2) unsigned null '),

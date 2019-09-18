@@ -11,6 +11,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 ### v0.3-dev
 
 - ajout des rubriques de ventilation
+- calcul des salaires restant à verser par ligne budgétaire
 
 ### v0.2
 

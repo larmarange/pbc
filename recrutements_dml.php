@@ -26,6 +26,8 @@ function recrutements_insert(){
 	$data['date_fin'] = parseMySQLDate($data['date_fin'], '');
 	$data['duree'] = makeSafe($_REQUEST['duree']);
 		if($data['duree'] == empty_lookup_value){ $data['duree'] = ''; }
+	$data['ligne_budgetaire'] = makeSafe($_REQUEST['ligne_budgetaire']);
+		if($data['ligne_budgetaire'] == empty_lookup_value){ $data['ligne_budgetaire'] = ''; }
 	$data['ventilation'] = makeSafe($_REQUEST['ventilation']);
 		if($data['ventilation'] == empty_lookup_value){ $data['ventilation'] = ''; }
 	$data['notes'] = makeSafe($_REQUEST['notes']);
@@ -48,6 +50,11 @@ function recrutements_insert(){
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
+	if($data['ligne_budgetaire']== ''){
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Ligne budg&#233;taire': " . $Translation['field not null'] . '<br><br>';
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
 
 	// hook: recrutements_before_insert
 	if(function_exists('recrutements_before_insert')){
@@ -56,7 +63,7 @@ function recrutements_insert(){
 	}
 
 	$o = array('silentErrors' => true);
-	sql('insert into `recrutements` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `previsionnel`=' . (($data['previsionnel'] !== '' && $data['previsionnel'] !== NULL) ? "'{$data['previsionnel']}'" : 'NULL') . ', `depense`=' . (($data['depense'] !== '' && $data['depense'] !== NULL) ? "'{$data['depense']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `prop_dp`=' . (($data['prop_dp'] !== '' && $data['prop_dp'] !== NULL) ? "'{$data['prop_dp']}'" : 'NULL'), $o);
+	sql('insert into `recrutements` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `previsionnel`=' . (($data['previsionnel'] !== '' && $data['previsionnel'] !== NULL) ? "'{$data['previsionnel']}'" : 'NULL') . ', `depense`=' . (($data['depense'] !== '' && $data['depense'] !== NULL) ? "'{$data['depense']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `prop_dp`=' . (($data['prop_dp'] !== '' && $data['prop_dp'] !== NULL) ? "'{$data['prop_dp']}'" : 'NULL'), $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo "<a href=\"recrutements_view.php?addNew_x=1\">{$Translation['< back']}</a>";
@@ -170,6 +177,13 @@ function recrutements_update($selected_id){
 	$data['date_fin'] = parseMySQLDate($data['date_fin'], '');
 	$data['duree'] = makeSafe($_REQUEST['duree']);
 		if($data['duree'] == empty_lookup_value){ $data['duree'] = ''; }
+	$data['ligne_budgetaire'] = makeSafe($_REQUEST['ligne_budgetaire']);
+		if($data['ligne_budgetaire'] == empty_lookup_value){ $data['ligne_budgetaire'] = ''; }
+	if($data['ligne_budgetaire']==''){
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">{$Translation['error:']} 'Ligne budg&#233;taire': {$Translation['field not null']}<br><br>";
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
 	$data['ventilation'] = makeSafe($_REQUEST['ventilation']);
 		if($data['ventilation'] == empty_lookup_value){ $data['ventilation'] = ''; }
 	$data['notes'] = makeSafe($_REQUEST['notes']);
@@ -191,7 +205,7 @@ function recrutements_update($selected_id){
 	}
 
 	$o=array('silentErrors' => true);
-	sql('update `recrutements` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `previsionnel`=' . (($data['previsionnel'] !== '' && $data['previsionnel'] !== NULL) ? "'{$data['previsionnel']}'" : 'NULL') . ', `depense`=' . (($data['depense'] !== '' && $data['depense'] !== NULL) ? "'{$data['depense']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `prop_dp`=' . (($data['prop_dp'] !== '' && $data['prop_dp'] !== NULL) ? "'{$data['prop_dp']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `recrutements` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `previsionnel`=' . (($data['previsionnel'] !== '' && $data['previsionnel'] !== NULL) ? "'{$data['previsionnel']}'" : 'NULL') . ', `depense`=' . (($data['depense'] !== '' && $data['depense'] !== NULL) ? "'{$data['depense']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `prop_dp`=' . (($data['prop_dp'] !== '' && $data['prop_dp'] !== NULL) ? "'{$data['prop_dp']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!=''){
 		echo $o['error'];
 		echo '<a href="recrutements_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -235,9 +249,11 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 
 	$filterer_convention = thisOr(undo_magic_quotes($_REQUEST['filterer_convention']), '');
 	$filterer_beneficiaire = thisOr(undo_magic_quotes($_REQUEST['filterer_beneficiaire']), '');
+	$filterer_ligne_budgetaire = thisOr(undo_magic_quotes($_REQUEST['filterer_ligne_budgetaire']), '');
 	$filterer_ventilation = thisOr(undo_magic_quotes($_REQUEST['filterer_ventilation']), '');
 
 	// populate filterers, starting from children to grand-parents
+	if($filterer_ligne_budgetaire && !$filterer_convention) $filterer_convention = sqlValue("select convention from budgets where id='" . makeSafe($filterer_ligne_budgetaire) . "'");
 	if($filterer_ventilation && !$filterer_convention) $filterer_convention = sqlValue("select convention from ventilation where id='" . makeSafe($filterer_ventilation) . "'");
 
 	// unique random identifier
@@ -262,6 +278,8 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$combo_date_fin->DefaultDate = parseMySQLDate('', '');
 	$combo_date_fin->MonthNames = $Translation['month names'];
 	$combo_date_fin->NamePrefix = 'date_fin';
+	// combobox: ligne_budgetaire, filterable by: convention
+	$combo_ligne_budgetaire = new DataCombo;
 	// combobox: ventilation, filterable by: convention
 	$combo_ventilation = new DataCombo;
 
@@ -298,16 +316,20 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		$combo_beneficiaire->SelectedData = $row['beneficiaire'];
 		$combo_date_debut->DefaultDate = $row['date_debut'];
 		$combo_date_fin->DefaultDate = $row['date_fin'];
+		$combo_ligne_budgetaire->SelectedData = $row['ligne_budgetaire'];
 		$combo_ventilation->SelectedData = $row['ventilation'];
 	}else{
 		$combo_convention->SelectedData = $filterer_convention;
 		$combo_beneficiaire->SelectedData = $filterer_beneficiaire;
+		$combo_ligne_budgetaire->SelectedData = $filterer_ligne_budgetaire;
 		$combo_ventilation->SelectedData = $filterer_ventilation;
 	}
 	$combo_convention->HTML = '<span id="convention-container' . $rnd1 . '"></span><input type="hidden" name="convention" id="convention' . $rnd1 . '" value="' . html_attr($combo_convention->SelectedData) . '">';
 	$combo_convention->MatchText = '<span id="convention-container-readonly' . $rnd1 . '"></span><input type="hidden" name="convention" id="convention' . $rnd1 . '" value="' . html_attr($combo_convention->SelectedData) . '">';
 	$combo_beneficiaire->HTML = '<span id="beneficiaire-container' . $rnd1 . '"></span><input type="hidden" name="beneficiaire" id="beneficiaire' . $rnd1 . '" value="' . html_attr($combo_beneficiaire->SelectedData) . '">';
 	$combo_beneficiaire->MatchText = '<span id="beneficiaire-container-readonly' . $rnd1 . '"></span><input type="hidden" name="beneficiaire" id="beneficiaire' . $rnd1 . '" value="' . html_attr($combo_beneficiaire->SelectedData) . '">';
+	$combo_ligne_budgetaire->HTML = '<span id="ligne_budgetaire-container' . $rnd1 . '"></span><input type="hidden" name="ligne_budgetaire" id="ligne_budgetaire' . $rnd1 . '" value="' . html_attr($combo_ligne_budgetaire->SelectedData) . '">';
+	$combo_ligne_budgetaire->MatchText = '<span id="ligne_budgetaire-container-readonly' . $rnd1 . '"></span><input type="hidden" name="ligne_budgetaire" id="ligne_budgetaire' . $rnd1 . '" value="' . html_attr($combo_ligne_budgetaire->SelectedData) . '">';
 	$combo_ventilation->HTML = '<span id="ventilation-container' . $rnd1 . '"></span><input type="hidden" name="ventilation" id="ventilation' . $rnd1 . '" value="' . html_attr($combo_ventilation->SelectedData) . '">';
 	$combo_ventilation->MatchText = '<span id="ventilation-container-readonly' . $rnd1 . '"></span><input type="hidden" name="ventilation" id="ventilation' . $rnd1 . '" value="' . html_attr($combo_ventilation->SelectedData) . '">';
 
@@ -318,12 +340,14 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		// initial lookup values
 		AppGini.current_convention__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['convention'] : $filterer_convention); ?>"};
 		AppGini.current_beneficiaire__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['beneficiaire'] : $filterer_beneficiaire); ?>"};
+		AppGini.current_ligne_budgetaire__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['ligne_budgetaire'] : $filterer_ligne_budgetaire); ?>"};
 		AppGini.current_ventilation__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['ventilation'] : $filterer_ventilation); ?>"};
 
 		jQuery(function() {
 			setTimeout(function(){
 				if(typeof(convention_reload__RAND__) == 'function') convention_reload__RAND__();
 				if(typeof(beneficiaire_reload__RAND__) == 'function') beneficiaire_reload__RAND__();
+				<?php echo (!$AllowUpdate || $dvprint ? 'if(typeof(ligne_budgetaire_reload__RAND__) == \'function\') ligne_budgetaire_reload__RAND__(AppGini.current_convention__RAND__.value);' : ''); ?>
 				<?php echo (!$AllowUpdate || $dvprint ? 'if(typeof(ventilation_reload__RAND__) == \'function\') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);' : ''); ?>
 			}, 10); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
 		});
@@ -346,6 +370,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 							$j('[id=convention-container-readonly__RAND__]').html('<span id="convention-match-text">' + resp.results[0].text + '</span>');
 							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=conventions_view_parent]').hide(); }else{ $j('.btn[id=conventions_view_parent]').show(); }
 
+						if(typeof(ligne_budgetaire_reload__RAND__) == 'function') ligne_budgetaire_reload__RAND__(AppGini.current_convention__RAND__.value);
 						if(typeof(ventilation_reload__RAND__) == 'function') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);
 
 							if(typeof(convention_update_autofills__RAND__) == 'function') convention_update_autofills__RAND__();
@@ -370,6 +395,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 				$j('[name="convention"]').val(e.added.id);
 				if(e.added.id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=conventions_view_parent]').hide(); }else{ $j('.btn[id=conventions_view_parent]').show(); }
 
+						if(typeof(ligne_budgetaire_reload__RAND__) == 'function') ligne_budgetaire_reload__RAND__(AppGini.current_convention__RAND__.value);
 						if(typeof(ventilation_reload__RAND__) == 'function') ventilation_reload__RAND__(AppGini.current_convention__RAND__.value);
 
 				if(typeof(convention_update_autofills__RAND__) == 'function') convention_update_autofills__RAND__();
@@ -478,6 +504,83 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=personnes_view_parent]').hide(); }else{ $j('.btn[id=personnes_view_parent]').show(); }
 
 					if(typeof(beneficiaire_update_autofills__RAND__) == 'function') beneficiaire_update_autofills__RAND__();
+				}
+			});
+		<?php } ?>
+
+		}
+		function ligne_budgetaire_reload__RAND__(filterer_convention){
+		<?php if(($AllowUpdate || $AllowInsert) && !$dvprint){ ?>
+
+			$j("#ligne_budgetaire-container__RAND__").select2({
+				/* initial default value */
+				initSelection: function(e, c){
+					$j.ajax({
+						url: 'ajax_combo.php',
+						dataType: 'json',
+						data: { filterer_convention: filterer_convention, id: AppGini.current_ligne_budgetaire__RAND__.value, t: 'recrutements', f: 'ligne_budgetaire' },
+						success: function(resp){
+							c({
+								id: resp.results[0].id,
+								text: resp.results[0].text
+							});
+							$j('[name="ligne_budgetaire"]').val(resp.results[0].id);
+							$j('[id=ligne_budgetaire-container-readonly__RAND__]').html('<span id="ligne_budgetaire-match-text">' + resp.results[0].text + '</span>');
+							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=budgets_view_parent]').hide(); }else{ $j('.btn[id=budgets_view_parent]').show(); }
+
+
+							if(typeof(ligne_budgetaire_update_autofills__RAND__) == 'function') ligne_budgetaire_update_autofills__RAND__();
+						}
+					});
+				},
+				width: '100%',
+				formatNoMatches: function(term){ /* */ return '<?php echo addslashes($Translation['No matches found!']); ?>'; },
+				minimumResultsForSearch: 5,
+				loadMorePadding: 200,
+				ajax: {
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					cache: true,
+					data: function(term, page){ /* */ return { filterer_convention: filterer_convention, s: term, p: page, t: 'recrutements', f: 'ligne_budgetaire' }; },
+					results: function(resp, page){ /* */ return resp; }
+				},
+				escapeMarkup: function(str){ /* */ return str; }
+			}).on('change', function(e){
+				AppGini.current_ligne_budgetaire__RAND__.value = e.added.id;
+				AppGini.current_ligne_budgetaire__RAND__.text = e.added.text;
+				$j('[name="ligne_budgetaire"]').val(e.added.id);
+				if(e.added.id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=budgets_view_parent]').hide(); }else{ $j('.btn[id=budgets_view_parent]').show(); }
+
+
+				if(typeof(ligne_budgetaire_update_autofills__RAND__) == 'function') ligne_budgetaire_update_autofills__RAND__();
+			});
+
+			if(!$j("#ligne_budgetaire-container__RAND__").length){
+				$j.ajax({
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					data: { id: AppGini.current_ligne_budgetaire__RAND__.value, t: 'recrutements', f: 'ligne_budgetaire' },
+					success: function(resp){
+						$j('[name="ligne_budgetaire"]').val(resp.results[0].id);
+						$j('[id=ligne_budgetaire-container-readonly__RAND__]').html('<span id="ligne_budgetaire-match-text">' + resp.results[0].text + '</span>');
+						if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=budgets_view_parent]').hide(); }else{ $j('.btn[id=budgets_view_parent]').show(); }
+
+						if(typeof(ligne_budgetaire_update_autofills__RAND__) == 'function') ligne_budgetaire_update_autofills__RAND__();
+					}
+				});
+			}
+
+		<?php }else{ ?>
+
+			$j.ajax({
+				url: 'ajax_combo.php',
+				dataType: 'json',
+				data: { id: AppGini.current_ligne_budgetaire__RAND__.value, t: 'recrutements', f: 'ligne_budgetaire' },
+				success: function(resp){
+					$j('[id=ligne_budgetaire-container__RAND__], [id=ligne_budgetaire-container-readonly__RAND__]').html('<span id="ligne_budgetaire-match-text">' + resp.results[0].text + '</span>');
+					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>'){ $j('.btn[id=budgets_view_parent]').hide(); }else{ $j('.btn[id=budgets_view_parent]').show(); }
+
+					if(typeof(ligne_budgetaire_update_autofills__RAND__) == 'function') ligne_budgetaire_update_autofills__RAND__();
 				}
 			});
 		<?php } ?>
@@ -628,6 +731,8 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		$jsReadOnly .= "\tjQuery('#date_fin').prop('readonly', true);\n";
 		$jsReadOnly .= "\tjQuery('#date_finDay, #date_finMonth, #date_finYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#duree').replaceWith('<div class=\"form-control-static\" id=\"duree\">' + (jQuery('#duree').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#ligne_budgetaire').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
+		$jsReadOnly .= "\tjQuery('#ligne_budgetaire_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#ventilation').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#ventilation_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#previsionnel').replaceWith('<div class=\"form-control-static\" id=\"previsionnel\">' + (jQuery('#previsionnel').val() || '') + '</div>');\n";
@@ -653,12 +758,15 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$templateCode = str_replace('<%%COMBOTEXT(date_debut)%%>', $combo_date_debut->GetHTML(true), $templateCode);
 	$templateCode = str_replace('<%%COMBO(date_fin)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_fin->GetHTML(true) . '</div>' : $combo_date_fin->GetHTML()), $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(date_fin)%%>', $combo_date_fin->GetHTML(true), $templateCode);
+	$templateCode = str_replace('<%%COMBO(ligne_budgetaire)%%>', $combo_ligne_budgetaire->HTML, $templateCode);
+	$templateCode = str_replace('<%%COMBOTEXT(ligne_budgetaire)%%>', $combo_ligne_budgetaire->MatchText, $templateCode);
+	$templateCode = str_replace('<%%URLCOMBOTEXT(ligne_budgetaire)%%>', urlencode($combo_ligne_budgetaire->MatchText), $templateCode);
 	$templateCode = str_replace('<%%COMBO(ventilation)%%>', $combo_ventilation->HTML, $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(ventilation)%%>', $combo_ventilation->MatchText, $templateCode);
 	$templateCode = str_replace('<%%URLCOMBOTEXT(ventilation)%%>', urlencode($combo_ventilation->MatchText), $templateCode);
 
 	/* lookup fields array: 'lookup field name' => array('parent table name', 'lookup field caption') */
-	$lookup_fields = array(  'convention' => array('conventions', 'Convention'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ventilation' => array('ventilation', 'Ventilation Budg&#233;taire'));
+	$lookup_fields = array(  'convention' => array('conventions', 'Convention'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ligne_budgetaire' => array('budgets', 'Ligne budg&#233;taire'), 'ventilation' => array('ventilation', 'Ventilation Budg&#233;taire'));
 	foreach($lookup_fields as $luf => $ptfc){
 		$pt_perm = getTablePermissions($ptfc[0]);
 
@@ -681,6 +789,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$templateCode = str_replace('<%%UPLOADFILE(date_debut)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date_fin)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(duree)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(ligne_budgetaire)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(ventilation)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(notes)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(previsionnel)%%>', '', $templateCode);
@@ -709,6 +818,9 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(duree)%%>', safe_html($urow['duree']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(duree)%%>', html_attr($row['duree']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(duree)%%>', urlencode($urow['duree']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(ligne_budgetaire)%%>', safe_html($urow['ligne_budgetaire']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(ligne_budgetaire)%%>', html_attr($row['ligne_budgetaire']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(ligne_budgetaire)%%>', urlencode($urow['ligne_budgetaire']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(ventilation)%%>', safe_html($urow['ventilation']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(ventilation)%%>', html_attr($row['ventilation']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ventilation)%%>', urlencode($urow['ventilation']), $templateCode);
@@ -746,6 +858,8 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 		$templateCode = str_replace('<%%URLVALUE(date_fin)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(duree)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(duree)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(ligne_budgetaire)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(ligne_budgetaire)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(ventilation)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ventilation)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5"></textarea>', $templateCode);

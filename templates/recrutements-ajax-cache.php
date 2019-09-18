@@ -10,6 +10,7 @@
 		var data = {
 			convention: <?php echo json_encode(array('id' => $rdata['convention'], 'value' => $rdata['convention'], 'text' => $jdata['convention'])); ?>,
 			beneficiaire: <?php echo json_encode(array('id' => $rdata['beneficiaire'], 'value' => $rdata['beneficiaire'], 'text' => $jdata['beneficiaire'])); ?>,
+			ligne_budgetaire: <?php echo json_encode(array('id' => $rdata['ligne_budgetaire'], 'value' => $rdata['ligne_budgetaire'], 'text' => $jdata['ligne_budgetaire'])); ?>,
 			ventilation: <?php echo json_encode(array('id' => $rdata['ventilation'], 'value' => $rdata['ventilation'], 'text' => $jdata['ventilation'])); ?>
 		};
 
@@ -31,6 +32,14 @@
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'beneficiaire' && d.id == data.beneficiaire.id)
 				return { results: [ data.beneficiaire ], more: false, elapsed: 0.01 };
+			return false;
+		});
+
+		/* saved value for ligne_budgetaire */
+		cache.addCheck(function(u, d){
+			if(u != 'ajax_combo.php') return false;
+			if(d.t == tn && d.f == 'ligne_budgetaire' && d.id == data.ligne_budgetaire.id)
+				return { results: [ data.ligne_budgetaire ], more: false, elapsed: 0.01 };
 			return false;
 		});
 

@@ -176,6 +176,8 @@
 			$disponible = "NULL";
 			$reste_ouvrir = "NULL";
 			$reste_engager = "NULL";
+			$reservation_salaire = "NULL";
+			$reste_depenser = "NULL";
 			$prop_uo = "NULL";
 			$prop_uv = "NULL";
 			$prop_ua = "NULL";
@@ -191,6 +193,9 @@
 			$disponible = $ouvert - $utilise;
 			$reste_ouvrir = $verse - $ouvert;
 			$reste_engager = $accorde - $utilise;
+			$reservation_salaire = sqlValue("SELECT sum(reservation_salaire) FROM `recrutements` WHERE ligne_budgetaire={$id_ligne}");
+			if (is_null($reservation_salaire)) $reservation_salaire = 0;
+			$reste_depenser = $reste_engager - $reservation_salaire;
 			$prop_uo = ($ouvert > 0) ? 100 * $utilise / $ouvert : 0;
 			$prop_uv = ($verse > 0) ? 100 * $utilise / $verse : 0;
 			$prop_ua = ($accorde > 0) ? 100 * $utilise / $accorde : 0;
@@ -207,6 +212,8 @@
 			reste_verser={$reste_verser},
 			reste_ouvrir={$reste_ouvrir},
 			reste_engager={$reste_engager},
+			reservation_salaire={$reservation_salaire},
+			reste_depenser={$reste_depenser},
 			prop_uo={$prop_uo},
 			prop_uv={$prop_uv},
 			prop_ua={$prop_ua}
