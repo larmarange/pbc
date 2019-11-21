@@ -3,7 +3,7 @@
 	$jdata = array_map('to_utf8', array_map('nl2br', array_map('html_attr_tags_ok', $jdata)));
 ?>
 <script>
-	$j(function(){
+	$j(function() {
 		var tn = 'credits';
 
 		/* data for selected record, or defaults if none is selected */
@@ -19,7 +19,7 @@
 		var cache = AppGini.cache[tn];
 
 		/* saved value for convention */
-		cache.addCheck(function(u, d){
+		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'convention' && d.id == data.convention.id)
 				return { results: [ data.convention ], more: false, elapsed: 0.01 };
@@ -27,7 +27,7 @@
 		});
 
 		/* saved value for ligne_budgetaire */
-		cache.addCheck(function(u, d){
+		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'ligne_budgetaire' && d.id == data.ligne_budgetaire.id)
 				return { results: [ data.ligne_budgetaire ], more: false, elapsed: 0.01 };
@@ -35,7 +35,7 @@
 		});
 
 		/* saved value for ligne_credit */
-		cache.addCheck(function(u, d){
+		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'ligne_credit' && d.id == data.ligne_credit.id)
 				return { results: [ data.ligne_credit ], more: false, elapsed: 0.01 };

@@ -320,3 +320,14 @@
 
 	/* Added in AppGini 5.75 */
 	$Translation['rebuild fields'] = 'You could try fixing this issue from the Admin Area : Utilities menu : Rebuild Fields.';
+
+	/* Added in AppGini 5.80 */
+	$Translation['group added successfully'] = 'Group added successfully';
+	$Translation['group updated successfully'] = 'Changes to this group saved successfully';
+	$Translation['saved filter link'] = 'Saved filter link';
+	$Translation['app documentation'] = 'App documentation';
+	$Translation['back to top'] = 'Back to top';
+	$Translation['check all'] = 'Check all';
+	$Translation['uncheck all'] = 'Uncheck all';
+	$Translation['invert checks'] = 'Invert checks';
+	$Translation['set all to x'] = 'Set all to <x>';

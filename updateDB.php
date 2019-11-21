@@ -2,11 +2,11 @@
 	// check this file's MD5 to make sure it wasn't called before
 	$prevMD5=@implode('', @file(dirname(__FILE__).'/setup.md5'));
 	$thisMD5=md5(@implode('', @file("./updateDB.php")));
-	if($thisMD5==$prevMD5){
+	if($thisMD5==$prevMD5) {
 		$setupAlreadyRun=true;
 	}else{
 		// set up tables
-		if(!isset($silent)){
+		if(!isset($silent)) {
 			$silent=true;
 		}
 
@@ -25,7 +25,7 @@
 		setupIndexes('rubriques', array('convention'));
 		setupTable('ventilation', "create table if not exists `ventilation` (   `id` INT unsigned not null auto_increment , primary key (`id`), `convention` INT unsigned not null , `rubrique` INT unsigned null , `intitule` VARCHAR(100) not null , `notes` TEXT null , `accorde` DOUBLE(10,2) unsigned null , `reserve` DECIMAL(10,2) null , `liquide` DECIMAL(10,2) null , `utilise` DECIMAL(10,2) null , `reste_engager` DECIMAL(10,2) null , `reservation_salaire` DECIMAL(10,2) null , `reste_depenser` DECIMAL(10,2) null , `prop_ua` DECIMAL(10,1) null ) CHARSET utf8", $silent);
 		setupIndexes('ventilation', array('convention','rubrique'));
-		setupTable('recrutements', "create table if not exists `recrutements` (   `id` INT unsigned not null auto_increment , primary key (`id`), `convention` INT unsigned not null , `intitule` VARCHAR(100) not null , `beneficiaire` INT unsigned null , `date_debut` DATE null , `date_fin` DATE null , `duree` MEDIUMINT unsigned null , `ligne_budgetaire` INT unsigned not null , `ventilation` INT unsigned null , `notes` TEXT null , `previsionnel` DOUBLE(10,2) unsigned null , `depense` DECIMAL(10,2) null , `reservation_salaire` DECIMAL(10,2) null , `prop_dp` DECIMAL(10,2) null ) CHARSET utf8", $silent);
+		setupTable('recrutements', "create table if not exists `recrutements` (   `id` INT unsigned not null auto_increment , primary key (`id`), `convention` INT unsigned not null , `intitule` VARCHAR(100) not null , `beneficiaire` INT unsigned null , `date_debut` DATE null , `date_fin` DATE null , `duree` MEDIUMINT unsigned null , `ligne_budgetaire` INT unsigned null , `ventilation` INT unsigned null , `notes` TEXT null , `previsionnel` DOUBLE(10,2) unsigned null , `depense` DECIMAL(10,2) null , `reservation_salaire` DECIMAL(10,2) null , `prop_dp` DECIMAL(10,2) null ) CHARSET utf8", $silent);
 		setupIndexes('recrutements', array('convention','beneficiaire','ligne_budgetaire','ventilation'));
 		setupTable('depenses', "create table if not exists `depenses` (   `id` INT unsigned not null auto_increment , primary key (`id`), `convention` INT unsigned not null , `ligne_budgetaire` INT unsigned null , `ligne_credit` INT unsigned not null , `date` DATE not null , `intitule` VARCHAR(100) not null , `contrat` INT unsigned null , `beneficiaire` INT unsigned null , `montant` DECIMAL(10,2) not null , `statut` VARCHAR(40) not null default '1' , `ventilation` INT unsigned null , `notes` TEXT null ) CHARSET utf8", $silent);
 		setupIndexes('depenses', array('convention','ligne_budgetaire','ligne_credit','contrat','beneficiaire','ventilation'));
@@ -36,55 +36,55 @@
 
 
 		// save MD5
-		if($fp=@fopen(dirname(__FILE__).'/setup.md5', 'w')){
+		if($fp=@fopen(dirname(__FILE__).'/setup.md5', 'w')) {
 			fwrite($fp, $thisMD5);
 			fclose($fp);
 		}
 	}
 
 
-	function setupIndexes($tableName, $arrFields){
-		if(!is_array($arrFields)){
+	function setupIndexes($tableName, $arrFields) {
+		if(!is_array($arrFields)) {
 			return false;
 		}
 
-		foreach($arrFields as $fieldName){
-			if(!$res=@db_query("SHOW COLUMNS FROM `$tableName` like '$fieldName'")){
+		foreach($arrFields as $fieldName) {
+			if(!$res=@db_query("SHOW COLUMNS FROM `$tableName` like '$fieldName'")) {
 				continue;
 			}
-			if(!$row=@db_fetch_assoc($res)){
+			if(!$row=@db_fetch_assoc($res)) {
 				continue;
 			}
-			if($row['Key']==''){
+			if($row['Key']=='') {
 				@db_query("ALTER TABLE `$tableName` ADD INDEX `$fieldName` (`$fieldName`)");
 			}
 		}
 	}
 
 
-	function setupTable($tableName, $createSQL='', $silent=true, $arrAlter=''){
+	function setupTable($tableName, $createSQL='', $silent=true, $arrAlter='') {
 		global $Translation;
 		ob_start();
 
 		echo '<div style="padding: 5px; border-bottom:solid 1px silver; font-family: verdana, arial; font-size: 10px;">';
 
 		// is there a table rename query?
-		if(is_array($arrAlter)){
+		if(is_array($arrAlter)) {
 			$matches=array();
-			if(preg_match("/ALTER TABLE `(.*)` RENAME `$tableName`/", $arrAlter[0], $matches)){
+			if(preg_match("/ALTER TABLE `(.*)` RENAME `$tableName`/", $arrAlter[0], $matches)) {
 				$oldTableName=$matches[1];
 			}
 		}
 
-		if($res=@db_query("select count(1) from `$tableName`")){ // table already exists
-			if($row = @db_fetch_array($res)){
+		if($res=@db_query("select count(1) from `$tableName`")) { // table already exists
+			if($row = @db_fetch_array($res)) {
 				echo str_replace("<TableName>", $tableName, str_replace("<NumRecords>", $row[0],$Translation["table exists"]));
-				if(is_array($arrAlter)){
+				if(is_array($arrAlter)) {
 					echo '<br>';
-					foreach($arrAlter as $alter){
-						if($alter!=''){
+					foreach($arrAlter as $alter) {
+						if($alter!='') {
 							echo "$alter ... ";
-							if(!@db_query($alter)){
+							if(!@db_query($alter)) {
 								echo '<span class="label label-danger">' . $Translation['failed'] . '</span>';
 								echo '<div class="text-danger">' . $Translation['mysql said'] . ' ' . db_error(db_link()) . '</div>';
 							}else{
@@ -100,12 +100,12 @@
 			}
 		}else{ // given tableName doesn't exist
 
-			if($oldTableName!=''){ // if we have a table rename query
-				if($ro=@db_query("select count(1) from `$oldTableName`")){ // if old table exists, rename it.
+			if($oldTableName!='') { // if we have a table rename query
+				if($ro=@db_query("select count(1) from `$oldTableName`")) { // if old table exists, rename it.
 					$renameQuery=array_shift($arrAlter); // get and remove rename query
 
 					echo "$renameQuery ... ";
-					if(!@db_query($renameQuery)){
+					if(!@db_query($renameQuery)) {
 						echo '<span class="label label-danger">' . $Translation['failed'] . '</span>';
 						echo '<div class="text-danger">' . $Translation['mysql said'] . ' ' . db_error(db_link()) . '</div>';
 					}else{
@@ -118,7 +118,7 @@
 				}
 			}else{ // tableName doesn't exist and no rename, so just create the table
 				echo str_replace("<TableName>", $tableName, $Translation["creating table"]);
-				if(!@db_query($createSQL)){
+				if(!@db_query($createSQL)) {
 					echo '<span class="label label-danger">' . $Translation['failed'] . '</span>';
 					echo '<div class="text-danger">' . $Translation['mysql said'] . db_error(db_link()) . '</div>';
 				}else{
@@ -131,7 +131,7 @@
 
 		$out=ob_get_contents();
 		ob_end_clean();
-		if(!$silent){
+		if(!$silent) {
 			echo $out;
 		}
 	}

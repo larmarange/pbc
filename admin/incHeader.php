@@ -32,9 +32,9 @@
 
 			// VALIDATION FUNCTIONS FOR VARIOUS PAGES
 
-			function jsValidateEmail(address){
+			function jsValidateEmail(address) {
 				var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-				if(reg.test(address) == false){
+				if(reg.test(address) == false) {
 					modal_window({ message: '<div class="alert alert-danger">'+"<?php echo $Translation['invalid email'];?>"+'</div>', title: "<?php echo $Translation['error'] ; ?>"  });
 					return false;
 				}else{
@@ -42,14 +42,14 @@
 				}
 			}
 
-			function jsShowWait(){
+			function jsShowWait() {
 				return window.confirm("<?php echo $Translation['sending mails']; ?>");
 			}
 
-			function jsValidateAdminSettings(){
+			function jsValidateAdminSettings() {
 				var p1=document.getElementById('adminPassword').value;
 				var p2=document.getElementById('confirmPassword').value;
-				if(p1=='' || p1==p2){
+				if(p1=='' || p1==p2) {
 					return jsValidateEmail(document.getElementById('senderEmail').value);
 				}else{
 					modal_window({ message: '<div class="alert alert-error">'+"<?php echo $Translation['password mismatch']; ?>"+'</div>', title: "<?php echo $Translation['error'] ; ?>" });
@@ -57,50 +57,50 @@
 				}
 			}
 
-			function jsConfirmTransfer(){
+			function jsConfirmTransfer() {
 				var confirmMessage;
 				var sg=document.getElementById('sourceGroupID').options[document.getElementById('sourceGroupID').selectedIndex].text;
 				var sm=document.getElementById('sourceMemberID').value;
 				var dg=document.getElementById('destinationGroupID').options[document.getElementById('destinationGroupID').selectedIndex].text;
-				if(document.getElementById('destinationMemberID')){
+				if(document.getElementById('destinationMemberID')) {
 					var dm=document.getElementById('destinationMemberID').value;
 				}
-				if(document.getElementById('dontMoveMembers')){
+				if(document.getElementById('dontMoveMembers')) {
 					var dmm=document.getElementById('dontMoveMembers').checked;
 				}
-				if(document.getElementById('moveMembers')){
+				if(document.getElementById('moveMembers')) {
 					var mm=document.getElementById('moveMembers').checked;
 				}
 
 				//confirm('sg='+sg+'\n'+'sm='+sm+'\n'+'dg='+dg+'\n'+'dm='+dm+'\n'+'mm='+mm+'\n'+'dmm='+dmm+'\n');
 
-				if(dmm && !dm){
-					modal_window({ message: '<div>'+"<?php echo $Translation['complete step 4']; ?>"+'</div>', title: "<?php echo $Translation['info']; ?>", close: function(){ /* */ jQuery('#destinationMemberID').focus(); } });
+				if(dmm && !dm) {
+					modal_window({ message: '<div>'+"<?php echo $Translation['complete step 4']; ?>"+'</div>', title: "<?php echo $Translation['info']; ?>", close: function() { /* */ jQuery('#destinationMemberID').focus(); } });
 					return false;
 				}
 
-				if(mm && sm!='-1'){
+				if(mm && sm!='-1') {
 
 					confirmMessage = "<?php echo $Translation['sure move member']; ?>";
 					confirmMessage = confirmMessage.replace(/<MEMBER>/, sm).replace(/<OLDGROUP>/, sg).replace(/<NEWGROUP>/, dg);
 					return window.confirm(confirmMessage);
 
 				}
-				if((dmm || dm) && sm!='-1'){
+				if((dmm || dm) && sm!='-1') {
 
 					confirmMessage = "<?php echo $Translation['sure move data of member']; ?>";
 					confirmMessage = confirmMessage.replace(/<OLDMEMBER>/, sm).replace(/<OLDGROUP>/, sg).replace(/<NEWMEMBER>/, dm).replace(/<NEWGROUP>/, dg);                 
 					return window.confirm(confirmMessage);
 				}
 
-				if(mm){
+				if(mm) {
 
 					confirmMessage = "<?php echo $Translation['sure move all members']; ?>";
 					confirmMessage = confirmMessage.replace(/<OLDGROUP>/, sg).replace(/<NEWGROUP>/, dg);
 					return window.confirm(confirmMessage);
 				}
 
-				if(dmm){
+				if(dmm) {
 
 
 					confirmMessage = "<?php echo $Translation['sure move data of all members']; ?>";
@@ -109,20 +109,20 @@
 				}
 			}
 
-			function showDialog(dialogId){
+			function showDialog(dialogId) {
 				$j('.dialog-box').addClass('hidden-block');
 				$j('#' + dialogId).removeClass('hidden-block');
 				return false
 			};
 
-			function hideDialogs(){
+			function hideDialogs() {
 				$j('.dialog-box').addClass('hidden-block');
 				return false
 			};
 
 
-			$j(function(){
-				$j('input[type=submit],input[type=button]').each(function(){
+			$j(function() {
+				$j('input[type=submit],input[type=button]').each(function() {
 					var label = $j(this).val();
 					var onclick = $j(this).attr('onclick') || '';
 					var name = $j(this).attr('name') || '';
@@ -219,11 +219,11 @@
 
 					<?php $plugins = get_plugins(); ?>
 
-					<?php if(count($plugins)){ ?>
+					<?php if(count($plugins)) { ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-plus"></i> <?php echo $Translation["plugins"] ; ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<?php foreach($plugins as $plugin){ ?>
+								<?php foreach($plugins as $plugin) { ?>
 									<?php
 										$plugin_icon = '';
 										if($plugin['glyphicon']) $plugin_icon = "<i class=\"glyphicon glyphicon-{$plugin['glyphicon']}\"></i> ";
@@ -244,10 +244,10 @@
 		</nav>
 		<script>
 			/* periodically check if user is still signed in */
-			setInterval(function(){
+			setInterval(function() {
 				$j.ajax({
 					url: '<?php echo PREPEND_PATH; ?>ajax_check_login.php',
-					success: function(username){
+					success: function(username) {
 						if(!username.length) window.location = '<?php echo PREPEND_PATH; ?>index.php?signIn=1';
 					}
 				});
@@ -270,7 +270,7 @@
 		?>
 		<div class="alert alert-danger">
 			<p><strong><?php echo $Translation["attention"] ; ?></strong></p>
-			<p><?php if($adminConfig['adminUsername'] == 'admin'){
+			<p><?php if($adminConfig['adminUsername'] == 'admin') {
 					echo $Translation['security risk admin'];
 			}else{
 					echo $Translation['security risk'];

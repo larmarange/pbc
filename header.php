@@ -40,7 +40,7 @@
 		<script src="<?php echo PREPEND_PATH; ?>resources/datepicker/js/datepicker.packed.js"></script>
 		<script src="<?php echo PREPEND_PATH; ?>resources/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
 		<script src="<?php echo PREPEND_PATH; ?>common.js.php"></script>
-		<?php if(isset($x->TableName) && is_file(dirname(__FILE__) . "/hooks/{$x->TableName}-tv.js")){ ?>
+		<?php if(isset($x->TableName) && is_file(dirname(__FILE__) . "/hooks/{$x->TableName}-tv.js")) { ?>
 			<script src="<?php echo PREPEND_PATH; ?>hooks/<?php echo $x->TableName; ?>-tv.js"></script>
 		<?php } ?>
 
@@ -49,12 +49,12 @@
 		<div class="container theme-bootstrap theme-3d theme-compact">
 			<?php if(function_exists('handle_maintenance')) echo handle_maintenance(true); ?>
 
-			<?php if(!$_REQUEST['Embedded']){ ?>
+			<?php if(!$_REQUEST['Embedded']) { ?>
 				<?php if(function_exists('htmlUserBar')) echo htmlUserBar(); ?>
 				<div style="height: 70px;" class="hidden-print"></div>
 			<?php } ?>
 
-			<?php if(class_exists('Notification')) echo Notification::placeholder(); ?>
+			<?php if(class_exists('Notification', false)) echo Notification::placeholder(); ?>
 
 			<!-- process notifications -->
 			<?php $notification_margin = ($_REQUEST['Embedded'] ? '15px 0px' : '-15px 0 -45px'); ?>
@@ -62,6 +62,6 @@
 				<?php if(function_exists('showNotifications')) echo showNotifications(); ?>
 			</div>
 
-			<?php if(!defined('APPGINI_SETUP') && is_file(dirname(__FILE__) . '/hooks/header-extras.php')){ include(dirname(__FILE__).'/hooks/header-extras.php'); } ?>
+			<?php if(!defined('APPGINI_SETUP') && is_file(dirname(__FILE__) . '/hooks/header-extras.php')) { include(dirname(__FILE__).'/hooks/header-extras.php'); } ?>
 			<!-- Add header template below here .. -->
 

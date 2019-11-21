@@ -3,7 +3,7 @@
 	$jdata = array_map('to_utf8', array_map('nl2br', array_map('html_attr_tags_ok', $jdata)));
 ?>
 <script>
-	$j(function(){
+	$j(function() {
 		var tn = 'conventions';
 
 		/* data for selected record, or defaults if none is selected */
@@ -17,7 +17,7 @@
 		var cache = AppGini.cache[tn];
 
 		/* saved value for porteur */
-		cache.addCheck(function(u, d){
+		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
 			if(d.t == tn && d.f == 'porteur' && d.id == data.porteur.id)
 				return { results: [ data.porteur ], more: false, elapsed: 0.01 };
