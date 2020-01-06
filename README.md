@@ -12,6 +12,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 - ajout des rubriques de ventilation
 - calcul des salaires restant à verser par ligne budgétaire
+- ajout d'un script de sauvegarde automatique de la base de données (https://forums.appgini.com/phpbb/viewtopic.php?f=4&t=3341)
 
 ### v0.2
 
