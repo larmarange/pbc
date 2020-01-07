@@ -16,6 +16,7 @@
 			'statut' => array('appgini' => 'VARCHAR(40) not null default \'active\' '),
 			'bailleur' => array('appgini' => 'VARCHAR(40) null '),
 			'porteur' => array('appgini' => 'INT unsigned null '),
+			'chef_projet' => array('appgini' => 'INT unsigned null '),
 			'date_reponse' => array('appgini' => 'DATE null '),
 			'demande' => array('appgini' => 'DECIMAL(10,2) null '),
 			'date_debut' => array('appgini' => 'DATE null '),

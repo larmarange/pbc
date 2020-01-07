@@ -1971,7 +1971,7 @@
 		 */
 		$parents = array(
 			'conventions' => array(
-				'personnes' => array('porteur'),
+				'personnes' => array('chef_projet', 'porteur'),
 			),
 			'budgets' => array(
 				'conventions' => array('convention'),

@@ -21,6 +21,8 @@ function conventions_insert() {
 		if($data['bailleur'] == empty_lookup_value) { $data['bailleur'] = ''; }
 	$data['porteur'] = $_REQUEST['porteur'];
 		if($data['porteur'] == empty_lookup_value) { $data['porteur'] = ''; }
+	$data['chef_projet'] = $_REQUEST['chef_projet'];
+		if($data['chef_projet'] == empty_lookup_value) { $data['chef_projet'] = ''; }
 	$data['date_reponse'] = intval($_REQUEST['date_reponseYear']) . '-' . intval($_REQUEST['date_reponseMonth']) . '-' . intval($_REQUEST['date_reponseDay']);
 	$data['date_reponse'] = parseMySQLDate($data['date_reponse'], '');
 	$data['demande'] = $_REQUEST['demande'];
@@ -367,6 +369,8 @@ function conventions_update($selected_id) {
 		if($data['bailleur'] == empty_lookup_value) { $data['bailleur'] = ''; }
 	$data['porteur'] = makeSafe($_REQUEST['porteur']);
 		if($data['porteur'] == empty_lookup_value) { $data['porteur'] = ''; }
+	$data['chef_projet'] = makeSafe($_REQUEST['chef_projet']);
+		if($data['chef_projet'] == empty_lookup_value) { $data['chef_projet'] = ''; }
 	$data['date_reponse'] = intval($_REQUEST['date_reponseYear']) . '-' . intval($_REQUEST['date_reponseMonth']) . '-' . intval($_REQUEST['date_reponseDay']);
 	$data['date_reponse'] = parseMySQLDate($data['date_reponse'], '');
 	$data['demande'] = makeSafe($_REQUEST['demande']);
@@ -428,7 +432,7 @@ function conventions_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `date_reponse`=' . (($data['date_reponse'] !== '' && $data['date_reponse'] !== NULL) ? "'{$data['date_reponse']}'" : 'NULL') . ', `demande`=' . (($data['demande'] !== '' && $data['demande'] !== NULL) ? "'{$data['demande']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `verse_hfg`=' . (($data['verse_hfg'] !== '' && $data['verse_hfg'] !== NULL) ? "'{$data['verse_hfg']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `conventions` set       `nom`=' . (($data['nom'] !== '' && $data['nom'] !== NULL) ? "'{$data['nom']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `bailleur`=' . (($data['bailleur'] !== '' && $data['bailleur'] !== NULL) ? "'{$data['bailleur']}'" : 'NULL') . ', `porteur`=' . (($data['porteur'] !== '' && $data['porteur'] !== NULL) ? "'{$data['porteur']}'" : 'NULL') . ', `chef_projet`=' . (($data['chef_projet'] !== '' && $data['chef_projet'] !== NULL) ? "'{$data['chef_projet']}'" : 'NULL') . ', `date_reponse`=' . (($data['date_reponse'] !== '' && $data['date_reponse'] !== NULL) ? "'{$data['date_reponse']}'" : 'NULL') . ', `demande`=' . (($data['demande'] !== '' && $data['demande'] !== NULL) ? "'{$data['demande']}'" : 'NULL') . ', `date_debut`=' . (($data['date_debut'] !== '' && $data['date_debut'] !== NULL) ? "'{$data['date_debut']}'" : 'NULL') . ', `date_fin`=' . (($data['date_fin'] !== '' && $data['date_fin'] !== NULL) ? "'{$data['date_fin']}'" : 'NULL') . ', `duree`=' . (($data['duree'] !== '' && $data['duree'] !== NULL) ? "'{$data['duree']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde_hfg`=' . (($data['accorde_hfg'] !== '' && $data['accorde_hfg'] !== NULL) ? "'{$data['accorde_hfg']}'" : 'NULL') . ', `frais_gestion`=' . (($data['frais_gestion'] !== '' && $data['frais_gestion'] !== NULL) ? "'{$data['frais_gestion']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `verse_hfg`=' . (($data['verse_hfg'] !== '' && $data['verse_hfg'] !== NULL) ? "'{$data['verse_hfg']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . ', `budget_nv`=' . (($data['budget_nv'] !== '' && $data['budget_nv'] !== NULL) ? "'{$data['budget_nv']}'" : 'NULL') . ', `depenses_nv`=' . (($data['depenses_nv'] !== '' && $data['depenses_nv'] !== NULL) ? "'{$data['depenses_nv']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="conventions_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -471,6 +475,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	}
 
 	$filterer_porteur = thisOr(undo_magic_quotes($_REQUEST['filterer_porteur']), '');
+	$filterer_chef_projet = thisOr(undo_magic_quotes($_REQUEST['filterer_chef_projet']), '');
 
 	// populate filterers, starting from children to grand-parents
 
@@ -494,6 +499,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$combo_statut->AllowNull = false;
 	// combobox: porteur
 	$combo_porteur = new DataCombo;
+	// combobox: chef_projet
+	$combo_chef_projet = new DataCombo;
 	// combobox: date_reponse
 	$combo_date_reponse = new DateCombo;
 	$combo_date_reponse->DateFormat = "dmy";
@@ -547,6 +554,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		}
 		$combo_statut->SelectedData = $row['statut'];
 		$combo_porteur->SelectedData = $row['porteur'];
+		$combo_chef_projet->SelectedData = $row['chef_projet'];
 		$combo_date_reponse->DefaultDate = $row['date_reponse'];
 		$combo_date_debut->DefaultDate = $row['date_debut'];
 		$combo_date_fin->DefaultDate = $row['date_fin'];
@@ -556,10 +564,13 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	} else {
 		$combo_statut->SelectedText = ( $_REQUEST['FilterField'][1]=='3' && $_REQUEST['FilterOperator'][1]=='<=>' ? (get_magic_quotes_gpc() ? stripslashes($_REQUEST['FilterValue'][1]) : $_REQUEST['FilterValue'][1]) : "active");
 		$combo_porteur->SelectedData = $filterer_porteur;
+		$combo_chef_projet->SelectedData = $filterer_chef_projet;
 	}
 	$combo_statut->Render();
 	$combo_porteur->HTML = '<span id="porteur-container' . $rnd1 . '"></span><input type="hidden" name="porteur" id="porteur' . $rnd1 . '" value="' . html_attr($combo_porteur->SelectedData) . '">';
 	$combo_porteur->MatchText = '<span id="porteur-container-readonly' . $rnd1 . '"></span><input type="hidden" name="porteur" id="porteur' . $rnd1 . '" value="' . html_attr($combo_porteur->SelectedData) . '">';
+	$combo_chef_projet->HTML = '<span id="chef_projet-container' . $rnd1 . '"></span><input type="hidden" name="chef_projet" id="chef_projet' . $rnd1 . '" value="' . html_attr($combo_chef_projet->SelectedData) . '">';
+	$combo_chef_projet->MatchText = '<span id="chef_projet-container-readonly' . $rnd1 . '"></span><input type="hidden" name="chef_projet" id="chef_projet' . $rnd1 . '" value="' . html_attr($combo_chef_projet->SelectedData) . '">';
 
 	ob_start();
 	?>
@@ -567,10 +578,12 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	<script>
 		// initial lookup values
 		AppGini.current_porteur__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['porteur'] : $filterer_porteur); ?>"};
+		AppGini.current_chef_projet__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['chef_projet'] : $filterer_chef_projet); ?>"};
 
 		jQuery(function() {
 			setTimeout(function() {
 				if(typeof(porteur_reload__RAND__) == 'function') porteur_reload__RAND__();
+				if(typeof(chef_projet_reload__RAND__) == 'function') chef_projet_reload__RAND__();
 			}, 10); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
 		});
 		function porteur_reload__RAND__() {
@@ -650,6 +663,83 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		<?php } ?>
 
 		}
+		function chef_projet_reload__RAND__() {
+		<?php if(($AllowUpdate || $AllowInsert) && !$dvprint) { ?>
+
+			$j("#chef_projet-container__RAND__").select2({
+				/* initial default value */
+				initSelection: function(e, c) {
+					$j.ajax({
+						url: 'ajax_combo.php',
+						dataType: 'json',
+						data: { id: AppGini.current_chef_projet__RAND__.value, t: 'conventions', f: 'chef_projet' },
+						success: function(resp) {
+							c({
+								id: resp.results[0].id,
+								text: resp.results[0].text
+							});
+							$j('[name="chef_projet"]').val(resp.results[0].id);
+							$j('[id=chef_projet-container-readonly__RAND__]').html('<span id="chef_projet-match-text">' + resp.results[0].text + '</span>');
+							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=personnes_view_parent]').hide(); }else{ $j('.btn[id=personnes_view_parent]').show(); }
+
+
+							if(typeof(chef_projet_update_autofills__RAND__) == 'function') chef_projet_update_autofills__RAND__();
+						}
+					});
+				},
+				width: '100%',
+				formatNoMatches: function(term) { /* */ return '<?php echo addslashes($Translation['No matches found!']); ?>'; },
+				minimumResultsForSearch: 5,
+				loadMorePadding: 200,
+				ajax: {
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					cache: true,
+					data: function(term, page) { /* */ return { s: term, p: page, t: 'conventions', f: 'chef_projet' }; },
+					results: function(resp, page) { /* */ return resp; }
+				},
+				escapeMarkup: function(str) { /* */ return str; }
+			}).on('change', function(e) {
+				AppGini.current_chef_projet__RAND__.value = e.added.id;
+				AppGini.current_chef_projet__RAND__.text = e.added.text;
+				$j('[name="chef_projet"]').val(e.added.id);
+				if(e.added.id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=personnes_view_parent]').hide(); }else{ $j('.btn[id=personnes_view_parent]').show(); }
+
+
+				if(typeof(chef_projet_update_autofills__RAND__) == 'function') chef_projet_update_autofills__RAND__();
+			});
+
+			if(!$j("#chef_projet-container__RAND__").length) {
+				$j.ajax({
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					data: { id: AppGini.current_chef_projet__RAND__.value, t: 'conventions', f: 'chef_projet' },
+					success: function(resp) {
+						$j('[name="chef_projet"]').val(resp.results[0].id);
+						$j('[id=chef_projet-container-readonly__RAND__]').html('<span id="chef_projet-match-text">' + resp.results[0].text + '</span>');
+						if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=personnes_view_parent]').hide(); }else{ $j('.btn[id=personnes_view_parent]').show(); }
+
+						if(typeof(chef_projet_update_autofills__RAND__) == 'function') chef_projet_update_autofills__RAND__();
+					}
+				});
+			}
+
+		<?php }else{ ?>
+
+			$j.ajax({
+				url: 'ajax_combo.php',
+				dataType: 'json',
+				data: { id: AppGini.current_chef_projet__RAND__.value, t: 'conventions', f: 'chef_projet' },
+				success: function(resp) {
+					$j('[id=chef_projet-container__RAND__], [id=chef_projet-container-readonly__RAND__]').html('<span id="chef_projet-match-text">' + resp.results[0].text + '</span>');
+					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=personnes_view_parent]').hide(); }else{ $j('.btn[id=personnes_view_parent]').show(); }
+
+					if(typeof(chef_projet_update_autofills__RAND__) == 'function') chef_projet_update_autofills__RAND__();
+				}
+			});
+		<?php } ?>
+
+		}
 	</script>
 	<?php
 
@@ -713,6 +803,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$jsReadOnly .= "\tjQuery('#bailleur').replaceWith('<div class=\"form-control-static\" id=\"bailleur\">' + (jQuery('#bailleur').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#porteur').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#porteur_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
+		$jsReadOnly .= "\tjQuery('#chef_projet').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
+		$jsReadOnly .= "\tjQuery('#chef_projet_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#date_reponse').prop('readonly', true);\n";
 		$jsReadOnly .= "\tjQuery('#date_reponseDay, #date_reponseMonth, #date_reponseYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#demande').replaceWith('<div class=\"form-control-static\" id=\"demande\">' + (jQuery('#demande').val() || '') + '</div>');\n";
@@ -755,6 +847,9 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%COMBO(porteur)%%>', $combo_porteur->HTML, $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(porteur)%%>', $combo_porteur->MatchText, $templateCode);
 	$templateCode = str_replace('<%%URLCOMBOTEXT(porteur)%%>', urlencode($combo_porteur->MatchText), $templateCode);
+	$templateCode = str_replace('<%%COMBO(chef_projet)%%>', $combo_chef_projet->HTML, $templateCode);
+	$templateCode = str_replace('<%%COMBOTEXT(chef_projet)%%>', $combo_chef_projet->MatchText, $templateCode);
+	$templateCode = str_replace('<%%URLCOMBOTEXT(chef_projet)%%>', urlencode($combo_chef_projet->MatchText), $templateCode);
 	$templateCode = str_replace('<%%COMBO(date_reponse)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_reponse->GetHTML(true) . '</div>' : $combo_date_reponse->GetHTML()), $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(date_reponse)%%>', $combo_date_reponse->GetHTML(true), $templateCode);
 	$templateCode = str_replace('<%%COMBO(date_debut)%%>', ($selected_id && !$arrPerm[3] ? '<div class="form-control-static">' . $combo_date_debut->GetHTML(true) . '</div>' : $combo_date_debut->GetHTML()), $templateCode);
@@ -763,7 +858,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%COMBOTEXT(date_fin)%%>', $combo_date_fin->GetHTML(true), $templateCode);
 
 	/* lookup fields array: 'lookup field name' => array('parent table name', 'lookup field caption') */
-	$lookup_fields = array('porteur' => array('personnes', 'Porteur'), );
+	$lookup_fields = array('porteur' => array('personnes', 'Porteur'), 'chef_projet' => array('personnes', 'Chef de Projet'), );
 	foreach($lookup_fields as $luf => $ptfc) {
 		$pt_perm = getTablePermissions($ptfc[0]);
 
@@ -784,6 +879,7 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%UPLOADFILE(statut)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(bailleur)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(porteur)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(chef_projet)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date_reponse)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(demande)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date_debut)%%>', '', $templateCode);
@@ -828,6 +924,9 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(porteur)%%>', safe_html($urow['porteur']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(porteur)%%>', html_attr($row['porteur']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(porteur)%%>', urlencode($urow['porteur']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(chef_projet)%%>', safe_html($urow['chef_projet']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(chef_projet)%%>', html_attr($row['chef_projet']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(chef_projet)%%>', urlencode($urow['chef_projet']), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_reponse)%%>', @date('d/m/Y', @strtotime(html_attr($row['date_reponse']))), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(date_reponse)%%>', urlencode(@date('d/m/Y', @strtotime(html_attr($urow['date_reponse'])))), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(demande)%%>', safe_html($urow['demande']), $templateCode);
@@ -918,6 +1017,8 @@ function conventions_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$templateCode = str_replace('<%%URLVALUE(bailleur)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(porteur)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(porteur)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(chef_projet)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(chef_projet)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(date_reponse)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(date_reponse)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(demande)%%>', '', $templateCode);

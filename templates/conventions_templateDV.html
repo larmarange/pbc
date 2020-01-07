@@ -59,6 +59,16 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
+					<label for="chef_projet" class="control-label col-lg-3" data-parent_link="view_parent_modal">Chef de Projet <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#chef_projet-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="chef_projet-description"><div class="alert alert-info">(si applicable)</div></span>
+
+						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(chef_projet)%%><%%PLINK(chef_projet)%%><%%ADDNEW(personnes)%%></div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
 					<label for="date_reponse" class="control-label col-lg-3">Date r&#233;ponse <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#date_reponse-description"></i></label>
 					<div class="col-lg-9">
 						<span class="help-block collapse" id="date_reponse-description"><div class="alert alert-info">Si la convention a &#233;t&#233; soumise pour financement &#224; un appel d'offres, indiquez la date (approximative) o&#249; une r&#233;ponse est attendue</div></span>

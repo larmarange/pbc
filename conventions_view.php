@@ -27,6 +27,7 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* Chef de Projet */" => "chef_projet",
 		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
@@ -61,32 +62,33 @@
 		3 => 3,
 		4 => 4,
 		5 => '`personnes1`.`nom`',
-		6 => '`conventions`.`date_reponse`',
-		7 => '`conventions`.`demande`',
-		8 => '`conventions`.`date_debut`',
-		9 => '`conventions`.`date_fin`',
-		10 => '`conventions`.`duree`',
-		11 => 11,
-		12 => '`conventions`.`accorde_hfg`',
-		13 => '`conventions`.`frais_gestion`',
-		14 => '`conventions`.`accorde`',
-		15 => '`conventions`.`verse`',
-		16 => '`conventions`.`reste_verser`',
-		17 => '`conventions`.`verse_hfg`',
-		18 => '`conventions`.`ouvert`',
-		19 => '`conventions`.`reste_ouvrir`',
-		20 => '`conventions`.`reserve`',
-		21 => '`conventions`.`liquide`',
-		22 => '`conventions`.`utilise`',
-		23 => '`conventions`.`disponible`',
-		24 => '`conventions`.`reste_engager`',
-		25 => '`conventions`.`reservation_salaire`',
-		26 => '`conventions`.`reste_depenser`',
-		27 => '`conventions`.`prop_uo`',
-		28 => '`conventions`.`prop_uv`',
-		29 => '`conventions`.`prop_ua`',
-		30 => '`conventions`.`budget_nv`',
-		31 => '`conventions`.`depenses_nv`',
+		6 => '`personnes2`.`nom`',
+		7 => '`conventions`.`date_reponse`',
+		8 => '`conventions`.`demande`',
+		9 => '`conventions`.`date_debut`',
+		10 => '`conventions`.`date_fin`',
+		11 => '`conventions`.`duree`',
+		12 => 12,
+		13 => '`conventions`.`accorde_hfg`',
+		14 => '`conventions`.`frais_gestion`',
+		15 => '`conventions`.`accorde`',
+		16 => '`conventions`.`verse`',
+		17 => '`conventions`.`reste_verser`',
+		18 => '`conventions`.`verse_hfg`',
+		19 => '`conventions`.`ouvert`',
+		20 => '`conventions`.`reste_ouvrir`',
+		21 => '`conventions`.`reserve`',
+		22 => '`conventions`.`liquide`',
+		23 => '`conventions`.`utilise`',
+		24 => '`conventions`.`disponible`',
+		25 => '`conventions`.`reste_engager`',
+		26 => '`conventions`.`reservation_salaire`',
+		27 => '`conventions`.`reste_depenser`',
+		28 => '`conventions`.`prop_uo`',
+		29 => '`conventions`.`prop_uv`',
+		30 => '`conventions`.`prop_ua`',
+		31 => '`conventions`.`budget_nv`',
+		32 => '`conventions`.`depenses_nv`',
 	);
 
 	// Fields that can be displayed in the csv file
@@ -96,6 +98,7 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* Chef de Projet */" => "chef_projet",
 		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
@@ -130,6 +133,7 @@
 		"`conventions`.`statut`" => "Statut",
 		"`conventions`.`bailleur`" => "Bailleur(s)",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "Porteur",
+		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* Chef de Projet */" => "Chef de Projet",
 		"`conventions`.`date_reponse`" => "Date r&#233;ponse",
 		"`conventions`.`demande`" => "Demand&#233;",
 		"`conventions`.`date_debut`" => "D&#233;but",
@@ -165,6 +169,7 @@
 		"`conventions`.`statut`" => "statut",
 		"`conventions`.`bailleur`" => "bailleur",
 		"IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') /* Porteur */" => "porteur",
+		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* Chef de Projet */" => "chef_projet",
 		"if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'')" => "date_reponse",
 		"CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "demande",
 		"if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'')" => "date_debut",
@@ -194,9 +199,9 @@
 	);
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = array('porteur' => 'Porteur', );
+	$x->filterers = array('porteur' => 'Porteur', 'chef_projet' => 'Chef de Projet', );
 
-	$x->QueryFrom = "`conventions` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`conventions`.`porteur` ";
+	$x->QueryFrom = "`conventions` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`conventions`.`porteur` LEFT JOIN `personnes` as personnes2 ON `personnes2`.`id`=`conventions`.`chef_projet` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 
@@ -226,10 +231,10 @@
 	$x->DefaultSortField = '`conventions`.`date_fin`';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Nom", "Statut", "Bailleur(s)", "Porteur", "Date r&#233;ponse", "Demand&#233;", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Accord&#233; hors FG", "Frais de Gestion", "Total Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Vers&#233; hors FG", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233; (R+L)", "Disponible (O-U)", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/O (%)", "U/V (%)", "U/A (%, hors FG)", "Budget non ventil&#233;", "D&#233;penses non ventil&#233;es");
-	$x->ColFieldName = array('nom', 'statut', 'bailleur', 'porteur', 'date_reponse', 'demande', 'date_debut', 'date_fin', 'duree', 'accorde_hfg', 'frais_gestion', 'accorde', 'verse', 'reste_verser', 'verse_hfg', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_uo', 'prop_uv', 'prop_ua', 'budget_nv', 'depenses_nv');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Nom", "Statut", "Bailleur(s)", "Porteur", "Chef de Projet", "Date r&#233;ponse", "Demand&#233;", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Accord&#233; hors FG", "Frais de Gestion", "Total Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Vers&#233; hors FG", "Ouvert", "Reste &#224; Ouvrir", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233; (R+L)", "Disponible (O-U)", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/O (%)", "U/V (%)", "U/A (%, hors FG)", "Budget non ventil&#233;", "D&#233;penses non ventil&#233;es");
+	$x->ColFieldName = array('nom', 'statut', 'bailleur', 'porteur', 'chef_projet', 'date_reponse', 'demande', 'date_debut', 'date_fin', 'duree', 'accorde_hfg', 'frais_gestion', 'accorde', 'verse', 'reste_verser', 'verse_hfg', 'ouvert', 'reste_ouvrir', 'reserve', 'liquide', 'utilise', 'disponible', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_uo', 'prop_uv', 'prop_ua', 'budget_nv', 'depenses_nv');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/conventions_templateTV.html';
@@ -295,6 +300,7 @@
 			$sumRow .= '<td class="conventions-statut"></td>';
 			$sumRow .= '<td class="conventions-bailleur"></td>';
 			$sumRow .= '<td class="conventions-porteur"></td>';
+			$sumRow .= '<td class="conventions-chef_projet"></td>';
 			$sumRow .= '<td class="conventions-date_reponse"></td>';
 			$sumRow .= "<td class=\"conventions-demande text-right\">{$row[0]}</td>";
 			$sumRow .= '<td class="conventions-date_debut"></td>';
