@@ -26,7 +26,9 @@
 .table_view td, .tab-content td {white-space: normal;}
 .table_view td.text-right, .tab-content td.text-right {white-space: nowrap;}
 
+/* plus d'espace pour les tables enfants */
 .children-tabs {margin: 0 10px;}
+
 </style>
 
 <script type="text/javascript">
@@ -52,4 +54,5 @@
           })
       }, 1000);
   })
+
 </script>

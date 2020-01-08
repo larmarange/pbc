@@ -48,3 +48,23 @@ $j(function () {
 	$j('#prop_uv').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_uv').val()) + '</div>'));
 	$j('#prop_ua').hide().after($j('<div class="form-control-static" style="text-align: right; max-width: 100px;">' + percent($j('#prop_ua').val()) + '</div>'));
 });
+
+// boutons vérification des dépenses
+$j(function () {
+  $j("#conventions_dv_action_buttons").append(
+    '<div class="btn-group-vertical btn-group-lg" style="width: 100%;">' +
+  	  '<button type="button" class="btn btn-default btn-lg" onclick="depenses_verifiees()" style="white-space: normal; font-size: 1.1em;"><i class="glyphicon glyphicon-check"></i> Marquer toutes les dépenses comme <strong>vérifiées</strong></button>' +
+      '<button type="button" class="btn btn-default btn-lg" onclick="depenses_non_verifiees()" style="white-space: normal; font-size: 1.1em;"><i class="glyphicon glyphicon-unchecked"></i> Marquer toutes les dépenses comme <strong>non vérifiées</strong></button>' +
+  	'</div>'
+  );
+});
+
+function depenses_verifiees(){
+  var id_convention = $j("[name=SelectedID]").val();
+  $j.get("verification_depenses.php?verifiees=oui&convention=" + id_convention, depensesConventionGetRecords({ Verb: 'reload' }));
+}
+
+function depenses_non_verifiees(){
+  var id_convention = $j("[name=SelectedID]").val();
+  $j.get("verification_depenses.php?verifiees=non&convention=" + id_convention, depensesConventionGetRecords({ Verb: 'reload' }));
+}

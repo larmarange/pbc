@@ -15,6 +15,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 - ajout d'un script de sauvegarde automatique de la base de données (https://forums.appgini.com/phpbb/viewtopic.php?f=4&t=3341)
 - ajout d'un champ 'chef de projet' sur les fiches convention
 - ajout d'un champ 'référence' sur les dépenses
+- ajout d'un système de vérification des dépenses
 
 
 ### v0.2

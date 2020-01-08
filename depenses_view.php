@@ -35,6 +35,7 @@
 		"`depenses`.`statut`" => "statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"if(CHAR_LENGTH(`depenses`.`notes`)>80, concat(left(`depenses`.`notes`,80),' ...'), `depenses`.`notes`)" => "notes",
+		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(
@@ -51,6 +52,7 @@
 		11 => 11,
 		12 => '`ventilation1`.`intitule`',
 		13 => 13,
+		14 => 14,
 	);
 
 	// Fields that can be displayed in the csv file
@@ -68,6 +70,7 @@
 		"`depenses`.`statut`" => "statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "notes",
+		"`depenses`.`verifie`" => "verifie",
 	);
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = array(
@@ -84,6 +87,7 @@
 		"`depenses`.`statut`" => "Statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "Ventilation Budg&#233;taire",
 		"`depenses`.`notes`" => "Notes",
+		"`depenses`.`verifie`" => "V&#233;rifi&#233;e ?",
 	);
 
 	// Fields that can be quick searched
@@ -101,6 +105,7 @@
 		"`depenses`.`statut`" => "statut",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "Notes",
+		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
 	);
 
 	// Lookup fields that can be used as filterers
@@ -136,10 +141,10 @@
 	$x->DefaultSortField = '`depenses`.`date`';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Statut", "Ventilation Budg&#233;taire", "Notes");
-	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'statut', 'ventilation', 'notes');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Statut", "Ventilation Budg&#233;taire", "Notes", "V&#233;rifi&#233;e ?");
+	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'statut', 'ventilation', 'notes', 'verifie');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/depenses_templateTV.html';
@@ -213,6 +218,7 @@
 			$sumRow .= '<td class="depenses-statut"></td>';
 			$sumRow .= '<td class="depenses-ventilation"></td>';
 			$sumRow .= '<td class="depenses-notes"></td>';
+			$sumRow .= '<td class="depenses-verifie"></td>';
 			$sumRow .= '</tr>';
 
 			$x->HTML = str_replace('<!-- tv data below -->', '', $x->HTML);

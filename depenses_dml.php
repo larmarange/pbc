@@ -37,6 +37,8 @@ function depenses_insert() {
 		if($data['ventilation'] == empty_lookup_value) { $data['ventilation'] = ''; }
 	$data['notes'] = $_REQUEST['notes'];
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
+	$data['verifie'] = $_REQUEST['verifie'];
+		if($data['verifie'] == empty_lookup_value) { $data['verifie'] = ''; }
 	if($data['convention']== '') {
 		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Convention': " . $Translation['field not null'] . '<br><br>';
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
@@ -216,6 +218,8 @@ function depenses_update($selected_id) {
 		if($data['ventilation'] == empty_lookup_value) { $data['ventilation'] = ''; }
 	$data['notes'] = makeSafe($_REQUEST['notes']);
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
+	$data['verifie'] = makeSafe($_REQUEST['verifie']);
+		if($data['verifie'] == empty_lookup_value) { $data['verifie'] = ''; }
 	$data['selectedID'] = makeSafe($selected_id);
 
 	// hook: depenses_before_update
@@ -225,7 +229,7 @@ function depenses_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `depenses` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ligne_credit`=' . (($data['ligne_credit'] !== '' && $data['ligne_credit'] !== NULL) ? "'{$data['ligne_credit']}'" : 'NULL') . ', `date`=' . (($data['date'] !== '' && $data['date'] !== NULL) ? "'{$data['date']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `reference`=' . (($data['reference'] !== '' && $data['reference'] !== NULL) ? "'{$data['reference']}'" : 'NULL') . ', `contrat`=' . (($data['contrat'] !== '' && $data['contrat'] !== NULL) ? "'{$data['contrat']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `montant`=' . (($data['montant'] !== '' && $data['montant'] !== NULL) ? "'{$data['montant']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `depenses` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ligne_credit`=' . (($data['ligne_credit'] !== '' && $data['ligne_credit'] !== NULL) ? "'{$data['ligne_credit']}'" : 'NULL') . ', `date`=' . (($data['date'] !== '' && $data['date'] !== NULL) ? "'{$data['date']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `reference`=' . (($data['reference'] !== '' && $data['reference'] !== NULL) ? "'{$data['reference']}'" : 'NULL') . ', `contrat`=' . (($data['contrat'] !== '' && $data['contrat'] !== NULL) ? "'{$data['contrat']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `montant`=' . (($data['montant'] !== '' && $data['montant'] !== NULL) ? "'{$data['montant']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `verifie`=' . (($data['verifie'] !== '' && $data['verifie'] !== NULL) ? "'{$data['verifie']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="depenses_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -947,6 +951,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$jsReadOnly .= "\tjQuery('input[name=statut]').parent().html('<div class=\"form-control-static\">' + jQuery('input[name=statut]:checked').next().text() + '</div>')\n";
 		$jsReadOnly .= "\tjQuery('#ventilation').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#ventilation_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
+		$jsReadOnly .= "\tjQuery('#verifie').prop('disabled', true);\n";
 		$jsReadOnly .= "\tjQuery('.select2-container').hide();\n";
 
 		$noUploads = true;
@@ -1009,6 +1014,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 	$templateCode = str_replace('<%%UPLOADFILE(statut)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(ventilation)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(notes)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(verifie)%%>', '', $templateCode);
 
 	// process values
 	if($selected_id) {
@@ -1054,6 +1060,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		}
 		$templateCode = str_replace('<%%VALUE(notes)%%>', nl2br($row['notes']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(notes)%%>', urlencode($urow['notes']), $templateCode);
+		$templateCode = str_replace('<%%CHECKED(verifie)%%>', ($row['verifie'] ? "checked" : ""), $templateCode);
 	}else{
 		$templateCode = str_replace('<%%VALUE(id)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode(''), $templateCode);
@@ -1080,6 +1087,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$templateCode = str_replace('<%%VALUE(ventilation)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ventilation)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5"></textarea>', $templateCode);
+		$templateCode = str_replace('<%%CHECKED(verifie)%%>', '', $templateCode);
 	}
 
 	// process translations

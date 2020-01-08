@@ -156,6 +156,7 @@
 			'statut' => array('appgini' => 'VARCHAR(40) not null default \'1\' '),
 			'ventilation' => array('appgini' => 'INT unsigned null '),
 			'notes' => array('appgini' => 'TEXT null '),
+			'verifie' => array('appgini' => 'VARCHAR(40) null '),
 		),
 		'fichiers' => array(
 			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
