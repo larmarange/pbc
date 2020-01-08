@@ -28,6 +28,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",
+		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
@@ -44,11 +45,12 @@
 		5 => '`depenses`.`date`',
 		6 => 6,
 		7 => 7,
-		8 => '`personnes2`.`nom`',
-		9 => '`depenses`.`montant`',
-		10 => 10,
-		11 => '`ventilation1`.`intitule`',
-		12 => 12,
+		8 => 8,
+		9 => '`personnes2`.`nom`',
+		10 => '`depenses`.`montant`',
+		11 => 11,
+		12 => '`ventilation1`.`intitule`',
+		13 => 13,
 	);
 
 	// Fields that can be displayed in the csv file
@@ -59,6 +61,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",
+		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
@@ -74,6 +77,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "Ligne de cr&#233;dit (CFI) - Exercice",
 		"`depenses`.`date`" => "Date",
 		"`depenses`.`intitule`" => "Intitul&#233;",
+		"`depenses`.`reference`" => "R&#233;ference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "Contrat (si salaire)",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "B&#233;n&#233;ficiaire",
 		"`depenses`.`montant`" => "Montant",
@@ -90,6 +94,7 @@
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",
+		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
@@ -131,10 +136,10 @@
 	$x->DefaultSortField = '`depenses`.`date`';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Statut", "Ventilation Budg&#233;taire", "Notes");
-	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'contrat', 'beneficiaire', 'montant', 'statut', 'ventilation', 'notes');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Statut", "Ventilation Budg&#233;taire", "Notes");
+	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'statut', 'ventilation', 'notes');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/depenses_templateTV.html';
@@ -201,6 +206,7 @@
 			$sumRow .= '<td class="depenses-ligne_credit"></td>';
 			$sumRow .= '<td class="depenses-date"></td>';
 			$sumRow .= '<td class="depenses-intitule"></td>';
+			$sumRow .= '<td class="depenses-reference"></td>';
 			$sumRow .= '<td class="depenses-contrat"></td>';
 			$sumRow .= '<td class="depenses-beneficiaire"></td>';
 			$sumRow .= "<td class=\"depenses-montant text-right\">{$row[0]}</td>";

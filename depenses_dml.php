@@ -23,6 +23,8 @@ function depenses_insert() {
 	$data['date'] = parseMySQLDate($data['date'], '1');
 	$data['intitule'] = $_REQUEST['intitule'];
 		if($data['intitule'] == empty_lookup_value) { $data['intitule'] = ''; }
+	$data['reference'] = $_REQUEST['reference'];
+		if($data['reference'] == empty_lookup_value) { $data['reference'] = ''; }
 	$data['contrat'] = $_REQUEST['contrat'];
 		if($data['contrat'] == empty_lookup_value) { $data['contrat'] = ''; }
 	$data['beneficiaire'] = $_REQUEST['beneficiaire'];
@@ -190,6 +192,8 @@ function depenses_update($selected_id) {
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
+	$data['reference'] = makeSafe($_REQUEST['reference']);
+		if($data['reference'] == empty_lookup_value) { $data['reference'] = ''; }
 	$data['contrat'] = makeSafe($_REQUEST['contrat']);
 		if($data['contrat'] == empty_lookup_value) { $data['contrat'] = ''; }
 	$data['beneficiaire'] = makeSafe($_REQUEST['beneficiaire']);
@@ -221,7 +225,7 @@ function depenses_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `depenses` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ligne_credit`=' . (($data['ligne_credit'] !== '' && $data['ligne_credit'] !== NULL) ? "'{$data['ligne_credit']}'" : 'NULL') . ', `date`=' . (($data['date'] !== '' && $data['date'] !== NULL) ? "'{$data['date']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `contrat`=' . (($data['contrat'] !== '' && $data['contrat'] !== NULL) ? "'{$data['contrat']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `montant`=' . (($data['montant'] !== '' && $data['montant'] !== NULL) ? "'{$data['montant']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `depenses` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `ligne_credit`=' . (($data['ligne_credit'] !== '' && $data['ligne_credit'] !== NULL) ? "'{$data['ligne_credit']}'" : 'NULL') . ', `date`=' . (($data['date'] !== '' && $data['date'] !== NULL) ? "'{$data['date']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `reference`=' . (($data['reference'] !== '' && $data['reference'] !== NULL) ? "'{$data['reference']}'" : 'NULL') . ', `contrat`=' . (($data['contrat'] !== '' && $data['contrat'] !== NULL) ? "'{$data['contrat']}'" : 'NULL') . ', `beneficiaire`=' . (($data['beneficiaire'] !== '' && $data['beneficiaire'] !== NULL) ? "'{$data['beneficiaire']}'" : 'NULL') . ', `montant`=' . (($data['montant'] !== '' && $data['montant'] !== NULL) ? "'{$data['montant']}'" : 'NULL') . ', `statut`=' . (($data['statut'] !== '' && $data['statut'] !== NULL) ? "'{$data['statut']}'" : 'NULL') . ', `ventilation`=' . (($data['ventilation'] !== '' && $data['ventilation'] !== NULL) ? "'{$data['ventilation']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="depenses_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -298,7 +302,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 	$combo_beneficiaire = new DataCombo;
 	// combobox: statut
 	$combo_statut = new Combo;
-	$combo_statut->ListType = 0;
+	$combo_statut->ListType = 2;
 	$combo_statut->MultipleSeparator = ', ';
 	$combo_statut->ListBoxHeight = 10;
 	$combo_statut->RadiosPerLine = 1;
@@ -358,7 +362,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$combo_ligne_credit->SelectedData = $filterer_ligne_credit;
 		$combo_contrat->SelectedData = $filterer_contrat;
 		$combo_beneficiaire->SelectedData = $filterer_beneficiaire;
-		$combo_statut->SelectedText = ( $_REQUEST['FilterField'][1]=='10' && $_REQUEST['FilterOperator'][1]=='<=>' ? (get_magic_quotes_gpc() ? stripslashes($_REQUEST['FilterValue'][1]) : $_REQUEST['FilterValue'][1]) : "1");
+		$combo_statut->SelectedText = ( $_REQUEST['FilterField'][1]=='11' && $_REQUEST['FilterOperator'][1]=='<=>' ? (get_magic_quotes_gpc() ? stripslashes($_REQUEST['FilterValue'][1]) : $_REQUEST['FilterValue'][1]) : "1");
 		$combo_ventilation->SelectedData = $filterer_ventilation;
 	}
 	$combo_convention->HTML = '<span id="convention-container' . $rnd1 . '"></span><input type="hidden" name="convention" id="convention' . $rnd1 . '" value="' . html_attr($combo_convention->SelectedData) . '">';
@@ -934,12 +938,13 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$jsReadOnly .= "\tjQuery('#date').prop('readonly', true);\n";
 		$jsReadOnly .= "\tjQuery('#dateDay, #dateMonth, #dateYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#intitule').replaceWith('<div class=\"form-control-static\" id=\"intitule\">' + (jQuery('#intitule').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#reference').replaceWith('<div class=\"form-control-static\" id=\"reference\">' + (jQuery('#reference').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#contrat').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#contrat_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#beneficiaire').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#beneficiaire_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#montant').replaceWith('<div class=\"form-control-static\" id=\"montant\">' + (jQuery('#montant').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('#statut').replaceWith('<div class=\"form-control-static\" id=\"statut\">' + (jQuery('#statut').val() || '') + '</div>'); jQuery('#statut-multi-selection-help').hide();\n";
+		$jsReadOnly .= "\tjQuery('input[name=statut]').parent().html('<div class=\"form-control-static\">' + jQuery('input[name=statut]:checked').next().text() + '</div>')\n";
 		$jsReadOnly .= "\tjQuery('#ventilation').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#ventilation_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('.select2-container').hide();\n";
@@ -997,6 +1002,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 	$templateCode = str_replace('<%%UPLOADFILE(ligne_credit)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(date)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(intitule)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(reference)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(contrat)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(beneficiaire)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(montant)%%>', '', $templateCode);
@@ -1023,6 +1029,9 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(intitule)%%>', safe_html($urow['intitule']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(intitule)%%>', html_attr($row['intitule']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(intitule)%%>', urlencode($urow['intitule']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(reference)%%>', safe_html($urow['reference']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reference)%%>', html_attr($row['reference']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reference)%%>', urlencode($urow['reference']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(contrat)%%>', safe_html($urow['contrat']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(contrat)%%>', html_attr($row['contrat']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(contrat)%%>', urlencode($urow['contrat']), $templateCode);
@@ -1058,6 +1067,8 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$templateCode = str_replace('<%%URLVALUE(date)%%>', urlencode('1'), $templateCode);
 		$templateCode = str_replace('<%%VALUE(intitule)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(intitule)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(reference)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(reference)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(contrat)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(contrat)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(beneficiaire)%%>', '', $templateCode);

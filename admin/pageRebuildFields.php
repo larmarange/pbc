@@ -149,6 +149,7 @@
 			'ligne_credit' => array('appgini' => 'INT unsigned not null '),
 			'date' => array('appgini' => 'DATE not null '),
 			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
+			'reference' => array('appgini' => 'VARCHAR(40) null '),
 			'contrat' => array('appgini' => 'INT unsigned null '),
 			'beneficiaire' => array('appgini' => 'INT unsigned null '),
 			'montant' => array('appgini' => 'DECIMAL(10,2) not null '),
