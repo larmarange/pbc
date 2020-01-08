@@ -13,7 +13,7 @@ function addThousandsSpaces(nStr)
 
 function currency(x) {
 	if (x >= 0) {col = 'black';} else {col = 'red';}
-	return '<span style="color:' + col + ';">' + addThousandsSpaces(x) + '</span>';
+	return '<span style="color:' + col + ';">' + addThousandsSpaces(x) + '&nbsp;&euro;</span>';
 }
 
 function percent(x) {
