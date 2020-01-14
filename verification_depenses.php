@@ -11,7 +11,6 @@
             same as PHP built-in mysqli_fetch_assoc() function
     */
     $curr_dir = dirname(__FILE__);
-    var_dump($curr_dir);
     include("{$curr_dir}/defaultLang.php");
     include("{$curr_dir}/language.php");
     include("{$curr_dir}/lib.php");

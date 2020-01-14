@@ -306,7 +306,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 	$combo_beneficiaire = new DataCombo;
 	// combobox: statut
 	$combo_statut = new Combo;
-	$combo_statut->ListType = 2;
+	$combo_statut->ListType = 0;
 	$combo_statut->MultipleSeparator = ', ';
 	$combo_statut->ListBoxHeight = 10;
 	$combo_statut->RadiosPerLine = 1;
@@ -948,7 +948,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 		$jsReadOnly .= "\tjQuery('#beneficiaire').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#beneficiaire_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#montant').replaceWith('<div class=\"form-control-static\" id=\"montant\">' + (jQuery('#montant').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('input[name=statut]').parent().html('<div class=\"form-control-static\">' + jQuery('input[name=statut]:checked').next().text() + '</div>')\n";
+		$jsReadOnly .= "\tjQuery('#statut').replaceWith('<div class=\"form-control-static\" id=\"statut\">' + (jQuery('#statut').val() || '') + '</div>'); jQuery('#statut-multi-selection-help').hide();\n";
 		$jsReadOnly .= "\tjQuery('#ventilation').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#ventilation_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#verifie').prop('disabled', true);\n";
