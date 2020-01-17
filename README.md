@@ -21,7 +21,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 - ajout d'un système de vérification des dépenses
 - ajout d'un lien vers la documentation
 
-En raison de la rupture de compatibilité entre la version 0.2 et la version 0.3, exécutez le code SQL ci-dessous juste avant de procéder à la mise à jour. Sinon, il vous perdrez l'information concernant le statut des dépenses (elles seront toutes considérées comme non liquidées).
+En raison de la rupture de compatibilité entre la version 0.2 et la version 0.3, exécutez le code SQL ci-dessous juste avant de procéder à la mise à jour. Sinon, vous perdrez l'information concernant le statut des dépenses (elles seront toutes considérées comme non liquidées).
 
 ```sql
 ALTER TABLE depenses ADD COLUMN `liquidee` TINYINT null AFTER statut
