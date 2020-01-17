@@ -62,4 +62,11 @@ $j(function(){
                '<a href="https://github.com/larmarange/pbc/wiki" class="btn btn-default navbar-btn" target="_blank">Aide / Documentation</a>' +
            '</ul>'
     );
+    if ($j(location).attr('href').includes("ceped.org")) {
+      $j('nav .navbar-collapse').append(
+             '<ul class="nav navbar-nav">' +
+                 '<a href="https://analytics.huma-num.fr/Joseph.Larmarange/map2pbc/" class="btn btn-default navbar-btn" target="_blank">map2pbc</a>' +
+             '</ul>'
+      );
+    }
 })</script>
