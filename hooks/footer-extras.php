@@ -55,4 +55,11 @@
       }, 1000);
   })
 
-</script>
+// Lien documentation dans le menu
+$j(function(){
+    $j('nav .navbar-collapse').append(
+           '<ul class="nav navbar-nav">' +
+               '<a href="https://github.com/larmarange/pbc/wiki" class="btn btn-default navbar-btn" target="_blank">Aide / Documentation</a>' +
+           '</ul>'
+    );
+})</script>
