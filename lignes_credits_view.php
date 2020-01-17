@@ -29,7 +29,7 @@
 		"`lignes_credits`.`exercice`" => "exercice",
 		"if(CHAR_LENGTH(`lignes_credits`.`notes`)>80, concat(left(`lignes_credits`.`notes`,80),' ...'), `lignes_credits`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "ouvert",
-		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "disponible",
@@ -44,7 +44,7 @@
 		5 => 5,
 		6 => 6,
 		7 => '`lignes_credits`.`ouvert`',
-		8 => '`lignes_credits`.`reserve`',
+		8 => '`lignes_credits`.`non_liquide`',
 		9 => '`lignes_credits`.`liquide`',
 		10 => '`lignes_credits`.`utilise`',
 		11 => '`lignes_credits`.`disponible`',
@@ -60,7 +60,7 @@
 		"`lignes_credits`.`exercice`" => "exercice",
 		"`lignes_credits`.`notes`" => "notes",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "ouvert",
-		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "disponible",
@@ -75,7 +75,7 @@
 		"`lignes_credits`.`exercice`" => "Exercice",
 		"`lignes_credits`.`notes`" => "Notes",
 		"`lignes_credits`.`ouvert`" => "Ouvert",
-		"`lignes_credits`.`reserve`" => "R&#233;serv&#233;",
+		"`lignes_credits`.`non_liquide`" => "Non Liquid&#233;",
 		"`lignes_credits`.`liquide`" => "Liquid&#233;",
 		"`lignes_credits`.`utilise`" => "Utilis&#233;",
 		"`lignes_credits`.`disponible`" => "Disponible",
@@ -91,7 +91,7 @@
 		"`lignes_credits`.`exercice`" => "exercice",
 		"`lignes_credits`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "ouvert",
-		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`lignes_credits`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "disponible",
@@ -130,8 +130,8 @@
 	$x->PrimaryKey = "`lignes_credits`.`id`";
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Intitul&#233; / CFI", "Exercice", "Notes", "Ouvert", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "U/O (%)");
-	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'intitule', 'exercice', 'notes', 'ouvert', 'reserve', 'liquide', 'utilise', 'disponible', 'prop_uo');
+	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Intitul&#233; / CFI", "Exercice", "Notes", "Ouvert", "Non Liquid&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "U/O (%)");
+	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'intitule', 'exercice', 'notes', 'ouvert', 'non_liquide', 'liquide', 'utilise', 'disponible', 'prop_uo');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
 	// template paths below are based on the app main directory
@@ -189,7 +189,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`ouvert`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`reserve`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`disponible`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`ouvert`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`ouvert`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`non_liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`non_liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`lignes_credits`.`disponible`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`lignes_credits`.`disponible`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
@@ -200,7 +200,7 @@
 			$sumRow .= '<td class="lignes_credits-exercice"></td>';
 			$sumRow .= '<td class="lignes_credits-notes"></td>';
 			$sumRow .= "<td class=\"lignes_credits-ouvert text-right\">{$row[0]}</td>";
-			$sumRow .= "<td class=\"lignes_credits-reserve text-right\">{$row[1]}</td>";
+			$sumRow .= "<td class=\"lignes_credits-non_liquide text-right\">{$row[1]}</td>";
 			$sumRow .= "<td class=\"lignes_credits-liquide text-right\">{$row[2]}</td>";
 			$sumRow .= "<td class=\"lignes_credits-utilise text-right\">{$row[3]}</td>";
 			$sumRow .= "<td class=\"lignes_credits-disponible text-right\">{$row[4]}</td>";

@@ -27,7 +27,7 @@
 		"`rubriques`.`intitule`" => "intitule",
 		"if(CHAR_LENGTH(`rubriques`.`notes`)>80, concat(left(`rubriques`.`notes`,80),' ...'), `rubriques`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`rubriques`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -42,7 +42,7 @@
 		3 => 3,
 		4 => 4,
 		5 => '`rubriques`.`accorde`',
-		6 => '`rubriques`.`reserve`',
+		6 => '`rubriques`.`non_liquide`',
 		7 => '`rubriques`.`liquide`',
 		8 => '`rubriques`.`utilise`',
 		9 => '`rubriques`.`reste_engager`',
@@ -58,7 +58,7 @@
 		"`rubriques`.`intitule`" => "intitule",
 		"`rubriques`.`notes`" => "notes",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`rubriques`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -73,7 +73,7 @@
 		"`rubriques`.`intitule`" => "Intitul&#233;",
 		"`rubriques`.`notes`" => "Notes",
 		"`rubriques`.`accorde`" => "Pr&#233;visionnel",
-		"`rubriques`.`reserve`" => "R&#233;serv&#233;",
+		"`rubriques`.`non_liquide`" => "Non Liquid&#233;",
 		"`rubriques`.`liquide`" => "Liquid&#233;",
 		"`rubriques`.`utilise`" => "Utilis&#233;",
 		"`rubriques`.`reste_engager`" => "Reste &#224; Engager",
@@ -89,7 +89,7 @@
 		"`rubriques`.`intitule`" => "intitule",
 		"`rubriques`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`rubriques`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -132,8 +132,8 @@
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
-	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
+	$x->ColCaption = array("Convention", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "Non Liquid&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
+	$x->ColFieldName = array('convention', 'intitule', 'notes', 'accorde', 'non_liquide', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
 	// template paths below are based on the app main directory
@@ -191,7 +191,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`rubriques`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`accorde`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reserve`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reste_engager`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reste_depenser`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`rubriques`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`accorde`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`non_liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`non_liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reste_engager`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`rubriques`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`rubriques`.`reste_depenser`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
@@ -200,7 +200,7 @@
 			$sumRow .= '<td class="rubriques-intitule"></td>';
 			$sumRow .= '<td class="rubriques-notes"></td>';
 			$sumRow .= "<td class=\"rubriques-accorde text-right\">{$row[0]}</td>";
-			$sumRow .= "<td class=\"rubriques-reserve text-right\">{$row[1]}</td>";
+			$sumRow .= "<td class=\"rubriques-non_liquide text-right\">{$row[1]}</td>";
 			$sumRow .= "<td class=\"rubriques-liquide text-right\">{$row[2]}</td>";
 			$sumRow .= "<td class=\"rubriques-utilise text-right\">{$row[3]}</td>";
 			$sumRow .= "<td class=\"rubriques-reste_engager text-right\">{$row[4]}</td>";

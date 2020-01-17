@@ -25,8 +25,8 @@ function lignes_credits_insert() {
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['ouvert'] = $_REQUEST['ouvert'];
 		if($data['ouvert'] == empty_lookup_value) { $data['ouvert'] = ''; }
-	$data['reserve'] = $_REQUEST['reserve'];
-		if($data['reserve'] == empty_lookup_value) { $data['reserve'] = ''; }
+	$data['non_liquide'] = $_REQUEST['non_liquide'];
+		if($data['non_liquide'] == empty_lookup_value) { $data['non_liquide'] = ''; }
 	$data['liquide'] = $_REQUEST['liquide'];
 		if($data['liquide'] == empty_lookup_value) { $data['liquide'] = ''; }
 	$data['utilise'] = $_REQUEST['utilise'];
@@ -209,8 +209,8 @@ function lignes_credits_update($selected_id) {
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['ouvert'] = makeSafe($_REQUEST['ouvert']);
 		if($data['ouvert'] == empty_lookup_value) { $data['ouvert'] = ''; }
-	$data['reserve'] = makeSafe($_REQUEST['reserve']);
-		if($data['reserve'] == empty_lookup_value) { $data['reserve'] = ''; }
+	$data['non_liquide'] = makeSafe($_REQUEST['non_liquide']);
+		if($data['non_liquide'] == empty_lookup_value) { $data['non_liquide'] = ''; }
 	$data['liquide'] = makeSafe($_REQUEST['liquide']);
 		if($data['liquide'] == empty_lookup_value) { $data['liquide'] = ''; }
 	$data['utilise'] = makeSafe($_REQUEST['utilise']);
@@ -228,7 +228,7 @@ function lignes_credits_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `lignes_credits` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `exercice`=' . (($data['exercice'] !== '' && $data['exercice'] !== NULL) ? "'{$data['exercice']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `lignes_credits` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `ligne_budgetaire`=' . (($data['ligne_budgetaire'] !== '' && $data['ligne_budgetaire'] !== NULL) ? "'{$data['ligne_budgetaire']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `exercice`=' . (($data['exercice'] !== '' && $data['exercice'] !== NULL) ? "'{$data['exercice']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `non_liquide`=' . (($data['non_liquide'] !== '' && $data['non_liquide'] !== NULL) ? "'{$data['non_liquide']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="lignes_credits_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -558,7 +558,7 @@ function lignes_credits_form($selected_id = '', $AllowUpdate = 1, $AllowInsert =
 		$jsReadOnly .= "\tjQuery('#intitule').replaceWith('<div class=\"form-control-static\" id=\"intitule\">' + (jQuery('#intitule').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#exercice').replaceWith('<div class=\"form-control-static\" id=\"exercice\">' + (jQuery('#exercice').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#ouvert').replaceWith('<div class=\"form-control-static\" id=\"ouvert\">' + (jQuery('#ouvert').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('#reserve').replaceWith('<div class=\"form-control-static\" id=\"reserve\">' + (jQuery('#reserve').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#non_liquide').replaceWith('<div class=\"form-control-static\" id=\"non_liquide\">' + (jQuery('#non_liquide').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#liquide').replaceWith('<div class=\"form-control-static\" id=\"liquide\">' + (jQuery('#liquide').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#utilise').replaceWith('<div class=\"form-control-static\" id=\"utilise\">' + (jQuery('#utilise').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#disponible').replaceWith('<div class=\"form-control-static\" id=\"disponible\">' + (jQuery('#disponible').val() || '') + '</div>');\n";
@@ -603,7 +603,7 @@ function lignes_credits_form($selected_id = '', $AllowUpdate = 1, $AllowInsert =
 	$templateCode = str_replace('<%%UPLOADFILE(exercice)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(notes)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(ouvert)%%>', '', $templateCode);
-	$templateCode = str_replace('<%%UPLOADFILE(reserve)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(non_liquide)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(liquide)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(utilise)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(disponible)%%>', '', $templateCode);
@@ -636,9 +636,9 @@ function lignes_credits_form($selected_id = '', $AllowUpdate = 1, $AllowInsert =
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(ouvert)%%>', safe_html($urow['ouvert']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(ouvert)%%>', html_attr($row['ouvert']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ouvert)%%>', urlencode($urow['ouvert']), $templateCode);
-		if( $dvprint) $templateCode = str_replace('<%%VALUE(reserve)%%>', safe_html($urow['reserve']), $templateCode);
-		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reserve)%%>', html_attr($row['reserve']), $templateCode);
-		$templateCode = str_replace('<%%URLVALUE(reserve)%%>', urlencode($urow['reserve']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(non_liquide)%%>', safe_html($urow['non_liquide']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(non_liquide)%%>', html_attr($row['non_liquide']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(non_liquide)%%>', urlencode($urow['non_liquide']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(liquide)%%>', safe_html($urow['liquide']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(liquide)%%>', html_attr($row['liquide']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(liquide)%%>', urlencode($urow['liquide']), $templateCode);
@@ -665,8 +665,8 @@ function lignes_credits_form($selected_id = '', $AllowUpdate = 1, $AllowInsert =
 		$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5"></textarea>', $templateCode);
 		$templateCode = str_replace('<%%VALUE(ouvert)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(ouvert)%%>', urlencode(''), $templateCode);
-		$templateCode = str_replace('<%%VALUE(reserve)%%>', '', $templateCode);
-		$templateCode = str_replace('<%%URLVALUE(reserve)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(non_liquide)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(non_liquide)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(liquide)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(liquide)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(utilise)%%>', '', $templateCode);

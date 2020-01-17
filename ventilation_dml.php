@@ -23,8 +23,8 @@ function ventilation_insert() {
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['accorde'] = $_REQUEST['accorde'];
 		if($data['accorde'] == empty_lookup_value) { $data['accorde'] = ''; }
-	$data['reserve'] = $_REQUEST['reserve'];
-		if($data['reserve'] == empty_lookup_value) { $data['reserve'] = ''; }
+	$data['non_liquide'] = $_REQUEST['non_liquide'];
+		if($data['non_liquide'] == empty_lookup_value) { $data['non_liquide'] = ''; }
 	$data['liquide'] = $_REQUEST['liquide'];
 		if($data['liquide'] == empty_lookup_value) { $data['liquide'] = ''; }
 	$data['utilise'] = $_REQUEST['utilise'];
@@ -199,8 +199,8 @@ function ventilation_update($selected_id) {
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['accorde'] = makeSafe($_REQUEST['accorde']);
 		if($data['accorde'] == empty_lookup_value) { $data['accorde'] = ''; }
-	$data['reserve'] = makeSafe($_REQUEST['reserve']);
-		if($data['reserve'] == empty_lookup_value) { $data['reserve'] = ''; }
+	$data['non_liquide'] = makeSafe($_REQUEST['non_liquide']);
+		if($data['non_liquide'] == empty_lookup_value) { $data['non_liquide'] = ''; }
 	$data['liquide'] = makeSafe($_REQUEST['liquide']);
 		if($data['liquide'] == empty_lookup_value) { $data['liquide'] = ''; }
 	$data['utilise'] = makeSafe($_REQUEST['utilise']);
@@ -222,7 +222,7 @@ function ventilation_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `rubrique`=' . (($data['rubrique'] !== '' && $data['rubrique'] !== NULL) ? "'{$data['rubrique']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `reserve`=' . (($data['reserve'] !== '' && $data['reserve'] !== NULL) ? "'{$data['reserve']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `ventilation` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `rubrique`=' . (($data['rubrique'] !== '' && $data['rubrique'] !== NULL) ? "'{$data['rubrique']}'" : 'NULL') . ', `intitule`=' . (($data['intitule'] !== '' && $data['intitule'] !== NULL) ? "'{$data['intitule']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `non_liquide`=' . (($data['non_liquide'] !== '' && $data['non_liquide'] !== NULL) ? "'{$data['non_liquide']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="ventilation_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -551,7 +551,7 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$jsReadOnly .= "\tjQuery('#rubrique_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#intitule').replaceWith('<div class=\"form-control-static\" id=\"intitule\">' + (jQuery('#intitule').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#accorde').replaceWith('<div class=\"form-control-static\" id=\"accorde\">' + (jQuery('#accorde').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('#reserve').replaceWith('<div class=\"form-control-static\" id=\"reserve\">' + (jQuery('#reserve').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\tjQuery('#non_liquide').replaceWith('<div class=\"form-control-static\" id=\"non_liquide\">' + (jQuery('#non_liquide').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#liquide').replaceWith('<div class=\"form-control-static\" id=\"liquide\">' + (jQuery('#liquide').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#utilise').replaceWith('<div class=\"form-control-static\" id=\"utilise\">' + (jQuery('#utilise').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reste_engager').replaceWith('<div class=\"form-control-static\" id=\"reste_engager\">' + (jQuery('#reste_engager').val() || '') + '</div>');\n";
@@ -597,7 +597,7 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 	$templateCode = str_replace('<%%UPLOADFILE(intitule)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(notes)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(accorde)%%>', '', $templateCode);
-	$templateCode = str_replace('<%%UPLOADFILE(reserve)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(non_liquide)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(liquide)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(utilise)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reste_engager)%%>', '', $templateCode);
@@ -629,9 +629,9 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(accorde)%%>', safe_html($urow['accorde']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(accorde)%%>', html_attr($row['accorde']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(accorde)%%>', urlencode($urow['accorde']), $templateCode);
-		if( $dvprint) $templateCode = str_replace('<%%VALUE(reserve)%%>', safe_html($urow['reserve']), $templateCode);
-		if(!$dvprint) $templateCode = str_replace('<%%VALUE(reserve)%%>', html_attr($row['reserve']), $templateCode);
-		$templateCode = str_replace('<%%URLVALUE(reserve)%%>', urlencode($urow['reserve']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(non_liquide)%%>', safe_html($urow['non_liquide']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(non_liquide)%%>', html_attr($row['non_liquide']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(non_liquide)%%>', urlencode($urow['non_liquide']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(liquide)%%>', safe_html($urow['liquide']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(liquide)%%>', html_attr($row['liquide']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(liquide)%%>', urlencode($urow['liquide']), $templateCode);
@@ -662,8 +662,8 @@ function ventilation_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1,
 		$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5"></textarea>', $templateCode);
 		$templateCode = str_replace('<%%VALUE(accorde)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(accorde)%%>', urlencode(''), $templateCode);
-		$templateCode = str_replace('<%%VALUE(reserve)%%>', '', $templateCode);
-		$templateCode = str_replace('<%%URLVALUE(reserve)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(non_liquide)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(non_liquide)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(liquide)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(liquide)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(utilise)%%>', '', $templateCode);

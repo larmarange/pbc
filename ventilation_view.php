@@ -28,7 +28,7 @@
 		"`ventilation`.`intitule`" => "intitule",
 		"if(CHAR_LENGTH(`ventilation`.`notes`)>80, concat(left(`ventilation`.`notes`,80),' ...'), `ventilation`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -44,7 +44,7 @@
 		4 => 4,
 		5 => 5,
 		6 => '`ventilation`.`accorde`',
-		7 => '`ventilation`.`reserve`',
+		7 => '`ventilation`.`non_liquide`',
 		8 => '`ventilation`.`liquide`',
 		9 => '`ventilation`.`utilise`',
 		10 => '`ventilation`.`reste_engager`',
@@ -61,7 +61,7 @@
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -77,7 +77,7 @@
 		"`ventilation`.`intitule`" => "Intitul&#233;",
 		"`ventilation`.`notes`" => "Notes",
 		"`ventilation`.`accorde`" => "Pr&#233;visionnel",
-		"`ventilation`.`reserve`" => "R&#233;serv&#233;",
+		"`ventilation`.`non_liquide`" => "Non Liquid&#233;",
 		"`ventilation`.`liquide`" => "Liquid&#233;",
 		"`ventilation`.`utilise`" => "Utilis&#233;",
 		"`ventilation`.`reste_engager`" => "Reste &#224; Engager",
@@ -94,7 +94,7 @@
 		"`ventilation`.`intitule`" => "intitule",
 		"`ventilation`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
-		"CONCAT('<span style=''color: ', IF(`ventilation`.`reserve` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reserve`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reserve",
+		"CONCAT('<span style=''color: ', IF(`ventilation`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
 		"CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
@@ -137,8 +137,8 @@
 	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Rubrique de Ventilation", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "R&#233;serv&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
-	$x->ColFieldName = array('convention', 'rubrique', 'intitule', 'notes', 'accorde', 'reserve', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
+	$x->ColCaption = array("Convention", "Rubrique de Ventilation", "Intitul&#233;", "Notes", "Pr&#233;visionnel", "Non Liquid&#233;", "Liquid&#233;", "Utilis&#233;", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/P (%)");
+	$x->ColFieldName = array('convention', 'rubrique', 'intitule', 'notes', 'accorde', 'non_liquide', 'liquide', 'utilise', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_ua');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
 	// template paths below are based on the app main directory
@@ -196,7 +196,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`ventilation`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`accorde`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reserve`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reserve`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_engager`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_depenser`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`ventilation`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`accorde`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`non_liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`non_liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_engager`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`ventilation`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`ventilation`.`reste_depenser`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
@@ -206,7 +206,7 @@
 			$sumRow .= '<td class="ventilation-intitule"></td>';
 			$sumRow .= '<td class="ventilation-notes"></td>';
 			$sumRow .= "<td class=\"ventilation-accorde text-right\">{$row[0]}</td>";
-			$sumRow .= "<td class=\"ventilation-reserve text-right\">{$row[1]}</td>";
+			$sumRow .= "<td class=\"ventilation-non_liquide text-right\">{$row[1]}</td>";
 			$sumRow .= "<td class=\"ventilation-liquide text-right\">{$row[2]}</td>";
 			$sumRow .= "<td class=\"ventilation-utilise text-right\">{$row[3]}</td>";
 			$sumRow .= "<td class=\"ventilation-reste_engager text-right\">{$row[4]}</td>";

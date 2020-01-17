@@ -113,11 +113,11 @@
 		if (is_null($verse_hfg)) $verse_hfg = 0;
 		$ouvert = sqlValue("SELECT sum(montant) FROM `credits` WHERE convention={$id_convention}");
 		if (is_null($ouvert)) $ouvert = 0;
-		$reserve = sqlValue("SELECT sum(montant) FROM `depenses` WHERE convention={$id_convention} AND statut='réservée'");
-		if (is_null($reserve)) $reserve = 0;
-		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE convention={$id_convention} AND statut='liquidée'");
+		$non_liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE convention={$id_convention} AND liquidee IS NULL");
+		if (is_null($non_liquide)) $non_liquide = 0;
+		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE convention={$id_convention} AND liquidee IS NOT NULL");
 		if (is_null($liquide)) $liquide = 0;
-		$utilise = $reserve + $liquide;
+		$utilise = $non_liquide + $liquide;
 		$disponible = $ouvert - $utilise;
 		$reste_verser = $accorde - $verse;
 		$reste_ouvrir = $verse_hfg - $ouvert;
@@ -140,7 +140,7 @@
 			verse='{$verse}',
 			verse_hfg='{$verse_hfg}',
 			ouvert='{$ouvert}',
-			reserve='{$reserve}',
+			non_liquide='{$non_liquide}',
 			liquide='{$liquide}',
 			utilise='{$utilise}',
 			disponible='{$disponible}',
@@ -170,7 +170,7 @@
 
 		if ($type_fg) {
 			$ouvert = "NULL";
-			$reserve = "NULL";
+			$non_liquide = "NULL";
 			$liquide = "NULL";
 			$utilise = "NULL";
 			$disponible = "NULL";
@@ -185,11 +185,11 @@
 		} else {
 			$ouvert = sqlValue("SELECT sum(montant) FROM `credits` WHERE ligne_budgetaire={$id_ligne}");
 			if (is_null($ouvert)) $ouvert = 0;
-			$reserve = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_budgetaire={$id_ligne} AND statut='réservée'");
-			if (is_null($reserve)) $reserve = 0;
-			$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_budgetaire={$id_ligne} AND statut='liquidée'");
+			$non_liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_budgetaire={$id_ligne} AND liquidee IS NULL");
+			if (is_null($non_liquide)) $non_liquide = 0;
+			$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_budgetaire={$id_ligne} AND liquidee IS NOT NULL");
 			if (is_null($liquide)) $liquide = 0;
-			$utilise = $reserve + $liquide;
+			$utilise = $non_liquide + $liquide;
 			$disponible = $ouvert - $utilise;
 			$reste_ouvrir = $verse - $ouvert;
 			$reste_engager = $accorde - $utilise;
@@ -205,7 +205,7 @@
 		sql("UPDATE budgets SET
 			verse={$verse},
 			ouvert={$ouvert},
-			reserve={$reserve},
+			non_liquide={$non_liquide},
 			liquide={$liquide},
 			utilise={$utilise},
 			disponible={$disponible},
@@ -223,11 +223,11 @@
 	function maj_ventilation($id_ventilation){
 		$id_ventilation = makeSafe($id_ventilation);
 		$accorde = sqlValue("SELECT accorde FROM `ventilation` WHERE id={$id_ventilation}");
-		$reserve = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ventilation={$id_ventilation} AND statut='réservée'");
-		if (is_null($reserve)) $reserve = 0;
-		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ventilation={$id_ventilation} AND statut='liquidée'");
+		$non_liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ventilation={$id_ventilation} AND liquidee IS NULL");
+		if (is_null($non_liquide)) $non_liquide = 0;
+		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ventilation={$id_ventilation} AND liquidee IS NOT NULL");
 		if (is_null($liquide)) $liquide = 0;
-		$utilise = $reserve + $liquide;
+		$utilise = $non_liquide + $liquide;
 		$reservation_salaire = sqlValue("SELECT sum(reservation_salaire) FROM `recrutements` WHERE ventilation={$id_ventilation}");
 		if (is_null($reservation_salaire)) $reservation_salaire = 0;
 
@@ -243,7 +243,7 @@
 		}
 
 		sql("UPDATE ventilation SET
-			reserve={$reserve},
+			non_liquide={$non_liquide},
 			liquide={$liquide},
 			utilise={$utilise},
 			reste_engager={$reste_engager},
@@ -259,11 +259,11 @@
 		# ne faire la somme d'accorde que si tous les lignes de ventilation ont un prévésionnel
 		$accorde = sqlValue("SELECT CASE WHEN COUNT(accorde)<COUNT(*) THEN NULL ELSE SUM(accorde) END FROM `ventilation` WHERE rubrique={$id_rubrique}");
 
-		$reserve = sqlValue("SELECT sum(reserve) FROM `ventilation` WHERE rubrique={$id_rubrique}");
-		if (is_null($reserve)) $reserve = 0;
+		$non_liquide = sqlValue("SELECT sum(non_liquide) FROM `ventilation` WHERE rubrique={$id_rubrique}");
+		if (is_null($non_liquide)) $non_liquide = 0;
 		$liquide = sqlValue("SELECT sum(liquide) FROM `ventilation` WHERE rubrique={$id_rubrique}");
 		if (is_null($liquide)) $liquide = 0;
-		$utilise = $reserve + $liquide;
+		$utilise = $non_liquide + $liquide;
 		$reservation_salaire = sqlValue("SELECT sum(reservation_salaire) FROM `ventilation` WHERE rubrique={$id_rubrique}");
 		if (is_null($reservation_salaire)) $reservation_salaire = 0;
 
@@ -280,7 +280,7 @@
 
 		sql("UPDATE rubriques SET
 			accorde={$accorde},
-			reserve={$reserve},
+			non_liquide={$non_liquide},
 			liquide={$liquide},
 			utilise={$utilise},
 			reste_engager={$reste_engager},
@@ -295,18 +295,18 @@
 
 		$ouvert = sqlValue("SELECT sum(montant) FROM `credits` WHERE ligne_credit={$id_ligne}");
 		if (is_null($ouvert)) $ouvert = 0;
-		$reserve = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_credit={$id_ligne} AND statut='réservée'");
-		if (is_null($reserve)) $reserve = 0;
-		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_credit={$id_ligne} AND statut='liquidée'");
+		$non_liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_credit={$id_ligne} AND liquidee IS NULL");
+		if (is_null($non_liquide)) $non_liquide = 0;
+		$liquide = sqlValue("SELECT sum(montant) FROM `depenses` WHERE ligne_credit={$id_ligne} AND liquidee IS NOT NULL");
 		if (is_null($liquide)) $liquide = 0;
-		$utilise = $reserve + $liquide;
+		$utilise = $non_liquide + $liquide;
 		$disponible = $ouvert - $utilise;
 		$prop_uo = ($ouvert > 0) ? 100 * $utilise / $ouvert : 0;
 
 
 		sql("UPDATE lignes_credits SET
 			ouvert={$ouvert},
-			reserve={$reserve},
+			non_liquide={$non_liquide},
 			liquide={$liquide},
 			utilise={$utilise},
 			disponible={$disponible},

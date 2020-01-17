@@ -32,7 +32,7 @@
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
-		"`depenses`.`statut`" => "statut",
+		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"if(CHAR_LENGTH(`depenses`.`notes`)>80, concat(left(`depenses`.`notes`,80),' ...'), `depenses`.`notes`)" => "notes",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
@@ -49,10 +49,10 @@
 		8 => 8,
 		9 => '`personnes2`.`nom`',
 		10 => '`depenses`.`montant`',
-		11 => 11,
+		11 => '`depenses`.`liquidee`',
 		12 => '`ventilation1`.`intitule`',
 		13 => 13,
-		14 => 14,
+		14 => '`depenses`.`verifie`',
 	);
 
 	// Fields that can be displayed in the csv file
@@ -67,7 +67,7 @@
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
-		"`depenses`.`statut`" => "statut",
+		"`depenses`.`liquidee`" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "notes",
 		"`depenses`.`verifie`" => "verifie",
@@ -84,7 +84,7 @@
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "Contrat (si salaire)",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "B&#233;n&#233;ficiaire",
 		"`depenses`.`montant`" => "Montant",
-		"`depenses`.`statut`" => "Statut",
+		"`depenses`.`liquidee`" => "Liquid&#233;e ?",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "Ventilation Budg&#233;taire",
 		"`depenses`.`notes`" => "Notes",
 		"`depenses`.`verifie`" => "V&#233;rifi&#233;e ?",
@@ -102,7 +102,7 @@
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
-		"`depenses`.`statut`" => "statut",
+		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "Notes",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
@@ -142,8 +142,8 @@
 	$x->DefaultSortDirection = 'desc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Statut", "Ventilation Budg&#233;taire", "Notes", "V&#233;rifi&#233;e ?");
-	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'statut', 'ventilation', 'notes', 'verifie');
+	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Liquid&#233;e ?", "Ventilation Budg&#233;taire", "Notes", "V&#233;rifi&#233;e ?");
+	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'liquidee', 'ventilation', 'notes', 'verifie');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 
 	// template paths below are based on the app main directory
@@ -215,7 +215,7 @@
 			$sumRow .= '<td class="depenses-contrat"></td>';
 			$sumRow .= '<td class="depenses-beneficiaire"></td>';
 			$sumRow .= "<td class=\"depenses-montant text-right\">{$row[0]}</td>";
-			$sumRow .= '<td class="depenses-statut"></td>';
+			$sumRow .= '<td class="depenses-liquidee"></td>';
 			$sumRow .= '<td class="depenses-ventilation"></td>';
 			$sumRow .= '<td class="depenses-notes"></td>';
 			$sumRow .= '<td class="depenses-verifie"></td>';

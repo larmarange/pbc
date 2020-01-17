@@ -8,8 +8,11 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 ## Historique des versions
 
-### v0.3-dev
+### v0.4-dev
 
+### v0.3
+
+- changement du statut *réservé* des dépenses en *non liquidé*. **ATTENTION :** cela entraîne une rupture de compatibilité avec la version 2.0.
 - ajout des rubriques de ventilation
 - calcul des salaires restant à verser par ligne budgétaire
 - ajout d'un script de sauvegarde automatique de la base de données (https://forums.appgini.com/phpbb/viewtopic.php?f=4&t=3341)
@@ -17,6 +20,12 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 - ajout d'un champ 'référence' sur les dépenses
 - ajout d'un système de vérification des dépenses
 
+En raison de la rupture de compatibilité entre la version 0.2 et la version 0.3, exécutez le code SQL ci-dessous juste avant de procéder à la mise à jour. Sinon, il vous perdrez l'information concernant le statut des dépenses (elles seront toutes considérées comme non liquidées).
+
+```sql
+ALTER TABLE depenses ADD COLUMN `liquidee` TINYINT null AFTER statut
+UPDATE `depenses` SET `liquidee`=1 WHERE `statut`='liquidée'
+```
 
 ### v0.2
 

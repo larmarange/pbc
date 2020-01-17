@@ -95,11 +95,11 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="statut" class="control-label col-lg-3">Statut<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#statut-description"></i></label>
-					<div class="col-lg-9">
-						<span class="help-block collapse" id="statut-description"><div class="alert alert-info">Une d&#233;pense est consid&#233;r&#233;e comme liquid&#233;e une fois r&#233;gl&#233;e par l'organisme gestionnaire. Si la d&#233;pense est engag&#233;e (le montant a &#233;t&#233; r&#233;serv&#233; par l'organisme gestionnaire) ou si elle est plannifi&#233;e par l'&#233;quipe de recherche, s&#233;lectionnez 'r&#233;serv&#233;e'.</div></span>
-
-						<%%COMBO(statut)%%>
+					<div class="col-lg-offset-3 col-lg-9">
+						<div class="checkbox"><label for="liquidee"><input type="checkbox" name="liquidee" id="liquidee" value="1" <%%CHECKED(liquidee)%%>> Liquid&#233;e ?</label>
+							<i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquidee-description"></i>
+							<span class="help-block collapse" id="liquidee-description"><div class="alert alert-info">Une d&#233;pense est consid&#233;r&#233;e comme liquid&#233;e une fois totalement r&#233;gl&#233;e par l'organisme gestionnaire. Si ce n'est pas le cas (pr&#233;vue, r&#233;serv&#233;e, engag&#233;e...), la d&#233;pense n'est pas encore liquid&#233;e.</div></span>
+						</div>
 					</div>
 				</div>
 
