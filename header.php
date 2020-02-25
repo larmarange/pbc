@@ -46,7 +46,7 @@
 
 	</head>
 	<body>
-		<div class="container theme-bootstrap theme-3d theme-compact">
+		<div class="users-area container theme-bootstrap theme-3d theme-compact">
 			<?php if(function_exists('handle_maintenance')) echo handle_maintenance(true); ?>
 
 			<?php if(!$_REQUEST['Embedded']) { ?>

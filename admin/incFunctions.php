@@ -2030,3 +2030,73 @@
 			array_values($arr_data)
 		);
 	}
+	#########################################################
+	function calculated_fields() {
+		/*
+		 * calculated fields configuration array, $calc:
+		 *         table => [calculated fields], ..
+		 *         where calculated fields:
+		 *             field => query, ...
+		 */
+		return array(
+			'conventions' => array(
+			),
+			'budgets' => array(
+			),
+			'versements' => array(
+			),
+			'lignes_credits' => array(
+			),
+			'credits' => array(
+			),
+			'rubriques' => array(
+			),
+			'ventilation' => array(
+			),
+			'recrutements' => array(
+			),
+			'depenses' => array(
+			),
+			'fichiers' => array(
+			),
+			'personnes' => array(
+			),
+			'types_ligne' => array(
+			),
+		);
+	}
+	#########################################################
+	function update_calc_fields($table, $id, $formulas, $mi = false) {
+		if($mi === false) $mi = getMemberInfo();
+		$pk = getPKFieldName($table);
+		$safe_id = makeSafe($id);
+		$eo = array('silentErrors' => true);
+		$caluclations_made = array();
+		$replace = array(
+			'%ID%' => $safe_id,
+			'%USERNAME%' => makeSafe($mi['username']),
+			'%GROUPID%' => makeSafe($mi['groupID']),
+			'%GROUP%' => makeSafe($mi['group'])
+		);
+
+		foreach($formulas as $field => $query) {
+			$query = str_replace(array_keys($replace), array_values($replace), $query);
+			$calc_value = sqlValue($query);
+			if($calc_value  === false) continue;
+
+			// update calculated field
+			$safe_calc_value = makeSafe($calc_value);
+			$update_query = "UPDATE `{$table}` SET `{$field}`='{$safe_calc_value}' " .
+				"WHERE `{$pk}`='{$safe_id}'";
+			$res = sql($update_query, $eo);
+			if($res) $caluclations_made[] = array(
+				'table' => $table,
+				'id' => $id,
+				'field' => $field,
+				'value' => $calc_value
+			);
+		}
+
+		return $caluclations_made;
+	}
+	#########################################################

@@ -2,6 +2,10 @@
 	// For help on using hooks, please refer to https://bigprof.com/appgini/help/working-with-generated-web-database-application/hooks
 
 	function depenses_init(&$options, $memberInfo, &$args){
+		/* Inserted by Inline-Detail-View Plugin on 2020-02-25 07:05:22 */
+		// uninstalled
+		/* End of Inline-Detail-View Plugin code */
+
 		/* Inserted by Search Page Maker for AppGini on 2019-07-10 12:45:52 */
 		$options->FilterPage = 'hooks/depenses_filter.php';
 		/* End of Search Page Maker for AppGini code */
@@ -115,6 +119,10 @@
 	}
 
 	function depenses_dv($selectedID, $memberInfo, &$html, &$args){
+		/* Inserted by Inline-Detail-View Plugin on 2020-02-25 07:05:22 */
+		// uninstalled
+		/* End of Inline-Detail-View Plugin code */
+
 
 	}
 
