@@ -47,11 +47,11 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
-					<label for="exercice" class="control-label col-lg-3">Exercice <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
+					<label for="exercice" class="control-label col-lg-3">Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
 					<div class="col-lg-9">
 						<span class="help-block collapse" id="exercice-description"><div class="alert alert-info">Exercice comptable</div></span>
 
-						<input maxlength="10" type="text" class="form-control" name="exercice" id="exercice" value="<%%VALUE(exercice)%%>">
+						<input maxlength="10" type="text" class="form-control" name="exercice" id="exercice" value="<%%VALUE(exercice)%%>" required>
 					</div>
 				</div>
 

@@ -10,6 +10,8 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 ### v0.4-dev
 
+- ajout d'un champ 'précision' aux lignes budgétaires
+
 ### v0.3
 
 - changement du statut *réservé* des dépenses en *non liquidé*. **ATTENTION :** cela entraîne une rupture de compatibilité avec la version 2.0. (voir ci-dessous)

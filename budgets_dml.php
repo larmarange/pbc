@@ -17,8 +17,12 @@ function budgets_insert() {
 		if($data['convention'] == empty_lookup_value) { $data['convention'] = ''; }
 	$data['type'] = $_REQUEST['type'];
 		if($data['type'] == empty_lookup_value) { $data['type'] = ''; }
+	$data['precision'] = $_REQUEST['precision'];
+		if($data['precision'] == empty_lookup_value) { $data['precision'] = ''; }
 	$data['accorde'] = $_REQUEST['accorde'];
 		if($data['accorde'] == empty_lookup_value) { $data['accorde'] = ''; }
+	$data['notes'] = $_REQUEST['notes'];
+		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['verse'] = $_REQUEST['verse'];
 		if($data['verse'] == empty_lookup_value) { $data['verse'] = ''; }
 	$data['reste_verser'] = $_REQUEST['reste_verser'];
@@ -265,6 +269,8 @@ function budgets_update($selected_id) {
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
+	$data['precision'] = makeSafe($_REQUEST['precision']);
+		if($data['precision'] == empty_lookup_value) { $data['precision'] = ''; }
 	$data['accorde'] = makeSafe($_REQUEST['accorde']);
 		if($data['accorde'] == empty_lookup_value) { $data['accorde'] = ''; }
 	if($data['accorde']=='') {
@@ -272,6 +278,8 @@ function budgets_update($selected_id) {
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
+	$data['notes'] = makeSafe($_REQUEST['notes']);
+		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['verse'] = makeSafe($_REQUEST['verse']);
 		if($data['verse'] == empty_lookup_value) { $data['verse'] = ''; }
 	$data['reste_verser'] = makeSafe($_REQUEST['reste_verser']);
@@ -309,7 +317,7 @@ function budgets_update($selected_id) {
 	}
 
 	$o = array('silentErrors' => true);
-	sql('update `budgets` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `non_liquide`=' . (($data['non_liquide'] !== '' && $data['non_liquide'] !== NULL) ? "'{$data['non_liquide']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
+	sql('update `budgets` set       `convention`=' . (($data['convention'] !== '' && $data['convention'] !== NULL) ? "'{$data['convention']}'" : 'NULL') . ', `type`=' . (($data['type'] !== '' && $data['type'] !== NULL) ? "'{$data['type']}'" : 'NULL') . ', `precision`=' . (($data['precision'] !== '' && $data['precision'] !== NULL) ? "'{$data['precision']}'" : 'NULL') . ', `accorde`=' . (($data['accorde'] !== '' && $data['accorde'] !== NULL) ? "'{$data['accorde']}'" : 'NULL') . ', `notes`=' . (($data['notes'] !== '' && $data['notes'] !== NULL) ? "'{$data['notes']}'" : 'NULL') . ', `verse`=' . (($data['verse'] !== '' && $data['verse'] !== NULL) ? "'{$data['verse']}'" : 'NULL') . ', `reste_verser`=' . (($data['reste_verser'] !== '' && $data['reste_verser'] !== NULL) ? "'{$data['reste_verser']}'" : 'NULL') . ', `ouvert`=' . (($data['ouvert'] !== '' && $data['ouvert'] !== NULL) ? "'{$data['ouvert']}'" : 'NULL') . ', `reste_ouvrir`=' . (($data['reste_ouvrir'] !== '' && $data['reste_ouvrir'] !== NULL) ? "'{$data['reste_ouvrir']}'" : 'NULL') . ', `non_liquide`=' . (($data['non_liquide'] !== '' && $data['non_liquide'] !== NULL) ? "'{$data['non_liquide']}'" : 'NULL') . ', `liquide`=' . (($data['liquide'] !== '' && $data['liquide'] !== NULL) ? "'{$data['liquide']}'" : 'NULL') . ', `utilise`=' . (($data['utilise'] !== '' && $data['utilise'] !== NULL) ? "'{$data['utilise']}'" : 'NULL') . ', `disponible`=' . (($data['disponible'] !== '' && $data['disponible'] !== NULL) ? "'{$data['disponible']}'" : 'NULL') . ', `reste_engager`=' . (($data['reste_engager'] !== '' && $data['reste_engager'] !== NULL) ? "'{$data['reste_engager']}'" : 'NULL') . ', `reservation_salaire`=' . (($data['reservation_salaire'] !== '' && $data['reservation_salaire'] !== NULL) ? "'{$data['reservation_salaire']}'" : 'NULL') . ', `reste_depenser`=' . (($data['reste_depenser'] !== '' && $data['reste_depenser'] !== NULL) ? "'{$data['reste_depenser']}'" : 'NULL') . ', `prop_uo`=' . (($data['prop_uo'] !== '' && $data['prop_uo'] !== NULL) ? "'{$data['prop_uo']}'" : 'NULL') . ', `prop_uv`=' . (($data['prop_uv'] !== '' && $data['prop_uv'] !== NULL) ? "'{$data['prop_uv']}'" : 'NULL') . ', `prop_ua`=' . (($data['prop_ua'] !== '' && $data['prop_ua'] !== NULL) ? "'{$data['prop_ua']}'" : 'NULL') . " where `id`='".makeSafe($selected_id)."'", $o);
 	if($o['error']!='') {
 		echo $o['error'];
 		echo '<a href="budgets_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
@@ -578,6 +586,7 @@ function budgets_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Al
 		$jsReadOnly .= "\tjQuery('#convention_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#type').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#type_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
+		$jsReadOnly .= "\tjQuery('#precision').replaceWith('<div class=\"form-control-static\" id=\"precision\">' + (jQuery('#precision').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#accorde').replaceWith('<div class=\"form-control-static\" id=\"accorde\">' + (jQuery('#accorde').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#verse').replaceWith('<div class=\"form-control-static\" id=\"verse\">' + (jQuery('#verse').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#reste_verser').replaceWith('<div class=\"form-control-static\" id=\"reste_verser\">' + (jQuery('#reste_verser').val() || '') + '</div>');\n";
@@ -629,7 +638,9 @@ function budgets_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Al
 	$templateCode = str_replace('<%%UPLOADFILE(id)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(convention)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(type)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(precision)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(accorde)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(notes)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(verse)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(reste_verser)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(ouvert)%%>', '', $templateCode);
@@ -656,9 +667,19 @@ function budgets_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Al
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(type)%%>', safe_html($urow['type']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(type)%%>', html_attr($row['type']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(type)%%>', urlencode($urow['type']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(precision)%%>', safe_html($urow['precision']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(precision)%%>', html_attr($row['precision']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(precision)%%>', urlencode($urow['precision']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(accorde)%%>', safe_html($urow['accorde']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(accorde)%%>', html_attr($row['accorde']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(accorde)%%>', urlencode($urow['accorde']), $templateCode);
+		if($AllowUpdate || $AllowInsert) {
+			$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5">' . html_attr($row['notes']) . '</textarea>', $templateCode);
+		}else{
+			$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<div id="notes" class="form-control-static">' . $row['notes'] . '</div>', $templateCode);
+		}
+		$templateCode = str_replace('<%%VALUE(notes)%%>', nl2br($row['notes']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(notes)%%>', urlencode($urow['notes']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(verse)%%>', safe_html($urow['verse']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(verse)%%>', html_attr($row['verse']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(verse)%%>', urlencode($urow['verse']), $templateCode);
@@ -708,8 +729,11 @@ function budgets_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Al
 		$templateCode = str_replace('<%%URLVALUE(convention)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(type)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(type)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(precision)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(precision)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(accorde)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(accorde)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%HTMLAREA(notes)%%>', '<textarea name="notes" id="notes" rows="5"></textarea>', $templateCode);
 		$templateCode = str_replace('<%%VALUE(verse)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(verse)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(reste_verser)%%>', '', $templateCode);

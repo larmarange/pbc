@@ -24,7 +24,7 @@
 	$x->QueryFieldsTV = array(
 		"`depenses`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",
@@ -59,7 +59,7 @@
 	$x->QueryFieldsCSV = array(
 		"`depenses`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",
@@ -76,7 +76,7 @@
 	$x->QueryFieldsFilters = array(
 		"`depenses`.`id`" => "ID",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "Convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "Ligne Budg&#233;taire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "Ligne Budg&#233;taire",
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "Ligne de cr&#233;dit (CFI) - Exercice",
 		"`depenses`.`date`" => "Date",
 		"`depenses`.`intitule`" => "Intitul&#233;",
@@ -94,7 +94,7 @@
 	$x->QueryFieldsQS = array(
 		"`depenses`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') /* Ligne de cr&#233;dit (CFI) - Exercice */" => "ligne_credit",
 		"if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`depenses`.`intitule`" => "intitule",

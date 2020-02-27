@@ -96,10 +96,10 @@
 			'ligne_budgetaire' => array(
 				'parent_table' => 'budgets',
 				'parent_pk_field' => 'id',
-				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_caption' => 'IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\'), \' - \', `budgets`.`precision`), \'\')',
 				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
 				'filterers' => array('convention' => 'convention'),
-				'custom_query' => '',
+				'custom_query' => 'SELECT `budgets`.`id`, IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\' - \', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\' - \',   `types_ligne1`.`gestionnaire`, `types_ligne1`.`type`), \'\'),  `budgets`.`precision`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => true
@@ -120,10 +120,10 @@
 			'ligne_budgetaire' => array(
 				'parent_table' => 'budgets',
 				'parent_pk_field' => 'id',
-				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_caption' => 'IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\'), \' - \', `budgets`.`precision`), \'\')',
 				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
 				'filterers' => array('convention' => 'convention'),
-				'custom_query' => 'SELECT `budgets`.`id`, IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
+				'custom_query' => 'SELECT `budgets`.`id`, IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\' - \', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\' - \',   `types_ligne1`.`gestionnaire`, `types_ligne1`.`type`), \'\'),  `budgets`.`precision`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => true
@@ -144,10 +144,10 @@
 			'ligne_budgetaire' => array(
 				'parent_table' => 'budgets',
 				'parent_pk_field' => 'id',
-				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_caption' => 'IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\'), \' - \', `budgets`.`precision`), \'\')',
 				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
 				'filterers' => array('convention' => 'convention'),
-				'custom_query' => 'SELECT `budgets`.`id`, IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
+				'custom_query' => 'SELECT `budgets`.`id`, IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\' - \', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\' - \',   `types_ligne1`.`gestionnaire`, `types_ligne1`.`type`), \'\'),  `budgets`.`precision`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => false
@@ -227,10 +227,10 @@
 			'ligne_budgetaire' => array(
 				'parent_table' => 'budgets',
 				'parent_pk_field' => 'id',
-				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_caption' => 'IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\'), \' - \', `budgets`.`precision`), \'\')',
 				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
 				'filterers' => array('convention' => 'convention'),
-				'custom_query' => 'SELECT `budgets`.`id`, IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
+				'custom_query' => 'SELECT `budgets`.`id`, IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\' - \', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\' - \',   `types_ligne1`.`gestionnaire`, `types_ligne1`.`type`), \'\'), `budgets`.`precision`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => false
@@ -262,10 +262,10 @@
 			'ligne_budgetaire' => array(
 				'parent_table' => 'budgets',
 				'parent_pk_field' => 'id',
-				'parent_caption' => 'IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\')',
+				'parent_caption' => 'IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\'), \' - \', `budgets`.`precision`), \'\')',
 				'parent_from' => '`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ',
 				'filterers' => array('convention' => 'convention'),
-				'custom_query' => 'SELECT `budgets`.`id`, IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\'\',   `types_ligne1`.`gestionnaire`, \' - \', `types_ligne1`.`type`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
+				'custom_query' => 'SELECT `budgets`.`id`, IF(CHAR_LENGTH(`budgets`.`type`) || CHAR_LENGTH(`budgets`.`precision`), CONCAT_WS(\' - \', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS(\' - \',   `types_ligne1`.`gestionnaire`, `types_ligne1`.`type`), \'\'), `budgets`.`precision`), \'\') FROM `budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` WHERE `types_ligne1`.`frais_gestion` IS NULL ORDER BY 2',
 				'inherit_permissions' => false,
 				'list_type' => 0,
 				'not_null' => false

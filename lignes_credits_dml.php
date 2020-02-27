@@ -50,6 +50,11 @@ function lignes_credits_insert() {
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
+	if($data['exercice']== '') {
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Exercice': " . $Translation['field not null'] . '<br><br>';
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
 
 	// hook: lignes_credits_before_insert
 	if(function_exists('lignes_credits_before_insert')) {
@@ -205,6 +210,11 @@ function lignes_credits_update($selected_id) {
 	}
 	$data['exercice'] = makeSafe($_REQUEST['exercice']);
 		if($data['exercice'] == empty_lookup_value) { $data['exercice'] = ''; }
+	if($data['exercice']=='') {
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">{$Translation['error:']} 'Exercice': {$Translation['field not null']}<br><br>";
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
 	$data['notes'] = makeSafe($_REQUEST['notes']);
 		if($data['notes'] == empty_lookup_value) { $data['notes'] = ''; }
 	$data['ouvert'] = makeSafe($_REQUEST['ouvert']);

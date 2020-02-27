@@ -39,9 +39,27 @@
 
 				<div class="form-group">
 					<hr class="hidden-md hidden-lg">
+					<label for="precision" class="control-label col-lg-3">Pr&#233;cision <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#precision-description"></i></label>
+					<div class="col-lg-9">
+						<span class="help-block collapse" id="precision-description"><div class="alert alert-info">Optionnel, si besoin de distinguer plusieurs lignes budg&#233;taires du m&#234;me type</div></span>
+
+						<input maxlength="100" type="text" class="form-control" name="precision" id="precision" value="<%%VALUE(precision)%%>">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
 					<label for="accorde" class="control-label col-lg-3">Accord&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<hr class="hidden-md hidden-lg">
+					<label for="notes" class="control-label col-lg-3">Notes</label>
+					<div class="col-lg-9">
+						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
 
@@ -193,6 +211,7 @@
 	</div>
 
 </div><!-- /div class="panel-body" -->
+	<script src="nicEdit.js"></script>
 	<script>
 		$j(function() {
 			var add_new_mode = (!$j('input[name=SelectedID]').val());
@@ -206,6 +225,13 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
+			bkLib.onDomLoaded(function() {
+				if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
+
+				$j('.nicEdit-panelContain').parent().width('100%');
+				$j('.nicEdit-panelContain').parent().next().width('98%');
+				$j('.nicEdit-main').width('99%');
+			});
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
@@ -216,6 +242,9 @@
 				if($j('#deselect').length) $j('#deselect').removeClass('btn-default').addClass('btn-warning').get(0).lastChild.data = " <%%TRANSLATION(Cancel)%%>";
 				$j(this).data('already_changed', true);
 			});
+
+			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
+			AppGini.detectContentEditableChanges();
 
 			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
 

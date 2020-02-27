@@ -25,7 +25,9 @@
 		"`budgets`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Type */" => "type",
+		"`budgets`.`precision`" => "precision",
 		"CONCAT('$', FORMAT(`budgets`.`accorde`, 2))" => "accorde",
+		"if(CHAR_LENGTH(`budgets`.`notes`)>80, concat(left(`budgets`.`notes`,80),' ...'), `budgets`.`notes`)" => "notes",
 		"CONCAT('$', FORMAT(`budgets`.`verse`, 2))" => "verse",
 		"CONCAT('$', FORMAT(`budgets`.`reste_verser`, 2))" => "reste_verser",
 		"CONCAT('$', FORMAT(`budgets`.`ouvert`, 2))" => "ouvert",
@@ -46,21 +48,23 @@
 		1 => '`budgets`.`id`',
 		2 => '`conventions1`.`nom`',
 		3 => 3,
-		4 => '`budgets`.`accorde`',
-		5 => '`budgets`.`verse`',
-		6 => '`budgets`.`reste_verser`',
-		7 => '`budgets`.`ouvert`',
-		8 => '`budgets`.`reste_ouvrir`',
-		9 => '`budgets`.`non_liquide`',
-		10 => '`budgets`.`liquide`',
-		11 => '`budgets`.`utilise`',
-		12 => '`budgets`.`disponible`',
-		13 => '`budgets`.`reste_engager`',
-		14 => '`budgets`.`reservation_salaire`',
-		15 => '`budgets`.`reste_depenser`',
-		16 => '`budgets`.`prop_uo`',
-		17 => '`budgets`.`prop_uv`',
-		18 => '`budgets`.`prop_ua`',
+		4 => 4,
+		5 => '`budgets`.`accorde`',
+		6 => 6,
+		7 => '`budgets`.`verse`',
+		8 => '`budgets`.`reste_verser`',
+		9 => '`budgets`.`ouvert`',
+		10 => '`budgets`.`reste_ouvrir`',
+		11 => '`budgets`.`non_liquide`',
+		12 => '`budgets`.`liquide`',
+		13 => '`budgets`.`utilise`',
+		14 => '`budgets`.`disponible`',
+		15 => '`budgets`.`reste_engager`',
+		16 => '`budgets`.`reservation_salaire`',
+		17 => '`budgets`.`reste_depenser`',
+		18 => '`budgets`.`prop_uo`',
+		19 => '`budgets`.`prop_uv`',
+		20 => '`budgets`.`prop_ua`',
 	);
 
 	// Fields that can be displayed in the csv file
@@ -68,7 +72,9 @@
 		"`budgets`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Type */" => "type",
+		"`budgets`.`precision`" => "precision",
 		"CONCAT('$', FORMAT(`budgets`.`accorde`, 2))" => "accorde",
+		"`budgets`.`notes`" => "notes",
 		"CONCAT('$', FORMAT(`budgets`.`verse`, 2))" => "verse",
 		"CONCAT('$', FORMAT(`budgets`.`reste_verser`, 2))" => "reste_verser",
 		"CONCAT('$', FORMAT(`budgets`.`ouvert`, 2))" => "ouvert",
@@ -89,7 +95,9 @@
 		"`budgets`.`id`" => "ID",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "Convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Type */" => "Type",
+		"`budgets`.`precision`" => "Pr&#233;cision",
 		"`budgets`.`accorde`" => "Accord&#233;",
+		"`budgets`.`notes`" => "Notes",
 		"`budgets`.`verse`" => "Vers&#233;",
 		"`budgets`.`reste_verser`" => "Reste &#224; Verser",
 		"`budgets`.`ouvert`" => "Ouvert",
@@ -111,7 +119,9 @@
 		"`budgets`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Type */" => "type",
+		"`budgets`.`precision`" => "precision",
 		"CONCAT('$', FORMAT(`budgets`.`accorde`, 2))" => "accorde",
+		"`budgets`.`notes`" => "Notes",
 		"CONCAT('$', FORMAT(`budgets`.`verse`, 2))" => "verse",
 		"CONCAT('$', FORMAT(`budgets`.`reste_verser`, 2))" => "reste_verser",
 		"CONCAT('$', FORMAT(`budgets`.`ouvert`, 2))" => "ouvert",
@@ -161,10 +171,10 @@
 	$x->DefaultSortField = '3';
 	$x->DefaultSortDirection = 'asc';
 
-	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Type", "Accord&#233;", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "Non Liquid&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/O (%)", "U/V (%)", "U/A (%)");
-	$x->ColFieldName = array('convention', 'type', 'accorde', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'non_liquide', 'liquide', 'utilise', 'disponible', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_uo', 'prop_uv', 'prop_ua');
-	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
+	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
+	$x->ColCaption = array("Convention", "Type", "Pr&#233;cision", "Accord&#233;", "Notes", "Vers&#233;", "Reste &#224; Verser", "Ouvert", "Reste &#224; Ouvrir", "Non Liquid&#233;", "Liquid&#233;", "Utilis&#233;", "Disponible", "Reste &#224; Engager", "Salaires restant &#224; verser", "Reste &#224; D&#233;penser", "U/O (%)", "U/V (%)", "U/A (%)");
+	$x->ColFieldName = array('convention', 'type', 'precision', 'accorde', 'notes', 'verse', 'reste_verser', 'ouvert', 'reste_ouvrir', 'non_liquide', 'liquide', 'utilise', 'disponible', 'reste_engager', 'reservation_salaire', 'reste_depenser', 'prop_uo', 'prop_uv', 'prop_ua');
+	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/budgets_templateTV.html';
@@ -228,7 +238,9 @@
 			if(!isset($_REQUEST['Print_x'])) $sumRow .= '<td class="text-center"><strong>&sum;</strong></td>';
 			$sumRow .= '<td class="budgets-convention"></td>';
 			$sumRow .= '<td class="budgets-type"></td>';
+			$sumRow .= '<td class="budgets-precision"></td>';
 			$sumRow .= "<td class=\"budgets-accorde text-right\">{$row[0]}</td>";
+			$sumRow .= '<td class="budgets-notes"></td>';
 			$sumRow .= "<td class=\"budgets-verse text-right\">{$row[1]}</td>";
 			$sumRow .= "<td class=\"budgets-reste_verser text-right\">{$row[2]}</td>";
 			$sumRow .= "<td class=\"budgets-ouvert text-right\">{$row[3]}</td>";

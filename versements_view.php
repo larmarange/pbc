@@ -24,7 +24,7 @@
 	$x->QueryFieldsTV = array(
 		"`versements`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
 		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
@@ -45,7 +45,7 @@
 	$x->QueryFieldsCSV = array(
 		"`versements`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
 		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
@@ -55,7 +55,7 @@
 	$x->QueryFieldsFilters = array(
 		"`versements`.`id`" => "ID",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "Convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "Ligne Budg&#233;taire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "Ligne Budg&#233;taire",
 		"`versements`.`date`" => "Date",
 		"`versements`.`intitule`" => "Intitul&#233;",
 		"`versements`.`montant`" => "Montant",
@@ -66,7 +66,7 @@
 	$x->QueryFieldsQS = array(
 		"`versements`.`id`" => "id",
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
-		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
+		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
 		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
