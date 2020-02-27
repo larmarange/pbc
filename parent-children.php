@@ -21,7 +21,7 @@
 					'display-fields' => array(1 => 'Nom', 2 => 'Statut', 3 => 'Bailleur(s)', 4 => 'Porteur', 5 => 'Chef de Projet', 6 => 'Date r&#233;ponse', 7 => 'Demand&#233;', 8 => 'D&#233;but', 9 => 'Fin', 10 => 'Dur&#233;e (mois)', 12 => 'Accord&#233; hors FG', 13 => 'Frais de Gestion', 14 => 'Total Accord&#233;', 15 => 'Vers&#233;', 16 => 'Reste &#224; Verser', 17 => 'Vers&#233; hors FG', 18 => 'Ouvert', 19 => 'Reste &#224; Ouvrir', 20 => 'Non Liquid&#233;', 21 => 'Liquid&#233;', 22 => 'Utilis&#233; (L+NL)', 23 => 'Disponible (O-U)', 24 => 'Reste &#224; Engager', 25 => 'Salaires restant &#224; verser', 26 => 'Reste &#224; D&#233;penser', 27 => 'U/O (%)', 28 => 'U/V (%)', 29 => 'U/A (%, hors FG)', 30 => 'Budget non ventil&#233;', 31 => 'D&#233;penses non ventil&#233;es'),
 					'display-field-names' => array(1 => 'nom', 2 => 'statut', 3 => 'bailleur', 4 => 'porteur', 5 => 'chef_projet', 6 => 'date_reponse', 7 => 'demande', 8 => 'date_debut', 9 => 'date_fin', 10 => 'duree', 12 => 'accorde_hfg', 13 => 'frais_gestion', 14 => 'accorde', 15 => 'verse', 16 => 'reste_verser', 17 => 'verse_hfg', 18 => 'ouvert', 19 => 'reste_ouvrir', 20 => 'non_liquide', 21 => 'liquide', 22 => 'utilise', 23 => 'disponible', 24 => 'reste_engager', 25 => 'reservation_salaire', 26 => 'reste_depenser', 27 => 'prop_uo', 28 => 'prop_uv', 29 => 'prop_ua', 30 => 'budget_nv', 31 => 'depenses_nv'),
 					'sortable-fields' => array(0 => '`conventions`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => '`personnes1`.`nom`', 5 => '`personnes2`.`nom`', 6 => '`conventions`.`date_reponse`', 7 => '`conventions`.`demande`', 8 => '`conventions`.`date_debut`', 9 => '`conventions`.`date_fin`', 10 => '`conventions`.`duree`', 11 => 12, 12 => '`conventions`.`accorde_hfg`', 13 => '`conventions`.`frais_gestion`', 14 => '`conventions`.`accorde`', 15 => '`conventions`.`verse`', 16 => '`conventions`.`reste_verser`', 17 => '`conventions`.`verse_hfg`', 18 => '`conventions`.`ouvert`', 19 => '`conventions`.`reste_ouvrir`', 20 => '`conventions`.`non_liquide`', 21 => '`conventions`.`liquide`', 22 => '`conventions`.`utilise`', 23 => '`conventions`.`disponible`', 24 => '`conventions`.`reste_engager`', 25 => '`conventions`.`reservation_salaire`', 26 => '`conventions`.`reste_depenser`', 27 => '`conventions`.`prop_uo`', 28 => '`conventions`.`prop_uv`', 29 => '`conventions`.`prop_ua`', 30 => '`conventions`.`budget_nv`', 31 => '`conventions`.`depenses_nv`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 9,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -45,7 +45,7 @@
 					'display-fields' => array(1 => 'Nom', 2 => 'Statut', 3 => 'Bailleur(s)', 4 => 'Porteur', 5 => 'Chef de Projet', 6 => 'Date r&#233;ponse', 7 => 'Demand&#233;', 8 => 'D&#233;but', 9 => 'Fin', 10 => 'Dur&#233;e (mois)', 12 => 'Accord&#233; hors FG', 13 => 'Frais de Gestion', 14 => 'Total Accord&#233;', 15 => 'Vers&#233;', 16 => 'Reste &#224; Verser', 17 => 'Vers&#233; hors FG', 18 => 'Ouvert', 19 => 'Reste &#224; Ouvrir', 20 => 'Non Liquid&#233;', 21 => 'Liquid&#233;', 22 => 'Utilis&#233; (L+NL)', 23 => 'Disponible (O-U)', 24 => 'Reste &#224; Engager', 25 => 'Salaires restant &#224; verser', 26 => 'Reste &#224; D&#233;penser', 27 => 'U/O (%)', 28 => 'U/V (%)', 29 => 'U/A (%, hors FG)', 30 => 'Budget non ventil&#233;', 31 => 'D&#233;penses non ventil&#233;es'),
 					'display-field-names' => array(1 => 'nom', 2 => 'statut', 3 => 'bailleur', 4 => 'porteur', 5 => 'chef_projet', 6 => 'date_reponse', 7 => 'demande', 8 => 'date_debut', 9 => 'date_fin', 10 => 'duree', 12 => 'accorde_hfg', 13 => 'frais_gestion', 14 => 'accorde', 15 => 'verse', 16 => 'reste_verser', 17 => 'verse_hfg', 18 => 'ouvert', 19 => 'reste_ouvrir', 20 => 'non_liquide', 21 => 'liquide', 22 => 'utilise', 23 => 'disponible', 24 => 'reste_engager', 25 => 'reservation_salaire', 26 => 'reste_depenser', 27 => 'prop_uo', 28 => 'prop_uv', 29 => 'prop_ua', 30 => 'budget_nv', 31 => 'depenses_nv'),
 					'sortable-fields' => array(0 => '`conventions`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => '`personnes1`.`nom`', 5 => '`personnes2`.`nom`', 6 => '`conventions`.`date_reponse`', 7 => '`conventions`.`demande`', 8 => '`conventions`.`date_debut`', 9 => '`conventions`.`date_fin`', 10 => '`conventions`.`duree`', 11 => 12, 12 => '`conventions`.`accorde_hfg`', 13 => '`conventions`.`frais_gestion`', 14 => '`conventions`.`accorde`', 15 => '`conventions`.`verse`', 16 => '`conventions`.`reste_verser`', 17 => '`conventions`.`verse_hfg`', 18 => '`conventions`.`ouvert`', 19 => '`conventions`.`reste_ouvrir`', 20 => '`conventions`.`non_liquide`', 21 => '`conventions`.`liquide`', 22 => '`conventions`.`utilise`', 23 => '`conventions`.`disponible`', 24 => '`conventions`.`reste_engager`', 25 => '`conventions`.`reservation_salaire`', 26 => '`conventions`.`reste_depenser`', 27 => '`conventions`.`prop_uo`', 28 => '`conventions`.`prop_uv`', 29 => '`conventions`.`prop_ua`', 30 => '`conventions`.`budget_nv`', 31 => '`conventions`.`depenses_nv`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 9,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -71,7 +71,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Type', 3 => 'Pr&#233;cision', 4 => 'Accord&#233;', 5 => 'Notes', 6 => 'Vers&#233;', 7 => 'Reste &#224; Verser', 8 => 'Ouvert', 9 => 'Reste &#224; Ouvrir', 10 => 'Non Liquid&#233;', 11 => 'Liquid&#233;', 12 => 'Utilis&#233;', 13 => 'Disponible', 14 => 'Reste &#224; Engager', 15 => 'Salaires restant &#224; verser', 16 => 'Reste &#224; D&#233;penser', 17 => 'U/O (%)', 18 => 'U/V (%)', 19 => 'U/A (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'type', 3 => 'precision', 4 => 'accorde', 5 => 'notes', 6 => 'verse', 7 => 'reste_verser', 8 => 'ouvert', 9 => 'reste_ouvrir', 10 => 'non_liquide', 11 => 'liquide', 12 => 'utilise', 13 => 'disponible', 14 => 'reste_engager', 15 => 'reservation_salaire', 16 => 'reste_depenser', 17 => 'prop_uo', 18 => 'prop_uv', 19 => 'prop_ua'),
 					'sortable-fields' => array(0 => '`budgets`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`budgets`.`accorde`', 5 => 6, 6 => '`budgets`.`verse`', 7 => '`budgets`.`reste_verser`', 8 => '`budgets`.`ouvert`', 9 => '`budgets`.`reste_ouvrir`', 10 => '`budgets`.`non_liquide`', 11 => '`budgets`.`liquide`', 12 => '`budgets`.`utilise`', 13 => '`budgets`.`disponible`', 14 => '`budgets`.`reste_engager`', 15 => '`budgets`.`reservation_salaire`', 16 => '`budgets`.`reste_depenser`', 17 => '`budgets`.`prop_uo`', 18 => '`budgets`.`prop_uv`', 19 => '`budgets`.`prop_ua`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 2,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -97,7 +97,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Date', 4 => 'Intitul&#233;', 5 => 'Montant', 6 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'date', 4 => 'intitule', 5 => 'montant', 6 => 'notes'),
 					'sortable-fields' => array(0 => '`versements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`versements`.`date`', 4 => 5, 5 => '`versements`.`montant`', 6 => 7),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 3,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -121,7 +121,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Date', 4 => 'Intitul&#233;', 5 => 'Montant', 6 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'date', 4 => 'intitule', 5 => 'montant', 6 => 'notes'),
 					'sortable-fields' => array(0 => '`versements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`versements`.`date`', 4 => 5, 5 => '`versements`.`montant`', 6 => 7),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 3,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -147,7 +147,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Intitul&#233; / CFI', 4 => 'Exercice', 5 => 'Notes', 6 => 'Ouvert', 7 => 'Non Liquid&#233;', 8 => 'Liquid&#233;', 9 => 'Utilis&#233;', 10 => 'Disponible', 11 => 'U/O (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'intitule', 4 => 'exercice', 5 => 'notes', 6 => 'ouvert', 7 => 'non_liquide', 8 => 'liquide', 9 => 'utilise', 10 => 'disponible', 11 => 'prop_uo'),
 					'sortable-fields' => array(0 => '`lignes_credits`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => '`lignes_credits`.`ouvert`', 7 => '`lignes_credits`.`non_liquide`', 8 => '`lignes_credits`.`liquide`', 9 => '`lignes_credits`.`utilise`', 10 => '`lignes_credits`.`disponible`', 11 => '`lignes_credits`.`prop_uo`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -171,7 +171,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Intitul&#233; / CFI', 4 => 'Exercice', 5 => 'Notes', 6 => 'Ouvert', 7 => 'Non Liquid&#233;', 8 => 'Liquid&#233;', 9 => 'Utilis&#233;', 10 => 'Disponible', 11 => 'U/O (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'intitule', 4 => 'exercice', 5 => 'notes', 6 => 'ouvert', 7 => 'non_liquide', 8 => 'liquide', 9 => 'utilise', 10 => 'disponible', 11 => 'prop_uo'),
 					'sortable-fields' => array(0 => '`lignes_credits`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => '`lignes_credits`.`ouvert`', 7 => '`lignes_credits`.`non_liquide`', 8 => '`lignes_credits`.`liquide`', 9 => '`lignes_credits`.`utilise`', 10 => '`lignes_credits`.`disponible`', 11 => '`lignes_credits`.`prop_uo`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -197,7 +197,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'Montant', 7 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'montant', 7 => 'notes'),
 					'sortable-fields' => array(0 => '`credits`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`credits`.`date`', 5 => 6, 6 => '`credits`.`montant`', 7 => 8),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -221,7 +221,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'Montant', 7 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'montant', 7 => 'notes'),
 					'sortable-fields' => array(0 => '`credits`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`credits`.`date`', 5 => 6, 6 => '`credits`.`montant`', 7 => 8),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -245,7 +245,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'Montant', 7 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'montant', 7 => 'notes'),
 					'sortable-fields' => array(0 => '`credits`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`credits`.`date`', 5 => 6, 6 => '`credits`.`montant`', 7 => 8),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -271,7 +271,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Intitul&#233;', 3 => 'Notes', 4 => 'Pr&#233;visionnel', 5 => 'Non Liquid&#233;', 6 => 'Liquid&#233;', 7 => 'Utilis&#233;', 8 => 'Reste &#224; Engager', 9 => 'Salaires restant &#224; verser', 10 => 'Reste &#224; D&#233;penser', 11 => 'U/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'intitule', 3 => 'notes', 4 => 'accorde', 5 => 'non_liquide', 6 => 'liquide', 7 => 'utilise', 8 => 'reste_engager', 9 => 'reservation_salaire', 10 => 'reste_depenser', 11 => 'prop_ua'),
 					'sortable-fields' => array(0 => '`rubriques`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`rubriques`.`accorde`', 5 => '`rubriques`.`non_liquide`', 6 => '`rubriques`.`liquide`', 7 => '`rubriques`.`utilise`', 8 => '`rubriques`.`reste_engager`', 9 => '`rubriques`.`reservation_salaire`', 10 => '`rubriques`.`reste_depenser`', 11 => '`rubriques`.`prop_ua`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 2,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -297,7 +297,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Rubrique de Ventilation', 3 => 'Intitul&#233;', 4 => 'Notes', 5 => 'Pr&#233;visionnel', 6 => 'Non Liquid&#233;', 7 => 'Liquid&#233;', 8 => 'Utilis&#233;', 9 => 'Reste &#224; Engager', 10 => 'Salaires restant &#224; verser', 11 => 'Reste &#224; D&#233;penser', 12 => 'U/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'rubrique', 3 => 'intitule', 4 => 'notes', 5 => 'accorde', 6 => 'non_liquide', 7 => 'liquide', 8 => 'utilise', 9 => 'reste_engager', 10 => 'reservation_salaire', 11 => 'reste_depenser', 12 => 'prop_ua'),
 					'sortable-fields' => array(0 => '`ventilation`.`id`', 1 => '`conventions1`.`nom`', 2 => '`rubriques1`.`intitule`', 3 => 4, 4 => 5, 5 => '`ventilation`.`accorde`', 6 => '`ventilation`.`non_liquide`', 7 => '`ventilation`.`liquide`', 8 => '`ventilation`.`utilise`', 9 => '`ventilation`.`reste_engager`', 10 => '`ventilation`.`reservation_salaire`', 11 => '`ventilation`.`reste_depenser`', 12 => '`ventilation`.`prop_ua`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 2,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -321,7 +321,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Rubrique de Ventilation', 3 => 'Intitul&#233;', 4 => 'Notes', 5 => 'Pr&#233;visionnel', 6 => 'Non Liquid&#233;', 7 => 'Liquid&#233;', 8 => 'Utilis&#233;', 9 => 'Reste &#224; Engager', 10 => 'Salaires restant &#224; verser', 11 => 'Reste &#224; D&#233;penser', 12 => 'U/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'rubrique', 3 => 'intitule', 4 => 'notes', 5 => 'accorde', 6 => 'non_liquide', 7 => 'liquide', 8 => 'utilise', 9 => 'reste_engager', 10 => 'reservation_salaire', 11 => 'reste_depenser', 12 => 'prop_ua'),
 					'sortable-fields' => array(0 => '`ventilation`.`id`', 1 => '`conventions1`.`nom`', 2 => '`rubriques1`.`intitule`', 3 => 4, 4 => 5, 5 => '`ventilation`.`accorde`', 6 => '`ventilation`.`non_liquide`', 7 => '`ventilation`.`liquide`', 8 => '`ventilation`.`utilise`', 9 => '`ventilation`.`reste_engager`', 10 => '`ventilation`.`reservation_salaire`', 11 => '`ventilation`.`reste_depenser`', 12 => '`ventilation`.`prop_ua`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 2,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -347,7 +347,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Intitul&#233; du poste', 3 => 'B&#233;n&#233;ficiaire', 4 => 'D&#233;but', 5 => 'Fin', 6 => 'Dur&#233;e (mois)', 7 => 'Ligne budg&#233;taire', 8 => 'Ventilation Budg&#233;taire', 9 => 'Notes', 10 => 'Co&#251;t total pr&#233;visionnel', 11 => 'D&#233;pens&#233;', 12 => 'Salaires restant &#224; verser', 13 => 'D/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'intitule', 3 => 'beneficiaire', 4 => 'date_debut', 5 => 'date_fin', 6 => 'duree', 7 => 'ligne_budgetaire', 8 => 'ventilation', 9 => 'notes', 10 => 'previsionnel', 11 => 'depense', 12 => 'reservation_salaire', 13 => 'prop_dp'),
 					'sortable-fields' => array(0 => '`recrutements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`personnes1`.`nom`', 4 => '`recrutements`.`date_debut`', 5 => '`recrutements`.`date_fin`', 6 => '`recrutements`.`duree`', 7 => 8, 8 => '`ventilation1`.`intitule`', 9 => 10, 10 => '`recrutements`.`previsionnel`', 11 => '`recrutements`.`depense`', 12 => '`recrutements`.`reservation_salaire`', 13 => '`recrutements`.`prop_dp`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -371,7 +371,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Intitul&#233; du poste', 3 => 'B&#233;n&#233;ficiaire', 4 => 'D&#233;but', 5 => 'Fin', 6 => 'Dur&#233;e (mois)', 7 => 'Ligne budg&#233;taire', 8 => 'Ventilation Budg&#233;taire', 9 => 'Notes', 10 => 'Co&#251;t total pr&#233;visionnel', 11 => 'D&#233;pens&#233;', 12 => 'Salaires restant &#224; verser', 13 => 'D/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'intitule', 3 => 'beneficiaire', 4 => 'date_debut', 5 => 'date_fin', 6 => 'duree', 7 => 'ligne_budgetaire', 8 => 'ventilation', 9 => 'notes', 10 => 'previsionnel', 11 => 'depense', 12 => 'reservation_salaire', 13 => 'prop_dp'),
 					'sortable-fields' => array(0 => '`recrutements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`personnes1`.`nom`', 4 => '`recrutements`.`date_debut`', 5 => '`recrutements`.`date_fin`', 6 => '`recrutements`.`duree`', 7 => 8, 8 => '`ventilation1`.`intitule`', 9 => 10, 10 => '`recrutements`.`previsionnel`', 11 => '`recrutements`.`depense`', 12 => '`recrutements`.`reservation_salaire`', 13 => '`recrutements`.`prop_dp`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -395,7 +395,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Intitul&#233; du poste', 3 => 'B&#233;n&#233;ficiaire', 4 => 'D&#233;but', 5 => 'Fin', 6 => 'Dur&#233;e (mois)', 7 => 'Ligne budg&#233;taire', 8 => 'Ventilation Budg&#233;taire', 9 => 'Notes', 10 => 'Co&#251;t total pr&#233;visionnel', 11 => 'D&#233;pens&#233;', 12 => 'Salaires restant &#224; verser', 13 => 'D/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'intitule', 3 => 'beneficiaire', 4 => 'date_debut', 5 => 'date_fin', 6 => 'duree', 7 => 'ligne_budgetaire', 8 => 'ventilation', 9 => 'notes', 10 => 'previsionnel', 11 => 'depense', 12 => 'reservation_salaire', 13 => 'prop_dp'),
 					'sortable-fields' => array(0 => '`recrutements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`personnes1`.`nom`', 4 => '`recrutements`.`date_debut`', 5 => '`recrutements`.`date_fin`', 6 => '`recrutements`.`duree`', 7 => 8, 8 => '`ventilation1`.`intitule`', 9 => 10, 10 => '`recrutements`.`previsionnel`', 11 => '`recrutements`.`depense`', 12 => '`recrutements`.`reservation_salaire`', 13 => '`recrutements`.`prop_dp`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -419,7 +419,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Intitul&#233; du poste', 3 => 'B&#233;n&#233;ficiaire', 4 => 'D&#233;but', 5 => 'Fin', 6 => 'Dur&#233;e (mois)', 7 => 'Ligne budg&#233;taire', 8 => 'Ventilation Budg&#233;taire', 9 => 'Notes', 10 => 'Co&#251;t total pr&#233;visionnel', 11 => 'D&#233;pens&#233;', 12 => 'Salaires restant &#224; verser', 13 => 'D/P (%)'),
 					'display-field-names' => array(1 => 'convention', 2 => 'intitule', 3 => 'beneficiaire', 4 => 'date_debut', 5 => 'date_fin', 6 => 'duree', 7 => 'ligne_budgetaire', 8 => 'ventilation', 9 => 'notes', 10 => 'previsionnel', 11 => 'depense', 12 => 'reservation_salaire', 13 => 'prop_dp'),
 					'sortable-fields' => array(0 => '`recrutements`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => '`personnes1`.`nom`', 4 => '`recrutements`.`date_debut`', 5 => '`recrutements`.`date_fin`', 6 => '`recrutements`.`duree`', 7 => 8, 8 => '`ventilation1`.`intitule`', 9 => 10, 10 => '`recrutements`.`previsionnel`', 11 => '`recrutements`.`depense`', 12 => '`recrutements`.`reservation_salaire`', 13 => '`recrutements`.`prop_dp`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => false,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -445,7 +445,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -469,7 +469,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -493,7 +493,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -517,7 +517,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -541,7 +541,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -565,7 +565,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Ligne Budg&#233;taire', 3 => 'Ligne de cr&#233;dit (CFI) - Exercice', 4 => 'Date', 5 => 'Intitul&#233;', 6 => 'R&#233;ference', 7 => 'Contrat (si salaire)', 8 => 'B&#233;n&#233;ficiaire', 9 => 'Montant', 10 => 'Liquid&#233;e ?', 11 => 'Ventilation Budg&#233;taire', 12 => 'Notes', 13 => 'V&#233;rifi&#233;e ?'),
 					'display-field-names' => array(1 => 'convention', 2 => 'ligne_budgetaire', 3 => 'ligne_credit', 4 => 'date', 5 => 'intitule', 6 => 'reference', 7 => 'contrat', 8 => 'beneficiaire', 9 => 'montant', 10 => 'liquidee', 11 => 'ventilation', 12 => 'notes', 13 => 'verifie'),
 					'sortable-fields' => array(0 => '`depenses`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => '`depenses`.`date`', 5 => 6, 6 => 7, 7 => 8, 8 => '`personnes2`.`nom`', 9 => '`depenses`.`montant`', 10 => '`depenses`.`liquidee`', 11 => '`ventilation1`.`intitule`', 12 => 13, 13 => '`depenses`.`verifie`'),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 4,
 					'default-sort-direction' => 'desc',
 					'open-detail-view-on-click' => true,
@@ -591,7 +591,7 @@
 					'display-fields' => array(1 => 'Convention', 2 => 'Titre', 3 => 'Fichier', 4 => 'Notes'),
 					'display-field-names' => array(1 => 'convention', 2 => 'titre', 3 => 'fichier', 4 => 'notes'),
 					'sortable-fields' => array(0 => '`fichiers`.`id`', 1 => '`conventions1`.`nom`', 2 => 3, 3 => 4, 4 => 5),
-					'records-per-page' => 10,
+					'records-per-page' => 50,
 					'default-sort-by' => 2,
 					'default-sort-direction' => 'asc',
 					'open-detail-view-on-click' => true,
@@ -795,7 +795,7 @@
 
 			// build the count query
 			$forcedWhere = $userPCConfig[$ChildTable][$ChildLookupField]['forced-where'];
-			$query = 
+			$query =
 				preg_replace('/^select .* from /i', 'SELECT count(1) FROM ', $userPCConfig[$ChildTable][$ChildLookupField]['query']) .
 				$permissionsJoin . " WHERE " .
 				($permissionsWhere ? "( $permissionsWhere )" : "( 1=1 )") . " AND " .
@@ -826,12 +826,12 @@
 			// build the data query
 			if($totalMatches) { // if we have at least one record, proceed with fetching data
 				$startRecord = $userPCConfig[$ChildTable][$ChildLookupField]['records-per-page'] * ($Page - 1);
-				$data['query'] = 
+				$data['query'] =
 					$userPCConfig[$ChildTable][$ChildLookupField]['query'] .
 					$permissionsJoin . " WHERE " .
 					($permissionsWhere ? "( $permissionsWhere )" : "( 1=1 )") . " AND " .
 					($forcedWhere ? "( $forcedWhere )" : "( 2=2 )") . " AND " .
-					"`$ChildTable`.`$ChildLookupField`='" . makeSafe($SelectedID) . "'" . 
+					"`$ChildTable`.`$ChildLookupField`='" . makeSafe($SelectedID) . "'" .
 					($SortBy !== false && $userPCConfig[$ChildTable][$ChildLookupField]['sortable-fields'][$SortBy] ? " ORDER BY {$userPCConfig[$ChildTable][$ChildLookupField]['sortable-fields'][$SortBy]} $SortDirection" : '') .
 					" LIMIT $startRecord, {$userPCConfig[$ChildTable][$ChildLookupField]['records-per-page']}";
 				$res = sql($data['query'], $eo);
