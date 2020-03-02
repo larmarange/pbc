@@ -53,11 +53,21 @@ $j(function () {
 $j(function () {
   $j("#conventions_dv_action_buttons").append(
     '<div class="btn-group-vertical btn-group-lg" style="width: 100%;">' +
+  	  '<button type="button" class="btn btn-primary btn-lg" onclick="consommation_budget()" style="white-space: normal; font-size: 1.1em;"><i class="glyphicon glyphicon-stats"></i> Consommation du budget</button>' +
+  	'</div>' +
+    '<p></p>' +
+    '<div class="btn-group-vertical btn-group-lg" style="width: 100%;">' +
   	  '<button type="button" class="btn btn-default btn-lg" onclick="depenses_verifiees()" style="white-space: normal; font-size: 1.1em;"><i class="glyphicon glyphicon-check"></i> Marquer toutes les dépenses comme <strong>vérifiées</strong></button>' +
       '<button type="button" class="btn btn-default btn-lg" onclick="depenses_non_verifiees()" style="white-space: normal; font-size: 1.1em;"><i class="glyphicon glyphicon-unchecked"></i> Marquer toutes les dépenses comme <strong>non vérifiées</strong></button>' +
   	'</div>'
   );
 });
+
+function consommation_budget(){
+  var id_convention = $j("[name=SelectedID]").val();
+  window.open("consommation_budget.php?ConventionID=" + id_convention, '_blank');
+
+}
 
 function depenses_verifiees(){
   var id_convention = $j("[name=SelectedID]").val();
