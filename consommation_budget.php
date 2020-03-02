@@ -68,7 +68,7 @@
     } else {
       $class = "progress-bar-danger";
     }
-    echo '<div class="progress" style="min-width: 75px;">
+    echo '<div class="progress" style="min-width: 75px; margin: 0;">
       <div class="progress-bar '.$class.'" role="progressbar" aria-valuenow="'.$value.'" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: '.$width.'%; font-size: .9em;">
         '.$res.'
       </div>
@@ -87,8 +87,8 @@
   <div class="row">
     <div class="col-xs-12">
 			<h1><?php echo $convention['nom']; ?></h1>
+			<p>Version du <?php setlocale(LC_TIME, 'fr_FR'); echo strftime('%A %d %B %Y'); ?></p>
       <p>Les astérisques (*) indiquent les montants où les dépenses ne sont pas toutes liquidées.</p>
-      <p>Version du <?php setlocale(LC_TIME, 'fr_FR'); echo strftime('%A %d %B %Y'); ?></p>
     </div>
 	</div>
 
