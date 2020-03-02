@@ -43,13 +43,36 @@
     }
 
   }
+  // function pourcent($nombre) {
+  //   $res = number_format($nombre * 100, 1, ',', ' ')  . "&nbsp;%";
+  //   if ($nombre >=1 ) {
+  //     echo $res;
+  //   } else {
+  //     echo '<span style="color: red;">' . $res . '</span>';
+  //   }
+  // }
   function pourcent($nombre) {
-    $res = number_format($nombre * 100, 1, ',', ' ')  . "&nbsp;%";
-    if ($nombre >=0 ) {
-      echo $res;
+    $res = number_format($nombre * 100, 0, ',', ' ')  . "%";
+    $value = round($nombre * 100);
+    if ($value > 100) {
+      $width = 100;
     } else {
-      echo '<span style="color: red;">' . $res . '</span>';
+      $width = $value;
     }
+    if ($value < 50) {
+      $class = "progress-bar-success";
+    } else if ($value >=50 & $value < 75) {
+      $class = "progress-bar-info";
+    } else if ($value >= 75 & $value < 100) {
+      $class = "progress-bar-warning";
+    } else {
+      $class = "progress-bar-danger";
+    }
+    echo '<div class="progress" style="min-width: 75px;">
+      <div class="progress-bar '.$class.'" role="progressbar" aria-valuenow="'.$value.'" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: '.$width.'%; font-size: .9em;">
+        '.$res.'
+      </div>
+    </div>';
   }
 
   /* sélectionner les exercices */
@@ -64,7 +87,7 @@
   <div class="row">
     <div class="col-xs-12">
 			<h1><?php echo $convention['nom']; ?></h1>
-      <p><em>Les astérisques (*) indiquent les montants où les dépenses ne sont pas toutes liquidées.</em></p>
+      <p>Les astérisques (*) indiquent les montants où les dépenses ne sont pas toutes liquidées.</p>
       <p>Version du <?php setlocale(LC_TIME, 'fr_FR'); echo strftime('%A %d %B %Y'); ?></p>
     </div>
 	</div>
@@ -85,7 +108,7 @@
         }
       ?>
       <th class="text-right">Total consommé</th>
-      <th class="text-right">%</th>
+      <th class="text-right">&nbsp;</th>
 		</thead>
 
 		<tbody>
@@ -128,9 +151,9 @@
               euro2($non_liquide, $liquide);
               echo '</td>';
               // Pourcentage
-              echo '<td class="text-right"><em>';
+              echo '<td class="text-right">';
               pourcent(($non_liquide + $liquide) / $ligne['accorde']);
-              echo '</em></td>';
+              echo '</td>';
             ?>
 
           </tr>
@@ -177,9 +200,9 @@
           euro2($non_liquide, $liquide);
           echo '</th>';
           // Pourcentage
-          echo '<th class="text-right"><em>';
+          echo '<th class="text-right">';
           pourcent(($non_liquide + $liquide) / $accorde);
-          echo '</em></th>';
+          echo '</th>';
         ?>
 			</tr>
 		</tfoot>
@@ -201,7 +224,7 @@
         }
       ?>
       <th class="text-right">Total consommé</th>
-      <th class="text-right">%</th>
+      <th class="text-right">&nbsp;</th>
 		</thead>
 
 		<tbody>
@@ -246,9 +269,9 @@
         euro2($non_liquide, $liquide);
         echo '</td>';
         // Pourcentage
-        echo '<td class="text-right"><em>';
+        echo '<td class="text-right">';
         if ($previsionnel > 0) { pourcent(($non_liquide + $liquide) / $previsionnel); }
-        echo '</em></td>';
+        echo '</td>';
         echo '</tr>';
       }
 
@@ -294,9 +317,9 @@
           euro2($non_liquide, $liquide);
           echo '</th>';
           // Pourcentage
-          echo '<th class="text-right"><em>';
+          echo '<th class="text-right">';
           if ($previsionnel > 0) { pourcent(($non_liquide + $liquide) / $previsionnel); }
-          echo '</em></th>';
+          echo '</th>';
           echo '</tr>';
           // Pour chaque ligne de ventilation de la rubrique
           $res_lignes = sql("SELECT * FROM `ventilation` WHERE convention={$convention_id} AND rubrique={$id_rubrique} ORDER BY intitule", $eo);
@@ -338,9 +361,9 @@
             euro2($non_liquide, $liquide);
             echo '</td>';
             // Pourcentage
-            echo '<td class="text-right"><em>';
+            echo '<td class="text-right">';
             if ($previsionnel > 0) { pourcent(($non_liquide + $liquide) / $previsionnel); }
-            echo '</em></td>';
+            echo '</td>';
             echo '</tr>';
           }
         }
@@ -385,9 +408,9 @@
           euro2($non_liquide, $liquide);
           echo '</th>';
           // Pourcentage
-          echo '<th class="text-right"><em>';
+          echo '<th class="text-right">';
           if ($previsionnel > 0) { pourcent(($non_liquide + $liquide) / $previsionnel); }
-          echo '</em></th>';
+          echo '</th>';
           echo '</tr>';
         }
       ?>
@@ -431,9 +454,9 @@
           euro2($non_liquide, $liquide);
           echo '</th>';
           // Pourcentage
-          echo '<th class="text-right"><em>';
+          echo '<th class="text-right">';
           pourcent(($non_liquide + $liquide) / $accorde);
-          echo '</em></th>';
+          echo '</th>';
         ?>
 			</tr>
 		</tfoot>
