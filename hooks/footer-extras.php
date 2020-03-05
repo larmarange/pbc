@@ -53,7 +53,7 @@
               $j(id + ' .badge').html(recs);
           })
       }, 1000);
-  })
+  });
 
 // Lien documentation dans le menu
 $j(function(){
@@ -69,4 +69,22 @@ $j(function(){
              '</ul>'
       );
     }
-})</script>
+});
+
+// Titre des tables enfants
+
+$j(function () {
+  setInterval(function() {
+    $j(".titre_enfant").remove();
+    titre = $j(".child-tab-label.active a").clone()    //clone the element
+    .children() //select all the children
+    .remove()   //remove all the children
+    .end()  //again go back to selected element
+    .text();
+    $j(".tab-pane.active").prepend("<h4 class='titre_enfant'><strong>"+titre+"</strong></h4>");
+
+  }, 1000);
+});
+
+
+</script>
