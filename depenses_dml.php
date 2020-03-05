@@ -953,7 +953,7 @@ function depenses_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $A
 	$templateCode = str_replace('<%%URLCOMBOTEXT(ventilation)%%>', urlencode($combo_ventilation->MatchText), $templateCode);
 
 	/* lookup fields array: 'lookup field name' => array('parent table name', 'lookup field caption') */
-	$lookup_fields = array('convention' => array('conventions', 'Convention'), 'ligne_budgetaire' => array('budgets', 'Ligne Budg&#233;taire'), 'ligne_credit' => array('lignes_credits', 'Ligne de cr&#233;dit (CFI) - Exercice'), 'contrat' => array('recrutements', 'Contrat (si salaire)'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ventilation' => array('ventilation', 'Ventilation Budg&#233;taire'), );
+	$lookup_fields = array('convention' => array('conventions', 'Convention'), 'ligne_budgetaire' => array('budgets', 'Ligne Budg&#233;taire'), 'ligne_credit' => array('lignes_credits', 'Ligne de cr&#233;dit (CFI) - Exercice'), 'contrat' => array('recrutements', 'Contrat (si salaire)'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ventilation' => array('ventilation', 'Ventilation Analytique'), );
 	foreach($lookup_fields as $luf => $ptfc) {
 		$pt_perm = getTablePermissions($ptfc[0]);
 

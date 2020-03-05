@@ -94,7 +94,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h2>Consommation des lignes budgétaires</h2>
+      <h2>Consommation Budgétaire</h2>
     </div>
   </div>
 
@@ -220,7 +220,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h2>Consommation analytique</h2>
+      <h2>Consommation Analytique</h2>
     </div>
 	</div>
 
