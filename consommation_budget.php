@@ -25,7 +25,7 @@
 
   /* formatteurs */
   function euro($nombre) {
-    $res = number_format($nombre, 2, ',', ' ')  . "&nbsp;&euro;";
+    $res = number_format($nombre, 2, ',', '&nbsp;')  . "&nbsp;&euro;";
     if ($nombre >=0 ) {
       echo $res;
     } else {
@@ -35,7 +35,7 @@
   function euro2($non_liquide, $liquide) {
     if (is_null($non_liquide)) $non_liquide = 0;
     if (is_null($liquide)) $liquide = 0;
-    $res = number_format($non_liquide + $liquide, 2, ',', ' ')  . "&nbsp;&euro;";
+    $res = number_format($non_liquide + $liquide, 2, ',', '&nbsp;')  . "&nbsp;&euro;";
     if ($non_liquide >0 ) {
       echo $res . "*";
     } else {
@@ -52,7 +52,7 @@
   //   }
   // }
   function pourcent($nombre) {
-    $res = number_format($nombre * 100, 0, ',', ' ')  . "%";
+    $res = number_format($nombre * 100, 0, ',', '&nbsp;')  . "%";
     $value = round($nombre * 100);
     if ($value > 100) {
       $width = 100;
