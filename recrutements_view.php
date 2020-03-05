@@ -32,10 +32,10 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"if(CHAR_LENGTH(`recrutements`.`notes`)>80, concat(left(`recrutements`.`notes`,80),' ...'), `recrutements`.`notes`)" => "notes",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`prop_dp` > 100, 'red', 'black'), ';''>', FORMAT(`recrutements`.`prop_dp`, 0, 'ru_RU'), '%</span>')" => "prop_dp",
+		"CONCAT('$', FORMAT(`recrutements`.`previsionnel`, 2))" => "previsionnel",
+		"CONCAT('$', FORMAT(`recrutements`.`depense`, 2))" => "depense",
+		"CONCAT('$', FORMAT(`recrutements`.`reservation_salaire`, 2))" => "reservation_salaire",
+		"CONCAT('&euro;', FORMAT(`recrutements`.`prop_dp`, 2))" => "prop_dp",
 	);
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = array(
@@ -67,10 +67,10 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`recrutements`.`notes`" => "notes",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`prop_dp` > 100, 'red', 'black'), ';''>', FORMAT(`recrutements`.`prop_dp`, 0, 'ru_RU'), '%</span>')" => "prop_dp",
+		"CONCAT('$', FORMAT(`recrutements`.`previsionnel`, 2))" => "previsionnel",
+		"CONCAT('$', FORMAT(`recrutements`.`depense`, 2))" => "depense",
+		"CONCAT('$', FORMAT(`recrutements`.`reservation_salaire`, 2))" => "reservation_salaire",
+		"CONCAT('&euro;', FORMAT(`recrutements`.`prop_dp`, 2))" => "prop_dp",
 	);
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = array(
@@ -102,10 +102,10 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`recrutements`.`notes`" => "Notes",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
-		"CONCAT('<span style=''color: ', IF(`recrutements`.`prop_dp` > 100, 'red', 'black'), ';''>', FORMAT(`recrutements`.`prop_dp`, 0, 'ru_RU'), '%</span>')" => "prop_dp",
+		"CONCAT('$', FORMAT(`recrutements`.`previsionnel`, 2))" => "previsionnel",
+		"CONCAT('$', FORMAT(`recrutements`.`depense`, 2))" => "depense",
+		"CONCAT('$', FORMAT(`recrutements`.`reservation_salaire`, 2))" => "reservation_salaire",
+		"CONCAT('&euro;', FORMAT(`recrutements`.`prop_dp`, 2))" => "prop_dp",
 	);
 
 	// Lookup fields that can be used as filterers
@@ -199,7 +199,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`recrutements`.`previsionnel`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`recrutements`.`previsionnel`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`recrutements`.`depense`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`recrutements`.`depense`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(sum(`recrutements`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`recrutements`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('$', FORMAT(sum(`recrutements`.`previsionnel`), 2)), CONCAT('$', FORMAT(sum(`recrutements`.`depense`), 2)), CONCAT('$', FORMAT(sum(`recrutements`.`reservation_salaire`), 2)) from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
