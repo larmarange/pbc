@@ -25,7 +25,7 @@
 
   /* formatteurs */
   function euro($nombre) {
-    $res = number_format($nombre, 2, ',', ' ')  . "&nbsp;&euro;";
+    $res = number_format($nombre, 2, ',', '&nbsp;')  . "&nbsp;&euro;";
     if ($nombre >=0 ) {
       echo $res;
     } else {
@@ -35,7 +35,7 @@
   function euro2($non_liquide, $liquide) {
     if (is_null($non_liquide)) $non_liquide = 0;
     if (is_null($liquide)) $liquide = 0;
-    $res = number_format($non_liquide + $liquide, 2, ',', ' ')  . "&nbsp;&euro;";
+    $res = number_format($non_liquide + $liquide, 2, ',', '&nbsp;')  . "&nbsp;&euro;";
     if ($non_liquide >0 ) {
       echo $res . "*";
     } else {
@@ -52,7 +52,7 @@
   //   }
   // }
   function pourcent($nombre) {
-    $res = number_format($nombre * 100, 0, ',', ' ')  . "%";
+    $res = number_format($nombre * 100, 0, ',', '&nbsp;')  . "%";
     $value = round($nombre * 100);
     if ($value > 100) {
       $width = 100;
@@ -69,7 +69,7 @@
       $class = "progress-bar-danger";
     }
     echo '<div class="progress" style="min-width: 75px; margin: 0;">
-      <div class="progress-bar '.$class.'" role="progressbar" aria-valuenow="'.$value.'" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: '.$width.'%; font-size: .9em;">
+      <div class="progress-bar '.$class.'" role="progressbar" aria-valuenow="'.$value.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$width.'%; font-size: .9em;">
         '.$res.'
       </div>
     </div>';
@@ -94,7 +94,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h2>Consommation des lignes budgétaires</h2>
+      <h2>Consommation Budgétaire</h2>
     </div>
   </div>
 
@@ -220,7 +220,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h2>Consommation analytique</h2>
+      <h2>Consommation Analytique</h2>
     </div>
 	</div>
 
