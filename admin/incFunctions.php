@@ -133,7 +133,7 @@
 					'homepageShowCount' => 0
 				),
 				'ventilation' => array(
-					'Caption' => 'Ventilation Analytique',
+					'Caption' => 'Ventilation Budg&#233;taire',
 					'Description' => '',
 					'tableIcon' => 'resources/table_icons/024-tasks.png',
 					'group' => $tg[0],
@@ -195,7 +195,7 @@
 				'lignes_credits' => 'Lignes de Cr&#233;dits',
 				'credits' => 'Cr&#233;dits (ouverture)',
 				'rubriques' => 'Rubriques de Ventilation',
-				'ventilation' => 'Ventilation Analytique',
+				'ventilation' => 'Ventilation Budg&#233;taire',
 				'recrutements' => 'Recrutements',
 				'depenses' => 'D&#233;penses',
 				'fichiers' => 'Fichiers',

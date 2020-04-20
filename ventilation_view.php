@@ -130,7 +130,7 @@
 	$x->QuickSearchText = $Translation["quick search"];
 	$x->ScriptFileName = "ventilation_view.php";
 	$x->RedirectAfterInsert = "ventilation_view.php?SelectedID=#ID#";
-	$x->TableTitle = "Ventilation Analytique";
+	$x->TableTitle = "Ventilation Budg&#233;taire";
 	$x->TableIcon = "resources/table_icons/024-tasks.png";
 	$x->PrimaryKey = "`ventilation`.`id`";
 	$x->DefaultSortField = '3';

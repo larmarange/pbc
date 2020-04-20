@@ -768,7 +768,7 @@ function recrutements_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1
 	$templateCode = str_replace('<%%URLCOMBOTEXT(ventilation)%%>', urlencode($combo_ventilation->MatchText), $templateCode);
 
 	/* lookup fields array: 'lookup field name' => array('parent table name', 'lookup field caption') */
-	$lookup_fields = array('convention' => array('conventions', 'Convention'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ligne_budgetaire' => array('budgets', 'Ligne budg&#233;taire'), 'ventilation' => array('ventilation', 'Ventilation Analytique'), );
+	$lookup_fields = array('convention' => array('conventions', 'Convention'), 'beneficiaire' => array('personnes', 'B&#233;n&#233;ficiaire'), 'ligne_budgetaire' => array('budgets', 'Ligne budg&#233;taire'), 'ventilation' => array('ventilation', 'Ventilation Budg&#233;taire'), );
 	foreach($lookup_fields as $luf => $ptfc) {
 		$pt_perm = getTablePermissions($ptfc[0]);
 

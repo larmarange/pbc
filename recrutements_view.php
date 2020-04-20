@@ -30,7 +30,7 @@
 		"if(`recrutements`.`date_fin`,date_format(`recrutements`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`recrutements`.`duree`" => "duree",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"if(CHAR_LENGTH(`recrutements`.`notes`)>80, concat(left(`recrutements`.`notes`,80),' ...'), `recrutements`.`notes`)" => "notes",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
@@ -65,7 +65,7 @@
 		"if(`recrutements`.`date_fin`,date_format(`recrutements`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`recrutements`.`duree`" => "duree",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`recrutements`.`notes`" => "notes",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
@@ -82,7 +82,7 @@
 		"`recrutements`.`date_fin`" => "Fin",
 		"`recrutements`.`duree`" => "Dur&#233;e (mois)",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "Ligne budg&#233;taire",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "Ventilation Analytique",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "Ventilation Budg&#233;taire",
 		"`recrutements`.`notes`" => "Notes",
 		"`recrutements`.`previsionnel`" => "Co&#251;t total pr&#233;visionnel",
 		"`recrutements`.`depense`" => "D&#233;pens&#233;",
@@ -100,7 +100,7 @@
 		"if(`recrutements`.`date_fin`,date_format(`recrutements`.`date_fin`,'%d/%m/%Y'),'')" => "date_fin",
 		"`recrutements`.`duree`" => "duree",
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne budg&#233;taire */" => "ligne_budgetaire",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`recrutements`.`notes`" => "Notes",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "previsionnel",
 		"CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "depense",
@@ -109,7 +109,7 @@
 	);
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = array('convention' => 'Convention', 'beneficiaire' => 'B&#233;n&#233;ficiaire', 'ligne_budgetaire' => 'Ligne budg&#233;taire', 'ventilation' => 'Ventilation Analytique', );
+	$x->filterers = array('convention' => 'Convention', 'beneficiaire' => 'B&#233;n&#233;ficiaire', 'ligne_budgetaire' => 'Ligne budg&#233;taire', 'ventilation' => 'Ventilation Budg&#233;taire', );
 
 	$x->QueryFrom = "`recrutements` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`recrutements`.`convention` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`recrutements`.`beneficiaire` LEFT JOIN `budgets` as budgets1 ON `budgets1`.`id`=`recrutements`.`ligne_budgetaire` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets1`.`type` LEFT JOIN `ventilation` as ventilation1 ON `ventilation1`.`id`=`recrutements`.`ventilation` ";
 	$x->QueryWhere = '';
@@ -140,7 +140,7 @@
 	$x->PrimaryKey = "`recrutements`.`id`";
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Intitul&#233; du poste", "B&#233;n&#233;ficiaire", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Ligne budg&#233;taire", "Ventilation Analytique", "Notes", "Co&#251;t total pr&#233;visionnel", "D&#233;pens&#233;", "Salaires restant &#224; verser", "D/P (%)");
+	$x->ColCaption = array("Convention", "Intitul&#233; du poste", "B&#233;n&#233;ficiaire", "D&#233;but", "Fin", "Dur&#233;e (mois)", "Ligne budg&#233;taire", "Ventilation Budg&#233;taire", "Notes", "Co&#251;t total pr&#233;visionnel", "D&#233;pens&#233;", "Salaires restant &#224; verser", "D/P (%)");
 	$x->ColFieldName = array('convention', 'intitule', 'beneficiaire', 'date_debut', 'date_fin', 'duree', 'ligne_budgetaire', 'ventilation', 'notes', 'previsionnel', 'depense', 'reservation_salaire', 'prop_dp');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 

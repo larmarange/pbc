@@ -120,22 +120,22 @@ rubriques_delete2Tip=["",spacer+"This option allows each member of the group to 
 rubriques_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Rubriques de Ventilation' table."];
 
 // ventilation table
-ventilation_addTip=["",spacer+"This option allows all members of the group to add records to the 'Ventilation Analytique' table. A member who adds a record to the table becomes the 'owner' of that record."];
+ventilation_addTip=["",spacer+"This option allows all members of the group to add records to the 'Ventilation Budg&#233;taire' table. A member who adds a record to the table becomes the 'owner' of that record."];
 
-ventilation_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Ventilation Analytique' table."];
-ventilation_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Ventilation Analytique' table."];
-ventilation_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Ventilation Analytique' table."];
-ventilation_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Ventilation Analytique' table."];
+ventilation_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Ventilation Budg&#233;taire' table."];
+ventilation_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Ventilation Budg&#233;taire' table."];
+ventilation_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Ventilation Budg&#233;taire' table."];
+ventilation_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Ventilation Budg&#233;taire' table."];
 
-ventilation_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Ventilation Analytique' table."];
-ventilation_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Ventilation Analytique' table."];
-ventilation_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Ventilation Analytique' table."];
-ventilation_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Ventilation Analytique' table, regardless of their owner."];
+ventilation_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Ventilation Budg&#233;taire' table."];
+ventilation_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Ventilation Budg&#233;taire' table."];
+ventilation_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Ventilation Budg&#233;taire' table."];
+ventilation_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Ventilation Budg&#233;taire' table, regardless of their owner."];
 
-ventilation_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Ventilation Analytique' table."];
-ventilation_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Ventilation Analytique' table."];
-ventilation_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Ventilation Analytique' table."];
-ventilation_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Ventilation Analytique' table."];
+ventilation_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Ventilation Budg&#233;taire' table."];
+ventilation_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Ventilation Budg&#233;taire' table."];
+ventilation_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Ventilation Budg&#233;taire' table."];
+ventilation_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Ventilation Budg&#233;taire' table."];
 
 // recrutements table
 recrutements_addTip=["",spacer+"This option allows all members of the group to add records to the 'Recrutements' table. A member who adds a record to the table becomes the 'owner' of that record."];
