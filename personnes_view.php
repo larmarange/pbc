@@ -42,7 +42,7 @@
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = array(
 		"`personnes`.`id`" => "ID",
-		"`personnes`.`nom`" => "Nom Pr&#233;nom",
+		"`personnes`.`nom`" => "Pr&#233;nom Nom",
 		"`personnes`.`email`" => "Email",
 	);
 
@@ -83,9 +83,11 @@
 	$x->TableTitle = "Individus";
 	$x->TableIcon = "resources/table_icons/023-human-resources.png";
 	$x->PrimaryKey = "`personnes`.`id`";
+	$x->DefaultSortField = '2';
+	$x->DefaultSortDirection = 'asc';
 
 	$x->ColWidth   = array(  150, 150);
-	$x->ColCaption = array("Nom Pr&#233;nom", "Email");
+	$x->ColCaption = array("Pr&#233;nom Nom", "Email");
 	$x->ColFieldName = array('nom', 'email');
 	$x->ColNumber  = array(2, 3);
 

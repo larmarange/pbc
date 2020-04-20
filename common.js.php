@@ -408,10 +408,6 @@ function depenses_validateData() {
 	if($j('#convention').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Convention", close: function() { /* */ $j('[name=convention]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Field ligne_credit can't be empty */
 	if($j('#ligne_credit').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Ligne de cr&#233;dit (CFI) - Exercice", close: function() { /* */ $j('[name=ligne_credit]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
-	/* Date field date can't be empty */
-	if($j('#date-dd').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function() { /* */ $j('#date-dd').focus().parents('.form-group').addClass('has-error'); } }); return false; };
-	if($j('#date-mm').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function() { /* */ $j('#date-mm').focus().parents('.form-group').addClass('has-error'); } }); return false; };
-	if($j('#date').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Date", close: function() { /* */ $j('#date').focus().parents('.form-group').addClass('has-error'); } }); return false; };
 	/* Field intitule can't be empty */
 	if($j('#intitule').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Intitul&#233;", close: function() { /* */ $j('[name=intitule]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	/* Field montant can't be empty */
@@ -434,7 +430,7 @@ function fichiers_validateData() {
 function personnes_validateData() {
 	$j('.has-error').removeClass('has-error');
 	/* Field nom can't be empty */
-	if($j('#nom').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Nom Pr&#233;nom", close: function() { /* */ $j('[name=nom]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
+	if($j('#nom').val() == ''){ modal_window({ message: '<div class="alert alert-danger"><?php echo addslashes($Translation['field not null']); ?></div>', title: "<?php echo addslashes($Translation['error:']); ?> Pr&#233;nom Nom", close: function() { /* */ $j('[name=nom]').eq(0).focus().parents('.form-group').addClass('has-error'); }, footer: [{ label: '<?php echo addslashes($Translation['ok']); ?>' }] }); return false; };
 	return true;
 }
 function types_ligne_validateData() {

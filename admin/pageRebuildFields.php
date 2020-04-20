@@ -149,7 +149,7 @@
 			'convention' => array('appgini' => 'INT unsigned not null '),
 			'ligne_budgetaire' => array('appgini' => 'INT unsigned null '),
 			'ligne_credit' => array('appgini' => 'INT unsigned not null '),
-			'date' => array('appgini' => 'DATE not null '),
+			'date' => array('appgini' => 'DATE null '),
 			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
 			'reference' => array('appgini' => 'VARCHAR(40) null '),
 			'contrat' => array('appgini' => 'INT unsigned null '),

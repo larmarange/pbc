@@ -18,7 +18,7 @@ function personnes_insert() {
 	$data['email'] = $_REQUEST['email'];
 		if($data['email'] == empty_lookup_value) { $data['email'] = ''; }
 	if($data['nom']== '') {
-		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Nom Pr&#233;nom': " . $Translation['field not null'] . '<br><br>';
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">" . $Translation['error:'] . " 'Pr&#233;nom Nom': " . $Translation['field not null'] . '<br><br>';
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
@@ -195,7 +195,7 @@ function personnes_update($selected_id) {
 	$data['nom'] = makeSafe($_REQUEST['nom']);
 		if($data['nom'] == empty_lookup_value) { $data['nom'] = ''; }
 	if($data['nom']=='') {
-		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">{$Translation['error:']} 'Nom Pr&#233;nom': {$Translation['field not null']}<br><br>";
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">{$Translation['error:']} 'Pr&#233;nom Nom': {$Translation['field not null']}<br><br>";
 		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
 		exit;
 	}
