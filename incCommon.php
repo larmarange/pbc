@@ -51,7 +51,7 @@
 			'lignes_credits' => array('Lignes de Cr&#233;dits', '', 'resources/table_icons/044-prince2.png', 'Pilotage Bud&#233;gtaire des Conventions'),
 			'credits' => array('Cr&#233;dits (ouverture)', '', 'resources/table_icons/051-revenue.png', 'Pilotage Bud&#233;gtaire des Conventions'),
 			'rubriques' => array('Rubriques de Ventilation', '', 'resources/table_icons/032-archives.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'ventilation' => array('Ventilation Budg&#233;taire', '', 'resources/table_icons/024-tasks.png', 'Pilotage Bud&#233;gtaire des Conventions'),
+			'ventilation' => array('Ventilation Analytique', '', 'resources/table_icons/024-tasks.png', 'Pilotage Bud&#233;gtaire des Conventions'),
 			'recrutements' => array('Recrutements', '', 'resources/table_icons/067-human-resources-1.png', 'Pilotage Bud&#233;gtaire des Conventions'),
 			'depenses' => array('D&#233;penses', '', 'resources/table_icons/005-expenses.png', 'Pilotage Bud&#233;gtaire des Conventions'),
 			'fichiers' => array('Fichiers', '', 'resources/table_icons/025-exchange.png', 'Pilotage Bud&#233;gtaire des Conventions'),

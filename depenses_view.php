@@ -33,7 +33,7 @@
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
 		"if(CHAR_LENGTH(`depenses`.`notes`)>80, concat(left(`depenses`.`notes`,80),' ...'), `depenses`.`notes`)" => "notes",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
 	);
@@ -68,7 +68,7 @@
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"`depenses`.`liquidee`" => "liquidee",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
 		"`depenses`.`notes`" => "notes",
 		"`depenses`.`verifie`" => "verifie",
 	);
@@ -85,7 +85,7 @@
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "B&#233;n&#233;ficiaire",
 		"`depenses`.`montant`" => "Montant",
 		"`depenses`.`liquidee`" => "Liquid&#233;e ?",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "Ventilation Budg&#233;taire",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "Ventilation Analytique",
 		"`depenses`.`notes`" => "Notes",
 		"`depenses`.`verifie`" => "V&#233;rifi&#233;e ?",
 	);
@@ -103,13 +103,13 @@
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
 		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
-		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
+		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Analytique */" => "ventilation",
 		"`depenses`.`notes`" => "Notes",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`verifie`, 'check', 'unchecked'), '\"></i>')" => "verifie",
 	);
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = array('convention' => 'Convention', 'ligne_budgetaire' => 'Ligne Budg&#233;taire', 'ligne_credit' => 'Ligne de cr&#233;dit (CFI) - Exercice', 'contrat' => 'Contrat (si salaire)', 'beneficiaire' => 'B&#233;n&#233;ficiaire', 'ventilation' => 'Ventilation Budg&#233;taire', );
+	$x->filterers = array('convention' => 'Convention', 'ligne_budgetaire' => 'Ligne Budg&#233;taire', 'ligne_credit' => 'Ligne de cr&#233;dit (CFI) - Exercice', 'contrat' => 'Contrat (si salaire)', 'beneficiaire' => 'B&#233;n&#233;ficiaire', 'ventilation' => 'Ventilation Analytique', );
 
 	$x->QueryFrom = "`depenses` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`depenses`.`convention` LEFT JOIN `budgets` as budgets1 ON `budgets1`.`id`=`depenses`.`ligne_budgetaire` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets1`.`type` LEFT JOIN `lignes_credits` as lignes_credits1 ON `lignes_credits1`.`id`=`depenses`.`ligne_credit` LEFT JOIN `recrutements` as recrutements1 ON `recrutements1`.`id`=`depenses`.`contrat` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`recrutements1`.`beneficiaire` LEFT JOIN `personnes` as personnes2 ON `personnes2`.`id`=`depenses`.`beneficiaire` LEFT JOIN `ventilation` as ventilation1 ON `ventilation1`.`id`=`depenses`.`ventilation` ";
 	$x->QueryWhere = '';
@@ -142,7 +142,7 @@
 	$x->DefaultSortDirection = 'desc';
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Liquid&#233;e ?", "Ventilation Budg&#233;taire", "Notes", "V&#233;rifi&#233;e ?");
+	$x->ColCaption = array("Convention", "Ligne Budg&#233;taire", "Ligne de cr&#233;dit (CFI) - Exercice", "Date", "Intitul&#233;", "R&#233;ference", "Contrat (si salaire)", "B&#233;n&#233;ficiaire", "Montant", "Liquid&#233;e ?", "Ventilation Analytique", "Notes", "V&#233;rifi&#233;e ?");
 	$x->ColFieldName = array('convention', 'ligne_budgetaire', 'ligne_credit', 'date', 'intitule', 'reference', 'contrat', 'beneficiaire', 'montant', 'liquidee', 'ventilation', 'notes', 'verifie');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 
