@@ -31,7 +31,7 @@
 		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
-		"CONCAT('$', FORMAT(`depenses`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"if(CHAR_LENGTH(`depenses`.`notes`)>80, concat(left(`depenses`.`notes`,80),' ...'), `depenses`.`notes`)" => "notes",
@@ -66,7 +66,7 @@
 		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
-		"CONCAT('$', FORMAT(`depenses`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"`depenses`.`liquidee`" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "notes",
@@ -101,7 +101,7 @@
 		"`depenses`.`reference`" => "reference",
 		"IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') /* Contrat (si salaire) */" => "contrat",
 		"IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') /* B&#233;n&#233;ficiaire */" => "beneficiaire",
-		"CONCAT('$', FORMAT(`depenses`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"concat('<i class=\"glyphicon glyphicon-', if(`depenses`.`liquidee`, 'check', 'unchecked'), '\"></i>')" => "liquidee",
 		"IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') /* Ventilation Budg&#233;taire */" => "ventilation",
 		"`depenses`.`notes`" => "Notes",
@@ -201,7 +201,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "select CONCAT('$', FORMAT(sum(`depenses`.`montant`), 2)) from {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "select CONCAT('<span style=''color: ', IF(sum(`depenses`.`montant`) < 0, 'red', 'black'), ';''>', FORMAT(sum(`depenses`.`montant`), 2, 'ru_RU'), '&nbsp;&euro;</span>') from {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
