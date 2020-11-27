@@ -8,7 +8,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 ## Historique des versions
 
-### v0.4-dev
+### v0.4
 
 - ajout d'un champ 'précision' aux lignes budgétaires
 - ajout d'un tableau de consommation du budget
