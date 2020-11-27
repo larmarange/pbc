@@ -14,85 +14,99 @@
 
 <div class="panel-body">
 	<fieldset class="form-horizontal">
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: ID -->
+		<div class="form-group recrutements-id" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">ID</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(id)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Convention -->
+		<div class="form-group recrutements-convention" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Convention</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="convention<%%RND1%%>"><%%COMBOTEXT(convention)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Intitul&#233; du poste -->
+		<div class="form-group recrutements-intitule" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Intitul&#233; du poste</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(intitule)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: B&#233;n&#233;ficiaire -->
+		<div class="form-group recrutements-beneficiaire" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">B&#233;n&#233;ficiaire</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="beneficiaire<%%RND1%%>"><%%COMBOTEXT(beneficiaire)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: D&#233;but -->
+		<div class="form-group recrutements-date_debut" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">D&#233;but</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(date_debut)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Fin -->
+		<div class="form-group recrutements-date_fin" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Fin</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(date_fin)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Dur&#233;e (mois) -->
+		<div class="form-group recrutements-duree" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Dur&#233;e (mois)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(duree)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Ligne budg&#233;taire -->
+		<div class="form-group recrutements-ligne_budgetaire" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Ligne budg&#233;taire</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="ligne_budgetaire<%%RND1%%>"><%%COMBOTEXT(ligne_budgetaire)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Ventilation Budg&#233;taire -->
+		<div class="form-group recrutements-ventilation" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Ventilation Budg&#233;taire</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="ventilation<%%RND1%%>"><%%COMBOTEXT(ventilation)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Notes -->
+		<div class="form-group recrutements-notes" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Notes</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(notes)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Co&#251;t total pr&#233;visionnel -->
+		<div class="form-group recrutements-previsionnel" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Co&#251;t total pr&#233;visionnel</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(previsionnel)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: D&#233;pens&#233; -->
+		<div class="form-group recrutements-depense" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">D&#233;pens&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(depense)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Salaires restant &#224; verser -->
+		<div class="form-group recrutements-reservation_salaire" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Salaires restant &#224; verser</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reservation_salaire)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: D/P (%) -->
+		<div class="form-group recrutements-prop_dp" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">D/P (%)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(prop_dp)%%></div>

@@ -6,7 +6,7 @@
 <div class="panel-body" id="lignes_credits_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
-		<div class="col-xs-12">
+		<div class="col-xs-12 children-links">
 			<input type="hidden" id="credits_hclink" value="credits_view.php?filterer_ligne_credit=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_ligne_credit=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
@@ -19,7 +19,8 @@
 		<div class="col-md-8 col-lg-10" id="lignes_credits_dv_form">
 			<fieldset class="form-horizontal">
 
-				<div class="form-group">
+				<!-- Field: Convention -->
+				<div class="form-group lignes_credits-convention">
 					<hr class="hidden-md hidden-lg">
 					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -27,7 +28,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ligne Budg&#233;taire -->
+				<div class="form-group lignes_credits-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne Budg&#233;taire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -35,7 +37,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Intitul&#233; / CFI -->
+				<div class="form-group lignes_credits-intitule">
 					<hr class="hidden-md hidden-lg">
 					<label for="intitule" class="control-label col-lg-3">Intitul&#233; / CFI<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#intitule-description"></i></label>
 					<div class="col-lg-9">
@@ -45,7 +48,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Exercice -->
+				<div class="form-group lignes_credits-exercice">
 					<hr class="hidden-md hidden-lg">
 					<label for="exercice" class="control-label col-lg-3">Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
 					<div class="col-lg-9">
@@ -55,7 +59,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Notes -->
+				<div class="form-group lignes_credits-notes">
 					<hr class="hidden-md hidden-lg">
 					<label for="notes" class="control-label col-lg-3">Notes</label>
 					<div class="col-lg-9">
@@ -63,7 +68,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ouvert -->
+				<div class="form-group lignes_credits-ouvert">
 					<hr class="hidden-md hidden-lg">
 					<label for="ouvert" class="control-label col-lg-3">Ouvert</label>
 					<div class="col-lg-9">
@@ -71,7 +77,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Non Liquid&#233; -->
+				<div class="form-group lignes_credits-non_liquide">
 					<hr class="hidden-md hidden-lg">
 					<label for="non_liquide" class="control-label col-lg-3">Non Liquid&#233;</label>
 					<div class="col-lg-9">
@@ -79,7 +86,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Liquid&#233; -->
+				<div class="form-group lignes_credits-liquide">
 					<hr class="hidden-md hidden-lg">
 					<label for="liquide" class="control-label col-lg-3">Liquid&#233;</label>
 					<div class="col-lg-9">
@@ -87,7 +95,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Utilis&#233; -->
+				<div class="form-group lignes_credits-utilise">
 					<hr class="hidden-md hidden-lg">
 					<label for="utilise" class="control-label col-lg-3">Utilis&#233;</label>
 					<div class="col-lg-9">
@@ -95,7 +104,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Disponible -->
+				<div class="form-group lignes_credits-disponible">
 					<hr class="hidden-md hidden-lg">
 					<label for="disponible" class="control-label col-lg-3">Disponible</label>
 					<div class="col-lg-9">
@@ -103,7 +113,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: U/O (%) -->
+				<div class="form-group lignes_credits-prop_uo">
 					<hr class="hidden-md hidden-lg">
 					<label for="prop_uo" class="control-label col-lg-3">U/O (%)</label>
 					<div class="col-lg-9">
@@ -138,12 +149,13 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
-			<div id="lignes_credits-children" class="children-tabs"></div>
+			<div id="lignes_credits-children" class="children-tabs">
+				<div class="text-center"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+			</div>
 		</div>
 	</div>
 
 </div><!-- /div class="panel-body" -->
-	<script src="nicEdit.js"></script>
 	<script>
 		$j(function() {
 			var add_new_mode = (!$j('input[name=SelectedID]').val());
@@ -157,12 +169,11 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
-			bkLib.onDomLoaded(function() {
-				if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
-
-				$j('.nicEdit-panelContain').parent().width('100%');
-				$j('.nicEdit-panelContain').parent().next().width('98%');
-				$j('.nicEdit-main').width('99%');
+			AppGini.once({
+				condition: function() { return bkLib != undefined; },
+				action: function() {
+					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
+				}
 			});
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
@@ -202,7 +213,7 @@
 			if(add_new_mode) {
 				/* hide links to children tables */
 				$j('.detail_view a[id$=_link]').remove();
-			}else{
+			} else {
 				post(
 					'parent-children.php', {
 						ParentTable: 'lignes_credits',
@@ -251,7 +262,7 @@
 				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
 				if($j(this).prevAll('input:hidden').length) {
 					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
-				}else{
+				} else {
 					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
 				}
 

@@ -13,6 +13,7 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 - ajout d'un champ 'précision' aux lignes budgétaires
 - ajout d'un tableau de consommation du budget
 - ergonomie : affichage du titre des tables enfants
+- mise à jour AppGini 5.92
 
 ### v0.3
 

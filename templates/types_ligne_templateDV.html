@@ -6,7 +6,7 @@
 <div class="panel-body" id="types_ligne_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
-		<div class="col-xs-12">
+		<div class="col-xs-12 children-links">
 			<input type="hidden" id="budgets_hclink" value="budgets_view.php?filterer_type=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
@@ -18,7 +18,8 @@
 		<div class="col-md-8 col-lg-10" id="types_ligne_dv_form">
 			<fieldset class="form-horizontal">
 
-				<div class="form-group">
+				<!-- Field: Frais de Gestion ? -->
+				<div class="form-group types_ligne-frais_gestion">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
 						<div class="checkbox"><label for="frais_gestion"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%>> Frais de Gestion ?</label>
@@ -28,7 +29,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Organisme gestionnaire -->
+				<div class="form-group types_ligne-gestionnaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="gestionnaire" class="control-label col-lg-3">Organisme gestionnaire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -36,7 +38,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Type -->
+				<div class="form-group types_ligne-type">
 					<hr class="hidden-md hidden-lg">
 					<label for="type" class="control-label col-lg-3">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -71,7 +74,9 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
-			<div id="types_ligne-children" class="children-tabs"></div>
+			<div id="types_ligne-children" class="children-tabs">
+				<div class="text-center"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+			</div>
 		</div>
 	</div>
 
@@ -124,7 +129,7 @@
 			if(add_new_mode) {
 				/* hide links to children tables */
 				$j('.detail_view a[id$=_link]').remove();
-			}else{
+			} else {
 				post(
 					'parent-children.php', {
 						ParentTable: 'types_ligne',
@@ -173,7 +178,7 @@
 				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
 				if($j(this).prevAll('input:hidden').length) {
 					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
-				}else{
+				} else {
 					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
 				}
 

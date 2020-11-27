@@ -6,7 +6,7 @@
 <div class="panel-body" id="recrutements_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
-		<div class="col-xs-12">
+		<div class="col-xs-12 children-links">
 			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_contrat=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
@@ -18,7 +18,8 @@
 		<div class="col-md-8 col-lg-10" id="recrutements_dv_form">
 			<fieldset class="form-horizontal">
 
-				<div class="form-group">
+				<!-- Field: ID -->
+				<div class="form-group recrutements-id">
 					<hr class="hidden-md hidden-lg">
 					<label for="id" class="control-label col-lg-3">ID</label>
 					<div class="col-lg-9">
@@ -26,7 +27,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Convention -->
+				<div class="form-group recrutements-convention">
 					<hr class="hidden-md hidden-lg">
 					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -34,7 +36,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Intitul&#233; du poste -->
+				<div class="form-group recrutements-intitule">
 					<hr class="hidden-md hidden-lg">
 					<label for="intitule" class="control-label col-lg-3">Intitul&#233; du poste<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -42,7 +45,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: B&#233;n&#233;ficiaire -->
+				<div class="form-group recrutements-beneficiaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="beneficiaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
 					<div class="col-lg-9">
@@ -50,7 +54,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: D&#233;but -->
+				<div class="form-group recrutements-date_debut">
 					<hr class="hidden-md hidden-lg">
 					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
 					<div class="col-lg-9">
@@ -58,7 +63,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Fin -->
+				<div class="form-group recrutements-date_fin">
 					<hr class="hidden-md hidden-lg">
 					<label for="date_fin" class="control-label col-lg-3">Fin</label>
 					<div class="col-lg-9">
@@ -66,7 +72,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Dur&#233;e (mois) -->
+				<div class="form-group recrutements-duree">
 					<hr class="hidden-md hidden-lg">
 					<label for="duree" class="control-label col-lg-3">Dur&#233;e (mois)</label>
 					<div class="col-lg-9">
@@ -74,7 +81,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ligne budg&#233;taire -->
+				<div class="form-group recrutements-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne budg&#233;taire</label>
 					<div class="col-lg-9">
@@ -82,7 +90,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ventilation Budg&#233;taire -->
+				<div class="form-group recrutements-ventilation">
 					<hr class="hidden-md hidden-lg">
 					<label for="ventilation" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
 					<div class="col-lg-9">
@@ -90,7 +99,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Notes -->
+				<div class="form-group recrutements-notes">
 					<hr class="hidden-md hidden-lg">
 					<label for="notes" class="control-label col-lg-3">Notes</label>
 					<div class="col-lg-9">
@@ -98,7 +108,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Co&#251;t total pr&#233;visionnel -->
+				<div class="form-group recrutements-previsionnel">
 					<hr class="hidden-md hidden-lg">
 					<label for="previsionnel" class="control-label col-lg-3">Co&#251;t total pr&#233;visionnel</label>
 					<div class="col-lg-9">
@@ -106,7 +117,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: D&#233;pens&#233; -->
+				<div class="form-group recrutements-depense">
 					<hr class="hidden-md hidden-lg">
 					<label for="depense" class="control-label col-lg-3">D&#233;pens&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depense-description"></i></label>
 					<div class="col-lg-9">
@@ -116,7 +128,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Salaires restant &#224; verser -->
+				<div class="form-group recrutements-reservation_salaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
 					<div class="col-lg-9">
@@ -126,7 +139,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: D/P (%) -->
+				<div class="form-group recrutements-prop_dp">
 					<hr class="hidden-md hidden-lg">
 					<label for="prop_dp" class="control-label col-lg-3">D/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_dp-description"></i></label>
 					<div class="col-lg-9">
@@ -163,12 +177,13 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
-			<div id="recrutements-children" class="children-tabs"></div>
+			<div id="recrutements-children" class="children-tabs">
+				<div class="text-center"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+			</div>
 		</div>
 	</div>
 
 </div><!-- /div class="panel-body" -->
-	<script src="nicEdit.js"></script>
 	<script>
 		$j(function() {
 			var add_new_mode = (!$j('input[name=SelectedID]').val());
@@ -182,12 +197,11 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
-			bkLib.onDomLoaded(function() {
-				if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
-
-				$j('.nicEdit-panelContain').parent().width('100%');
-				$j('.nicEdit-panelContain').parent().next().width('98%');
-				$j('.nicEdit-main').width('99%');
+			AppGini.once({
+				condition: function() { return bkLib != undefined; },
+				action: function() {
+					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
+				}
 			});
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
@@ -227,7 +241,7 @@
 			if(add_new_mode) {
 				/* hide links to children tables */
 				$j('.detail_view a[id$=_link]').remove();
-			}else{
+			} else {
 				post(
 					'parent-children.php', {
 						ParentTable: 'recrutements',
@@ -276,7 +290,7 @@
 				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
 				if($j(this).prevAll('input:hidden').length) {
 					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
-				}else{
+				} else {
 					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
 				}
 

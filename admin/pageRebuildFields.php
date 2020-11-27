@@ -9,176 +9,7 @@
 	*/
 
 	/* application schema as created in AppGini */
-	$schema = array(
-		'conventions' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'nom' => array('appgini' => 'VARCHAR(40) not null '),
-			'statut' => array('appgini' => 'VARCHAR(40) not null default \'active\' '),
-			'bailleur' => array('appgini' => 'VARCHAR(40) null '),
-			'porteur' => array('appgini' => 'INT unsigned null '),
-			'chef_projet' => array('appgini' => 'INT unsigned null '),
-			'date_reponse' => array('appgini' => 'DATE null '),
-			'demande' => array('appgini' => 'DECIMAL(10,2) null '),
-			'date_debut' => array('appgini' => 'DATE null '),
-			'date_fin' => array('appgini' => 'DATE null '),
-			'duree' => array('appgini' => 'MEDIUMINT unsigned null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'accorde_hfg' => array('appgini' => 'DECIMAL(10,2) null '),
-			'frais_gestion' => array('appgini' => 'DECIMAL(10,2) unsigned null '),
-			'accorde' => array('appgini' => 'DECIMAL(10,2) null '),
-			'verse' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_verser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'verse_hfg' => array('appgini' => 'DECIMAL(10,2) null '),
-			'ouvert' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_ouvrir' => array('appgini' => 'DECIMAL(10,2) null '),
-			'non_liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
-			'disponible' => array('appgini' => 'DOUBLE(10,2) null '),
-			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'prop_uo' => array('appgini' => 'DECIMAL(10,1) null '),
-			'prop_uv' => array('appgini' => 'DECIMAL(10,1) null '),
-			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null '),
-			'budget_nv' => array('appgini' => 'DECIMAL(10,2) null '),
-			'depenses_nv' => array('appgini' => 'DECIMAL(10,2) null '),
-		),
-		'budgets' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'type' => array('appgini' => 'INT unsigned not null '),
-			'precision' => array('appgini' => 'VARCHAR(100) null '),
-			'accorde' => array('appgini' => 'DECIMAL(10,2) unsigned not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'verse' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_verser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'ouvert' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_ouvrir' => array('appgini' => 'DECIMAL(10,2) null '),
-			'non_liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
-			'disponible' => array('appgini' => 'FLOAT(10,2) null '),
-			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'prop_uo' => array('appgini' => 'DECIMAL(10,1) null '),
-			'prop_uv' => array('appgini' => 'DECIMAL(10,1) null '),
-			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null '),
-		),
-		'versements' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'ligne_budgetaire' => array('appgini' => 'INT unsigned not null '),
-			'date' => array('appgini' => 'DATE not null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) null '),
-			'montant' => array('appgini' => 'DECIMAL(10,2) not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-		),
-		'lignes_credits' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'ligne_budgetaire' => array('appgini' => 'INT unsigned not null '),
-			'intitule' => array('appgini' => 'VARCHAR(40) not null '),
-			'exercice' => array('appgini' => 'VARCHAR(10) not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'ouvert' => array('appgini' => 'DECIMAL(10,2) null '),
-			'non_liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
-			'disponible' => array('appgini' => 'FLOAT(10,2) null '),
-			'prop_uo' => array('appgini' => 'DECIMAL(10,1) null '),
-		),
-		'credits' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'ligne_budgetaire' => array('appgini' => 'INT unsigned null '),
-			'ligne_credit' => array('appgini' => 'INT unsigned not null '),
-			'date' => array('appgini' => 'DATE not null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) null '),
-			'montant' => array('appgini' => 'DECIMAL(10,2) not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-		),
-		'rubriques' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'accorde' => array('appgini' => 'DOUBLE(10,2) unsigned null '),
-			'non_liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null '),
-		),
-		'ventilation' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'rubrique' => array('appgini' => 'INT unsigned null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'accorde' => array('appgini' => 'DOUBLE(10,2) unsigned null '),
-			'non_liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'liquide' => array('appgini' => 'DECIMAL(10,2) null '),
-			'utilise' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_engager' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reste_depenser' => array('appgini' => 'DECIMAL(10,2) null '),
-			'prop_ua' => array('appgini' => 'DECIMAL(10,1) null '),
-		),
-		'recrutements' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
-			'beneficiaire' => array('appgini' => 'INT unsigned null '),
-			'date_debut' => array('appgini' => 'DATE null '),
-			'date_fin' => array('appgini' => 'DATE null '),
-			'duree' => array('appgini' => 'MEDIUMINT unsigned null '),
-			'ligne_budgetaire' => array('appgini' => 'INT unsigned null '),
-			'ventilation' => array('appgini' => 'INT unsigned null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'previsionnel' => array('appgini' => 'DOUBLE(10,2) unsigned null '),
-			'depense' => array('appgini' => 'DECIMAL(10,2) null '),
-			'reservation_salaire' => array('appgini' => 'DECIMAL(10,2) null '),
-			'prop_dp' => array('appgini' => 'DECIMAL(10,2) null '),
-		),
-		'depenses' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'ligne_budgetaire' => array('appgini' => 'INT unsigned null '),
-			'ligne_credit' => array('appgini' => 'INT unsigned not null '),
-			'date' => array('appgini' => 'DATE null '),
-			'intitule' => array('appgini' => 'VARCHAR(100) not null '),
-			'reference' => array('appgini' => 'VARCHAR(40) null '),
-			'contrat' => array('appgini' => 'INT unsigned null '),
-			'beneficiaire' => array('appgini' => 'INT unsigned null '),
-			'montant' => array('appgini' => 'DECIMAL(10,2) not null '),
-			'liquidee' => array('appgini' => 'TINYINT null '),
-			'ventilation' => array('appgini' => 'INT unsigned null '),
-			'notes' => array('appgini' => 'TEXT null '),
-			'verifie' => array('appgini' => 'TINYINT null '),
-		),
-		'fichiers' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'convention' => array('appgini' => 'INT unsigned not null '),
-			'titre' => array('appgini' => 'VARCHAR(100) not null '),
-			'fichier' => array('appgini' => 'VARCHAR(150) null '),
-			'notes' => array('appgini' => 'TEXT null '),
-		),
-		'personnes' => array(
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'nom' => array('appgini' => 'VARCHAR(100) not null '),
-			'email' => array('appgini' => 'VARCHAR(80) null '),
-		),
-		'types_ligne' => array(
-			'frais_gestion' => array('appgini' => 'VARCHAR(40) null '),
-			'id' => array('appgini' => 'INT unsigned not null primary key auto_increment '),
-			'gestionnaire' => array('appgini' => 'VARCHAR(40) not null '),
-			'type' => array('appgini' => 'VARCHAR(40) not null '),
-		),
-	);
+	$schema = get_table_fields();
 
 	$table_captions = getTableList();
 
@@ -187,15 +18,15 @@
 		$def = strtolower($def);
 
 		/* ignore 'null' */
-		$def = preg_replace('/\s+not\s+null\s*/', '%%NOT_NULL%%', $def);
-		$def = preg_replace('/\s+null\s*/', ' ', $def);
+		$def = preg_replace('/\s+not\s+null\s*/i', '%%NOT_NULL%%', $def);
+		$def = preg_replace('/\s+null\s*/i', ' ', $def);
 		$def = str_replace('%%NOT_NULL%%', ' not null ', $def);
 
 		/* ignore length for int data types */
-		$def = preg_replace('/int\s*\([0-9]+\)/', 'int', $def);
+		$def = preg_replace('/int\s*\([0-9]+\)/i', 'int', $def);
 
 		/* make sure there is always a space before mysql words */
-		$def = preg_replace('/(\S)(unsigned|not null|binary|zerofill|auto_increment|default)/', '$1 $2', $def);
+		$def = preg_replace('/(\S)(unsigned|not null|binary|zerofill|auto_increment|default)/i', '$1 $2', $def);
 
 		/* treat 0.000.. same as 0 */
 		$def = preg_replace('/([0-9])*\.0+/', '$1', $def);
@@ -204,7 +35,7 @@
 		$def = str_ireplace('unsigned zerofill', 'zerofill', $def);
 
 		/* ignore zero-padding for date data types */
-		$def = preg_replace("/date\s*default\s*'([0-9]{4})-0?([1-9])-0?([1-9])'/", "date default '$1-$2-$3'", $def);
+		$def = preg_replace("/date\s*default\s*'([0-9]{4})-0?([1-9])-0?([1-9])'/i", "date default '$1-$2-$3'", $def);
 
 		return trim($def);
 	}
@@ -221,18 +52,18 @@
 		$eo['silentErrors'] = true;
 
 		// field exists?
-		$res = sql("show columns from `{$fix_table}` like '{$fix_field}'", $eo);
+		$res = sql("SHOW COLUMNS FROM `{$fix_table}` LIKE '{$fix_field}'", $eo);
 		if($row = db_fetch_assoc($res)) {
 			// modify field
-			$qry = "alter table `{$fix_table}` modify `{$fix_field}` {$def['appgini']}";
+			$qry = "ALTER TABLE `{$fix_table}` MODIFY `{$fix_field}` {$def['appgini']}";
 			sql($qry, $eo);
 
 			// remove unique from db if necessary
 			if($row['Key'] == 'UNI' && !stripos($def['appgini'], ' unique')) {
 				// retrieve unique index name
-				$res_unique = sql("show index from `{$fix_table}` where Column_name='{$fix_field}' and Non_unique=0", $eo);
+				$res_unique = sql("SHOW INDEX FROM `{$fix_table}` WHERE Column_name='{$fix_field}' AND Non_unique=0", $eo);
 				if($row_unique = db_fetch_assoc($res_unique)) {
-					$qry_unique = "drop index `{$row_unique['Key_name']}` on `{$fix_table}`";
+					$qry_unique = "DROP INDEX `{$row_unique['Key_name']}` ON `{$fix_table}`";
 					sql($qry_unique, $eo);
 					$qry .= ";\n{$qry_unique}";
 				}
@@ -248,7 +79,7 @@
 			if(!isset($schema[$fix_table][$current_pk])) {
 				// no need to include 'primary key' in definition since it's already a PK field
 				$redef = str_ireplace(' primary key', '', $def['appgini']);
-				$qry = "alter table `{$fix_table}` change `{$current_pk}` `{$fix_field}` {$redef}";
+				$qry = "ALTER TABLE `{$fix_table}` CHANGE `{$current_pk}` `{$fix_field}` {$redef}";
 				sql($qry, $eo);
 				return 1;
 			}
@@ -260,11 +91,11 @@
 			// and also remove auto_increment from it if defined
 			// then proceed to creating the missing PK field
 			$pk_def = str_ireplace(' auto_increment', '', $schema[$fix_table][$current_pk]);
-			sql("alter table `{$fix_table}` modify `{$current_pk}` {$pk_def}", $eo);
+			sql("ALTER TABLE `{$fix_table}` MODIFY `{$current_pk}` {$pk_def}", $eo);
 		}
 
 		// create field
-		$qry = "alter table `{$fix_table}` add column `{$fix_field}` {$def['appgini']}";
+		$qry = "ALTER TABLE `{$fix_table}` ADD COLUMN `{$fix_field}` {$def['appgini']}";
 		sql($qry, $eo);
 		return 2;
 	}
@@ -279,7 +110,7 @@
 	/* retrieve actual db schema */
 	foreach($table_captions as $tn => $tc) {
 		$eo['silentErrors'] = true;
-		$res = sql("show columns from `{$tn}`", $eo);
+		$res = sql("SHOW COLUMNS FROM `{$tn}`", $eo);
 		if($res) {
 			while($row = db_fetch_assoc($res)) {
 				if(!isset($schema[$tn][$row['Field']]['appgini'])) continue;
@@ -355,12 +186,12 @@
 			<tr class="<?php echo ($diff ? 'warning' : 'field_ok'); ?>">
 				<td><i class="glyphicon glyphicon-<?php echo ($diff ? 'remove text-danger' : 'ok text-success'); ?>"></i></td>
 				<td><?php echo $fn; ?></td>
-				<td class="<?php echo ($diff ? 'bold text-success' : ''); ?>"><?php echo $fd['appgini']; ?></td>
-				<td class="<?php echo ($diff ? 'bold text-danger' : ''); ?>"><?php echo thisOr($fd['db'], $Translation['does not exist']); ?></td>
+				<td class="<?php echo ($diff ? 'bold text-success' : ''); ?>"><samp><?php echo $fd['appgini']; ?></samp></td>
+				<td class="<?php echo ($diff ? 'bold text-danger' : ''); ?>"><?php echo thisOr("<samp>{$fd['db']}</samp>", $Translation['does not exist']); ?></td>
 				<td>
 					<?php if($diff && $no_db) { ?>
 						<a href="pageRebuildFields.php?t=<?php echo $tn; ?>&f=<?php echo $fn; ?>" class="btn btn-success btn-xs btn_create" data-toggle="tooltip" data-placement="top" title="<?php echo $Translation['create field'] ; ?>"><i class="glyphicon glyphicon-plus"></i> <?php echo $Translation['create it'] ; ?></a>
-					<?php }elseif($diff) { ?>
+					<?php } elseif($diff) { ?>
 						<a href="pageRebuildFields.php?t=<?php echo $tn; ?>&f=<?php echo $fn; ?>" class="btn btn-warning btn-xs btn_update" data-toggle="tooltip" title="<?php echo $Translation['fix field'] ; ?>"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['fix it'] ; ?></a>
 					<?php } ?>
 				</td>
@@ -400,7 +231,7 @@
 		var count_creates = $j('.btn_create').length;
 		if(!count_creates && !count_updates) {
 			$j('.summary').addClass('alert-success').html("<?php echo $Translation['no deviations found'] ; ?>");
-		}else{
+		} else {
 			var fieldsCount = "<?php echo $Translation['error fields']; ?>";
 			fieldsCount = fieldsCount.replace(/<CREATENUM>/, count_creates ).replace(/<UPDATENUM>/, count_updates);
 

@@ -42,30 +42,28 @@
 	#########################################################
 
 	function getTableList($skip_authentication = false) {
-		$arrAccessTables = array();
-		$arrTables = array(
+		$arrAccessTables = [];
+		$arrTables = [
 			/* 'table_name' => ['table caption', 'homepage description', 'icon', 'table group name'] */   
-			'conventions' => array('Conventions', '', 'resources/table_icons/035-legal-document.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'budgets' => array('Lignes budg&#233;taires', '', 'resources/table_icons/006-business.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'versements' => array('Versements (bailleur)', '', 'resources/table_icons/009-cash.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'lignes_credits' => array('Lignes de Cr&#233;dits', '', 'resources/table_icons/044-prince2.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'credits' => array('Cr&#233;dits (ouverture)', '', 'resources/table_icons/051-revenue.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'rubriques' => array('Rubriques de Ventilation', '', 'resources/table_icons/032-archives.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'ventilation' => array('Ventilation Budg&#233;taire', '', 'resources/table_icons/024-tasks.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'recrutements' => array('Recrutements', '', 'resources/table_icons/067-human-resources-1.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'depenses' => array('D&#233;penses', '', 'resources/table_icons/005-expenses.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'fichiers' => array('Fichiers', '', 'resources/table_icons/025-exchange.png', 'Pilotage Bud&#233;gtaire des Conventions'),
-			'personnes' => array('Individus', '', 'resources/table_icons/023-human-resources.png', 'Param&#232;tres'),
-			'types_ligne' => array('Type de lignes budg&#233;taires', '', 'resources/table_icons/034-mechanism.png', 'Param&#232;tres')
-		);
+			'conventions' => ['Conventions', '', 'resources/table_icons/035-legal-document.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'budgets' => ['Lignes budg&#233;taires', '', 'resources/table_icons/006-business.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'versements' => ['Versements (bailleur)', '', 'resources/table_icons/009-cash.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'lignes_credits' => ['Lignes de Cr&#233;dits', '', 'resources/table_icons/044-prince2.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'credits' => ['Cr&#233;dits (ouverture)', '', 'resources/table_icons/051-revenue.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'rubriques' => ['Rubriques de Ventilation', '', 'resources/table_icons/032-archives.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'ventilation' => ['Ventilation Budg&#233;taire', '', 'resources/table_icons/024-tasks.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'recrutements' => ['Recrutements', '', 'resources/table_icons/067-human-resources-1.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'depenses' => ['D&#233;penses', '', 'resources/table_icons/005-expenses.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'fichiers' => ['Fichiers', '', 'resources/table_icons/025-exchange.png', 'Pilotage Bud&#233;gtaire des Conventions'],
+			'personnes' => ['Individus', '', 'resources/table_icons/023-human-resources.png', 'Param&#232;tres'],
+			'types_ligne' => ['Type de lignes budg&#233;taires', '', 'resources/table_icons/034-mechanism.png', 'Param&#232;tres'],
+		];
 		if($skip_authentication || getLoggedAdmin()) return $arrTables;
 
 		if(is_array($arrTables)) {
 			foreach($arrTables as $tn => $tc) {
 				$arrPerm = getTablePermissions($tn);
-				if($arrPerm[0]) {
-					$arrAccessTables[$tn] = $tc;
-				}
+				if($arrPerm['access']) $arrAccessTables[$tn] = $tc;
 			}
 		}
 
@@ -76,9 +74,9 @@
 
 	function get_table_groups($skip_authentication = false) {
 		$tables = getTableList($skip_authentication);
-		$all_groups = array('Pilotage Bud&#233;gtaire des Conventions', 'Param&#232;tres');
+		$all_groups = ['Pilotage Bud&#233;gtaire des Conventions', 'Param&#232;tres'];
 
-		$groups = array();
+		$groups = [];
 		foreach($all_groups as $grp) {
 			foreach($tables as $tn => $td) {
 				if($td[3] && $td[3] == $grp) $groups[$grp][] = $tn;
@@ -92,16 +90,16 @@
 	#########################################################
 
 	function getTablePermissions($tn) {
-		static $table_permissions = array();
+		static $table_permissions = [];
 		if(isset($table_permissions[$tn])) return $table_permissions[$tn];
 
 		$groupID = getLoggedGroupID();
 		$memberID = makeSafe(getLoggedMemberID());
-		$res_group = sql("select tableName, allowInsert, allowView, allowEdit, allowDelete from membership_grouppermissions where groupID='{$groupID}'", $eo);
-		$res_user = sql("select tableName, allowInsert, allowView, allowEdit, allowDelete from membership_userpermissions where lcase(memberID)='{$memberID}'", $eo);
+		$res_group = sql("SELECT `tableName`, `allowInsert`, `allowView`, `allowEdit`, `allowDelete` FROM `membership_grouppermissions` WHERE `groupID`='{$groupID}'", $eo);
+		$res_user  = sql("SELECT `tableName`, `allowInsert`, `allowView`, `allowEdit`, `allowDelete` FROM `membership_userpermissions`  WHERE LCASE(`memberID`)='{$memberID}'", $eo);
 
 		while($row = db_fetch_assoc($res_group)) {
-			$table_permissions[$row['tableName']] = array(
+			$table_permissions[$row['tableName']] = [
 				1 => intval($row['allowInsert']),
 				2 => intval($row['allowView']),
 				3 => intval($row['allowEdit']),
@@ -110,12 +108,12 @@
 				'view' => intval($row['allowView']),
 				'edit' => intval($row['allowEdit']),
 				'delete' => intval($row['allowDelete'])
-			);
+			];
 		}
 
 		// user-specific permissions, if specified, overwrite his group permissions
 		while($row = db_fetch_assoc($res_user)) {
-			$table_permissions[$row['tableName']] = array(
+			$table_permissions[$row['tableName']] = [
 				1 => intval($row['allowInsert']),
 				2 => intval($row['allowView']),
 				3 => intval($row['allowEdit']),
@@ -124,7 +122,7 @@
 				'view' => intval($row['allowView']),
 				'edit' => intval($row['allowEdit']),
 				'delete' => intval($row['allowDelete'])
-			);
+			];
 		}
 
 		// if user has any type of access, set 'access' flag
@@ -142,32 +140,30 @@
 	#########################################################
 
 	function get_sql_fields($table_name) {
-		$sql_fields = array(
-			'conventions' => "`conventions`.`id` as 'id', `conventions`.`nom` as 'nom', `conventions`.`statut` as 'statut', `conventions`.`bailleur` as 'bailleur', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') as 'porteur', IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') as 'chef_projet', if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'') as 'date_reponse', CONCAT('<span style=''color: ', IF(`conventions`.`demande` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`demande`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'demande', if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'') as 'date_debut', if(`conventions`.`date_fin`,date_format(`conventions`.`date_fin`,'%d/%m/%Y'),'') as 'date_fin', `conventions`.`duree` as 'duree', `conventions`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`conventions`.`accorde_hfg` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`accorde_hfg`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'accorde_hfg', CONCAT('<span style=''color: ', IF(`conventions`.`frais_gestion` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`frais_gestion`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'frais_gestion', CONCAT('<span style=''color: ', IF(`conventions`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'accorde', CONCAT('<span style=''color: ', IF(`conventions`.`verse` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'verse', CONCAT('<span style=''color: ', IF(`conventions`.`reste_verser` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_verser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_verser', CONCAT('<span style=''color: ', IF(`conventions`.`verse_hfg` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`verse_hfg`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'verse_hfg', CONCAT('<span style=''color: ', IF(`conventions`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'ouvert', CONCAT('<span style=''color: ', IF(`conventions`.`reste_ouvrir` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_ouvrir`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_ouvrir', CONCAT('<span style=''color: ', IF(`conventions`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'non_liquide', CONCAT('<span style=''color: ', IF(`conventions`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'liquide', CONCAT('<span style=''color: ', IF(`conventions`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'utilise', CONCAT('<span style=''color: ', IF(`conventions`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'disponible', CONCAT('<span style=''color: ', IF(`conventions`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_engager', CONCAT('<span style=''color: ', IF(`conventions`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reservation_salaire', CONCAT('<span style=''color: ', IF(`conventions`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_depenser', CONCAT('<span style=''color: ', IF(`conventions`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`conventions`.`prop_uo`, 0, 'ru_RU'), '%</span>') as 'prop_uo', CONCAT('<span style=''color: ', IF(`conventions`.`prop_uv` > 100, 'red', 'black'), ';''>', FORMAT(`conventions`.`prop_uv`, 0, 'ru_RU'), '%</span>') as 'prop_uv', CONCAT('<span style=''color: ', IF(`conventions`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`conventions`.`prop_ua`, 0, 'ru_RU'), '%</span>') as 'prop_ua', CONCAT('<span style=''color: ', IF(`conventions`.`budget_nv` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`budget_nv`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'budget_nv', CONCAT('<span style=''color: ', IF(`conventions`.`depenses_nv` < 0, 'red', 'black'), ';''>', FORMAT(`conventions`.`depenses_nv`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'depenses_nv'",
-			'budgets' => "`budgets`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') as 'type', `budgets`.`precision` as 'precision', CONCAT('<span style=''color: ', IF(`budgets`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'accorde', `budgets`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`budgets`.`verse` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`verse`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'verse', CONCAT('<span style=''color: ', IF(`budgets`.`reste_verser` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_verser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_verser', CONCAT('<span style=''color: ', IF(`budgets`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'ouvert', CONCAT('<span style=''color: ', IF(`budgets`.`reste_ouvrir` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_ouvrir`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_ouvrir', CONCAT('<span style=''color: ', IF(`budgets`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'non_liquide', CONCAT('<span style=''color: ', IF(`budgets`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'liquide', CONCAT('<span style=''color: ', IF(`budgets`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'utilise', CONCAT('<span style=''color: ', IF(`budgets`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'disponible', CONCAT('<span style=''color: ', IF(`budgets`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_engager', CONCAT('<span style=''color: ', IF(`budgets`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reservation_salaire', CONCAT('<span style=''color: ', IF(`budgets`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`budgets`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_depenser', CONCAT('<span style=''color: ', IF(`budgets`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uo`, 0, 'ru_RU'), '%</span>') as 'prop_uo', CONCAT('<span style=''color: ', IF(`budgets`.`prop_uv` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_uv`, 0, 'ru_RU'), '%</span>') as 'prop_uv', CONCAT('<span style=''color: ', IF(`budgets`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`budgets`.`prop_ua`, 0, 'ru_RU'), '%</span>') as 'prop_ua'",
-			'versements' => "`versements`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'') as 'date', `versements`.`intitule` as 'intitule', CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'montant', `versements`.`notes` as 'notes'",
-			'lignes_credits' => "`lignes_credits`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', `lignes_credits`.`intitule` as 'intitule', `lignes_credits`.`exercice` as 'exercice', `lignes_credits`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`lignes_credits`.`ouvert` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`ouvert`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'ouvert', CONCAT('<span style=''color: ', IF(`lignes_credits`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'non_liquide', CONCAT('<span style=''color: ', IF(`lignes_credits`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'liquide', CONCAT('<span style=''color: ', IF(`lignes_credits`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'utilise', CONCAT('<span style=''color: ', IF(`lignes_credits`.`disponible` < 0, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`disponible`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'disponible', CONCAT('<span style=''color: ', IF(`lignes_credits`.`prop_uo` > 100, 'red', 'black'), ';''>', FORMAT(`lignes_credits`.`prop_uo`, 0, 'ru_RU'), '%</span>') as 'prop_uo'",
-			'credits' => "`credits`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') as 'ligne_credit', if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'') as 'date', `credits`.`intitule` as 'intitule', CONCAT('<span style=''color: ', IF(`credits`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`credits`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'montant', `credits`.`notes` as 'notes'",
-			'rubriques' => "`rubriques`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', `rubriques`.`intitule` as 'intitule', `rubriques`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'accorde', CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'non_liquide', CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'liquide', CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'utilise', CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_engager', CONCAT('<span style=''color: ', IF(`rubriques`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reservation_salaire', CONCAT('<span style=''color: ', IF(`rubriques`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_depenser', CONCAT('<span style=''color: ', IF(`rubriques`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`rubriques`.`prop_ua`, 0, 'ru_RU'), '%</span>') as 'prop_ua'",
-			'ventilation' => "`ventilation`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') as 'rubrique', `ventilation`.`intitule` as 'intitule', `ventilation`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`ventilation`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'accorde', CONCAT('<span style=''color: ', IF(`ventilation`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'non_liquide', CONCAT('<span style=''color: ', IF(`ventilation`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'liquide', CONCAT('<span style=''color: ', IF(`ventilation`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'utilise', CONCAT('<span style=''color: ', IF(`ventilation`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_engager', CONCAT('<span style=''color: ', IF(`ventilation`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reservation_salaire', CONCAT('<span style=''color: ', IF(`ventilation`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`ventilation`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reste_depenser', CONCAT('<span style=''color: ', IF(`ventilation`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`ventilation`.`prop_ua`, 0, 'ru_RU'), '%</span>') as 'prop_ua'",
-			'recrutements' => "`recrutements`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', `recrutements`.`intitule` as 'intitule', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') as 'beneficiaire', if(`recrutements`.`date_debut`,date_format(`recrutements`.`date_debut`,'%d/%m/%Y'),'') as 'date_debut', if(`recrutements`.`date_fin`,date_format(`recrutements`.`date_fin`,'%d/%m/%Y'),'') as 'date_fin', `recrutements`.`duree` as 'duree', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') as 'ventilation', `recrutements`.`notes` as 'notes', CONCAT('<span style=''color: ', IF(`recrutements`.`previsionnel` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`previsionnel`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'previsionnel', CONCAT('<span style=''color: ', IF(`recrutements`.`depense` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`depense`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'depense', CONCAT('<span style=''color: ', IF(`recrutements`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`recrutements`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'reservation_salaire', CONCAT('<span style=''color: ', IF(`recrutements`.`prop_dp` > 100, 'red', 'black'), ';''>', FORMAT(`recrutements`.`prop_dp`, 0, 'ru_RU'), '%</span>') as 'prop_dp'",
-			'depenses' => "`depenses`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') as 'ligne_credit', if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'') as 'date', `depenses`.`intitule` as 'intitule', `depenses`.`reference` as 'reference', IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') as 'contrat', IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') as 'beneficiaire', CONCAT('<span style=''color: ', IF(`depenses`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`depenses`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>') as 'montant', `depenses`.`liquidee` as 'liquidee', IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') as 'ventilation', `depenses`.`notes` as 'notes', `depenses`.`verifie` as 'verifie'",
+		$sql_fields = [
+			'conventions' => "`conventions`.`id` as 'id', `conventions`.`nom` as 'nom', `conventions`.`statut` as 'statut', `conventions`.`bailleur` as 'bailleur', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') as 'porteur', IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') as 'chef_projet', if(`conventions`.`date_reponse`,date_format(`conventions`.`date_reponse`,'%d/%m/%Y'),'') as 'date_reponse', CONCAT('$', FORMAT(`conventions`.`demande`, 2)) as 'demande', if(`conventions`.`date_debut`,date_format(`conventions`.`date_debut`,'%d/%m/%Y'),'') as 'date_debut', if(`conventions`.`date_fin`,date_format(`conventions`.`date_fin`,'%d/%m/%Y'),'') as 'date_fin', `conventions`.`duree` as 'duree', `conventions`.`notes` as 'notes', CONCAT('$', FORMAT(`conventions`.`accorde_hfg`, 2)) as 'accorde_hfg', CONCAT('$', FORMAT(`conventions`.`frais_gestion`, 2)) as 'frais_gestion', CONCAT('$', FORMAT(`conventions`.`accorde`, 2)) as 'accorde', CONCAT('$', FORMAT(`conventions`.`verse`, 2)) as 'verse', CONCAT('$', FORMAT(`conventions`.`reste_verser`, 2)) as 'reste_verser', CONCAT('$', FORMAT(`conventions`.`verse_hfg`, 2)) as 'verse_hfg', CONCAT('$', FORMAT(`conventions`.`ouvert`, 2)) as 'ouvert', CONCAT('$', FORMAT(`conventions`.`reste_ouvrir`, 2)) as 'reste_ouvrir', CONCAT('$', FORMAT(`conventions`.`non_liquide`, 2)) as 'non_liquide', CONCAT('$', FORMAT(`conventions`.`liquide`, 2)) as 'liquide', CONCAT('$', FORMAT(`conventions`.`utilise`, 2)) as 'utilise', CONCAT('$', FORMAT(`conventions`.`disponible`, 2)) as 'disponible', CONCAT('$', FORMAT(`conventions`.`reste_engager`, 2)) as 'reste_engager', CONCAT('$', FORMAT(`conventions`.`reservation_salaire`, 2)) as 'reservation_salaire', CONCAT('$', FORMAT(`conventions`.`reste_depenser`, 2)) as 'reste_depenser', CONCAT('&euro;', FORMAT(`conventions`.`prop_uo`, 2)) as 'prop_uo', CONCAT('&euro;', FORMAT(`conventions`.`prop_uv`, 2)) as 'prop_uv', CONCAT('&euro;', FORMAT(`conventions`.`prop_ua`, 2)) as 'prop_ua', CONCAT('$', FORMAT(`conventions`.`budget_nv`, 2)) as 'budget_nv', CONCAT('$', FORMAT(`conventions`.`depenses_nv`, 2)) as 'depenses_nv'",
+			'budgets' => "`budgets`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`), '') as 'type', `budgets`.`precision` as 'precision', CONCAT('$', FORMAT(`budgets`.`accorde`, 2)) as 'accorde', `budgets`.`notes` as 'notes', CONCAT('$', FORMAT(`budgets`.`verse`, 2)) as 'verse', CONCAT('$', FORMAT(`budgets`.`reste_verser`, 2)) as 'reste_verser', CONCAT('$', FORMAT(`budgets`.`ouvert`, 2)) as 'ouvert', CONCAT('$', FORMAT(`budgets`.`reste_ouvrir`, 2)) as 'reste_ouvrir', CONCAT('$', FORMAT(`budgets`.`non_liquide`, 2)) as 'non_liquide', CONCAT('$', FORMAT(`budgets`.`liquide`, 2)) as 'liquide', CONCAT('$', FORMAT(`budgets`.`utilise`, 2)) as 'utilise', CONCAT('$', FORMAT(`budgets`.`disponible`, 2)) as 'disponible', CONCAT('$', FORMAT(`budgets`.`reste_engager`, 2)) as 'reste_engager', CONCAT('$', FORMAT(`budgets`.`reservation_salaire`, 2)) as 'reservation_salaire', CONCAT('$', FORMAT(`budgets`.`reste_depenser`, 2)) as 'reste_depenser', CONCAT('&euro;', FORMAT(`budgets`.`prop_uo`, 2)) as 'prop_uo', CONCAT('&euro;', FORMAT(`budgets`.`prop_uv`, 2)) as 'prop_uv', CONCAT('&euro;', FORMAT(`budgets`.`prop_ua`, 2)) as 'prop_ua'",
+			'versements' => "`versements`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'') as 'date', `versements`.`intitule` as 'intitule', CONCAT('$', FORMAT(`versements`.`montant`, 2)) as 'montant', `versements`.`notes` as 'notes'",
+			'lignes_credits' => "`lignes_credits`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', `lignes_credits`.`intitule` as 'intitule', `lignes_credits`.`exercice` as 'exercice', `lignes_credits`.`notes` as 'notes', CONCAT('$', FORMAT(`lignes_credits`.`ouvert`, 2)) as 'ouvert', CONCAT('$', FORMAT(`lignes_credits`.`non_liquide`, 2)) as 'non_liquide', CONCAT('$', FORMAT(`lignes_credits`.`liquide`, 2)) as 'liquide', CONCAT('$', FORMAT(`lignes_credits`.`utilise`, 2)) as 'utilise', CONCAT('$', FORMAT(`lignes_credits`.`disponible`, 2)) as 'disponible', CONCAT('&euro;', FORMAT(`lignes_credits`.`prop_uo`, 2)) as 'prop_uo'",
+			'credits' => "`credits`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') as 'ligne_credit', if(`credits`.`date`,date_format(`credits`.`date`,'%d/%m/%Y'),'') as 'date', `credits`.`intitule` as 'intitule', CONCAT('$', FORMAT(`credits`.`montant`, 2)) as 'montant', `credits`.`notes` as 'notes'",
+			'rubriques' => "`rubriques`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', `rubriques`.`intitule` as 'intitule', `rubriques`.`notes` as 'notes', CONCAT('$', FORMAT(`rubriques`.`accorde`, 2)) as 'accorde', CONCAT('$', FORMAT(`rubriques`.`non_liquide`, 2)) as 'non_liquide', CONCAT('$', FORMAT(`rubriques`.`liquide`, 2)) as 'liquide', CONCAT('$', FORMAT(`rubriques`.`utilise`, 2)) as 'utilise', CONCAT('$', FORMAT(`rubriques`.`reste_engager`, 2)) as 'reste_engager', CONCAT('$', FORMAT(`rubriques`.`reservation_salaire`, 2)) as 'reservation_salaire', CONCAT('$', FORMAT(`rubriques`.`reste_depenser`, 2)) as 'reste_depenser', CONCAT('&euro;', FORMAT(`rubriques`.`prop_ua`, 2)) as 'prop_ua'",
+			'ventilation' => "`ventilation`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`rubriques1`.`intitule`), CONCAT_WS('',   `rubriques1`.`intitule`), '') as 'rubrique', `ventilation`.`intitule` as 'intitule', `ventilation`.`notes` as 'notes', CONCAT('$', FORMAT(`ventilation`.`accorde`, 2)) as 'accorde', CONCAT('$', FORMAT(`ventilation`.`non_liquide`, 2)) as 'non_liquide', CONCAT('$', FORMAT(`ventilation`.`liquide`, 2)) as 'liquide', CONCAT('$', FORMAT(`ventilation`.`utilise`, 2)) as 'utilise', CONCAT('$', FORMAT(`ventilation`.`reste_engager`, 2)) as 'reste_engager', CONCAT('$', FORMAT(`ventilation`.`reservation_salaire`, 2)) as 'reservation_salaire', CONCAT('$', FORMAT(`ventilation`.`reste_depenser`, 2)) as 'reste_depenser', CONCAT('&euro;', FORMAT(`ventilation`.`prop_ua`, 2)) as 'prop_ua'",
+			'recrutements' => "`recrutements`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', `recrutements`.`intitule` as 'intitule', IF(    CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `personnes1`.`nom`), '') as 'beneficiaire', if(`recrutements`.`date_debut`,date_format(`recrutements`.`date_debut`,'%d/%m/%Y'),'') as 'date_debut', if(`recrutements`.`date_fin`,date_format(`recrutements`.`date_fin`,'%d/%m/%Y'),'') as 'date_fin', `recrutements`.`duree` as 'duree', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') as 'ventilation', `recrutements`.`notes` as 'notes', CONCAT('$', FORMAT(`recrutements`.`previsionnel`, 2)) as 'previsionnel', CONCAT('$', FORMAT(`recrutements`.`depense`, 2)) as 'depense', CONCAT('$', FORMAT(`recrutements`.`reservation_salaire`, 2)) as 'reservation_salaire', CONCAT('&euro;', FORMAT(`recrutements`.`prop_dp`, 2)) as 'prop_dp'",
+			'depenses' => "`depenses`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') as 'ligne_budgetaire', IF(    CHAR_LENGTH(`lignes_credits1`.`intitule`) || CHAR_LENGTH(`lignes_credits1`.`exercice`), CONCAT_WS('',   `lignes_credits1`.`intitule`, ' - ', `lignes_credits1`.`exercice`), '') as 'ligne_credit', if(`depenses`.`date`,date_format(`depenses`.`date`,'%d/%m/%Y'),'') as 'date', `depenses`.`intitule` as 'intitule', `depenses`.`reference` as 'reference', IF(    CHAR_LENGTH(`recrutements1`.`intitule`) || CHAR_LENGTH(`personnes1`.`nom`), CONCAT_WS('',   `recrutements1`.`intitule`, ' - ', `personnes1`.`nom`), '') as 'contrat', IF(    CHAR_LENGTH(`personnes2`.`nom`), CONCAT_WS('',   `personnes2`.`nom`), '') as 'beneficiaire', CONCAT('$', FORMAT(`depenses`.`montant`, 2)) as 'montant', `depenses`.`liquidee` as 'liquidee', IF(    CHAR_LENGTH(`ventilation1`.`intitule`), CONCAT_WS('',   `ventilation1`.`intitule`), '') as 'ventilation', `depenses`.`notes` as 'notes', `depenses`.`verifie` as 'verifie'",
 			'fichiers' => "`fichiers`.`id` as 'id', IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') as 'convention', `fichiers`.`titre` as 'titre', `fichiers`.`fichier` as 'fichier', `fichiers`.`notes` as 'notes'",
 			'personnes' => "`personnes`.`id` as 'id', `personnes`.`nom` as 'nom', `personnes`.`email` as 'email'",
 			'types_ligne' => "`types_ligne`.`frais_gestion` as 'frais_gestion', `types_ligne`.`id` as 'id', `types_ligne`.`gestionnaire` as 'gestionnaire', `types_ligne`.`type` as 'type'",
-		);
+		];
 
-		if(isset($sql_fields[$table_name])) {
-			return $sql_fields[$table_name];
-		}
+		if(isset($sql_fields[$table_name])) return $sql_fields[$table_name];
 
 		return false;
 	}
 
 	#########################################################
 
-	function get_sql_from($table_name, $skip_permissions = false, $skip_joins = false) {
-		$sql_from = array(
+	function get_sql_from($table_name, $skip_permissions = false, $skip_joins = false, $lower_permissions = false) {
+		$sql_from = [
 			'conventions' => "`conventions` LEFT JOIN `personnes` as personnes1 ON `personnes1`.`id`=`conventions`.`porteur` LEFT JOIN `personnes` as personnes2 ON `personnes2`.`id`=`conventions`.`chef_projet` ",
 			'budgets' => "`budgets` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`budgets`.`convention` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets`.`type` ",
 			'versements' => "`versements` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`versements`.`convention` LEFT JOIN `budgets` as budgets1 ON `budgets1`.`id`=`versements`.`ligne_budgetaire` LEFT JOIN `types_ligne` as types_ligne1 ON `types_ligne1`.`id`=`budgets1`.`type` ",
@@ -180,9 +176,9 @@
 			'fichiers' => "`fichiers` LEFT JOIN `conventions` as conventions1 ON `conventions1`.`id`=`fichiers`.`convention` ",
 			'personnes' => "`personnes` ",
 			'types_ligne' => "`types_ligne` ",
-		);
+		];
 
-		$pkey = array(
+		$pkey = [
 			'conventions' => 'id',
 			'budgets' => 'id',
 			'versements' => 'id',
@@ -195,7 +191,7 @@
 			'fichiers' => 'id',
 			'personnes' => 'id',
 			'types_ligne' => 'id',
-		);
+		];
 
 		if(!isset($sql_from[$table_name])) return false;
 
@@ -204,14 +200,15 @@
 		if($skip_permissions) return $from . ' WHERE 1=1';
 
 		// mm: build the query based on current member's permissions
+		// allowing lower permissions if $lower_permissions set to 'user' or 'group'
 		$perm = getTablePermissions($table_name);
-		if($perm[2] == 1) { // view owner only
-			$from .= ", membership_userrecords WHERE `{$table_name}`.`{$pkey[$table_name]}`=membership_userrecords.pkValue and membership_userrecords.tableName='{$table_name}' and lcase(membership_userrecords.memberID)='" . getLoggedMemberID() . "'";
-		}elseif($perm[2] == 2) { // view group only
-			$from .= ", membership_userrecords WHERE `{$table_name}`.`{$pkey[$table_name]}`=membership_userrecords.pkValue and membership_userrecords.tableName='{$table_name}' and membership_userrecords.groupID='" . getLoggedGroupID() . "'";
-		}elseif($perm[2] == 3) { // view all
+		if($perm['view'] == 1 || ($perm['view'] > 1 && $lower_permissions == 'user')) { // view owner only
+			$from .= ", `membership_userrecords` WHERE `{$table_name}`.`{$pkey[$table_name]}`=`membership_userrecords`.`pkValue` AND `membership_userrecords`.`tableName`='{$table_name}' AND LCASE(`membership_userrecords`.`memberID`)='" . getLoggedMemberID() . "'";
+		} elseif($perm['view'] == 2 || ($perm['view'] > 2 && $lower_permissions == 'group')) { // view group only
+			$from .= ", `membership_userrecords` WHERE `{$table_name}`.`{$pkey[$table_name]}`=`membership_userrecords`.`pkValue` AND `membership_userrecords`.`tableName`='{$table_name}' AND `membership_userrecords`.`groupID`='" . getLoggedGroupID() . "'";
+		} elseif($perm['view'] == 3) { // view all
 			$from .= ' WHERE 1=1';
-		}else{ // view none
+		} else { // view none
 			return false;
 		}
 
@@ -242,8 +239,8 @@
 
 	function get_defaults($table) {
 		/* array of tables and their fields, with default values (or empty), excluding automatic values */
-		$defaults = array(
-			'conventions' => array(
+		$defaults = [
+			'conventions' => [
 				'id' => '',
 				'nom' => '',
 				'statut' => 'active',
@@ -275,9 +272,9 @@
 				'prop_uv' => '',
 				'prop_ua' => '',
 				'budget_nv' => '',
-				'depenses_nv' => ''
-			),
-			'budgets' => array(
+				'depenses_nv' => '',
+			],
+			'budgets' => [
 				'id' => '',
 				'convention' => '',
 				'type' => '',
@@ -297,18 +294,18 @@
 				'reste_depenser' => '',
 				'prop_uo' => '',
 				'prop_uv' => '',
-				'prop_ua' => ''
-			),
-			'versements' => array(
+				'prop_ua' => '',
+			],
+			'versements' => [
 				'id' => '',
 				'convention' => '',
 				'ligne_budgetaire' => '',
 				'date' => '1',
 				'intitule' => '',
 				'montant' => '',
-				'notes' => ''
-			),
-			'lignes_credits' => array(
+				'notes' => '',
+			],
+			'lignes_credits' => [
 				'id' => '',
 				'convention' => '',
 				'ligne_budgetaire' => '',
@@ -320,9 +317,9 @@
 				'liquide' => '',
 				'utilise' => '',
 				'disponible' => '',
-				'prop_uo' => ''
-			),
-			'credits' => array(
+				'prop_uo' => '',
+			],
+			'credits' => [
 				'id' => '',
 				'convention' => '',
 				'ligne_budgetaire' => '',
@@ -330,9 +327,9 @@
 				'date' => '1',
 				'intitule' => '',
 				'montant' => '',
-				'notes' => ''
-			),
-			'rubriques' => array(
+				'notes' => '',
+			],
+			'rubriques' => [
 				'id' => '',
 				'convention' => '',
 				'intitule' => '',
@@ -344,9 +341,9 @@
 				'reste_engager' => '',
 				'reservation_salaire' => '',
 				'reste_depenser' => '',
-				'prop_ua' => ''
-			),
-			'ventilation' => array(
+				'prop_ua' => '',
+			],
+			'ventilation' => [
 				'id' => '',
 				'convention' => '',
 				'rubrique' => '',
@@ -359,9 +356,9 @@
 				'reste_engager' => '',
 				'reservation_salaire' => '',
 				'reste_depenser' => '',
-				'prop_ua' => ''
-			),
-			'recrutements' => array(
+				'prop_ua' => '',
+			],
+			'recrutements' => [
 				'id' => '',
 				'convention' => '',
 				'intitule' => '',
@@ -375,9 +372,9 @@
 				'previsionnel' => '',
 				'depense' => '',
 				'reservation_salaire' => '',
-				'prop_dp' => ''
-			),
-			'depenses' => array(
+				'prop_dp' => '',
+			],
+			'depenses' => [
 				'id' => '',
 				'convention' => '',
 				'ligne_budgetaire' => '',
@@ -391,29 +388,29 @@
 				'liquidee' => '',
 				'ventilation' => '',
 				'notes' => '',
-				'verifie' => ''
-			),
-			'fichiers' => array(
+				'verifie' => '',
+			],
+			'fichiers' => [
 				'id' => '',
 				'convention' => '',
 				'titre' => '',
 				'fichier' => '',
-				'notes' => ''
-			),
-			'personnes' => array(
+				'notes' => '',
+			],
+			'personnes' => [
 				'id' => '',
 				'nom' => '',
-				'email' => ''
-			),
-			'types_ligne' => array(
+				'email' => '',
+			],
+			'types_ligne' => [
 				'frais_gestion' => '',
 				'id' => '',
 				'gestionnaire' => '',
-				'type' => ''
-			)
-		);
+				'type' => '',
+			],
+		];
 
-		return isset($defaults[$table]) ? $defaults[$table] : array();
+		return isset($defaults[$table]) ? $defaults[$table] : [];
 	}
 
 	#########################################################
@@ -432,7 +429,7 @@
 
 					if($_POST['rememberMe'] == 1) {
 						RememberMe::login($username);
-					}else{
+					} else {
 						RememberMe::delete();
 					}
 
@@ -441,9 +438,9 @@
 
 					// hook: login_ok
 					if(function_exists('login_ok')) {
-						$args=array();
-						if(!$redir=login_ok(getMemberInfo(), $args)) {
-							$redir='index.php';
+						$args = [];
+						if(!$redir = login_ok(getMemberInfo(), $args)) {
+							$redir = 'index.php';
 						}
 					}
 
@@ -454,12 +451,12 @@
 
 			// hook: login_failed
 			if(function_exists('login_failed')) {
-				$args=array();
-				login_failed(array(
+				$args = [];
+				login_failed([
 					'username' => $_POST['username'],
 					'password' => $_POST['password'],
 					'IP' => $_SERVER['REMOTE_ADDR']
-					), $args);
+				], $args);
 			}
 
 			if(!headers_sent()) header('HTTP/1.0 403 Forbidden');
@@ -483,11 +480,13 @@
 	#########################################################
 
 	function htmlUserBar() {
-		global $adminConfig, $Translation;
+		global $Translation;
 		if(!defined('PREPEND_PATH')) define('PREPEND_PATH', '');
 
+		$mi = getMemberInfo();
+		$adminConfig = config('adminConfig');
+		$home_page = (basename($_SERVER['PHP_SELF']) == 'index.php');
 		ob_start();
-		$home_page = (basename($_SERVER['PHP_SELF'])=='index.php' ? true : false);
 
 		?>
 		<nav class="navbar navbar-default navbar-fixed-top hidden-print" role="navigation">
@@ -502,13 +501,16 @@
 				<a class="navbar-brand" href="<?php echo PREPEND_PATH; ?>index.php"><i class="glyphicon glyphicon-home"></i> pbc</a>
 			</div>
 			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<?php if(!$home_page) { ?>
-						<?php echo NavMenus(); ?>
-					<?php } ?>
-				</ul>
+				<ul class="nav navbar-nav"><?php echo ($home_page ? '' : NavMenus()); ?></ul>
 
-				<?php if(getLoggedAdmin()) { ?>
+				<?php if(userCanImport()){ ?>
+					<ul class="nav navbar-nav">
+						<a href="<?php echo PREPEND_PATH; ?>import-csv.php" class="btn btn-default navbar-btn hidden-xs btn-import-csv" title="<?php echo html_attr($Translation['import csv file']); ?>"><i class="glyphicon glyphicon-th"></i> <?php echo $Translation['import CSV']; ?></a>
+						<a href="<?php echo PREPEND_PATH; ?>import-csv.php" class="btn btn-default navbar-btn visible-xs btn-lg btn-import-csv" title="<?php echo html_attr($Translation['import csv file']); ?>"><i class="glyphicon glyphicon-th"></i> <?php echo $Translation['import CSV']; ?></a>
+					</ul>
+				<?php } ?>
+
+				<?php if($mi['admin']) { ?>
 					<ul class="nav navbar-nav">
 						<a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn hidden-xs" title="<?php echo html_attr($Translation['admin area']); ?>"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['admin area']; ?></a>
 						<a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn visible-xs btn-lg" title="<?php echo html_attr($Translation['admin area']); ?>"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['admin area']; ?></a>
@@ -516,23 +518,24 @@
 				<?php } ?>
 
 				<?php if(!$_GET['signIn'] && !$_GET['loginFailed']) { ?>
-					<?php if(getLoggedMemberID() == $adminConfig['anonymousMember']) { ?>
+					<?php if(!$mi['username'] || $mi['username'] == $adminConfig['anonymousMember']) { ?>
 						<p class="navbar-text navbar-right">&nbsp;</p>
 						<a href="<?php echo PREPEND_PATH; ?>index.php?signIn=1" class="btn btn-success navbar-btn navbar-right"><?php echo $Translation['sign in']; ?></a>
 						<p class="navbar-text navbar-right">
 							<?php echo $Translation['not signed in']; ?>
 						</p>
-					<?php }else{ ?>
+					<?php } else { ?>
 						<ul class="nav navbar-nav navbar-right hidden-xs" style="min-width: 330px;">
 							<a class="btn navbar-btn btn-default" href="<?php echo PREPEND_PATH; ?>index.php?signOut=1"><i class="glyphicon glyphicon-log-out"></i> <?php echo $Translation['sign out']; ?></a>
+
 							<p class="navbar-text">
-								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo getLoggedMemberID(); ?></a></strong>
+								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo $mi['username']; ?></a></strong>
 							</p>
 						</ul>
 						<ul class="nav navbar-nav visible-xs">
 							<a class="btn navbar-btn btn-default btn-lg visible-xs" href="<?php echo PREPEND_PATH; ?>index.php?signOut=1"><i class="glyphicon glyphicon-log-out"></i> <?php echo $Translation['sign out']; ?></a>
 							<p class="navbar-text text-center">
-								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo getLoggedMemberID(); ?></a></strong>
+								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo $mi['username']; ?></a></strong>
 							</p>
 						</ul>
 						<script>
@@ -548,6 +551,13 @@
 						</script>
 					<?php } ?>
 				<?php } ?>
+
+				<p class="navbar-text navbar-right help-shortcuts-launcher-container hidden-xs">
+					<img
+						class="help-shortcuts-launcher" 
+						src="<?php echo PREPEND_PATH; ?>resources/images/keyboard.png" 
+						title="<?php echo html_attr($Translation['keyboard shortcuts']); ?>">
+				</p>
 			</div>
 		</nav>
 		<?php
@@ -562,50 +572,89 @@
 
 	function showNotifications($msg = '', $class = '', $fadeout = true) {
 		global $Translation;
-
-		$notify_template_no_fadeout = '<div id="%%ID%%" class="alert alert-dismissable %%CLASS%%" style="display: none; padding-top: 6px; padding-bottom: 6px;">' .
-					'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' .
-					'%%MSG%%</div>' .
-					'<script> jQuery(function() { /* */ jQuery("#%%ID%%").show("slow"); }); </script>'."\n";
-		$notify_template = '<div id="%%ID%%" class="alert %%CLASS%%" style="display: none; padding-top: 6px; padding-bottom: 6px;">%%MSG%%</div>' .
-					'<script>' .
-						'jQuery(function() {' .
-							'jQuery("#%%ID%%").show("slow", function() {' .
-								'setTimeout(function() { /* */ jQuery("#%%ID%%").hide("slow"); }, 4000);' .
-							'});' .
-						'});' .
-					'</script>'."\n";
+		if($error_message = strip_tags($_REQUEST['error_message']))
+			$error_message = '<div class="text-bold">' . $error_message . '</div>';
 
 		if(!$msg) { // if no msg, use url to detect message to display
 			if($_REQUEST['record-added-ok'] != '') {
 				$msg = $Translation['new record saved'];
 				$class = 'alert-success';
-			}elseif($_REQUEST['record-added-error'] != '') {
-				$msg = $Translation['Couldn\'t save the new record'];
+			} elseif($_REQUEST['record-added-error'] != '') {
+				$msg = $Translation['Couldn\'t save the new record'] . $error_message;
 				$class = 'alert-danger';
 				$fadeout = false;
-			}elseif($_REQUEST['record-updated-ok'] != '') {
+			} elseif($_REQUEST['record-updated-ok'] != '') {
 				$msg = $Translation['record updated'];
 				$class = 'alert-success';
-			}elseif($_REQUEST['record-updated-error'] != '') {
-				$msg = $Translation['Couldn\'t save changes to the record'];
+			} elseif($_REQUEST['record-updated-error'] != '') {
+				$msg = $Translation['Couldn\'t save changes to the record'] . $error_message;
 				$class = 'alert-danger';
 				$fadeout = false;
-			}elseif($_REQUEST['record-deleted-ok'] != '') {
+			} elseif($_REQUEST['record-deleted-ok'] != '') {
 				$msg = $Translation['The record has been deleted successfully'];
 				$class = 'alert-success';
-				$fadeout = false;
-			}elseif($_REQUEST['record-deleted-error'] != '') {
-				$msg = $Translation['Couldn\'t delete this record'];
+			} elseif($_REQUEST['record-deleted-error'] != '') {
+				$msg = $Translation['Couldn\'t delete this record'] . $error_message;
 				$class = 'alert-danger';
 				$fadeout = false;
-			}else{
+			} else {
 				return '';
 			}
 		}
 		$id = 'notification-' . rand();
 
-		$out = ($fadeout ? $notify_template : $notify_template_no_fadeout);
+		ob_start();
+		// notification template
+		?>
+		<div id="%%ID%%" class="alert alert-dismissable %%CLASS%%" style="opacity: 1; padding-top: 6px; padding-bottom: 6px; animation: fadeIn 1.5s ease-out;">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			%%MSG%%
+		</div>
+		<script>
+			$j(function() {
+				var autoDismiss = <?php echo $fadeout ? 'true' : 'false'; ?>,
+					embedded = !$j('nav').length,
+					messageDelay = 10, fadeDelay = 1.5;
+
+				if(!autoDismiss) {
+					if(embedded)
+						$j('#%%ID%%').before('<div style="height: 2rem;"></div>');
+					else
+						$j('#%%ID%%').css({ margin: '0 0 1rem' });
+
+					return;
+				}
+
+				// below code runs only in case of autoDismiss
+
+				if(embedded)
+					$j('#%%ID%%').css({ margin: '1rem 0 -1rem' });
+				else
+					$j('#%%ID%%').css({ margin: '-15px 0 -20px' });
+
+				setTimeout(function() {
+					$j('#%%ID%%').css({    animation: 'fadeOut ' + fadeDelay + 's ease-out' });
+				}, messageDelay * 1000);
+
+				setTimeout(function() {
+					$j('#%%ID%%').css({    visibility: 'hidden' });
+				}, (messageDelay + fadeDelay) * 1000);
+			})
+		</script>
+		<style>
+			@keyframes fadeIn {
+				0%   { opacity: 0; }
+				100% { opacity: 1; }
+			}
+			@keyframes fadeOut {
+				0%   { opacity: 1; }
+				100% { opacity: 0; }
+			}
+		</style>
+
+		<?php
+		$out = ob_get_clean();
+
 		$out = str_replace('%%ID%%', $id, $out);
 		$out = str_replace('%%MSG%%', $msg, $out);
 		$out = str_replace('%%CLASS%%', $class, $out);
@@ -634,34 +683,34 @@
 
 	#########################################################
 
-	function parseCode($code, $isInsert=true, $rawData=false) {
+	function parseCode($code, $isInsert = true, $rawData = false) {
 		if($isInsert) {
-			$arrCodes=array(
+			$arrCodes = [
 				'<%%creatorusername%%>' => $_SESSION['memberID'],
 				'<%%creatorgroupid%%>' => $_SESSION['memberGroupID'],
 				'<%%creatorip%%>' => $_SERVER['REMOTE_ADDR'],
-				'<%%creatorgroup%%>' => sqlValue("select name from membership_groups where groupID='{$_SESSION['memberGroupID']}'"),
+				'<%%creatorgroup%%>' => sqlValue("SELECT `name` FROM `membership_groups` WHERE `groupID`='{$_SESSION['memberGroupID']}'"),
 
 				'<%%creationdate%%>' => ($rawData ? @date('Y-m-d') : @date('j/n/Y')),
 				'<%%creationtime%%>' => ($rawData ? @date('H:i:s') : @date('h:i:s a')),
 				'<%%creationdatetime%%>' => ($rawData ? @date('Y-m-d H:i:s') : @date('j/n/Y h:i:s a')),
 				'<%%creationtimestamp%%>' => ($rawData ? @date('Y-m-d H:i:s') : @time())
-			);
-		}else{
-			$arrCodes=array(
+			];
+		} else {
+			$arrCodes = [
 				'<%%editorusername%%>' => $_SESSION['memberID'],
 				'<%%editorgroupid%%>' => $_SESSION['memberGroupID'],
 				'<%%editorip%%>' => $_SERVER['REMOTE_ADDR'],
-				'<%%editorgroup%%>' => sqlValue("select name from membership_groups where groupID='{$_SESSION['memberGroupID']}'"),
+				'<%%editorgroup%%>' => sqlValue("SELECT `name` FROM `membership_groups` WHERE `groupID`='{$_SESSION['memberGroupID']}'"),
 
 				'<%%editingdate%%>' => ($rawData ? @date('Y-m-d') : @date('j/n/Y')),
 				'<%%editingtime%%>' => ($rawData ? @date('H:i:s') : @date('h:i:s a')),
 				'<%%editingdatetime%%>' => ($rawData ? @date('Y-m-d H:i:s') : @date('j/n/Y h:i:s a')),
 				'<%%editingtimestamp%%>' => ($rawData ? @date('Y-m-d H:i:s') : @time())
-			);
+			];
 		}
 
-		$pc=str_ireplace(array_keys($arrCodes), array_values($arrCodes), $code);
+		$pc = str_ireplace(array_keys($arrCodes), array_values($arrCodes), $code);
 
 		return $pc;
 	}
@@ -713,7 +762,7 @@
 				for($i=0; $i<count($search); $i++) {
 					$ret=str_ireplace($search[$i], $replace[$i], $ret);
 				}
-			}else{
+			} else {
 				$ret=preg_replace('/'.preg_quote($search, '/').'/i', $replace, $ret);
 			}
 
@@ -757,7 +806,7 @@
 	* @param $the_data_to_pass_to_the_table associative array containing the data to pass to the table template
 	* @return the output of the parsed table template as a string
 	*/
-	function loadTable($table_name, $the_data_to_pass_to_the_table = array()) {
+	function loadTable($table_name, $the_data_to_pass_to_the_table = []) {
 		$dont_load_header = $the_data_to_pass_to_the_table['dont_load_header'];
 		$dont_load_footer = $the_data_to_pass_to_the_table['dont_load_footer'];
 
@@ -789,7 +838,7 @@
 		$parentFilterersArray = explode(',', $parentFilterers);
 		$parentFiltererList = '`' . implode('`, `', $parentFilterersArray) . '`';
 		$res=sql("SELECT `$parentPKField`, $parentCaption, $parentFiltererList FROM `$parentTable` ORDER BY 2", $eo);
-		$filterableData = array();
+		$filterableData = [];
 		while($row=db_fetch_row($res)) {
 			$filterableData[$row[0]] = $row[1];
 			$filtererIndex = 0;
@@ -831,7 +880,7 @@
 			$filterJS.="\n\t\t\t\t({$filterable}_item == selected_{$filterable} ? true : false)";
 			$filterJS.="\n\t\t\t);";
 			$filterJS.="\n\t\t}";
-			$filterJS.="\n\t}else{";
+			$filterJS.="\n\t} else {";
 			$filterJS.="\n\t\tfor({$filterable}_item in {$filterable}_data) {";
 			$filterJS.="\n\t\t\t$('{$filterable}').options[$('{$filterable}').options.length] = new Option(";
 			$filterJS.="\n\t\t\t\t{$filterable}_data[{$filterable}_item],";
@@ -890,7 +939,7 @@
 	function _toUTF8($m) {
 		if(function_exists('mb_convert_encoding')) {
 			return mb_convert_encoding($m[1], "UTF-8", "HTML-ENTITIES");
-		}else{
+		} else {
 			return $m[1];
 		}
 	}
@@ -907,25 +956,25 @@
 	#########################################################
 
 	function permissions_sql($table, $level = 'all') {
-		if(!in_array($level, array('user', 'group'))) { $level = 'all'; }
+		if(!in_array($level, ['user', 'group'])) { $level = 'all'; }
 		$perm = getTablePermissions($table);
 		$from = '';
 		$where = '';
 		$pk = getPKFieldName($table);
 
-		if($perm[2] == 1 || ($perm[2] > 1 && $level == 'user')) { // view owner only
+		if($perm['view'] == 1 || ($perm['view'] > 1 && $level == 'user')) { // view owner only
 			$from = 'membership_userrecords';
 			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and lcase(membership_userrecords.memberID)='".getLoggedMemberID()."')";
-		}elseif($perm[2] == 2 || ($perm[2] > 2 && $level == 'group')) { // view group only
+		} elseif($perm['view'] == 2 || ($perm['view'] > 2 && $level == 'group')) { // view group only
 			$from = 'membership_userrecords';
 			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and membership_userrecords.groupID='".getLoggedGroupID()."')";
-		}elseif($perm[2] == 3) { // view all
+		} elseif($perm['view'] == 3) { // view all
 			// no further action
-		}elseif($perm[2] == 0) { // view none
+		} elseif($perm['view'] == 0) { // view none
 			return false;
 		}
 
-		return array('where' => $where, 'from' => $from, 0 => $where, 1 => $from);
+		return ['where' => $where, 'from' => $from, 0 => $where, 1 => $from];
 	}
 
 	#########################################################
@@ -936,7 +985,7 @@
 
 		ob_start();
 
-		if($full_page) include_once($curr_dir . '/header.php');
+		if($full_page) include($curr_dir . '/header.php');
 
 		echo '<div class="panel panel-danger">';
 			echo '<div class="panel-heading"><h3 class="panel-title">' . $Translation['error:'] . '</h3></div>';
@@ -945,7 +994,7 @@
 				echo '<div class="text-center">';
 				if($back_url) {
 					echo '<a href="' . $back_url . '" class="btn btn-danger btn-lg vspacer-lg"><i class="glyphicon glyphicon-chevron-left"></i> ' . $Translation['< back'] . '</a>';
-				}else{
+				} else {
 					echo '<a href="#" class="btn btn-danger btn-lg vspacer-lg" onclick="history.go(-1); return false;"><i class="glyphicon glyphicon-chevron-left"></i> ' . $Translation['< back'] . '</a>';
 				}
 				echo '</div>';
@@ -953,12 +1002,9 @@
 			echo '</div>';
 		echo '</div>';
 
-		if($full_page) include_once($curr_dir . '/footer.php');
+		if($full_page) include($curr_dir . '/footer.php');
 
-		$out = ob_get_contents();
-		ob_end_clean();
-
-		return $out;
+		return ob_get_clean();
 	}
 
 	#########################################################
@@ -987,10 +1033,10 @@
 		global $Translation;
 		if(!$url) return '';
 
-		$providers = array(
+		$providers = [
 			'youtube' => array('oembed' => 'http://www.youtube.com/oembed?'),
 			'googlemap' => array('oembed' => '', 'regex' => '/^http.*\.google\..*maps/i')
-		);
+		];
 
 		if(!isset($providers[$provider])) {
 			return '<div class="text-danger">' . $Translation['invalid provider'] . '</div>';
@@ -1040,10 +1086,10 @@
 
 			if($retrieve == 'html') {
 				return "<iframe width=\"{$max_width}\" height=\"{$max_height}\" frameborder=\"0\" style=\"border:0\" src=\"{$embed_url}\"></iframe>";
-			}else{
+			} else {
 				return $thumbnail_url;
 			}
-		}else{
+		} else {
 			return '<div class="text-danger">' . $Translation['cant retrieve coordinates from url'] . '</div>';
 		}
 	}
@@ -1083,7 +1129,7 @@
 				$error = error_get_last();
 				$error_message = preg_replace('/.*: (.*)/', '$1', $error['message']);
 				return $error_message;
-			}elseif($cache_table_exists) {
+			} elseif($cache_table_exists) {
 				/* store response in cache */
 				$ts = time();
 				sql("replace into membership_cache set request='" . md5($request) . "', request_ts='{$ts}', response='" . makeSafe($response, false) . "'", $eo);
@@ -1108,11 +1154,11 @@
 			$username = getLoggedMemberID();
 			$owner = sqlValue("select memberID from membership_userrecords where tableName='{$safe_table}' and pkValue='{$safe_id}'");
 			if($owner == $username) return true;
-		}elseif($perms[$perm] == 2) { // group records
+		} elseif($perms[$perm] == 2) { // group records
 			$group_id = getLoggedGroupID();
 			$owner_group_id = sqlValue("select groupID from membership_userrecords where tableName='{$safe_table}' and pkValue='{$safe_id}'");
 			if($owner_group_id == $group_id) return true;
-		}elseif($perms[$perm] == 3) { // all records
+		} elseif($perms[$perm] == 3) { // all records
 			return true;
 		}
 
@@ -1121,16 +1167,14 @@
 
 	#########################################################
 
-	function NavMenus($options = array()) {
+	function NavMenus($options = []) {
 		if(!defined('PREPEND_PATH')) define('PREPEND_PATH', '');
 		global $Translation;
 		$prepend_path = PREPEND_PATH;
 
 		/* default options */
 		if(empty($options)) {
-			$options = array(
-				'tabs' => 7
-			);
+			$options = ['tabs' => 7];
 		}
 
 		$table_group_name = array_keys(get_table_groups()); /* 0 => group1, 1 => group2 .. */
@@ -1144,13 +1188,13 @@
 		if(is_array($arrTables)) {
 			foreach($arrTables as $tn => $tc) {
 				/* ---- list of tables where hide link in nav menu is set ---- */
-				$tChkHL = array_search($tn, array('fichiers'));
+				$tChkHL = array_search($tn, ['fichiers']);
 
 				/* ---- list of tables where filter first is set ---- */
-				$tChkFF = array_search($tn, array());
+				$tChkFF = array_search($tn, []);
 				if($tChkFF !== false && $tChkFF !== null) {
 					$searchFirst = '&Filter_x=1';
-				}else{
+				} else {
 					$searchFirst = '';
 				}
 
@@ -1164,7 +1208,7 @@
 		global $navLinks;
 		if(is_array($navLinks)) {
 			$memberInfo = getMemberInfo();
-			$links_added = array();
+			$links_added = [];
 			foreach($navLinks as $link) {
 				if(!isset($link['url']) || !isset($link['title'])) continue;
 				if($memberInfo['admin'] || @in_array($memberInfo['group'], $link['groups']) || @in_array('*', $link['groups'])) {
@@ -1325,7 +1369,7 @@ EOT;
 
 		if($separate_dv) {
 			$reset_selection = "document.myform.SelectedID.value = '';";
-		}else{
+		} else {
 			$reset_selection = "document.myform.writeAttribute('novalidate', 'novalidate');";
 		}
 		$reset_selection .= ' document.myform.NoDV.value=1; return true;';

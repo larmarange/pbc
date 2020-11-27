@@ -6,7 +6,7 @@
 <div class="panel-body" id="personnes_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
-		<div class="col-xs-12">
+		<div class="col-xs-12 children-links">
 			<input type="hidden" id="conventions_hclink" value="conventions_view.php?filterer_porteur=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<input type="hidden" id="recrutements_hclink" value="recrutements_view.php?filterer_beneficiaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<input type="hidden" id="depenses_hclink" value="depenses_view.php?filterer_beneficiaire=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
@@ -20,7 +20,8 @@
 		<div class="col-md-8 col-lg-10" id="personnes_dv_form">
 			<fieldset class="form-horizontal">
 
-				<div class="form-group">
+				<!-- Field: Pr&#233;nom Nom -->
+				<div class="form-group personnes-nom">
 					<hr class="hidden-md hidden-lg">
 					<label for="nom" class="control-label col-lg-3">Pr&#233;nom Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -28,14 +29,15 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Email -->
+				<div class="form-group personnes-email">
 					<hr class="hidden-md hidden-lg">
 					<label for="email" class="control-label col-lg-3">Email</label>
 					<div class="col-lg-9">
 						
 						<div>
 							<a id="email-link" href="mailto:<%%VALUE(email)%%>" target="_blank"><%%VALUE(email)%%></a>
-							<label for="email"><button type="button" id="email-edit-link" class="btn btn-default hspacer-lg vspacer-sm" data-toggle="collapse" data-target="#email" title="<%%TRANSLATION(Edit)%%>"><i class="glyphicon glyphicon-pencil"></i></button></label>
+							<label for="email"><button type="button" id="email-edit-link" class="btn btn-default hspacer-lg vspacer-sm collapsed" data-toggle="collapse" data-target="#email" title="<%%TRANSLATION(Edit)%%>"><i class="glyphicon glyphicon-pencil"></i></button></label>
 						</div>
 						<script>jQuery(function() { /* */ var e_email = '<%%VALUE(email)%%>'; if(e_email == '' || e_email == '&nbsp;' || e_email == 'blank.gif') jQuery('#email-link').hide(); });</script><input maxlength="80" type="text" class="form-control collapse" name="email" id="email" value="<%%VALUE(email)%%>">
 					</div>
@@ -68,7 +70,9 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
-			<div id="personnes-children" class="children-tabs"></div>
+			<div id="personnes-children" class="children-tabs">
+				<div class="text-center"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+			</div>
 		</div>
 	</div>
 
@@ -121,7 +125,7 @@
 			if(add_new_mode) {
 				/* hide links to children tables */
 				$j('.detail_view a[id$=_link]').remove();
-			}else{
+			} else {
 				post(
 					'parent-children.php', {
 						ParentTable: 'personnes',
@@ -170,7 +174,7 @@
 				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
 				if($j(this).prevAll('input:hidden').length) {
 					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
-				}else{
+				} else {
 					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
 				}
 

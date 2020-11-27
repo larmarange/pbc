@@ -9,6 +9,6 @@
 		<td id="fichiers-titre-<%%VALUE(id)%%>" class="fichiers-titre"><%%VALUE(titre)%%></td>
 		<td id="fichiers-fichier-<%%VALUE(id)%%>" class="fichiers-fichier"><a href="link.php?t=fichiers&f=fichier&i=<%%VALUE(id)%%>" target="_blank"><%%VALUE(fichier)%%></a></td>
 		<td id="fichiers-notes-<%%VALUE(id)%%>" class="fichiers-notes"><%%VALUE(notes)%%></td>
-		<script>$j(function(){
+		<script>$j(function() {
 			var e_fichier = '<%%VALUE(fichier)%%>'; if(e_fichier == '' || e_fichier == '&nbsp;') $j(/*<*/ '#fichiers-fichier-<%%VALUE(id)%%>' /*>*/).html('');
 		});</script>

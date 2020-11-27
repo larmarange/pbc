@@ -14,25 +14,29 @@
 
 <div class="panel-body">
 	<fieldset class="form-horizontal">
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Convention -->
+		<div class="form-group fichiers-convention" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Convention</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="convention<%%RND1%%>"><%%COMBOTEXT(convention)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Titre -->
+		<div class="form-group fichiers-titre" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Titre</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(titre)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Fichier -->
+		<div class="form-group fichiers-fichier" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Fichier</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><a id="fichier-link" href="link.php?t=fichiers&f=fichier&i=<%%VALUE(id)%%>" target="_blank"><%%VALUE(fichier)%%></a><script>jQuery(function() { /* */ var e_fichier = '<%%VALUE(fichier)%%>'; if(e_fichier == '' || e_fichier == '&nbsp;' || e_fichier == 'blank.gif') jQuery('#fichier-link').hide(); });</script></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Notes -->
+		<div class="form-group fichiers-notes" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Notes</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(notes)%%></div>

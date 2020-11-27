@@ -6,7 +6,7 @@
 <div class="panel-body" id="depenses_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
-		<div class="col-xs-12">
+		<div class="col-xs-12 children-links">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -17,7 +17,8 @@
 		<div class="col-md-8 col-lg-10" id="depenses_dv_form">
 			<fieldset class="form-horizontal">
 
-				<div class="form-group">
+				<!-- Field: Convention -->
+				<div class="form-group depenses-convention">
 					<hr class="hidden-md hidden-lg">
 					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -25,7 +26,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ligne Budg&#233;taire -->
+				<div class="form-group depenses-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne Budg&#233;taire</label>
 					<div class="col-lg-9">
@@ -33,7 +35,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ligne de cr&#233;dit (CFI) - Exercice -->
+				<div class="form-group depenses-ligne_credit">
 					<hr class="hidden-md hidden-lg">
 					<label for="ligne_credit" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne de cr&#233;dit (CFI) - Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -41,7 +44,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Date -->
+				<div class="form-group depenses-date">
 					<hr class="hidden-md hidden-lg">
 					<label for="date" class="control-label col-lg-3">Date</label>
 					<div class="col-lg-9">
@@ -49,7 +53,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Intitul&#233; -->
+				<div class="form-group depenses-intitule">
 					<hr class="hidden-md hidden-lg">
 					<label for="intitule" class="control-label col-lg-3">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -57,7 +62,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: R&#233;ference -->
+				<div class="form-group depenses-reference">
 					<hr class="hidden-md hidden-lg">
 					<label for="reference" class="control-label col-lg-3">R&#233;ference <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reference-description"></i></label>
 					<div class="col-lg-9">
@@ -67,7 +73,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Contrat (si salaire) -->
+				<div class="form-group depenses-contrat">
 					<hr class="hidden-md hidden-lg">
 					<label for="contrat" class="control-label col-lg-3" data-parent_link="view_parent_modal">Contrat (si salaire) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#contrat-description"></i></label>
 					<div class="col-lg-9">
@@ -77,7 +84,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: B&#233;n&#233;ficiaire -->
+				<div class="form-group depenses-beneficiaire">
 					<hr class="hidden-md hidden-lg">
 					<label for="beneficiaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
 					<div class="col-lg-9">
@@ -85,7 +93,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Montant -->
+				<div class="form-group depenses-montant">
 					<hr class="hidden-md hidden-lg">
 					<label for="montant" class="control-label col-lg-3">Montant<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
@@ -93,7 +102,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Liquid&#233;e ? -->
+				<div class="form-group depenses-liquidee">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
 						<div class="checkbox"><label for="liquidee"><input type="checkbox" name="liquidee" id="liquidee" value="1" <%%CHECKED(liquidee)%%>> Liquid&#233;e ?</label>
@@ -103,7 +113,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Ventilation Budg&#233;taire -->
+				<div class="form-group depenses-ventilation">
 					<hr class="hidden-md hidden-lg">
 					<label for="ventilation" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
 					<div class="col-lg-9">
@@ -111,7 +122,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: Notes -->
+				<div class="form-group depenses-notes">
 					<hr class="hidden-md hidden-lg">
 					<label for="notes" class="control-label col-lg-3">Notes</label>
 					<div class="col-lg-9">
@@ -119,7 +131,8 @@
 					</div>
 				</div>
 
-				<div class="form-group">
+				<!-- Field: V&#233;rifi&#233;e ? -->
+				<div class="form-group depenses-verifie">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
 						<div class="checkbox"><label for="verifie"><input type="checkbox" name="verifie" id="verifie" value="1" <%%CHECKED(verifie)%%>> V&#233;rifi&#233;e ?</label>
@@ -151,7 +164,6 @@
 
 
 </div><!-- /div class="panel-body" -->
-	<script src="nicEdit.js"></script>
 	<script>
 		$j(function() {
 			var add_new_mode = (!$j('input[name=SelectedID]').val());
@@ -165,12 +177,11 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
-			bkLib.onDomLoaded(function() {
-				if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
-
-				$j('.nicEdit-panelContain').parent().width('100%');
-				$j('.nicEdit-panelContain').parent().next().width('98%');
-				$j('.nicEdit-main').width('99%');
+			AppGini.once({
+				condition: function() { return bkLib != undefined; },
+				action: function() {
+					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
+				}
 			});
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
@@ -227,7 +238,7 @@
 				var pt = $j(this).attr('id').replace(/_view_parent$/, '');
 				if($j(this).prevAll('input:hidden').length) {
 					var parent_id = $j(this).prevAll('input:hidden').eq(0).val();
-				}else{
+				} else {
 					var parent_id = $j(this).prevAll().children('input:hidden').eq(0).val();
 				}
 

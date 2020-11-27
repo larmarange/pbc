@@ -14,187 +14,218 @@
 
 <div class="panel-body">
 	<fieldset class="form-horizontal">
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Nom -->
+		<div class="form-group conventions-nom" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Nom</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(nom)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Statut -->
+		<div class="form-group conventions-statut" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Statut</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(statut)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Bailleur(s) -->
+		<div class="form-group conventions-bailleur" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Bailleur(s)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(bailleur)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Porteur -->
+		<div class="form-group conventions-porteur" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Porteur</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="porteur<%%RND1%%>"><%%COMBOTEXT(porteur)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Chef de Projet -->
+		<div class="form-group conventions-chef_projet" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Chef de Projet</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><span id="chef_projet<%%RND1%%>"><%%COMBOTEXT(chef_projet)%%></span></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Date r&#233;ponse -->
+		<div class="form-group conventions-date_reponse" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Date r&#233;ponse</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(date_reponse)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Demand&#233; -->
+		<div class="form-group conventions-demande" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Demand&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(demande)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: D&#233;but -->
+		<div class="form-group conventions-date_debut" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">D&#233;but</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(date_debut)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Fin -->
+		<div class="form-group conventions-date_fin" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Fin</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%COMBOTEXT(date_fin)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Dur&#233;e (mois) -->
+		<div class="form-group conventions-duree" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Dur&#233;e (mois)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(duree)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Notes -->
+		<div class="form-group conventions-notes" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Notes</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(notes)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Accord&#233; hors FG -->
+		<div class="form-group conventions-accorde_hfg" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Accord&#233; hors FG</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(accorde_hfg)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Frais de Gestion -->
+		<div class="form-group conventions-frais_gestion" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Frais de Gestion</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(frais_gestion)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Total Accord&#233; -->
+		<div class="form-group conventions-accorde" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Total Accord&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(accorde)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Vers&#233; -->
+		<div class="form-group conventions-verse" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Vers&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(verse)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Reste &#224; Verser -->
+		<div class="form-group conventions-reste_verser" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Reste &#224; Verser</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reste_verser)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Vers&#233; hors FG -->
+		<div class="form-group conventions-verse_hfg" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Vers&#233; hors FG</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(verse_hfg)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Ouvert -->
+		<div class="form-group conventions-ouvert" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Ouvert</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(ouvert)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Reste &#224; Ouvrir -->
+		<div class="form-group conventions-reste_ouvrir" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Reste &#224; Ouvrir</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reste_ouvrir)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Non Liquid&#233; -->
+		<div class="form-group conventions-non_liquide" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Non Liquid&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(non_liquide)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Liquid&#233; -->
+		<div class="form-group conventions-liquide" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Liquid&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(liquide)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Utilis&#233; (L+NL) -->
+		<div class="form-group conventions-utilise" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Utilis&#233; (L+NL)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(utilise)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Disponible (O-U) -->
+		<div class="form-group conventions-disponible" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Disponible (O-U)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(disponible)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Reste &#224; Engager -->
+		<div class="form-group conventions-reste_engager" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Reste &#224; Engager</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reste_engager)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Salaires restant &#224; verser -->
+		<div class="form-group conventions-reservation_salaire" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Salaires restant &#224; verser</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reservation_salaire)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Reste &#224; D&#233;penser -->
+		<div class="form-group conventions-reste_depenser" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Reste &#224; D&#233;penser</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(reste_depenser)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: U/O (%) -->
+		<div class="form-group conventions-prop_uo" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">U/O (%)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(prop_uo)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: U/V (%) -->
+		<div class="form-group conventions-prop_uv" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">U/V (%)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(prop_uv)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: U/A (%, hors FG) -->
+		<div class="form-group conventions-prop_ua" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">U/A (%, hors FG)</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(prop_ua)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: Budget non ventil&#233; -->
+		<div class="form-group conventions-budget_nv" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">Budget non ventil&#233;</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(budget_nv)%%></div>
 			</div>
 		</div>
-		<div class="form-group" style="border-bottom: dotted 1px #DDD;">
+		<!-- Field: D&#233;penses non ventil&#233;es -->
+		<div class="form-group conventions-depenses_nv" style="border-bottom: dotted 1px #DDD;">
 			<label class="col-xs-3 control-label">D&#233;penses non ventil&#233;es</label>
 			<div class="col-xs-9">
 				<div class="form-control-static"><%%VALUE(depenses_nv)%%></div>
