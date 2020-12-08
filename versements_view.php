@@ -25,7 +25,7 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"if(CHAR_LENGTH(`versements`.`notes`)>80, concat(left(`versements`.`notes`,80),' ...'), `versements`.`notes`)" => "notes",
 	];
 	// mapping incoming sort by requests to actual query fields
@@ -46,7 +46,7 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"`versements`.`notes`" => "notes",
 	];
 	// Fields that can be filtered
@@ -67,7 +67,7 @@
 		"IF(    CHAR_LENGTH(`types_ligne1`.`gestionnaire`) || CHAR_LENGTH(`types_ligne1`.`type`) || CHAR_LENGTH(`budgets1`.`precision`), CONCAT_WS('',   `types_ligne1`.`gestionnaire`, ' - ', `types_ligne1`.`type`, ' - ', `budgets1`.`precision`), '') /* Ligne Budg&#233;taire */" => "ligne_budgetaire",
 		"if(`versements`.`date`,date_format(`versements`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`versements`.`intitule`" => "intitule",
-		"CONCAT('$', FORMAT(`versements`.`montant`, 2))" => "montant",
+		"CONCAT('<span style=''color: ', IF(`versements`.`montant` < 0, 'red', 'black'), ';''>', FORMAT(`versements`.`montant`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "montant",
 		"`versements`.`notes`" => "Notes",
 	];
 
@@ -165,7 +165,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "SELECT CONCAT('$', FORMAT(SUM(`versements`.`montant`), 2)) FROM {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "SELECT CONCAT('<span style=''color: ', IF(SUM(`versements`.`montant`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`versements`.`montant`), 2, 'ru_RU'), '&nbsp;&euro;</span>') FROM {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';

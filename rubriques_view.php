@@ -24,14 +24,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`rubriques`.`intitule`" => "intitule",
 		"if(CHAR_LENGTH(`rubriques`.`notes`)>80, concat(left(`rubriques`.`notes`,80),' ...'), `rubriques`.`notes`)" => "notes",
-		"CONCAT('$', FORMAT(`rubriques`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`rubriques`.`non_liquide`, 2))" => "non_liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('$', FORMAT(`rubriques`.`reservation_salaire`, 2))" => "reservation_salaire",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_depenser`, 2))" => "reste_depenser",
-		"CONCAT('&euro;', FORMAT(`rubriques`.`prop_ua`, 2))" => "prop_ua",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`rubriques`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua",
 	];
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = [
@@ -55,14 +55,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`rubriques`.`intitule`" => "intitule",
 		"`rubriques`.`notes`" => "notes",
-		"CONCAT('$', FORMAT(`rubriques`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`rubriques`.`non_liquide`, 2))" => "non_liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('$', FORMAT(`rubriques`.`reservation_salaire`, 2))" => "reservation_salaire",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_depenser`, 2))" => "reste_depenser",
-		"CONCAT('&euro;', FORMAT(`rubriques`.`prop_ua`, 2))" => "prop_ua",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`rubriques`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua",
 	];
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = [
@@ -86,14 +86,14 @@
 		"IF(    CHAR_LENGTH(`conventions1`.`nom`), CONCAT_WS('',   `conventions1`.`nom`), '') /* Convention */" => "convention",
 		"`rubriques`.`intitule`" => "intitule",
 		"`rubriques`.`notes`" => "Notes",
-		"CONCAT('$', FORMAT(`rubriques`.`accorde`, 2))" => "accorde",
-		"CONCAT('$', FORMAT(`rubriques`.`non_liquide`, 2))" => "non_liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`liquide`, 2))" => "liquide",
-		"CONCAT('$', FORMAT(`rubriques`.`utilise`, 2))" => "utilise",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_engager`, 2))" => "reste_engager",
-		"CONCAT('$', FORMAT(`rubriques`.`reservation_salaire`, 2))" => "reservation_salaire",
-		"CONCAT('$', FORMAT(`rubriques`.`reste_depenser`, 2))" => "reste_depenser",
-		"CONCAT('&euro;', FORMAT(`rubriques`.`prop_ua`, 2))" => "prop_ua",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`accorde` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`accorde`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "accorde",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`non_liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`non_liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "non_liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`liquide` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`liquide`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "liquide",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`utilise` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`utilise`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "utilise",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_engager` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_engager`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_engager",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reservation_salaire` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reservation_salaire`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reservation_salaire",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`reste_depenser` < 0, 'red', 'black'), ';''>', FORMAT(`rubriques`.`reste_depenser`, 2, 'ru_RU'), '&nbsp;&euro;</span>')" => "reste_depenser",
+		"CONCAT('<span style=''color: ', IF(`rubriques`.`prop_ua` > 100, 'red', 'black'), ';''>', FORMAT(`rubriques`.`prop_ua`, 0, 'ru_RU'), '%</span>')" => "prop_ua",
 	];
 
 	// Lookup fields that can be used as filterers
@@ -190,7 +190,7 @@
 			$QueryWhere = $x->QueryWhere;
 		}
 
-		$sumQuery = "SELECT CONCAT('$', FORMAT(SUM(`rubriques`.`accorde`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`non_liquide`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`liquide`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`utilise`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`reste_engager`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`reservation_salaire`), 2)), CONCAT('$', FORMAT(SUM(`rubriques`.`reste_depenser`), 2)) FROM {$x->QueryFrom} {$QueryWhere}";
+		$sumQuery = "SELECT CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`accorde`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`accorde`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`non_liquide`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`non_liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`liquide`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`liquide`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`utilise`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`utilise`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`reste_engager`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`reste_engager`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`reservation_salaire`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`reservation_salaire`), 2, 'ru_RU'), '&nbsp;&euro;</span>'), CONCAT('<span style=''color: ', IF(SUM(`rubriques`.`reste_depenser`) < 0, 'red', 'black'), ';''>', FORMAT(SUM(`rubriques`.`reste_depenser`), 2, 'ru_RU'), '&nbsp;&euro;</span>') FROM {$x->QueryFrom} {$QueryWhere}";
 		$res = sql($sumQuery, $eo);
 		if($row = db_fetch_row($res)) {
 			$sumRow = '<tr class="success">';
