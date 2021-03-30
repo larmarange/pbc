@@ -3,4 +3,8 @@ config.bak.php
 images/*
 !images/blank/gif
 !images/index.html
-plugins/
+plugins/inline-dv/
+plugins/spm/
+plugins/summary_reports/
+plugins/projects
+plugins/plugins-resources
