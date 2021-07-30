@@ -8,8 +8,8 @@
 		createThumbnail($img, $specs) -- $specs is an array as returned by getThumbnailSpecs(). Returns true on success, false on failure.
 		makeSafe($string)
 		checkPermissionVal($pvn)
-		sql($statment, $o)
-		sqlValue($statment)
+		sql($statement, $o)
+		sqlValue($statement)
 		getLoggedAdmin()
 		checkUser($username, $password)
 		logOutUser()
@@ -41,7 +41,7 @@
 		html_attr_tags_ok($str) -- same as html_attr, but allowing HTML tags
 		Notification() -- class for providing a standardized html notifications functionality
 		sendmail($mail) -- sends an email using PHPMailer as specified in the assoc array $mail( ['to', 'name', 'subject', 'message', 'debug'] ) and returns true on success or an error message on failure
-		safe_html($str) -- sanitize HTML strings, and apply nl2br() to non-HTML ones
+		safe_html($str, $noBr = false) -- sanitize HTML strings, and apply nl2br() to non-HTML ones (unless optional 2nd param is passed as true)
 		get_tables_info($skip_authentication = false) -- retrieves table properties as a 2D assoc array ['table_name' => ['prop1' => 'val', ..], ..]
 		getLoggedMemberID() -- returns memberID of logged member. If no login, returns anonymous memberID
 		getLoggedGroupID() -- returns groupID of logged member, or anonymous groupID
@@ -76,6 +76,8 @@
 		guessMySQLDateTime($dt) -- if $dt is not already a mysql date/datetime, use mysql_datetime() to convert then return mysql date/datetime. Returns false if $dt invalid or couldn't be detected.
 		pkGivenLookupText($val, $tn, $lookupField, $falseIfNotFound) -- returns corresponding PK value for given $val which is the textual lookup value for given $lookupField in given $tn table. If $val has no corresponding PK value, $val is returned as-is, unless $falseIfNotFound is set to true, in which case false is returned.
 		userCanImport() -- returns true if user (or his group) can import CSV files (through the permission set in the group page in the admin area).
+		bgStyleToClass($html) -- replaces bg color 'style' attr with a class to prevent style loss on xss cleanup.
+		assocArrFilter($arr, $func) -- filters provided array using provided callback function. The callback receives 2 params ($key, $value) and should return a boolean.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	*/
 	########################################################################
@@ -221,113 +223,115 @@
 	}
 	########################################################################
 	function createThumbnail($img, $specs) {
-		$w=$specs['width'];
-		$h=$specs['height'];
-		$id=$specs['identifier'];
-		$path=dirname($img);
+		$w = $specs['width'];
+		$h = $specs['height'];
+		$id = $specs['identifier'];
+		$path = dirname($img);
 
 		// image doesn't exist or inaccessible?
-		if(!$size=@getimagesize($img))   return FALSE;
+		if(!$size = @getimagesize($img)) return false;
 
 		// calculate thumbnail size to maintain aspect ratio
-		$ow=$size[0]; // original image width
-		$oh=$size[1]; // original image height
-		$twbh=$h/$oh*$ow; // calculated thumbnail width based on given height
-		$thbw=$w/$ow*$oh; // calculated thumbnail height based on given width
+		$ow = $size[0]; // original image width
+		$oh = $size[1]; // original image height
+		$twbh = $h / $oh * $ow; // calculated thumbnail width based on given height
+		$thbw = $w / $ow * $oh; // calculated thumbnail height based on given width
 		if($w && $h) {
-			if($twbh>$w) $h=$thbw;
-			if($thbw>$h) $w=$twbh;
+			if($twbh > $w) $h = $thbw;
+			if($thbw > $h) $w = $twbh;
 		} elseif($w) {
-			$h=$thbw;
+			$h = $thbw;
 		} elseif($h) {
-			$w=$twbh;
+			$w = $twbh;
 		} else {
-			return FALSE;
+			return false;
 		}
 
 		// dir not writeable?
-		if(!is_writable($path))  return FALSE;
+		if(!is_writable($path)) return false;
 
 		// GD lib not loaded?
-		if(!function_exists('gd_info'))  return FALSE;
-		$gd=gd_info();
+		if(!function_exists('gd_info')) return false;
+		$gd = gd_info();
 
 		// GD lib older than 2.0?
 		preg_match('/\d/', $gd['GD Version'], $gdm);
-		if($gdm[0]<2)    return FALSE;
+		if($gdm[0] < 2) return false;
 
 		// get file extension
 		preg_match('/\.[a-zA-Z]{3,4}$/U', $img, $matches);
-		$ext=strtolower($matches[0]);
+		$ext = strtolower($matches[0]);
 
 		// check if supplied image is supported and specify actions based on file type
-		if($ext=='.gif') {
-			if(!$gd['GIF Create Support'])   return FALSE;
-			$thumbFunc='imagegif';
-		} elseif($ext=='.png') {
-			if(!$gd['PNG Support'])  return FALSE;
-			$thumbFunc='imagepng';
-		} elseif($ext=='.jpg' || $ext=='.jpe' || $ext=='.jpeg') {
-			if(!$gd['JPG Support'] && !$gd['JPEG Support'])  return FALSE;
-			$thumbFunc='imagejpeg';
+		if($ext == '.gif') {
+			if(!$gd['GIF Create Support']) return false;
+			$thumbFunc = 'imagegif';
+		} elseif($ext == '.png') {
+			if(!$gd['PNG Support'])  return false;
+			$thumbFunc = 'imagepng';
+		} elseif($ext == '.jpg' || $ext == '.jpe' || $ext == '.jpeg') {
+			if(!$gd['JPG Support'] && !$gd['JPEG Support'])  return false;
+			$thumbFunc = 'imagejpeg';
 		} else {
-			return FALSE;
+			return false;
 		}
 
 		// determine thumbnail file name
-		$ext=$matches[0];
-		$thumb=substr($img, 0, -5).str_replace($ext, $id.$ext, substr($img, -5));
+		$ext = $matches[0];
+		$thumb = substr($img, 0, -5) . str_replace($ext, $id . $ext, substr($img, -5));
 
 		// if the original image smaller than thumb, then just copy it to thumb
-		if($h>$oh && $w>$ow) {
-			return (@copy($img, $thumb) ? TRUE : FALSE);
+		if($h > $oh && $w > $ow) {
+			return (@copy($img, $thumb) ? true : false);
 		}
 
 		// get image data
-		if(!$imgData=imagecreatefromstring(implode('', file($img)))) return FALSE;
+		if(!$imgData = imagecreatefromstring(implode('', file($img)))) return false;
 
 		// finally, create thumbnail
-		$thumbData=imagecreatetruecolor($w, $h);
+		$thumbData = imagecreatetruecolor($w, $h);
 
 		//preserve transparency of png and gif images
-		if($thumbFunc=='imagepng') {
-			if(($clr=@imagecolorallocate($thumbData, 0, 0, 0))!=-1) {
+		if($thumbFunc == 'imagepng') {
+			if(($clr = @imagecolorallocate($thumbData, 0, 0, 0)) != -1) {
 				@imagecolortransparent($thumbData, $clr);
 				@imagealphablending($thumbData, false);
 				@imagesavealpha($thumbData, true);
 			}
-		} elseif($thumbFunc=='imagegif') {
+		} elseif($thumbFunc == 'imagegif') {
 			@imagealphablending($thumbData, false);
-			$transIndex=imagecolortransparent($imgData);
-			if($transIndex>=0) {
-				$transClr=imagecolorsforindex($imgData, $transIndex);
-				$transIndex=imagecolorallocatealpha($thumbData, $transClr['red'], $transClr['green'], $transClr['blue'], 127);
+			$transIndex = imagecolortransparent($imgData);
+			if($transIndex >= 0) {
+				$transClr = imagecolorsforindex($imgData, $transIndex);
+				$transIndex = imagecolorallocatealpha($thumbData, $transClr['red'], $transClr['green'], $transClr['blue'], 127);
 				imagefill($thumbData, 0, 0, $transIndex);
 			}
 		}
 
 		// resize original image into thumbnail
-		if(!imagecopyresampled($thumbData, $imgData, 0, 0 , 0, 0, $w, $h, $ow, $oh)) return FALSE;
+		if(!imagecopyresampled($thumbData, $imgData, 0, 0 , 0, 0, $w, $h, $ow, $oh)) return false;
 		unset($imgData);
 
 		// gif transparency
-		if($thumbFunc=='imagegif' && $transIndex>=0) {
+		if($thumbFunc == 'imagegif' && $transIndex >= 0) {
 			imagecolortransparent($thumbData, $transIndex);
-			for($y=0; $y<$h; ++$y)
-				for($x=0; $x<$w; ++$x)
-					if(((imagecolorat($thumbData, $x, $y)>>24) & 0x7F) >= 100)   imagesetpixel($thumbData, $x, $y, $transIndex);
+			for($y = 0; $y < $h; ++$y)
+				for($x = 0; $x < $w; ++$x)
+					if(((imagecolorat($thumbData, $x, $y) >> 24) & 0x7F) >= 100) imagesetpixel($thumbData, $x, $y, $transIndex);
 			imagetruecolortopalette($thumbData, true, 255);
 			imagesavealpha($thumbData, false);
 		}
 
-		if(!$thumbFunc($thumbData, $thumb))  return FALSE;
+		if(!$thumbFunc($thumbData, $thumb)) return false;
 		unset($thumbData);
 
-		return TRUE;
+		return true;
 	}
 	########################################################################
 	function makeSafe($string, $is_gpc = true) {
 		static $cached = []; /* str => escaped_str */
+
+		if(!strlen($string)) return '';
 
 		if(!db_link()) sql("SELECT 1+1", $eo);
 
@@ -352,115 +356,191 @@
 		}
 	}
 	########################################################################
-	if(!function_exists('sql')) {
-		function sql($statment, &$o) {
+	function dieErrorPage($error) {
+		global $Translation;
 
-			/*
-				Supported options that can be passed in $o options array (as array keys):
-				'silentErrors': If true, errors will be returned in $o['error'] rather than displaying them on screen and exiting.
-			*/
+		$header = (defined('ADMIN_AREA') ? __DIR__ . '/incHeader.php' : __DIR__ . '/../header.php');
+		$footer = (defined('ADMIN_AREA') ? __DIR__ . '/incFooter.php' : __DIR__ . '/../footer.php');
 
-			global $Translation;
-			static $connected = false, $db_link;
+		ob_start();
 
-			$dbServer = config('dbServer');
-			$dbUsername = config('dbUsername');
-			$dbPassword = config('dbPassword');
-			$dbDatabase = config('dbDatabase');
+		@include_once($header);
+		echo Notification::placeholder();
+		echo Notification::show([
+			'message' => $error,
+			'class' => 'danger',
+			'dismiss_seconds' => 7200
+		]);
+		@include_once($footer);
 
-			$admin_dir = dirname(__FILE__);
-			$header = (defined('ADMIN_AREA') ? "{$admin_dir}/incHeader.php" : "{$admin_dir}/../header.php");
-			$footer = (defined('ADMIN_AREA') ? "{$admin_dir}/incFooter.php" : "{$admin_dir}/../footer.php");
+		echo ob_get_clean();
+		exit;
+	}
+	########################################################################
+	function openDBConnection(&$o) {
+		static $connected = false, $db_link;
 
-			ob_start();
+		$dbServer = config('dbServer');
+		$dbUsername = config('dbUsername');
+		$dbPassword = config('dbPassword');
+		$dbDatabase = config('dbDatabase');
 
-			if(!$connected) {
-				/****** Connect to MySQL ******/
-				if(!extension_loaded('mysql') && !extension_loaded('mysqli')) {
-					$o['error'] = 'PHP is not configured to connect to MySQL on this machine. Please see <a href="http://www.php.net/manual/en/ref.mysql.php">this page</a> for help on how to configure MySQL.';
-					if($o['silentErrors']) return false;
+		if($connected) return $db_link;
 
-					@include_once($header);
-					echo Notification::placeholder();
-					echo Notification::show(array(
-						'message' => $o['error'],
-						'class' => 'danger',
-						'dismiss_seconds' => 7200
-					));
-					@include_once($footer);
-					echo ob_get_clean();
-					exit;
-				}
+		/****** Check that MySQL module is enabled ******/
+		if(!extension_loaded('mysql') && !extension_loaded('mysqli')) {
+			$o['error'] = 'PHP is not configured to connect to MySQL on this machine. Please see <a href="https://www.php.net/manual/en/ref.mysql.php">this page</a> for help on how to configure MySQL.';
+			if($o['silentErrors']) return false;
 
-				if(!($db_link = @db_connect($dbServer, $dbUsername, $dbPassword))) {
-					$o['error'] = db_error($db_link, true);
-					if($o['silentErrors']) return false;
-
-					@include_once($header);
-					echo Notification::placeholder();
-					echo Notification::show(array(
-						'message' => $o['error'],
-						'class' => 'danger',
-						'dismiss_seconds' => 7200
-					));
-					@include_once($footer);
-					echo ob_get_clean();
-					exit;
-				}
-
-				/****** Select DB ********/
-				if(!db_select_db($dbDatabase, $db_link)) {
-					$o['error'] = db_error($db_link);
-					if($o['silentErrors']) return false;
-
-					@include_once($header);
-					echo Notification::placeholder();
-					echo Notification::show(array(
-						'message' => $o['error'],
-						'class' => 'danger',
-						'dismiss_seconds' => 7200
-					));
-					@include_once($footer);
-					echo ob_get_clean();
-					exit;
-				}
-
-				$connected = true;
-			}
-
-			if(!$result = @db_query($statment, $db_link)) {
-				if(!stristr($statment, "show columns")) {
-					// retrieve error codes
-					$errorNum = db_errno($db_link);
-					$errorMsg = htmlspecialchars(db_error($db_link));
-
-					if(getLoggedAdmin()) $errorMsg .= "<pre class=\"ltr\">{$Translation['query:']}\n" . htmlspecialchars($statment) . "</pre><p><i class=\"text-right\">{$Translation['admin-only info']}</i></p><p>{$Translation['try rebuild fields']}</p>";
-
-					if($o['silentErrors']) { $o['error'] = $errorMsg; return false; }
-
-					@include_once($header);
-					echo Notification::placeholder();
-					echo Notification::show(array(
-						'message' => $errorMsg,
-						'class' => 'danger',
-						'dismiss_seconds' => 7200
-					));
-					@include_once($footer);
-					echo ob_get_clean();
-					exit;
-				}
-			}
-
-			ob_end_clean();
-			return $result;
+			dieErrorPage($o['error']);
 		}
+
+		/****** Connect to MySQL ******/
+		if(!($db_link = @db_connect($dbServer, $dbUsername, $dbPassword))) {
+			$o['error'] = db_error($db_link, true);
+			if($o['silentErrors']) return false;
+
+			dieErrorPage($o['error']);
+		}
+
+		/****** Select DB ********/
+		if(!db_select_db($dbDatabase, $db_link)) {
+			$o['error'] = db_error($db_link);
+			if($o['silentErrors']) return false;
+
+			dieErrorPage($o['error']);
+		}
+
+		$connected = true;
+		return $db_link;
+	}
+	########################################################################
+	function sql($statement, &$o) {
+
+		/*
+			Supported options that can be passed in $o options array (as array keys):
+			'silentErrors': If true, errors will be returned in $o['error'] rather than displaying them on screen and exiting.
+			'noSlowQueryLog': don't log slow query if true
+			'noErrorQueryLog': don't log error query if true
+		*/
+
+		global $Translation;
+
+		$db_link = openDBConnection($o);
+
+		/*
+		 if openDBConnection() fails, it would abort execution unless 'silentErrors' is true,
+		 in which case, we should return false from sql() without further action since
+		 $o['error'] would be already set by openDBConnection()
+		*/
+		if(!$db_link) return false;
+
+		$t0 = microtime(true);
+
+		if(!$result = @db_query($statement, $db_link)) {
+			if(!stristr($statement, "show columns")) {
+				// retrieve error codes
+				$errorNum = db_errno($db_link);
+				$o['error'] = htmlspecialchars(db_error($db_link));
+
+				if(empty($o['noErrorQueryLog']))
+					logErrorQuery($statement, $o['error']);
+
+				if(getLoggedAdmin())
+					$o['error'] .= "<pre class=\"ltr\">{$Translation['query:']}\n" . htmlspecialchars($statement) . "</pre><p><i class=\"text-right\">{$Translation['admin-only info']}</i></p><p>{$Translation['try rebuild fields']}</p>";
+
+				if($o['silentErrors']) return false;
+
+				dieErrorPage($o['error']);
+			}
+		}
+
+		/* log slow queries that take more than 1 sec */
+		$t1 = microtime(true);
+		if($t1 - $t0 > 1.0 && empty($o['noSlowQueryLog']))
+			logSlowQuery($statement, $t1 - $t0);
+
+		return $result;
+	}
+	########################################################################
+	function logSlowQuery($statement, $duration) {
+		if(!createQueryLogTable()) return;
+
+		$o = [
+			'silentErrors' => true,
+			'noSlowQueryLog' => true,
+			'noErrorQueryLog' => true
+		];
+		$statement = makeSafe($statement);
+		$duration = floatval($duration);
+		$memberID = makeSafe(getLoggedMemberID());
+		$uri = makeSafe($_SERVER['REQUEST_URI']);
+
+		sql("INSERT INTO `appgini_query_log` SET
+			`statement`='$statement',
+			`duration`=$duration,
+			`memberID`='$memberID',
+			`uri`='$uri'
+		", $o);
+	}
+	########################################################################
+	function logErrorQuery($statement, $error) {
+		if(!createQueryLogTable()) return;
+
+		$o = [
+			'silentErrors' => true,
+			'noSlowQueryLog' => true,
+			'noErrorQueryLog' => true
+		];
+		$statement = makeSafe($statement);
+		$error = makeSafe($error);
+		$memberID = makeSafe(getLoggedMemberID());
+		$uri = makeSafe($_SERVER['REQUEST_URI']);
+
+		sql("INSERT INTO `appgini_query_log` SET
+			`statement`='$statement',
+			`error`='$error',
+			`memberID`='$memberID',
+			`uri`='$uri'
+		", $o);
 	}
 
 	########################################################################
-	function sqlValue($statment, &$error = NULL) {
-		// executes a statment that retreives a single data value and returns the value retrieved
+	function createQueryLogTable() {
+		static $created = false;
+		if($created) return true;
+
+		$o = [
+			'silentErrors' => true,
+			'noSlowQueryLog' => true,
+			'noErrorQueryLog' => true
+		];
+
+		sql("CREATE TABLE IF NOT EXISTS `appgini_query_log` (
+			`datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			`statement` LONGTEXT,
+			`duration` DECIMAL(10,2) UNSIGNED DEFAULT 0.0,
+			`error` TEXT,
+			`memberID` VARCHAR(200),
+			`uri` VARCHAR(200)
+		) CHARSET " . mysql_charset, $o);
+
+		// check if table created
+		//$o2 = $o;
+		//$o2['error'] = '';
+		//sql("SELECT COUNT(1) FROM 'appgini_query_log'", $o2);
+
+		//$created = empty($o2['error']);
+
+		$created = true;
+		return $created;
+	}
+
+	########################################################################
+	function sqlValue($statement, &$error = NULL) {
+		// executes a statement that retreives a single data value and returns the value retrieved
 		$eo = ['silentErrors' => true];
-		if(!$res = sql($statment, $eo)) { $error = $eo['error']; return false; }
+		if(!$res = sql($statement, $eo)) { $error = $eo['error']; return false; }
 		if(!$row = db_fetch_row($res)) return false;
 		return $row[0];
 	}
@@ -803,11 +883,7 @@
 	}
 	########################################################################
 	function isEmail($email) {
-		if(preg_match('/^([*+!.&#$¦\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,45})$/i', $email)) {
-			return $email;
-		}
-
-		return false;
+		return filter_var(trim($email), FILTER_VALIDATE_EMAIL);
 	}
 	########################################################################
 	function notifyMemberApproval($memberID) {
@@ -1333,7 +1409,7 @@
 	########################################################################
 	function toBytes($val) {
 		$val = trim($val);
-		$last = strtolower($val{strlen($val)-1});
+		$last = strtolower($val[strlen($val)-1]);
 		switch($last) {
 			 // The 'G' modifier is available since PHP 5.1.0
 			 case 'g':
@@ -1350,7 +1426,7 @@
 	function convertLegacyOptions($CSVList) {
 		$CSVList=str_replace(';;;', ';||', $CSVList);
 		$CSVList=str_replace(';;', '||', $CSVList);
-		return $CSVList;
+		return trim($CSVList, '|');
 	}
 	########################################################################
 	function getValueGivenCaption($query, $caption) {
@@ -1615,7 +1691,7 @@
 
 						/* dismiss after x seconds if requested */
 						if(options.dismiss_seconds > 0) {
-							setTimeout(function() { /* */ this_notif.addClass('invisible'); }, options.dismiss_seconds * 1000);
+							setTimeout(function() { this_notif.addClass('invisible'); }, options.dismiss_seconds * 1000);
 						}
 
 						/* dismiss for x days if requested and user dismisses it */
@@ -1676,14 +1752,50 @@
 		}
 	}
 	#########################################################
-	function sendmail($mail) {
-		if(!isset($mail['to'])) return 'No recipient defined';
-		if(!isEmail($mail['to'])) return 'Invalid recipient email';
+	function addMailRecipients(&$pm, $recipients, $type = 'to') {
+		if(empty($recipients)) return;
 
-		$mail['subject'] = isset($mail['subject']) ? $mail['subject'] : '';
-		$mail['message'] = isset($mail['message']) ? $mail['message'] : '';
-		$mail['name'] = isset($mail['name']) ? $mail['name'] : '';
-		$mail['debug'] = isset($mail['debug']) ? min(4, max(0, intval($mail['debug']))) : 0;
+		switch(strtolower($type)) {
+			case 'cc':
+				$func = [$pm, 'addCC'];
+				break;
+			case 'bcc':
+				$func = [$pm, 'addBCC'];
+				break;
+			case 'to':
+				$func = [$pm, 'addAddress'];
+				break;
+		}
+
+		// if recipients is a str, arrayify it!
+		if(is_string($recipients)) $recipients = [[$recipients]];
+		if(!is_array($recipients)) return;
+
+		// if recipients is an array, loop thru and add emails/names
+		foreach ($recipients as $rcpt) {
+			// if rcpt is string, add as email
+			if(is_string($rcpt) && isEmail($rcpt))
+				call_user_func_array($func, [$rcpt]);
+
+			// else if rcpt is array [email, name], or just [email]
+			elseif(is_array($rcpt) && isEmail($rcpt[0]))
+				call_user_func_array($func, [$rcpt[0], empty($rcpt[1]) ? '' : $rcpt[1]]);
+		}
+	}
+	#########################################################
+	function sendmail($mail) {
+		if(empty($mail['to'])) return 'No recipient defined';
+
+		// convert legacy 'to' and 'name' to new format [[to, name]]
+		if(is_string($mail['to']))
+			$mail['to'] = [
+				[
+					$mail['to'], 
+					empty($mail['name']) ? '' : $mail['name']
+				]
+			];
+
+		if(!isEmail($mail['to'][0][0])) return 'Invalid recipient email';
 
 		$cfg = config('adminConfig');
 		$smtp = ($cfg['mail_function'] == 'smtp');
@@ -1699,7 +1811,7 @@
 
 		if($smtp) {
 			$pm->isSMTP();
-			$pm->SMTPDebug = $mail['debug'];
+			$pm->SMTPDebug = isset($mail['debug']) ? min(4, max(0, intval($mail['debug']))) : 0;
 			$pm->Debugoutput = 'html';
 			$pm->Host = $cfg['smtp_server'];
 			$pm->Port = $cfg['smtp_port'];
@@ -1710,14 +1822,25 @@
 		}
 
 		$pm->setFrom($cfg['senderEmail'], $cfg['senderName']);
-		$pm->addAddress($mail['to'], $mail['name']);
-		$pm->Subject = $mail['subject'];
+		$pm->Subject = isset($mail['subject']) ? $mail['subject'] : '';
+
+		// handle recipients
+		addMailRecipients($pm, $mail['to']);
+		if(!empty($mail['cc'])) addMailRecipients($pm, $mail['cc'], 'cc');
+		if(!empty($mail['bcc'])) addMailRecipients($pm, $mail['bcc'], 'bcc');
 
 		/* if message already contains html tags, don't apply nl2br */
+		$mail['message'] = isset($mail['message']) ? $mail['message'] : '';
 		if($mail['message'] == strip_tags($mail['message']))
 			$mail['message'] = nl2br($mail['message']);
 
 		$pm->msgHTML($mail['message'], realpath("{$curr_dir}/.."));
+
+		/*
+		 * pass 'tag' as-is if provided in $mail .. 
+		 * this is useful for passing any desired values to sendmail_handler
+		 */
+		if(!empty($mail['tag'])) $pm->tag = $mail['tag'];
 
 		/* if sendmail_handler(&$pm) is defined (in hooks/__global.php) */
 		if(function_exists('sendmail_handler')) sendmail_handler($pm);
@@ -1727,14 +1850,12 @@
 		return true;
 	}
 	#########################################################
-	function safe_html($str) {
+	function safe_html($str, $noBr = false) {
 		/* if $str has no HTML tags, apply nl2br */
-		if($str == strip_tags($str)) return nl2br($str);
+		if($str == strip_tags($str)) return $noBr ? $str : nl2br($str);
 
-		$hc = new CI_Input();
-		$hc->charset = datalist_db_encoding;
-
-		return $hc->xss_clean($str);
+		$hc = new CI_Input(datalist_db_encoding);
+		return $hc->xss_clean(bgStyleToClass($str));
 	}
 	#########################################################
 	function getLoggedGroupID() {
@@ -2370,7 +2491,6 @@
 
 		return trim("$date $time");
 	}
-
 	#########################################################
 	function lookupQuery($tn, $lookupField) {
 		/* 
@@ -2498,3 +2618,42 @@
 		return false;
 	}
 	#########################################################
+	function parseTemplate($template) {
+		if(trim($template) == '') return $template;
+
+		global $Translation;
+		foreach($Translation as $symbol => $trans)
+			$template = str_replace("<%%TRANSLATION($symbol)%%>", $trans, $template);
+
+		// Correct <MaxSize> and <FileTypes> to prevent invalid HTML
+		$template = str_replace(['<MaxSize>', '<FileTypes>'], ['{MaxSize}', '{FileTypes}'], $template);
+		$template = str_replace('<%%BASE_UPLOAD_PATH%%>', getUploadDir(''), $template);
+
+		return $template;
+	}
+	#########################################################
+	function getUploadDir($dir) {
+		if($dir == '') $dir = config('adminConfig')['baseUploadPath'];
+
+		return rtrim($dir, '\\/') . '/';
+	}
+	#########################################################
+	function bgStyleToClass($html) {
+		return preg_replace(
+			'/ style="background-color: rgb\((\d+), (\d+), (\d+)\);"/',
+			' class="nicedit-bg" data-nicedit_r="$1" data-nicedit_g="$2" data-nicedit_b="$3"',
+			$html
+		);
+	}
+	#########################################################
+	function assocArrFilter($arr, $func) {
+		if(!is_array($arr) || !count($arr)) return $arr;
+		if(!is_callable($func)) return false;
+
+		$filtered = [];
+		foreach ($arr as $key => $value)
+			if(call_user_func_array($func, [$key, $value]) === true)
+				$filtered[$key] = $value;
+
+		return $filtered;
+	}

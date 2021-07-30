@@ -47,7 +47,7 @@
 		public function __construct($transformFunctions, $filterFunctions, $uri = '', $request = false) {
 			global $Translation;
 
-			if($uri === '') $uri = $_SERVER['PHP_SELF'];
+			if($uri === '') $uri = htmlspecialchars($_SERVER['PHP_SELF']);
 			if($request === false) $request = $_REQUEST;
 
 			$this->transformFunctions = $transformFunctions;
@@ -162,6 +162,7 @@
 		 * @return  string  full page HTML after translating and wrapping given $html inside header and footer
 		 */
 		private function html($html, $replace = []) {
+			global $Translation;
 			ob_start();
 			@include_once("{$this->appDir}/header.php");
 

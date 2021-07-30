@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/depenses-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="depenses_dv_container">
+<div id="depenses_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="depenses_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -20,7 +22,7 @@
 				<!-- Field: Convention -->
 				<div class="form-group depenses-convention">
 					<hr class="hidden-md hidden-lg">
-					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="convention" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
 					</div>
@@ -29,7 +31,7 @@
 				<!-- Field: Ligne Budg&#233;taire -->
 				<div class="form-group depenses-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne Budg&#233;taire</label>
+					<label class="control-label col-lg-3" for="ligne_budgetaire" data-parent_link="view_parent_modal">Ligne Budg&#233;taire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_budgetaire)%%><%%PLINK(ligne_budgetaire)%%><%%ADDNEW(budgets)%%></div>
 					</div>
@@ -38,7 +40,7 @@
 				<!-- Field: Ligne de cr&#233;dit (CFI) - Exercice -->
 				<div class="form-group depenses-ligne_credit">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_credit" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne de cr&#233;dit (CFI) - Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="ligne_credit" data-parent_link="view_parent_modal">Ligne de cr&#233;dit (CFI) - Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_credit)%%><%%PLINK(ligne_credit)%%><%%ADDNEW(lignes_credits)%%></div>
 					</div>
@@ -47,7 +49,7 @@
 				<!-- Field: Date -->
 				<div class="form-group depenses-date">
 					<hr class="hidden-md hidden-lg">
-					<label for="date" class="control-label col-lg-3">Date</label>
+					<label class="control-label col-lg-3" for="date-dd">Date</label>
 					<div class="col-lg-9">
 						<%%COMBO(date)%%>
 					</div>
@@ -56,7 +58,7 @@
 				<!-- Field: Intitul&#233; -->
 				<div class="form-group depenses-intitule">
 					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="intitule">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="100" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
 					</div>
@@ -65,10 +67,9 @@
 				<!-- Field: R&#233;ference -->
 				<div class="form-group depenses-reference">
 					<hr class="hidden-md hidden-lg">
-					<label for="reference" class="control-label col-lg-3">R&#233;ference <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reference-description"></i></label>
+					<label class="control-label col-lg-3" for="reference">R&#233;ference <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reference-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reference-description"><div class="alert alert-info">Num&#233;ro de d&#233;placement ou num&#233;ro de commande</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reference-description"><div class="alert alert-info bspacer-xs">Num&#233;ro de d&#233;placement ou num&#233;ro de commande</div></span>
 						<input maxlength="40" type="text" class="form-control" name="reference" id="reference" value="<%%VALUE(reference)%%>">
 					</div>
 				</div>
@@ -76,10 +77,9 @@
 				<!-- Field: Contrat (si salaire) -->
 				<div class="form-group depenses-contrat">
 					<hr class="hidden-md hidden-lg">
-					<label for="contrat" class="control-label col-lg-3" data-parent_link="view_parent_modal">Contrat (si salaire) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#contrat-description"></i></label>
+					<label class="control-label col-lg-3" for="contrat" data-parent_link="view_parent_modal">Contrat (si salaire) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#contrat-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="contrat-description"><div class="alert alert-info">Pour les d&#233;penses de personnel, voir la liste des recrutements</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="contrat-description"><div class="alert alert-info bspacer-xs">Pour les d&#233;penses de personnel, voir la liste des recrutements</div></span>
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(contrat)%%><%%PLINK(contrat)%%><%%ADDNEW(recrutements)%%></div>
 					</div>
 				</div>
@@ -87,7 +87,7 @@
 				<!-- Field: B&#233;n&#233;ficiaire -->
 				<div class="form-group depenses-beneficiaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="beneficiaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
+					<label class="control-label col-lg-3" for="beneficiaire" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(beneficiaire)%%><%%PLINK(beneficiaire)%%><%%ADDNEW(personnes)%%></div>
 					</div>
@@ -96,7 +96,7 @@
 				<!-- Field: Montant -->
 				<div class="form-group depenses-montant">
 					<hr class="hidden-md hidden-lg">
-					<label for="montant" class="control-label col-lg-3">Montant<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="montant">Montant<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="montant" id="montant" value="<%%VALUE(montant)%%>" required>
 					</div>
@@ -106,9 +106,9 @@
 				<div class="form-group depenses-liquidee">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
-						<div class="checkbox"><label for="liquidee"><input type="checkbox" name="liquidee" id="liquidee" value="1" <%%CHECKED(liquidee)%%>> Liquid&#233;e ?</label>
-							<i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquidee-description"></i>
-							<span class="help-block collapse" id="liquidee-description"><div class="alert alert-info">Une d&#233;pense est consid&#233;r&#233;e comme liquid&#233;e une fois totalement r&#233;gl&#233;e par l'organisme gestionnaire. Si ce n'est pas le cas (pr&#233;vue, r&#233;serv&#233;e, engag&#233;e...), la d&#233;pense n'est pas encore liquid&#233;e.</div></span>
+						<span class="help-block bspacer-xs collapse" id="liquidee-description"><div class="alert alert-info bspacer-xs">Une d&#233;pense est consid&#233;r&#233;e comme liquid&#233;e une fois totalement r&#233;gl&#233;e par l'organisme gestionnaire. Si ce n'est pas le cas (pr&#233;vue, r&#233;serv&#233;e, engag&#233;e...), la d&#233;pense n'est pas encore liquid&#233;e.</div></span>
+						<div class="checkbox">
+							<label for="liquidee"><input type="checkbox" name="liquidee" id="liquidee" value="1" <%%CHECKED(liquidee)%%>> Liquid&#233;e ?</label> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquidee-description"></i>
 						</div>
 					</div>
 				</div>
@@ -116,7 +116,7 @@
 				<!-- Field: Ventilation Budg&#233;taire -->
 				<div class="form-group depenses-ventilation">
 					<hr class="hidden-md hidden-lg">
-					<label for="ventilation" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
+					<label class="control-label col-lg-3" for="ventilation" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ventilation)%%><%%PLINK(ventilation)%%><%%ADDNEW(ventilation)%%></div>
 					</div>
@@ -125,8 +125,8 @@
 				<!-- Field: Notes -->
 				<div class="form-group depenses-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -135,7 +135,8 @@
 				<div class="form-group depenses-verifie">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
-						<div class="checkbox"><label for="verifie"><input type="checkbox" name="verifie" id="verifie" value="1" <%%CHECKED(verifie)%%>> V&#233;rifi&#233;e ?</label>
+						<div class="checkbox">
+							<label for="verifie"><input type="checkbox" name="verifie" id="verifie" value="1" <%%CHECKED(verifie)%%>> V&#233;rifi&#233;e ?</label>
 						</div>
 					</div>
 				</div>
@@ -183,10 +184,29 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.depenses-convention')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0;
+					},
+					action: function() {
+						$j('#depenses_dv_container-loading').addClass('hidden');
+						$j('#depenses_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('depenses', 'convention');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#depenses_dv_container-loading').addClass('hidden');
+				$j('#depenses_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -197,10 +217,10 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -216,7 +236,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'depenses',

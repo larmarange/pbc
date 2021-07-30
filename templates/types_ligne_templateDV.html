@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/types_ligne-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="types_ligne_dv_container">
+<div id="types_ligne_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="types_ligne_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -22,9 +24,9 @@
 				<div class="form-group types_ligne-frais_gestion">
 					<hr class="hidden-md hidden-lg">
 					<div class="col-lg-offset-3 col-lg-9">
-						<div class="checkbox"><label for="frais_gestion"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%>> Frais de Gestion ?</label>
-							<i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i>
-							<span class="help-block collapse" id="frais_gestion-description"><div class="alert alert-info">Indiquez si cette ligne budg&#233;taire est du type 'Frais de gestion'. Elle sera alors exclue du calcul des montants &#224; ouvrir.</div></span>
+						<span class="help-block bspacer-xs collapse" id="frais_gestion-description"><div class="alert alert-info bspacer-xs">Indiquez si cette ligne budg&#233;taire est du type 'Frais de gestion'. Elle sera alors exclue du calcul des montants &#224; ouvrir.</div></span>
+						<div class="checkbox">
+							<label for="frais_gestion"><input type="checkbox" name="frais_gestion" id="frais_gestion" value="1" <%%CHECKED(frais_gestion)%%>> Frais de Gestion ?</label> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i>
 						</div>
 					</div>
 				</div>
@@ -32,7 +34,7 @@
 				<!-- Field: Organisme gestionnaire -->
 				<div class="form-group types_ligne-gestionnaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="gestionnaire" class="control-label col-lg-3">Organisme gestionnaire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="gestionnaire">Organisme gestionnaire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="gestionnaire" id="gestionnaire" value="<%%VALUE(gestionnaire)%%>" required>
 					</div>
@@ -41,7 +43,7 @@
 				<!-- Field: Type -->
 				<div class="form-group types_ligne-type">
 					<hr class="hidden-md hidden-lg">
-					<label for="type" class="control-label col-lg-3">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="type">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="type" id="type" value="<%%VALUE(type)%%>" required>
 					</div>
@@ -94,10 +96,13 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			$j('#types_ligne_dv_container-loading').addClass('hidden');
+			$j('#types_ligne_dv_container').removeClass('hidden');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('types_ligne', 'frais_gestion');
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -105,7 +110,7 @@
 				$j(this).data('already_changed', true);
 			});
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -140,7 +145,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -156,7 +161,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'types_ligne',

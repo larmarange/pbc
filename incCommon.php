@@ -510,7 +510,7 @@
 					</ul>
 				<?php } ?>
 
-				<?php if($mi['admin']) { ?>
+				<?php if(getLoggedAdmin() !== false) { ?>
 					<ul class="nav navbar-nav">
 						<a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn hidden-xs" title="<?php echo html_attr($Translation['admin area']); ?>"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['admin area']; ?></a>
 						<a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn visible-xs btn-lg" title="<?php echo html_attr($Translation['admin area']); ?>"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['admin area']; ?></a>
@@ -528,14 +528,14 @@
 						<ul class="nav navbar-nav navbar-right hidden-xs" style="min-width: 330px;">
 							<a class="btn navbar-btn btn-default" href="<?php echo PREPEND_PATH; ?>index.php?signOut=1"><i class="glyphicon glyphicon-log-out"></i> <?php echo $Translation['sign out']; ?></a>
 
-							<p class="navbar-text">
-								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo $mi['username']; ?></a></strong>
+							<p class="navbar-text signed-in-as">
+								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link username"><?php echo $mi['username']; ?></a></strong>
 							</p>
 						</ul>
 						<ul class="nav navbar-nav visible-xs">
 							<a class="btn navbar-btn btn-default btn-lg visible-xs" href="<?php echo PREPEND_PATH; ?>index.php?signOut=1"><i class="glyphicon glyphicon-log-out"></i> <?php echo $Translation['sign out']; ?></a>
-							<p class="navbar-text text-center">
-								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link"><?php echo $mi['username']; ?></a></strong>
+							<p class="navbar-text text-center signed-in-as">
+								<?php echo $Translation['signed as']; ?> <strong><a href="<?php echo PREPEND_PATH; ?>membership_profile.php" class="navbar-link username"><?php echo $mi['username']; ?></a></strong>
 							</p>
 						</ul>
 						<script>
@@ -903,7 +903,7 @@
 			$filterJS.="\n\t}";
 			$filterJS.="\n\t$('{$filterable}').highlight();";
 			$filterJS.="\n};";
-			$filterJS.="\n$('{$filterer}').observe('change', function() { /* */ window.setTimeout({$filterable}_change_by_{$filterer}, 25); });";
+			$filterJS.="\n$('{$filterer}').observe('change', function() { window.setTimeout({$filterable}_change_by_{$filterer}, 25); });";
 			$filterJS.="\n";
 		}
 
@@ -964,10 +964,10 @@
 
 		if($perm['view'] == 1 || ($perm['view'] > 1 && $level == 'user')) { // view owner only
 			$from = 'membership_userrecords';
-			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and lcase(membership_userrecords.memberID)='".getLoggedMemberID()."')";
+			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and lcase(membership_userrecords.memberID)='" . getLoggedMemberID() . "')";
 		} elseif($perm['view'] == 2 || ($perm['view'] > 2 && $level == 'group')) { // view group only
 			$from = 'membership_userrecords';
-			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and membership_userrecords.groupID='".getLoggedGroupID()."')";
+			$where = "(`$table`.`$pk`=membership_userrecords.pkValue and membership_userrecords.tableName='$table' and membership_userrecords.groupID='" . getLoggedGroupID() . "')";
 		} elseif($perm['view'] == 3) { // view all
 			// no further action
 		} elseif($perm['view'] == 0) { // view none
@@ -1034,8 +1034,8 @@
 		if(!$url) return '';
 
 		$providers = [
-			'youtube' => array('oembed' => 'http://www.youtube.com/oembed?'),
-			'googlemap' => array('oembed' => '', 'regex' => '/^http.*\.google\..*maps/i')
+			'youtube' => ['oembed' => 'https://www.youtube.com/oembed?'],
+			'googlemap' => ['oembed' => '', 'regex' => '/^http.*\.google\..*maps/i'],
 		];
 
 		if(!isset($providers[$provider])) {
@@ -1047,7 +1047,7 @@
 		}
 
 		if($providers[$provider]['oembed']) {
-			$oembed = $providers[$provider]['oembed'] . 'url=' . urlencode($url) . "&maxwidth={$max_width}&maxheight={$max_height}&format=json";
+			$oembed = $providers[$provider]['oembed'] . 'url=' . urlencode($url) . "&amp;maxwidth={$max_width}&amp;maxheight={$max_height}&amp;format=json";
 			$data_json = request_cache($oembed);
 
 			$data = json_decode($data_json, true);
@@ -1080,9 +1080,9 @@
 			if(!$max_height) $max_height = 360;
 			if(!$max_width) $max_width = 480;
 
-			$api_key = '';
-			$embed_url = "https://www.google.com/maps/embed/v1/view?key={$api_key}&center={$lat},{$long}&zoom={$zoom}&maptype=roadmap";
-			$thumbnail_url = "https://maps.googleapis.com/maps/api/staticmap?key={$api_key}&center={$lat},{$long}&zoom={$zoom}&maptype=roadmap&size={$max_width}x{$max_height}";
+			$api_key = config('adminConfig')['googleAPIKey'];
+			$embed_url = "https://www.google.com/maps/embed/v1/view?key={$api_key}&amp;center={$lat},{$long}&amp;zoom={$zoom}&amp;maptype=roadmap";
+			$thumbnail_url = "https://maps.googleapis.com/maps/api/staticmap?key={$api_key}&amp;center={$lat},{$long}&amp;zoom={$zoom}&amp;maptype=roadmap&amp;size={$max_width}x{$max_height}";
 
 			if($retrieve == 'html') {
 				return "<iframe width=\"{$max_width}\" height=\"{$max_height}\" frameborder=\"0\" style=\"border:0\" src=\"{$embed_url}\"></iframe>";
@@ -1211,7 +1211,7 @@
 			$links_added = [];
 			foreach($navLinks as $link) {
 				if(!isset($link['url']) || !isset($link['title'])) continue;
-				if($memberInfo['admin'] || @in_array($memberInfo['group'], $link['groups']) || @in_array('*', $link['groups'])) {
+				if(getLoggedAdmin() !== false || @in_array($memberInfo['group'], $link['groups']) || @in_array('*', $link['groups'])) {
 					$menu_index = intval($link['table_group']);
 					if(!$links_added[$menu_index]) $menu[$menu_index] .= '<li class="divider"></li>';
 
@@ -1253,26 +1253,10 @@ EOT;
 			<link rel="stylesheet" href="{$prepend_path}resources/lightbox/css/lightbox.css" media="screen">
 			<link rel="stylesheet" href="{$prepend_path}resources/select2/select2.css" media="screen">
 			<link rel="stylesheet" href="{$prepend_path}resources/timepicker/bootstrap-timepicker.min.css" media="screen">
-			<link rel="stylesheet" href="{$prepend_path}dynamic.css.php">
+			<link rel="stylesheet" href="{$prepend_path}dynamic.css">
 EOT;
 
 		return $css_links;
-	}
-
-	#########################################################
-
-	function getUploadDir($dir) {
-		global $Translation;
-
-		if($dir=="") {
-			$dir=$Translation['ImageFolder'];
-		}
-
-		if(substr($dir, -1)!="/") {
-			$dir.="/";
-		}
-
-		return $dir;
 	}
 
 	#########################################################
@@ -1299,11 +1283,11 @@ EOT;
 		$MaxSize = min($MaxSize, $php_upload_size_limit);
 
 		if($f['size'] > $MaxSize || $f['error']) {
-			echo error_message(str_replace('<MaxSize>', intval($MaxSize / 1024), $Translation['file too large']));
+			echo error_message(str_replace(['<MaxSize>', '{MaxSize}'], intval($MaxSize / 1024), $Translation['file too large']));
 			exit;
 		}
 		if(!preg_match('/\.(' . $FileTypes . ')$/i', $f['name'], $ft)) {
-			echo error_message(str_replace('<FileTypes>', str_replace('|', ', ', $FileTypes), $Translation['invalid file type']));
+			echo error_message(str_replace(['<FileTypes>', '{FileTypes}'], str_replace('|', ', ', $FileTypes), $Translation['invalid file type']));
 			exit;
 		}
 
@@ -1338,7 +1322,7 @@ EOT;
 			if(!$link['panel_classes']) $link['panel_classes'] = $default_classes['panel'];
 			if(!$link['link_classes']) $link['link_classes'] = $default_classes['link'];
 
-			if($memberInfo['admin'] || @in_array($memberInfo['group'], $link['groups']) || @in_array('*', $link['groups'])) {
+			if(getLoggedAdmin() !== false || @in_array($memberInfo['group'], $link['groups']) || @in_array('*', $link['groups'])) {
 				?>
 				<div class="col-xs-12 <?php echo $link['grid_column_classes']; ?>">
 					<div class="panel <?php echo $link['panel_classes']; ?>">

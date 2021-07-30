@@ -216,7 +216,7 @@
 <div style="height: 3em;"></div>
 
 <?php if($superadmin) { ?>
-	<div class="alert alert-warning"><?php echo $Translation["admin member"]; ?></div>
+	<div class="alert alert-warning text-center"><?php echo $Translation["admin member"]; ?></div>
 <?php } ?>
 
 <form method="post" action="pageEditMember.php" class="form-horizontal">
@@ -383,7 +383,7 @@
 							.parents('.form-group').removeClass('has-error has-success');
 					},
 					success: function(resp) {
-						if(resp.match(/\<!-- AVAILABLE --\>/)) {
+						if(resp.indexOf('username-available') > -1) {
 							$j('#username-available')
 								.removeClass('hidden')
 								.parents('.form-group').addClass('has-success');
@@ -494,10 +494,7 @@
 				})
 		}
 
-		/* circumvent browser auto-filling of passwords */
-		setTimeout(function() { /* */ $j('#password').val(''); }, 100);
-
-		$j('#username-available, #username-not-available').click(function() { /* */ $j('#memberID').focus(); });
+		$j('#username-available, #username-not-available').click(function() { $j('#memberID').focus(); });
 
 		$j('#memberID').on('keyup blur', check_user);
 

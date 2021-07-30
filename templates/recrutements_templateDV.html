@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/recrutements-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="recrutements_dv_container">
+<div id="recrutements_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="recrutements_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -21,7 +23,7 @@
 				<!-- Field: ID -->
 				<div class="form-group recrutements-id">
 					<hr class="hidden-md hidden-lg">
-					<label for="id" class="control-label col-lg-3">ID</label>
+					<label class="control-label col-lg-3" for="id">ID</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" id="id"><%%VALUE(id)%%></div>
 					</div>
@@ -30,7 +32,7 @@
 				<!-- Field: Convention -->
 				<div class="form-group recrutements-convention">
 					<hr class="hidden-md hidden-lg">
-					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="convention" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
 					</div>
@@ -39,7 +41,7 @@
 				<!-- Field: Intitul&#233; du poste -->
 				<div class="form-group recrutements-intitule">
 					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233; du poste<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="intitule">Intitul&#233; du poste<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="100" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
 					</div>
@@ -48,7 +50,7 @@
 				<!-- Field: B&#233;n&#233;ficiaire -->
 				<div class="form-group recrutements-beneficiaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="beneficiaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
+					<label class="control-label col-lg-3" for="beneficiaire" data-parent_link="view_parent_modal">B&#233;n&#233;ficiaire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(beneficiaire)%%><%%PLINK(beneficiaire)%%><%%ADDNEW(personnes)%%></div>
 					</div>
@@ -57,7 +59,7 @@
 				<!-- Field: D&#233;but -->
 				<div class="form-group recrutements-date_debut">
 					<hr class="hidden-md hidden-lg">
-					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
+					<label class="control-label col-lg-3" for="date_debut-dd">D&#233;but</label>
 					<div class="col-lg-9">
 						<%%COMBO(date_debut)%%>
 					</div>
@@ -66,7 +68,7 @@
 				<!-- Field: Fin -->
 				<div class="form-group recrutements-date_fin">
 					<hr class="hidden-md hidden-lg">
-					<label for="date_fin" class="control-label col-lg-3">Fin</label>
+					<label class="control-label col-lg-3" for="date_fin-dd">Fin</label>
 					<div class="col-lg-9">
 						<%%COMBO(date_fin)%%>
 					</div>
@@ -75,16 +77,16 @@
 				<!-- Field: Dur&#233;e (mois) -->
 				<div class="form-group recrutements-duree">
 					<hr class="hidden-md hidden-lg">
-					<label for="duree" class="control-label col-lg-3">Dur&#233;e (mois)</label>
+					<label class="control-label col-lg-3" for="duree">Dur&#233;e (mois)</label>
 					<div class="col-lg-9">
-						<input maxlength="" type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
+						<input type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
 					</div>
 				</div>
 
 				<!-- Field: Ligne budg&#233;taire -->
 				<div class="form-group recrutements-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne budg&#233;taire</label>
+					<label class="control-label col-lg-3" for="ligne_budgetaire" data-parent_link="view_parent_modal">Ligne budg&#233;taire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_budgetaire)%%><%%PLINK(ligne_budgetaire)%%><%%ADDNEW(budgets)%%></div>
 					</div>
@@ -93,7 +95,7 @@
 				<!-- Field: Ventilation Budg&#233;taire -->
 				<div class="form-group recrutements-ventilation">
 					<hr class="hidden-md hidden-lg">
-					<label for="ventilation" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
+					<label class="control-label col-lg-3" for="ventilation" data-parent_link="view_parent_modal">Ventilation Budg&#233;taire</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ventilation)%%><%%PLINK(ventilation)%%><%%ADDNEW(ventilation)%%></div>
 					</div>
@@ -102,8 +104,8 @@
 				<!-- Field: Notes -->
 				<div class="form-group recrutements-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -111,7 +113,7 @@
 				<!-- Field: Co&#251;t total pr&#233;visionnel -->
 				<div class="form-group recrutements-previsionnel">
 					<hr class="hidden-md hidden-lg">
-					<label for="previsionnel" class="control-label col-lg-3">Co&#251;t total pr&#233;visionnel</label>
+					<label class="control-label col-lg-3" for="previsionnel">Co&#251;t total pr&#233;visionnel</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="previsionnel" id="previsionnel" value="<%%VALUE(previsionnel)%%>">
 					</div>
@@ -120,10 +122,9 @@
 				<!-- Field: D&#233;pens&#233; -->
 				<div class="form-group recrutements-depense">
 					<hr class="hidden-md hidden-lg">
-					<label for="depense" class="control-label col-lg-3">D&#233;pens&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depense-description"></i></label>
+					<label class="control-label col-lg-3" for="depense">D&#233;pens&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depense-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="depense-description"><div class="alert alert-info">D&#233;penses (liquid&#233;es ou non) associ&#233;es &#224; ce contrat</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="depense-description"><div class="alert alert-info bspacer-xs">D&#233;penses (liquid&#233;es ou non) associ&#233;es &#224; ce contrat</div></span>
 						<input maxlength="13" type="text" class="form-control" name="depense" id="depense" value="<%%VALUE(depense)%%>">
 					</div>
 				</div>
@@ -131,10 +132,9 @@
 				<!-- Field: Salaires restant &#224; verser -->
 				<div class="form-group recrutements-reservation_salaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<label class="control-label col-lg-3" for="reservation_salaire">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Pr&#233;vionnel - D&#233;pens&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reservation_salaire-description"><div class="alert alert-info bspacer-xs">Pr&#233;vionnel - D&#233;pens&#233;</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
 					</div>
 				</div>
@@ -142,10 +142,9 @@
 				<!-- Field: D/P (%) -->
 				<div class="form-group recrutements-prop_dp">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_dp" class="control-label col-lg-3">D/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_dp-description"></i></label>
+					<label class="control-label col-lg-3" for="prop_dp">D/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_dp-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="prop_dp-description"><div class="alert alert-info">D&#233;pens&#233; sur Pr&#233;visionnel</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="prop_dp-description"><div class="alert alert-info bspacer-xs">D&#233;pens&#233; sur Pr&#233;visionnel</div></span>
 						<input maxlength="13" type="text" class="form-control" name="prop_dp" id="prop_dp" value="<%%VALUE(prop_dp)%%>">
 					</div>
 				</div>
@@ -203,10 +202,29 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.recrutements-convention')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0;
+					},
+					action: function() {
+						$j('#recrutements_dv_container-loading').addClass('hidden');
+						$j('#recrutements_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('recrutements', 'convention');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#recrutements_dv_container-loading').addClass('hidden');
+				$j('#recrutements_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -217,7 +235,7 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -252,7 +270,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -268,7 +286,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'recrutements',

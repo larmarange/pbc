@@ -69,11 +69,11 @@
 						</div>
 						<div class="form-group">
 							<label for="newPassword" class="control-label"><?php echo $Translation['new password']; ?></label>
-							<input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="<?php echo html_attr($Translation['new password']); ?>">
+							<input type="password" class="form-control" autocomplete="new-password" id="newPassword" name="newPassword" placeholder="<?php echo html_attr($Translation['new password']); ?>">
 						</div>
 						<div class="form-group">
 							<label for="confirmPassword" class="control-label"><?php echo $Translation['confirm password']; ?></label>
-							<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="<?php echo html_attr($Translation['confirm password']); ?>">
+							<input type="password" class="form-control" autocomplete="new-password" id="confirmPassword" name="confirmPassword" placeholder="<?php echo html_attr($Translation['confirm password']); ?>">
 						</div>
 
 						<div class="row">
@@ -124,7 +124,7 @@
 		if($row && $row['memberID'] != $adminConfig['adminUsername']) {
 			// generate and store password reset key, if no valid key already exists
 			$no_valid_key = ($row['pass_reset_key'] == '' || ($row['pass_reset_key'] != '' && $row['pass_reset_expiry'] < (time() - $reset_expiry)));
-			$key = ($no_valid_key ? md5(microtime()) : $row['pass_reset_key']);
+			$key = ($no_valid_key ? substr(md5(microtime() . rand(0, 100000)), -17) : $row['pass_reset_key']);
 			$expiry = ($no_valid_key ? time() + $reset_expiry : $row['pass_reset_expiry']);
 			@db_query("UPDATE `membership_users` SET `pass_reset_key`='{$key}', `pass_reset_expiry`='{$expiry}' WHERE `memberID`='" . makeSafe($row['memberID']) . "'");
 

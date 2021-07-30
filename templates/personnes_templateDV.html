@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/personnes-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="personnes_dv_container">
+<div id="personnes_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="personnes_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -23,7 +25,7 @@
 				<!-- Field: Pr&#233;nom Nom -->
 				<div class="form-group personnes-nom">
 					<hr class="hidden-md hidden-lg">
-					<label for="nom" class="control-label col-lg-3">Pr&#233;nom Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="nom">Pr&#233;nom Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="100" type="text" class="form-control" name="nom" id="nom" value="<%%VALUE(nom)%%>" required>
 					</div>
@@ -32,14 +34,13 @@
 				<!-- Field: Email -->
 				<div class="form-group personnes-email">
 					<hr class="hidden-md hidden-lg">
-					<label for="email" class="control-label col-lg-3">Email</label>
+					<label class="control-label col-lg-3" for="email-edit-link">Email</label>
 					<div class="col-lg-9">
-						
 						<div>
-							<a id="email-link" href="mailto:<%%VALUE(email)%%>" target="_blank"><%%VALUE(email)%%></a>
-							<label for="email"><button type="button" id="email-edit-link" class="btn btn-default hspacer-lg vspacer-sm collapsed" data-toggle="collapse" data-target="#email" title="<%%TRANSLATION(Edit)%%>"><i class="glyphicon glyphicon-pencil"></i></button></label>
-						</div>
-						<script>jQuery(function() { /* */ var e_email = '<%%VALUE(email)%%>'; if(e_email == '' || e_email == '&nbsp;' || e_email == 'blank.gif') jQuery('#email-link').hide(); });</script><input maxlength="80" type="text" class="form-control collapse" name="email" id="email" value="<%%VALUE(email)%%>">
+							<a id="email-link" href="mailto:<%%VALUE(email)%%>" target="_blank" class="rspacer-lg"><%%VALUE(email)%%></a>
+							<label for="email"><button type="button" id="email-edit-link" class="btn btn-default vspacer-sm" data-toggle="collapse" data-target="#email" title="<%%TRANSLATION(Edit)%%>"><i class="glyphicon glyphicon-pencil"></i></button></label>
+							<input maxlength="80" type="text" class="form-control collapse" name="email" id="email" value="<%%VALUE(email)%%>">
+						</div><script>jQuery(function() { var e_email = '<%%VALUE(email)%%>'; if(e_email == '' || e_email == '&nbsp;' || e_email == 'blank.gif') jQuery('#email-link').hide(); });</script>
 					</div>
 				</div>
 
@@ -90,10 +91,13 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			$j('#personnes_dv_container-loading').addClass('hidden');
+			$j('#personnes_dv_container').removeClass('hidden');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('personnes', 'nom');
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -101,7 +105,7 @@
 				$j(this).data('already_changed', true);
 			});
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -136,7 +140,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -152,7 +156,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'personnes',

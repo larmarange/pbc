@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/rubriques-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="rubriques_dv_container">
+<div id="rubriques_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="rubriques_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -21,7 +23,7 @@
 				<!-- Field: Convention -->
 				<div class="form-group rubriques-convention">
 					<hr class="hidden-md hidden-lg">
-					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="convention" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
 					</div>
@@ -30,7 +32,7 @@
 				<!-- Field: Intitul&#233; -->
 				<div class="form-group rubriques-intitule">
 					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="intitule">Intitul&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="100" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
 					</div>
@@ -39,8 +41,8 @@
 				<!-- Field: Notes -->
 				<div class="form-group rubriques-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -48,7 +50,7 @@
 				<!-- Field: Pr&#233;visionnel -->
 				<div class="form-group rubriques-accorde">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde" class="control-label col-lg-3">Pr&#233;visionnel</label>
+					<label class="control-label col-lg-3" for="accorde">Pr&#233;visionnel</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>">
 					</div>
@@ -57,7 +59,7 @@
 				<!-- Field: Non Liquid&#233; -->
 				<div class="form-group rubriques-non_liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="non_liquide" class="control-label col-lg-3">Non Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="non_liquide">Non Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="non_liquide" id="non_liquide" value="<%%VALUE(non_liquide)%%>">
 					</div>
@@ -66,7 +68,7 @@
 				<!-- Field: Liquid&#233; -->
 				<div class="form-group rubriques-liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="liquide" class="control-label col-lg-3">Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="liquide">Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="liquide" id="liquide" value="<%%VALUE(liquide)%%>">
 					</div>
@@ -75,7 +77,7 @@
 				<!-- Field: Utilis&#233; -->
 				<div class="form-group rubriques-utilise">
 					<hr class="hidden-md hidden-lg">
-					<label for="utilise" class="control-label col-lg-3">Utilis&#233;</label>
+					<label class="control-label col-lg-3" for="utilise">Utilis&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="utilise" id="utilise" value="<%%VALUE(utilise)%%>">
 					</div>
@@ -84,7 +86,7 @@
 				<!-- Field: Reste &#224; Engager -->
 				<div class="form-group rubriques-reste_engager">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_engager" class="control-label col-lg-3">Reste &#224; Engager</label>
+					<label class="control-label col-lg-3" for="reste_engager">Reste &#224; Engager</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reste_engager" id="reste_engager" value="<%%VALUE(reste_engager)%%>">
 					</div>
@@ -93,10 +95,9 @@
 				<!-- Field: Salaires restant &#224; verser -->
 				<div class="form-group rubriques-reservation_salaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<label class="control-label col-lg-3" for="reservation_salaire">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reservation_salaire-description"><div class="alert alert-info bspacer-xs">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
 					</div>
 				</div>
@@ -104,10 +105,9 @@
 				<!-- Field: Reste &#224; D&#233;penser -->
 				<div class="form-group rubriques-reste_depenser">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_depenser" class="control-label col-lg-3">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_depenser">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_depenser-description"><div class="alert alert-info">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_depenser-description"><div class="alert alert-info bspacer-xs">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_depenser" id="reste_depenser" value="<%%VALUE(reste_depenser)%%>">
 					</div>
 				</div>
@@ -115,10 +115,9 @@
 				<!-- Field: U/P (%) -->
 				<div class="form-group rubriques-prop_ua">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_ua" class="control-label col-lg-3">U/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
+					<label class="control-label col-lg-3" for="prop_ua">U/P (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="prop_ua-description"><div class="alert alert-info">Utilis&#233; sur Pr&#233;visionnel</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="prop_ua-description"><div class="alert alert-info bspacer-xs">Utilis&#233; sur Pr&#233;visionnel</div></span>
 						<input maxlength="12" type="text" class="form-control" name="prop_ua" id="prop_ua" value="<%%VALUE(prop_ua)%%>">
 					</div>
 				</div>
@@ -176,10 +175,29 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.rubriques-convention')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0;
+					},
+					action: function() {
+						$j('#rubriques_dv_container-loading').addClass('hidden');
+						$j('#rubriques_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('rubriques', 'convention');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#rubriques_dv_container-loading').addClass('hidden');
+				$j('#rubriques_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -190,7 +208,7 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -225,7 +243,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -241,7 +259,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'rubriques',

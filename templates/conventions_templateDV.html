@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/conventions-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="conventions_dv_container">
+<div id="conventions_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="conventions_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -28,7 +30,7 @@
 				<!-- Field: Nom -->
 				<div class="form-group conventions-nom">
 					<hr class="hidden-md hidden-lg">
-					<label for="nom" class="control-label col-lg-3">Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="nom">Nom<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="nom" id="nom" value="<%%VALUE(nom)%%>" required>
 					</div>
@@ -37,7 +39,7 @@
 				<!-- Field: Statut -->
 				<div class="form-group conventions-statut">
 					<hr class="hidden-md hidden-lg">
-					<label for="statut" class="control-label col-lg-3">Statut<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="statut">Statut<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<%%COMBO(statut)%%>
 					</div>
@@ -46,7 +48,7 @@
 				<!-- Field: Bailleur(s) -->
 				<div class="form-group conventions-bailleur">
 					<hr class="hidden-md hidden-lg">
-					<label for="bailleur" class="control-label col-lg-3">Bailleur(s)</label>
+					<label class="control-label col-lg-3" for="bailleur">Bailleur(s)</label>
 					<div class="col-lg-9">
 						<input maxlength="40" type="text" class="form-control" name="bailleur" id="bailleur" value="<%%VALUE(bailleur)%%>">
 					</div>
@@ -55,7 +57,7 @@
 				<!-- Field: Porteur -->
 				<div class="form-group conventions-porteur">
 					<hr class="hidden-md hidden-lg">
-					<label for="porteur" class="control-label col-lg-3" data-parent_link="view_parent_modal">Porteur</label>
+					<label class="control-label col-lg-3" for="porteur" data-parent_link="view_parent_modal">Porteur</label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(porteur)%%><%%PLINK(porteur)%%><%%ADDNEW(personnes)%%></div>
 					</div>
@@ -64,10 +66,9 @@
 				<!-- Field: Chef de Projet -->
 				<div class="form-group conventions-chef_projet">
 					<hr class="hidden-md hidden-lg">
-					<label for="chef_projet" class="control-label col-lg-3" data-parent_link="view_parent_modal">Chef de Projet <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#chef_projet-description"></i></label>
+					<label class="control-label col-lg-3" for="chef_projet" data-parent_link="view_parent_modal">Chef de Projet <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#chef_projet-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="chef_projet-description"><div class="alert alert-info">(si applicable)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="chef_projet-description"><div class="alert alert-info bspacer-xs">(si applicable)</div></span>
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(chef_projet)%%><%%PLINK(chef_projet)%%><%%ADDNEW(personnes)%%></div>
 					</div>
 				</div>
@@ -75,10 +76,9 @@
 				<!-- Field: Date r&#233;ponse -->
 				<div class="form-group conventions-date_reponse">
 					<hr class="hidden-md hidden-lg">
-					<label for="date_reponse" class="control-label col-lg-3">Date r&#233;ponse <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#date_reponse-description"></i></label>
+					<label class="control-label col-lg-3" for="date_reponse-dd">Date r&#233;ponse <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#date_reponse-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="date_reponse-description"><div class="alert alert-info">Si la convention a &#233;t&#233; soumise pour financement &#224; un appel d'offres, indiquez la date (approximative) o&#249; une r&#233;ponse est attendue</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="date_reponse-description"><div class="alert alert-info bspacer-xs">Si la convention a &#233;t&#233; soumise pour financement &#224; un appel d'offres, indiquez la date (approximative) o&#249; une r&#233;ponse est attendue</div></span>
 						<%%COMBO(date_reponse)%%>
 					</div>
 				</div>
@@ -86,10 +86,9 @@
 				<!-- Field: Demand&#233; -->
 				<div class="form-group conventions-demande">
 					<hr class="hidden-md hidden-lg">
-					<label for="demande" class="control-label col-lg-3">Demand&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#demande-description"></i></label>
+					<label class="control-label col-lg-3" for="demande">Demand&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#demande-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="demande-description"><div class="alert alert-info">Budget demand&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="demande-description"><div class="alert alert-info bspacer-xs">Budget demand&#233;</div></span>
 						<input maxlength="13" type="text" class="form-control" name="demande" id="demande" value="<%%VALUE(demande)%%>">
 					</div>
 				</div>
@@ -97,7 +96,7 @@
 				<!-- Field: D&#233;but -->
 				<div class="form-group conventions-date_debut">
 					<hr class="hidden-md hidden-lg">
-					<label for="date_debut" class="control-label col-lg-3">D&#233;but</label>
+					<label class="control-label col-lg-3" for="date_debut-dd">D&#233;but</label>
 					<div class="col-lg-9">
 						<%%COMBO(date_debut)%%>
 					</div>
@@ -106,7 +105,7 @@
 				<!-- Field: Fin -->
 				<div class="form-group conventions-date_fin">
 					<hr class="hidden-md hidden-lg">
-					<label for="date_fin" class="control-label col-lg-3">Fin</label>
+					<label class="control-label col-lg-3" for="date_fin-dd">Fin</label>
 					<div class="col-lg-9">
 						<%%COMBO(date_fin)%%>
 					</div>
@@ -115,17 +114,17 @@
 				<!-- Field: Dur&#233;e (mois) -->
 				<div class="form-group conventions-duree">
 					<hr class="hidden-md hidden-lg">
-					<label for="duree" class="control-label col-lg-3">Dur&#233;e (mois)</label>
+					<label class="control-label col-lg-3" for="duree">Dur&#233;e (mois)</label>
 					<div class="col-lg-9">
-						<input maxlength="" type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
+						<input type="text" class="form-control" name="duree" id="duree" value="<%%VALUE(duree)%%>">
 					</div>
 				</div>
 
 				<!-- Field: Notes -->
 				<div class="form-group conventions-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -133,10 +132,9 @@
 				<!-- Field: Accord&#233; hors FG -->
 				<div class="form-group conventions-accorde_hfg">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde_hfg" class="control-label col-lg-3">Accord&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde_hfg-description"></i></label>
+					<label class="control-label col-lg-3" for="accorde_hfg">Accord&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde_hfg-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="accorde_hfg-description"><div class="alert alert-info">Montants accord&#233;s hors frais de gestion (somme des Lignes Budg&#233;taires)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="accorde_hfg-description"><div class="alert alert-info bspacer-xs">Montants accord&#233;s hors frais de gestion (somme des Lignes Budg&#233;taires)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="accorde_hfg" id="accorde_hfg" value="<%%VALUE(accorde_hfg)%%>">
 					</div>
 				</div>
@@ -144,10 +142,9 @@
 				<!-- Field: Frais de Gestion -->
 				<div class="form-group conventions-frais_gestion">
 					<hr class="hidden-md hidden-lg">
-					<label for="frais_gestion" class="control-label col-lg-3">Frais de Gestion <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i></label>
+					<label class="control-label col-lg-3" for="frais_gestion">Frais de Gestion <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#frais_gestion-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="frais_gestion-description"><div class="alert alert-info">Calcul&#233; &#224; partir des lignes budg&#233;taires de type 'Frais de gestion'</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="frais_gestion-description"><div class="alert alert-info bspacer-xs">Calcul&#233; &#224; partir des lignes budg&#233;taires de type 'Frais de gestion'</div></span>
 						<input maxlength="13" type="text" class="form-control" name="frais_gestion" id="frais_gestion" value="<%%VALUE(frais_gestion)%%>">
 					</div>
 				</div>
@@ -155,10 +152,9 @@
 				<!-- Field: Total Accord&#233; -->
 				<div class="form-group conventions-accorde">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde" class="control-label col-lg-3">Total Accord&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
+					<label class="control-label col-lg-3" for="accorde">Total Accord&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#accorde-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="accorde-description"><div class="alert alert-info">Montant total accord&#233; par le bailleur (frais de gestion inclus)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="accorde-description"><div class="alert alert-info bspacer-xs">Montant total accord&#233; par le bailleur (frais de gestion inclus)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>">
 					</div>
 				</div>
@@ -166,10 +162,9 @@
 				<!-- Field: Vers&#233; -->
 				<div class="form-group conventions-verse">
 					<hr class="hidden-md hidden-lg">
-					<label for="verse" class="control-label col-lg-3">Vers&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse-description"></i></label>
+					<label class="control-label col-lg-3" for="verse">Vers&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="verse-description"><div class="alert alert-info">Total des fonds vers&#233;s par le bailleur &#224; l'organisme de gestion (cf. Versements)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="verse-description"><div class="alert alert-info bspacer-xs">Total des fonds vers&#233;s par le bailleur &#224; l'organisme de gestion (cf. Versements)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="verse" id="verse" value="<%%VALUE(verse)%%>">
 					</div>
 				</div>
@@ -177,10 +172,9 @@
 				<!-- Field: Reste &#224; Verser -->
 				<div class="form-group conventions-reste_verser">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_verser" class="control-label col-lg-3">Reste &#224; Verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_verser-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_verser">Reste &#224; Verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_verser-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_verser-description"><div class="alert alert-info">Budget accord&#233; non vers&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_verser-description"><div class="alert alert-info bspacer-xs">Budget accord&#233; non vers&#233;</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_verser" id="reste_verser" value="<%%VALUE(reste_verser)%%>">
 					</div>
 				</div>
@@ -188,10 +182,9 @@
 				<!-- Field: Vers&#233; hors FG -->
 				<div class="form-group conventions-verse_hfg">
 					<hr class="hidden-md hidden-lg">
-					<label for="verse_hfg" class="control-label col-lg-3">Vers&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse_hfg-description"></i></label>
+					<label class="control-label col-lg-3" for="verse_hfg">Vers&#233; hors FG <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#verse_hfg-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="verse_hfg-description"><div class="alert alert-info">Montants vers&#233;s hors frais de gestion (somme des Versements)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="verse_hfg-description"><div class="alert alert-info bspacer-xs">Montants vers&#233;s hors frais de gestion (somme des Versements)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="verse_hfg" id="verse_hfg" value="<%%VALUE(verse_hfg)%%>">
 					</div>
 				</div>
@@ -199,10 +192,9 @@
 				<!-- Field: Ouvert -->
 				<div class="form-group conventions-ouvert">
 					<hr class="hidden-md hidden-lg">
-					<label for="ouvert" class="control-label col-lg-3">Ouvert <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#ouvert-description"></i></label>
+					<label class="control-label col-lg-3" for="ouvert">Ouvert <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#ouvert-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="ouvert-description"><div class="alert alert-info">Total des cr&#233;dits ouverts (par l'organisme de gestion)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="ouvert-description"><div class="alert alert-info bspacer-xs">Total des cr&#233;dits ouverts (par l'organisme de gestion)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="ouvert" id="ouvert" value="<%%VALUE(ouvert)%%>">
 					</div>
 				</div>
@@ -210,10 +202,9 @@
 				<!-- Field: Reste &#224; Ouvrir -->
 				<div class="form-group conventions-reste_ouvrir">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_ouvrir" class="control-label col-lg-3">Reste &#224; Ouvrir <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_ouvrir-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_ouvrir">Reste &#224; Ouvrir <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_ouvrir-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_ouvrir-description"><div class="alert alert-info">Budget vers&#233; (frais de gestion exclus) - Cr&#233;dits Ouverts</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_ouvrir-description"><div class="alert alert-info bspacer-xs">Budget vers&#233; (frais de gestion exclus) - Cr&#233;dits Ouverts</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_ouvrir" id="reste_ouvrir" value="<%%VALUE(reste_ouvrir)%%>">
 					</div>
 				</div>
@@ -221,10 +212,9 @@
 				<!-- Field: Non Liquid&#233; -->
 				<div class="form-group conventions-non_liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="non_liquide" class="control-label col-lg-3">Non Liquid&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#non_liquide-description"></i></label>
+					<label class="control-label col-lg-3" for="non_liquide">Non Liquid&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#non_liquide-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="non_liquide-description"><div class="alert alert-info">Sommes des d&#233;penses non liquid&#233;es</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="non_liquide-description"><div class="alert alert-info bspacer-xs">Sommes des d&#233;penses non liquid&#233;es</div></span>
 						<input maxlength="13" type="text" class="form-control" name="non_liquide" id="non_liquide" value="<%%VALUE(non_liquide)%%>">
 					</div>
 				</div>
@@ -232,10 +222,9 @@
 				<!-- Field: Liquid&#233; -->
 				<div class="form-group conventions-liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="liquide" class="control-label col-lg-3">Liquid&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquide-description"></i></label>
+					<label class="control-label col-lg-3" for="liquide">Liquid&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#liquide-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="liquide-description"><div class="alert alert-info">Sommes des d&#233;penses liquid&#233;es</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="liquide-description"><div class="alert alert-info bspacer-xs">Sommes des d&#233;penses liquid&#233;es</div></span>
 						<input maxlength="13" type="text" class="form-control" name="liquide" id="liquide" value="<%%VALUE(liquide)%%>">
 					</div>
 				</div>
@@ -243,10 +232,9 @@
 				<!-- Field: Utilis&#233; (L+NL) -->
 				<div class="form-group conventions-utilise">
 					<hr class="hidden-md hidden-lg">
-					<label for="utilise" class="control-label col-lg-3">Utilis&#233; (L+NL) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#utilise-description"></i></label>
+					<label class="control-label col-lg-3" for="utilise">Utilis&#233; (L+NL) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#utilise-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="utilise-description"><div class="alert alert-info">Total des d&#233;penses (liquid&#233;es et non liquid&#233;es)</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="utilise-description"><div class="alert alert-info bspacer-xs">Total des d&#233;penses (liquid&#233;es et non liquid&#233;es)</div></span>
 						<input maxlength="13" type="text" class="form-control" name="utilise" id="utilise" value="<%%VALUE(utilise)%%>">
 					</div>
 				</div>
@@ -254,10 +242,9 @@
 				<!-- Field: Disponible (O-U) -->
 				<div class="form-group conventions-disponible">
 					<hr class="hidden-md hidden-lg">
-					<label for="disponible" class="control-label col-lg-3">Disponible (O-U) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#disponible-description"></i></label>
+					<label class="control-label col-lg-3" for="disponible">Disponible (O-U) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#disponible-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="disponible-description"><div class="alert alert-info">Ouvert - Utilis&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="disponible-description"><div class="alert alert-info bspacer-xs">Ouvert - Utilis&#233;</div></span>
 						<input maxlength="13" type="text" class="form-control" name="disponible" id="disponible" value="<%%VALUE(disponible)%%>">
 					</div>
 				</div>
@@ -265,10 +252,9 @@
 				<!-- Field: Reste &#224; Engager -->
 				<div class="form-group conventions-reste_engager">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_engager" class="control-label col-lg-3">Reste &#224; Engager <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_engager-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_engager">Reste &#224; Engager <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_engager-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_engager-description"><div class="alert alert-info">Accord&#233; (hors frais de gestion) - Utilis&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_engager-description"><div class="alert alert-info bspacer-xs">Accord&#233; (hors frais de gestion) - Utilis&#233;</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_engager" id="reste_engager" value="<%%VALUE(reste_engager)%%>">
 					</div>
 				</div>
@@ -276,10 +262,9 @@
 				<!-- Field: Salaires restant &#224; verser -->
 				<div class="form-group conventions-reservation_salaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<label class="control-label col-lg-3" for="reservation_salaire">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reservation_salaire-description"><div class="alert alert-info bspacer-xs">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
 					</div>
 				</div>
@@ -287,10 +272,9 @@
 				<!-- Field: Reste &#224; D&#233;penser -->
 				<div class="form-group conventions-reste_depenser">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_depenser" class="control-label col-lg-3">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_depenser">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_depenser-description"><div class="alert alert-info">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_depenser-description"><div class="alert alert-info bspacer-xs">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_depenser" id="reste_depenser" value="<%%VALUE(reste_depenser)%%>">
 					</div>
 				</div>
@@ -298,10 +282,9 @@
 				<!-- Field: U/O (%) -->
 				<div class="form-group conventions-prop_uo">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_uo" class="control-label col-lg-3">U/O (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uo-description"></i></label>
+					<label class="control-label col-lg-3" for="prop_uo">U/O (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uo-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="prop_uo-description"><div class="alert alert-info">Utilis&#233; / Ouvert</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="prop_uo-description"><div class="alert alert-info bspacer-xs">Utilis&#233; / Ouvert</div></span>
 						<input maxlength="12" type="text" class="form-control" name="prop_uo" id="prop_uo" value="<%%VALUE(prop_uo)%%>">
 					</div>
 				</div>
@@ -309,10 +292,9 @@
 				<!-- Field: U/V (%) -->
 				<div class="form-group conventions-prop_uv">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_uv" class="control-label col-lg-3">U/V (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uv-description"></i></label>
+					<label class="control-label col-lg-3" for="prop_uv">U/V (%) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_uv-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="prop_uv-description"><div class="alert alert-info">Utilis&#233; / Vers&#233;</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="prop_uv-description"><div class="alert alert-info bspacer-xs">Utilis&#233; / Vers&#233;</div></span>
 						<input maxlength="12" type="text" class="form-control" name="prop_uv" id="prop_uv" value="<%%VALUE(prop_uv)%%>">
 					</div>
 				</div>
@@ -320,10 +302,9 @@
 				<!-- Field: U/A (%, hors FG) -->
 				<div class="form-group conventions-prop_ua">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_ua" class="control-label col-lg-3">U/A (%, hors FG) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
+					<label class="control-label col-lg-3" for="prop_ua">U/A (%, hors FG) <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#prop_ua-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="prop_ua-description"><div class="alert alert-info">Utilis&#233; / Accord&#233; hors frais de gestion</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="prop_ua-description"><div class="alert alert-info bspacer-xs">Utilis&#233; / Accord&#233; hors frais de gestion</div></span>
 						<input maxlength="12" type="text" class="form-control" name="prop_ua" id="prop_ua" value="<%%VALUE(prop_ua)%%>">
 					</div>
 				</div>
@@ -331,10 +312,9 @@
 				<!-- Field: Budget non ventil&#233; -->
 				<div class="form-group conventions-budget_nv">
 					<hr class="hidden-md hidden-lg">
-					<label for="budget_nv" class="control-label col-lg-3">Budget non ventil&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#budget_nv-description"></i></label>
+					<label class="control-label col-lg-3" for="budget_nv">Budget non ventil&#233; <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#budget_nv-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="budget_nv-description"><div class="alert alert-info">Budget accord&#233; hors frais de gestion qui n'est pas ventil&#233; (cf. section 'Ventilation')</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="budget_nv-description"><div class="alert alert-info bspacer-xs">Budget accord&#233; hors frais de gestion qui n'est pas ventil&#233; (cf. section 'Ventilation')</div></span>
 						<input maxlength="13" type="text" class="form-control" name="budget_nv" id="budget_nv" value="<%%VALUE(budget_nv)%%>">
 					</div>
 				</div>
@@ -342,10 +322,9 @@
 				<!-- Field: D&#233;penses non ventil&#233;es -->
 				<div class="form-group conventions-depenses_nv">
 					<hr class="hidden-md hidden-lg">
-					<label for="depenses_nv" class="control-label col-lg-3">D&#233;penses non ventil&#233;es <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depenses_nv-description"></i></label>
+					<label class="control-label col-lg-3" for="depenses_nv">D&#233;penses non ventil&#233;es <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#depenses_nv-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="depenses_nv-description"><div class="alert alert-info">D&#233;penses qui ne sont pas ventil&#233;es</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="depenses_nv-description"><div class="alert alert-info bspacer-xs">D&#233;penses qui ne sont pas ventil&#233;es</div></span>
 						<input maxlength="13" type="text" class="form-control" name="depenses_nv" id="depenses_nv" value="<%%VALUE(depenses_nv)%%>">
 					</div>
 				</div>
@@ -403,10 +382,13 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			$j('#conventions_dv_container-loading').addClass('hidden');
+			$j('#conventions_dv_container').removeClass('hidden');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('conventions', 'nom');
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -417,7 +399,7 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -452,7 +434,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -468,7 +450,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'conventions',

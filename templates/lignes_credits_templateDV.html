@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/lignes_credits-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="lignes_credits_dv_container">
+<div id="lignes_credits_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="lignes_credits_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -22,7 +24,7 @@
 				<!-- Field: Convention -->
 				<div class="form-group lignes_credits-convention">
 					<hr class="hidden-md hidden-lg">
-					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="convention" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
 					</div>
@@ -31,7 +33,7 @@
 				<!-- Field: Ligne Budg&#233;taire -->
 				<div class="form-group lignes_credits-ligne_budgetaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="ligne_budgetaire" class="control-label col-lg-3" data-parent_link="view_parent_modal">Ligne Budg&#233;taire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="ligne_budgetaire" data-parent_link="view_parent_modal">Ligne Budg&#233;taire<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(ligne_budgetaire)%%><%%PLINK(ligne_budgetaire)%%><%%ADDNEW(budgets)%%></div>
 					</div>
@@ -40,10 +42,9 @@
 				<!-- Field: Intitul&#233; / CFI -->
 				<div class="form-group lignes_credits-intitule">
 					<hr class="hidden-md hidden-lg">
-					<label for="intitule" class="control-label col-lg-3">Intitul&#233; / CFI<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#intitule-description"></i></label>
+					<label class="control-label col-lg-3" for="intitule">Intitul&#233; / CFI<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#intitule-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="intitule-description"><div class="alert alert-info">Typiquement, le centre financier (CFI) correspondant aupr&#232;s de l'organisme gestionnaire</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="intitule-description"><div class="alert alert-info bspacer-xs">Typiquement, le centre financier (CFI) correspondant aupr&#232;s de l'organisme gestionnaire</div></span>
 						<input maxlength="40" type="text" class="form-control" name="intitule" id="intitule" value="<%%VALUE(intitule)%%>" required>
 					</div>
 				</div>
@@ -51,10 +52,9 @@
 				<!-- Field: Exercice -->
 				<div class="form-group lignes_credits-exercice">
 					<hr class="hidden-md hidden-lg">
-					<label for="exercice" class="control-label col-lg-3">Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
+					<label class="control-label col-lg-3" for="exercice">Exercice<span class="text-danger"><%%TRANSLATION(*)%%></span> <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exercice-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="exercice-description"><div class="alert alert-info">Exercice comptable</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="exercice-description"><div class="alert alert-info bspacer-xs">Exercice comptable</div></span>
 						<input maxlength="10" type="text" class="form-control" name="exercice" id="exercice" value="<%%VALUE(exercice)%%>" required>
 					</div>
 				</div>
@@ -62,8 +62,8 @@
 				<!-- Field: Notes -->
 				<div class="form-group lignes_credits-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 				<!-- Field: Ouvert -->
 				<div class="form-group lignes_credits-ouvert">
 					<hr class="hidden-md hidden-lg">
-					<label for="ouvert" class="control-label col-lg-3">Ouvert</label>
+					<label class="control-label col-lg-3" for="ouvert">Ouvert</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="ouvert" id="ouvert" value="<%%VALUE(ouvert)%%>">
 					</div>
@@ -80,7 +80,7 @@
 				<!-- Field: Non Liquid&#233; -->
 				<div class="form-group lignes_credits-non_liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="non_liquide" class="control-label col-lg-3">Non Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="non_liquide">Non Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="non_liquide" id="non_liquide" value="<%%VALUE(non_liquide)%%>">
 					</div>
@@ -89,7 +89,7 @@
 				<!-- Field: Liquid&#233; -->
 				<div class="form-group lignes_credits-liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="liquide" class="control-label col-lg-3">Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="liquide">Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="liquide" id="liquide" value="<%%VALUE(liquide)%%>">
 					</div>
@@ -98,7 +98,7 @@
 				<!-- Field: Utilis&#233; -->
 				<div class="form-group lignes_credits-utilise">
 					<hr class="hidden-md hidden-lg">
-					<label for="utilise" class="control-label col-lg-3">Utilis&#233;</label>
+					<label class="control-label col-lg-3" for="utilise">Utilis&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="utilise" id="utilise" value="<%%VALUE(utilise)%%>">
 					</div>
@@ -107,7 +107,7 @@
 				<!-- Field: Disponible -->
 				<div class="form-group lignes_credits-disponible">
 					<hr class="hidden-md hidden-lg">
-					<label for="disponible" class="control-label col-lg-3">Disponible</label>
+					<label class="control-label col-lg-3" for="disponible">Disponible</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="disponible" id="disponible" value="<%%VALUE(disponible)%%>">
 					</div>
@@ -116,7 +116,7 @@
 				<!-- Field: U/O (%) -->
 				<div class="form-group lignes_credits-prop_uo">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_uo" class="control-label col-lg-3">U/O (%)</label>
+					<label class="control-label col-lg-3" for="prop_uo">U/O (%)</label>
 					<div class="col-lg-9">
 						<input maxlength="12" type="text" class="form-control" name="prop_uo" id="prop_uo" value="<%%VALUE(prop_uo)%%>">
 					</div>
@@ -175,10 +175,29 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.lignes_credits-convention')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0;
+					},
+					action: function() {
+						$j('#lignes_credits_dv_container-loading').addClass('hidden');
+						$j('#lignes_credits_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('lignes_credits', 'convention');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#lignes_credits_dv_container-loading').addClass('hidden');
+				$j('#lignes_credits_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -189,7 +208,7 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -224,7 +243,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -240,7 +259,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'lignes_credits',

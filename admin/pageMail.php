@@ -84,7 +84,7 @@
 		}
 
 		// save mail queue
-		$queueFile = md5(microtime());
+		$queueFile = substr(md5(microtime() . rand(0, 100000)), -17);
 		$currDir = dirname(__FILE__);
 		if(!($fp = fopen("{$currDir}/{$queueFile}.php", 'w'))) {
 			echo Notification::show(array(
@@ -141,7 +141,7 @@
 			<p class="form-control-static">
 				<?php echo "{$adminConfig['senderName']} &lt;{$adminConfig['senderEmail']}&gt;"; ?>
 				<div>
-					<a href="pageSettings.php#mail-settings" class="btn btn-default">
+					<a href="pageSettings.php?search-settings=smtp" class="btn btn-default">
 						<i class="glyphicon glyphicon-pencil"></i>
 						<?php echo $Translation['configure mail settings']; ?>
 					</a>

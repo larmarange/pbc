@@ -1,9 +1,11 @@
-<!-- Edit this file to change the layout of the detail view form -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/budgets-dv.js rather than editing this file -->
 
-<a name="detail-view"></a>
+<div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div class="panel-body" id="budgets_dv_container">
+<div id="budgets_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+
+<div class="panel-body hidden" id="budgets_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
@@ -24,7 +26,7 @@
 				<!-- Field: Convention -->
 				<div class="form-group budgets-convention">
 					<hr class="hidden-md hidden-lg">
-					<label for="convention" class="control-label col-lg-3" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="convention" data-parent_link="view_parent_same_window">Convention<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(convention)%%><%%PLINK(convention)%%><%%ADDNEW(conventions)%%></div>
 					</div>
@@ -33,7 +35,7 @@
 				<!-- Field: Type -->
 				<div class="form-group budgets-type">
 					<hr class="hidden-md hidden-lg">
-					<label for="type" class="control-label col-lg-3" data-parent_link="view_parent_hidden">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" data-parent_link="view_parent_hidden">Type<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<div class="form-control-static" style="white-space: nowrap; overflow-x: hidden;"><%%COMBO(type)%%></div>
 					</div>
@@ -42,10 +44,9 @@
 				<!-- Field: Pr&#233;cision -->
 				<div class="form-group budgets-precision">
 					<hr class="hidden-md hidden-lg">
-					<label for="precision" class="control-label col-lg-3">Pr&#233;cision <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#precision-description"></i></label>
+					<label class="control-label col-lg-3" for="precision">Pr&#233;cision <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#precision-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="precision-description"><div class="alert alert-info">Optionnel, si besoin de distinguer plusieurs lignes budg&#233;taires du m&#234;me type</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="precision-description"><div class="alert alert-info bspacer-xs">Optionnel, si besoin de distinguer plusieurs lignes budg&#233;taires du m&#234;me type</div></span>
 						<input maxlength="100" type="text" class="form-control" name="precision" id="precision" value="<%%VALUE(precision)%%>">
 					</div>
 				</div>
@@ -53,7 +54,7 @@
 				<!-- Field: Accord&#233; -->
 				<div class="form-group budgets-accorde">
 					<hr class="hidden-md hidden-lg">
-					<label for="accorde" class="control-label col-lg-3">Accord&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
+					<label class="control-label col-lg-3" for="accorde">Accord&#233;<span class="text-danger"><%%TRANSLATION(*)%%></span></label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="accorde" id="accorde" value="<%%VALUE(accorde)%%>" required>
 					</div>
@@ -62,8 +63,8 @@
 				<!-- Field: Notes -->
 				<div class="form-group budgets-notes">
 					<hr class="hidden-md hidden-lg">
-					<label for="notes" class="control-label col-lg-3">Notes</label>
-					<div class="col-lg-9">
+					<label class="control-label col-lg-3" for="notes">Notes</label>
+					<div class="col-lg-9 has-nicedit">
 						<%%HTMLAREA(notes)%%>
 					</div>
 				</div>
@@ -71,7 +72,7 @@
 				<!-- Field: Vers&#233; -->
 				<div class="form-group budgets-verse">
 					<hr class="hidden-md hidden-lg">
-					<label for="verse" class="control-label col-lg-3">Vers&#233;</label>
+					<label class="control-label col-lg-3" for="verse">Vers&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="verse" id="verse" value="<%%VALUE(verse)%%>">
 					</div>
@@ -80,7 +81,7 @@
 				<!-- Field: Reste &#224; Verser -->
 				<div class="form-group budgets-reste_verser">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_verser" class="control-label col-lg-3">Reste &#224; Verser</label>
+					<label class="control-label col-lg-3" for="reste_verser">Reste &#224; Verser</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reste_verser" id="reste_verser" value="<%%VALUE(reste_verser)%%>">
 					</div>
@@ -89,7 +90,7 @@
 				<!-- Field: Ouvert -->
 				<div class="form-group budgets-ouvert">
 					<hr class="hidden-md hidden-lg">
-					<label for="ouvert" class="control-label col-lg-3">Ouvert</label>
+					<label class="control-label col-lg-3" for="ouvert">Ouvert</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="ouvert" id="ouvert" value="<%%VALUE(ouvert)%%>">
 					</div>
@@ -98,7 +99,7 @@
 				<!-- Field: Reste &#224; Ouvrir -->
 				<div class="form-group budgets-reste_ouvrir">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_ouvrir" class="control-label col-lg-3">Reste &#224; Ouvrir</label>
+					<label class="control-label col-lg-3" for="reste_ouvrir">Reste &#224; Ouvrir</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reste_ouvrir" id="reste_ouvrir" value="<%%VALUE(reste_ouvrir)%%>">
 					</div>
@@ -107,7 +108,7 @@
 				<!-- Field: Non Liquid&#233; -->
 				<div class="form-group budgets-non_liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="non_liquide" class="control-label col-lg-3">Non Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="non_liquide">Non Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="non_liquide" id="non_liquide" value="<%%VALUE(non_liquide)%%>">
 					</div>
@@ -116,7 +117,7 @@
 				<!-- Field: Liquid&#233; -->
 				<div class="form-group budgets-liquide">
 					<hr class="hidden-md hidden-lg">
-					<label for="liquide" class="control-label col-lg-3">Liquid&#233;</label>
+					<label class="control-label col-lg-3" for="liquide">Liquid&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="liquide" id="liquide" value="<%%VALUE(liquide)%%>">
 					</div>
@@ -125,7 +126,7 @@
 				<!-- Field: Utilis&#233; -->
 				<div class="form-group budgets-utilise">
 					<hr class="hidden-md hidden-lg">
-					<label for="utilise" class="control-label col-lg-3">Utilis&#233;</label>
+					<label class="control-label col-lg-3" for="utilise">Utilis&#233;</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="utilise" id="utilise" value="<%%VALUE(utilise)%%>">
 					</div>
@@ -134,7 +135,7 @@
 				<!-- Field: Disponible -->
 				<div class="form-group budgets-disponible">
 					<hr class="hidden-md hidden-lg">
-					<label for="disponible" class="control-label col-lg-3">Disponible</label>
+					<label class="control-label col-lg-3" for="disponible">Disponible</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="disponible" id="disponible" value="<%%VALUE(disponible)%%>">
 					</div>
@@ -143,7 +144,7 @@
 				<!-- Field: Reste &#224; Engager -->
 				<div class="form-group budgets-reste_engager">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_engager" class="control-label col-lg-3">Reste &#224; Engager</label>
+					<label class="control-label col-lg-3" for="reste_engager">Reste &#224; Engager</label>
 					<div class="col-lg-9">
 						<input maxlength="13" type="text" class="form-control" name="reste_engager" id="reste_engager" value="<%%VALUE(reste_engager)%%>">
 					</div>
@@ -152,10 +153,9 @@
 				<!-- Field: Salaires restant &#224; verser -->
 				<div class="form-group budgets-reservation_salaire">
 					<hr class="hidden-md hidden-lg">
-					<label for="reservation_salaire" class="control-label col-lg-3">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
+					<label class="control-label col-lg-3" for="reservation_salaire">Salaires restant &#224; verser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reservation_salaire-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reservation_salaire-description"><div class="alert alert-info">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reservation_salaire-description"><div class="alert alert-info bspacer-xs">Salaires non encore vers&#233;s, d'apr&#232;s la liste des recrutements pr&#233;vus</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reservation_salaire" id="reservation_salaire" value="<%%VALUE(reservation_salaire)%%>">
 					</div>
 				</div>
@@ -163,10 +163,9 @@
 				<!-- Field: Reste &#224; D&#233;penser -->
 				<div class="form-group budgets-reste_depenser">
 					<hr class="hidden-md hidden-lg">
-					<label for="reste_depenser" class="control-label col-lg-3">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
+					<label class="control-label col-lg-3" for="reste_depenser">Reste &#224; D&#233;penser <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#reste_depenser-description"></i></label>
 					<div class="col-lg-9">
-						<span class="help-block collapse" id="reste_depenser-description"><div class="alert alert-info">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
-
+						<span class="help-block bspacer-xs collapse" id="reste_depenser-description"><div class="alert alert-info bspacer-xs">Reste &#224; Engager - Salaires restant &#224; verser</div></span>
 						<input maxlength="13" type="text" class="form-control" name="reste_depenser" id="reste_depenser" value="<%%VALUE(reste_depenser)%%>">
 					</div>
 				</div>
@@ -174,7 +173,7 @@
 				<!-- Field: U/O (%) -->
 				<div class="form-group budgets-prop_uo">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_uo" class="control-label col-lg-3">U/O (%)</label>
+					<label class="control-label col-lg-3" for="prop_uo">U/O (%)</label>
 					<div class="col-lg-9">
 						<input maxlength="12" type="text" class="form-control" name="prop_uo" id="prop_uo" value="<%%VALUE(prop_uo)%%>">
 					</div>
@@ -183,7 +182,7 @@
 				<!-- Field: U/V (%) -->
 				<div class="form-group budgets-prop_uv">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_uv" class="control-label col-lg-3">U/V (%)</label>
+					<label class="control-label col-lg-3" for="prop_uv">U/V (%)</label>
 					<div class="col-lg-9">
 						<input maxlength="12" type="text" class="form-control" name="prop_uv" id="prop_uv" value="<%%VALUE(prop_uv)%%>">
 					</div>
@@ -192,7 +191,7 @@
 				<!-- Field: U/A (%) -->
 				<div class="form-group budgets-prop_ua">
 					<hr class="hidden-md hidden-lg">
-					<label for="prop_ua" class="control-label col-lg-3">U/A (%)</label>
+					<label class="control-label col-lg-3" for="prop_ua">U/A (%)</label>
 					<div class="col-lg-9">
 						<input maxlength="12" type="text" class="form-control" name="prop_ua" id="prop_ua" value="<%%VALUE(prop_ua)%%>">
 					</div>
@@ -251,10 +250,29 @@
 					if($j('textarea#notes').length) new nicEditor({ fullPanel : true }).panelInstance('notes');
 				}
 			});
+
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			setTimeout(AppGini.focusFirstFormElement, 100);
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.budgets-convention')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0;
+					},
+					action: function() {
+						$j('#budgets_dv_container-loading').addClass('hidden');
+						$j('#budgets_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('budgets', 'convention');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#budgets_dv_container-loading').addClass('hidden');
+				$j('#budgets_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;
@@ -265,7 +283,7 @@
 			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
 			AppGini.detectContentEditableChanges();
 
-			$j('a[href="<%%TRANSLATION(ImageFolder)%%>"]').click(function() { /* */ return false; });
+			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
 			if(embedded_mode) {
 				/* hide links to children tables in embedded mode */
@@ -300,7 +318,7 @@
 				);
 			}
 
-			if(!embedded_mode) {
+			if(true /* !embedded_mode */) {
 				/* add a horizontal spacer to [add new parent] buttons that don't have a spacered element before them */
 				$j('.add_new_parent').prev(':not(.hspacer-md)').next().addClass('hspacer-md');
 
@@ -316,7 +334,7 @@
 							var new_id = localStorage.getItem(pt + '_last_added_id');
 							if(new_id === null) return;
 
-							localStorage.clear(pt + '_last_added_id');
+							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
 								table: 'budgets',
