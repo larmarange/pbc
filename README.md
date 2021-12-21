@@ -4,8 +4,6 @@
 
 Outil à destination des unités de recherche pour suivre leurs conventions et dotations budégtaires
 
-**_En cours de développement :_** à utiliser uniquement dans un environnement de test. La documentation n'est pas encore disponible.
-
 ## Historique des versions
 
 ### v0.4
