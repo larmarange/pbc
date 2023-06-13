@@ -41,7 +41,7 @@
           $j('.children-tabs tfoot td').each(function() {
               var txt = $j(this).text().trim();
               // The line below assumes your app is in English language .. modify if it's in a different lang.
-              var pattern = /Records [0-9]+ to [0-9]+ of ([0-9]+)/g;
+              var pattern = /Enregistrement [0-9]+ à [0-9]+ de ([0-9]+)/g;
               var match, recs;
               match = pattern.exec(txt);
               recs = (match !== null ? match[1] : 0);
