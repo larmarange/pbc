@@ -6,6 +6,11 @@ Outil à destination des unités de recherche pour suivre leurs conventions et d
 
 ## Historique des versions
 
+### v0.4.1
+
+- ajout d'un fichier AUTHORS
+- bug fix concernant l'affichage du nombre d'enregistrements enfants (#3)
+
 ### v0.4
 
 - ajout d'un champ 'précision' aux lignes budgétaires
